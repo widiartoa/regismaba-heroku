@@ -16,31 +16,110 @@
 				<hr/>
 				
 				<div class="row">
-					<div class="col-sm-12"><label>Pilihan Golongan</label></div>
-					<div class="col-sm-12"><label>Jumlah Biaya yang Diajukan</label></div>
-					<div class="col-sm-12"><label>Uang Pangkal</label></div>
-					<div class="col-sm-12"><label>Surat Keterangan RT RW</label></div>
-					<div class="col-sm-12"><label>Foto Rumah</label></div>
-					<div class="col-sm-12"><label>Slip Gaji Pribadi</label></div>
-					<div class="col-sm-12"><label>Slip Gaji Wali 1</label></div>
-					<div class="col-sm-12"><label>Slip Gaji Wali 2</label></div>
-					<div class="col-sm-12"><label>Tagihan Air</label></div>
-					<div class="col-sm-12"><label>Tagihan Listrik</label></div>
-					<div class="col-sm-12"><label>Tagihan Telepon</label></div>
+					<div class="input-group">
+					  <span class="input-group-addon" id="basic-addon3">Pilihan Golongan</span>
+					  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Action <span class="caret"></span></button>
+					</div>
+				</div>
+				
+				<div class="row">
+					<div class="input-group">
+					  <span class="input-group-addon" id="basic-addon3">Jumlah Biaya yang Diajukan</span>
+					  <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3"/>
+					</div>
+				</div>
+				
+				<div class="row">
+					<div class="input-group">
+					  <span class="input-group-addon" id="basic-addon3">Uang Pangkal</span>
+					  <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3"/>
+					</div>
+				</div>
+				
+				<div class="row">
+					<div class="input-group">
+					  <span class="input-group-addon" id="basic-addon3">Surat Keterangan RT RW</span>
+					  <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3"/>
+					  <span class="input-group-btn">
+				        <a th:href="'/calon-mahasiswa/pengajuan-skema/submit'"><button type="button" class="btn btn-warning">Browse</button></a>
+				      </span>
+					</div>
+				</div>
+				
+				<div class="row">
+					<div class="input-group">
+					  <span class="input-group-addon" id="basic-addon3">Foto Rumah</span>
+					  <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3"/>
+					  <span class="input-group-btn">
+				        <a th:href="'/calon-mahasiswa/pengajuan-skema/submit'"><button type="button" class="btn btn-warning">Browse</button></a>
+				      </span>
+					</div>
+				</div>
+				
+				<div class="row">
+					<div class="input-group">
+					  <span class="input-group-addon" id="basic-addon3">Slip Gaji Pribadi</span>
+					  <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3"/>
+					  <span class="input-group-btn">
+				        <a th:href="'/calon-mahasiswa/pengajuan-skema/submit'"><button type="button" class="btn btn-warning">Browse</button></a>
+				      </span>
+					</div>
+				</div>
+				
+				<div class="row">
+					<div class="input-group">
+					  <span class="input-group-addon" id="basic-addon3">Slip Gaji Wali 1</span>
+					  <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3"/>
+					  <span class="input-group-btn">
+				        <a th:href="'/calon-mahasiswa/pengajuan-skema/submit'"><button type="button" class="btn btn-warning">Browse</button></a>
+				      </span>
+					</div>
+				</div>
+				
+				<div class="row">
+					<div class="input-group">
+					  <span class="input-group-addon" id="basic-addon3">Slip Gaji Wali 2</span>
+					  <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3"/>
+					  <span class="input-group-btn">
+				        <a th:href="'/calon-mahasiswa/pengajuan-skema/submit'"><button type="button" class="btn btn-warning">Browse</button></a>
+				      </span>
+					</div>
+				</div>
+				
+				<div class="row">
+					<div class="input-group">
+					  <span class="input-group-addon" id="basic-addon3">Tagihan Air</span>
+					  <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3"/>
+					  <span class="input-group-btn">
+				        <a th:href="'/calon-mahasiswa/pengajuan-skema/submit'"><button type="button" class="btn btn-warning">Browse</button></a>
+				      </span>
+					</div>
+				</div>
+				
+				<div class="row">
+					<div class="input-group">
+					  <span class="input-group-addon" id="basic-addon3">Tagihan Listrik</span>
+					  <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3"/>
+					  <span class="input-group-btn">
+				        <a th:href="'/calon-mahasiswa/pengajuan-skema/submit'"><button type="button" class="btn btn-warning">Browse</button></a>
+				      </span>
+					</div>
+				</div>
+				
+				<div class="row">
+					<div class="input-group">
+					  <span class="input-group-addon" id="basic-addon3">Tagihan Telepon</span>
+					  <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3"/>
+					  <span class="input-group-btn">
+				        <a th:href="'/calon-mahasiswa/pengajuan-skema/submit'"><button type="button" class="btn btn-warning">Browse</button></a>
+				      </span>
+					</div>
 				</div>
 				<hr/>
 				
 				<div class="btn-group" role="group" aria-label="...">
 				  <a th:href="'/calon-mahasiswa/pengajuan-skema/submit'"><button type="button" class="btn btn-default">Ajukan</button></a>
 				</div>
-				
-<!-- 				<ul class="list-group">
-				  <li class="list-group-item">Pilihan Golongan</li>
-				  <li class="list-group-item"><div class="col-sm-12"><label>Jumlah Biaya yang Diajukan</label></div></li>
-				  <li class="list-group-item"><div class="col-sm-12"><label>Uang Pangkal</label></div></li>
-				  <li class="list-group-item"><div class="col-sm-12"><label>Surat Keterangan RT RW</label></div></li>
-				  <li class="list-group-item"><div class="col-sm-12"><label>Foto Rumah</label></div></li>
-				</ul> -->
 			</div>
        	</div>
 		
