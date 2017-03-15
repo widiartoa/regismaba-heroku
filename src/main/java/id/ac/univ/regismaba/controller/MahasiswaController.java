@@ -17,4 +17,10 @@ public class MahasiswaController {
 	{
 		return "calon_mahasiswa-mengisi_idm";
 	}
+	
+	@RequestMapping("/calon-mahasiswa/skema-pembayaran")
+	public String skemaMahasiswa()
+	{
+		return "calon_mahasiswa-melihat_skema_pembayaran";
+	}
 }
