@@ -18,6 +18,7 @@ public class MahasiswaController {
 		return "calon_mahasiswa-mengisi_idm";
 	}
 	
+	//test
 	@RequestMapping("/calon-mahasiswa/skema-pembayaran")
 	public String skemaMahasiswa()
 	{
