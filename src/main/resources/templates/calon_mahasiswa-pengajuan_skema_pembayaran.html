@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
     <head>
 		<div th:replace="resources"></div>
-        <title>Calon Mahasiswa - Melihat Skema Pembayaran</title>
+        <title>Calon Mahasiswa - Pengajuan Skema Pembayaran</title>
     </head>
 	
     <body>
@@ -11,7 +11,7 @@
     	<div class="container">
 			<div class="content">
 				<div class="row">
-					<div class="col-sm-12"><h3>Skema Pembayaran</h3></div>
+					<div class="col-sm-12"><h3>Pengajuan Skema Pembayaran</h3></div>
 				</div>
 				<hr/>
 				
@@ -31,8 +31,16 @@
 				<hr/>
 				
 				<div class="btn-group" role="group" aria-label="...">
-				  <a th:href="'/calon-mahasiswa/pengajuan-skema'"><button type="button" class="btn btn-default">Ajukan Skema Pembayaran</button></a>
+				  <a th:href="'/calon-mahasiswa/pengajuan-skema/submit'"><button type="button" class="btn btn-default">Ajukan</button></a>
 				</div>
+				
+<!-- 				<ul class="list-group">
+				  <li class="list-group-item">Pilihan Golongan</li>
+				  <li class="list-group-item"><div class="col-sm-12"><label>Jumlah Biaya yang Diajukan</label></div></li>
+				  <li class="list-group-item"><div class="col-sm-12"><label>Uang Pangkal</label></div></li>
+				  <li class="list-group-item"><div class="col-sm-12"><label>Surat Keterangan RT RW</label></div></li>
+				  <li class="list-group-item"><div class="col-sm-12"><label>Foto Rumah</label></div></li>
+				</ul> -->
 			</div>
        	</div>
 		
