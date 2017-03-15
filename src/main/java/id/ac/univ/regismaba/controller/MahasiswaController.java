@@ -11,4 +11,10 @@ public class MahasiswaController {
 	{
 		return "index";
 	}
+	
+	@RequestMapping("/idm/fill")
+	public String idmMahasiswa()
+	{
+		return "calon_mahasiswa-mengisi_idm";
+	}
 }
