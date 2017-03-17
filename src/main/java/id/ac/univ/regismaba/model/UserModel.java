@@ -11,5 +11,6 @@ public class UserModel {
 	String nama_lengkap;
 	String email;
 	int flag_aktif;
+	String profile_picture;
 	
 }
