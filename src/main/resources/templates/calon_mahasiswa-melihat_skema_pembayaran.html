@@ -14,24 +14,99 @@
 					<div class="col-sm-12"><h3>Skema Pembayaran</h3></div>
 				</div>
 				<hr/>
-				
-				<div class="row">
-					<div class="col-sm-12"><label>Pilihan Golongan</label></div>
-					<div class="col-sm-12"><label>Jumlah Biaya yang Diajukan</label></div>
-					<div class="col-sm-12"><label>Uang Pangkal</label></div>
-					<div class="col-sm-12"><label>Surat Keterangan RT RW</label></div>
-					<div class="col-sm-12"><label>Foto Rumah</label></div>
-					<div class="col-sm-12"><label>Slip Gaji Pribadi</label></div>
-					<div class="col-sm-12"><label>Slip Gaji Wali 1</label></div>
-					<div class="col-sm-12"><label>Slip Gaji Wali 2</label></div>
-					<div class="col-sm-12"><label>Tagihan Air</label></div>
-					<div class="col-sm-12"><label>Tagihan Listrik</label></div>
-					<div class="col-sm-12"><label>Tagihan Telepon</label></div>
+				<div class="col-xs-6 col-md-3">
+				    <a href="#" class="thumbnail">
+				      <img src="/img/logo.png" alt="profpic"/>
+					</a>
 				</div>
-				<hr/>
+				
+				<table class="table">
+					<tbody>
+						<tr>Benathavia Saladdin-</tr>
+						<tr>1234567890</tr>
+					</tbody>
+				</table>
+				
+				<table class="table">
+					<tbody>
+						<tr>
+							<td>
+								<div class="col-sm-12"><h4 th:text="'Golongan'">Pilihan Golongan</h4></div>
+							</td>
+							<td>
+								<div class="col-sm-12"><h4 th:text="${psbm.golongan_id}">Pilihan Golongan</h4></div>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<div class="col-sm-12"><h4 th:text="'Surat Keterangan RT RW'">Pilihan Golongan</h4></div>
+							</td>
+							<td>
+								<div class="col-sm-12"><h4 th:text="${psbm.surat_keterangan_rtrw}">Pilihan Golongan</h4></div>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<div class="col-sm-12"><h4 th:text="'Foto Rumah'">Pilihan Golongan</h4></div>
+							</td>
+							<td>
+								<div class="col-sm-12"><h4 th:text="${psbm.foto_rumah}">Pilihan Golongan</h4></div>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<div class="col-sm-12"><h4 th:text="'Slip Gaji Pribadi'">Pilihan Golongan</h4></div>
+							</td>
+							<td>
+								<div class="col-sm-12"><h4 th:text="${psbm.slip_gaji_pribadi}">Pilihan Golongan</h4></div>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<div class="col-sm-12"><h4 th:text="'Slip Gaji Wali 1'">Pilihan Golongan</h4></div>
+							</td>
+							<td>
+								<div class="col-sm-12"><h4 th:text="${psbm.slip_gaji_wali1}">Pilihan Golongan</h4></div>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<div class="col-sm-12"><h4 th:text="'Slip Gaji Wali 2'">Pilihan Golongan</h4></div>
+							</td>
+							<td>
+								<div class="col-sm-12"><h4 th:text="${psbm.slip_gaji_wali2}">Pilihan Golongan</h4></div>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<div class="col-sm-12"><h4 th:text="'Tagihan Air'">Pilihan Golongan</h4></div>
+							</td>
+							<td>
+								<div class="col-sm-12"><h4 th:text="${psbm.tagihan_air}">Pilihan Golongan</h4></div>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<div class="col-sm-12"><h4 th:text="'Tagihan Listrik'">Pilihan Golongan</h4></div>
+							</td>
+							<td>
+								<div class="col-sm-12"><h4 th:text="${psbm.tagihan_listrik}">Pilihan Golongan</h4></div>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<div class="col-sm-12"><h4 th:text="'Tagihan Telepon'">Pilihan Golongan</h4></div>
+							</td>
+							<td>
+								<div class="col-sm-12"><h4 th:text="${psbm.tagihan_telepon}">Pilihan Golongan</h4></div>
+							</td>
+						</tr>
+					</tbody>
+  				</table>
+  				<hr/>
 				
 				<div class="btn-group" role="group" aria-label="...">
-				  <a th:href="'/calon-mahasiswa/pengajuan-skema'"><button type="button" class="btn btn-default">Ajukan Skema Pembayaran</button></a>
+				  <a th:href="'/calon-mahasiswa/pengajuan-skema'"><button type="button" class="btn btn-warning">Ajukan Skema Pembayaran</button></a>
 				</div>
 			</div>
        	</div>
