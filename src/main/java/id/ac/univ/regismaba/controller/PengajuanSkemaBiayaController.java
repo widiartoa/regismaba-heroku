@@ -3,6 +3,7 @@ package id.ac.univ.regismaba.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import id.ac.univ.regismaba.model.MahasiswaModel;
@@ -40,5 +41,33 @@ public class PengajuanSkemaBiayaController {
 	public String pengajuanSkemaMahasiswa()
 	{
 		return "calon_mahasiswa-pengajuan_skema_pembayaran";
+	}
+	
+	@RequestMapping("/calon-mahasiswa/pengajuan-skema/submit")
+	public String pengajuanSkemaMahasiswaSubmit(Model model, @ModelAttribute PengajuanSkemaBiayaModel skema)
+	{
+		MahasiswaModel mahasiswa = mahasiswaService.selectMahasiswa("1234567890");
+		
+		if(mahasiswa.getPengajuan_id() == 0)
+		{
+			//insert new pengajuan
+		}
+		else
+		{
+			//update existing pengajuan
+			
+		}
+		
+		mahasiswa = mahasiswaService.selectMahasiswa("1234567890");
+		
+		int pengajuanId = mahasiswa.getPengajuan_id();
+		
+		PengajuanSkemaBiayaModel psbm = psbs.selectPSBM(pengajuanId);
+		
+		model.addAttribute("mahasiswa", mahasiswa);
+		
+		model.addAttribute("psbm", psbm);
+		
+		return "calon_mahasiswa-melihat_skema_pembayaran";
 	}
 }
