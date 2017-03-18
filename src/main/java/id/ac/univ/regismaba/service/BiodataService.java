@@ -1,15 +1,10 @@
 package id.ac.univ.regismaba.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import id.ac.univ.regismaba.model.IjazahModel;
 
-import id.ac.univ.regismaba.dao.BiodataMapper;
-import lombok.extern.slf4j.Slf4j;
-
-@Slf4j
-@Service
-public class BiodataService
+public interface BiodataService
 {
-    @Autowired
-    BiodataMapper biodataMapper;
+    IjazahModel selectIjazah(String nomor_ijazah);
+    
+    void addIjazah(String nomor_ijazah);
 }
