@@ -51,11 +51,12 @@ public class PengajuanSkemaBiayaController {
 		if(mahasiswa.getPengajuan_id() == 0)
 		{
 			//insert new pengajuan
+			psbs.insertPSBM(skema);
 		}
 		else
 		{
 			//update existing pengajuan
-			
+			psbs.updatePSBM(skema);
 		}
 		
 		mahasiswa = mahasiswaService.selectMahasiswa("1234567890");
