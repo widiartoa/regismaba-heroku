@@ -5,7 +5,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import id.ac.univ.regismaba.model.MahasiswaModel;
 import id.ac.univ.regismaba.model.PengajuanSkemaBiayaModel;
+import id.ac.univ.regismaba.service.MahasiswaService;
 import id.ac.univ.regismaba.service.PengajuanSkemaBiayaService;
 
 @Controller
@@ -14,11 +16,20 @@ public class PengajuanSkemaBiayaController {
 	@Autowired
 	PengajuanSkemaBiayaService psbs;
 	
+	@Autowired
+	MahasiswaService mahasiswaService;
+	
 	@RequestMapping("/calon-mahasiswa/skema-pembayaran")
 	public String skemaMahasiswa(Model model)
 	{
 		//hardcode first psbm
-		PengajuanSkemaBiayaModel psbm = psbs.selectPSBM(1);
+		MahasiswaModel mahasiswa = mahasiswaService.selectMahasiswa("1234567890");
+		
+		int pengajuanId = mahasiswa.getPengajuan_id();
+		
+		PengajuanSkemaBiayaModel psbm = psbs.selectPSBM(pengajuanId);
+		
+		model.addAttribute("mahasiswa", mahasiswa);
 		
 		model.addAttribute("psbm", psbm);
 		
