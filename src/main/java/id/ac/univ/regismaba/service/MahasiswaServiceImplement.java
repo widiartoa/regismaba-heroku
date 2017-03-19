@@ -16,10 +16,6 @@ import id.ac.univ.regismaba.dao.MahasiswaMapper;
 @Slf4j
 @Service
 public class MahasiswaServiceImplement implements MahasiswaService{
-<<<<<<< HEAD
-	@Autowired
-    private MahasiswaMapper mahasiswaMapper;
-=======
 	
 	@Autowired
 	MahasiswaMapper mahasiswaMapper;
@@ -79,7 +75,6 @@ public class MahasiswaServiceImplement implements MahasiswaService{
 		log.info ("update pengajuan mahasiswa with npm {}", npm);
 		mahasiswaMapper.updatePengajuanMahasiswa(npm, pengajuan_id);
 	}
->>>>>>> 7589d95d5efeb4ff08535a26000633719edd8d8b
 
     @Override
     public MahasiswaModel loginMahasiswa (String username, String password)

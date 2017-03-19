@@ -10,6 +10,6 @@ import lombok.extern.slf4j.Slf4j;
 @Service
 public class BiodataService
 {
-    @Autowired
-    BiodataMapper biodataMapper;
+    /*@Autowired
+    BiodataMapper biodataMapper;*/
 }

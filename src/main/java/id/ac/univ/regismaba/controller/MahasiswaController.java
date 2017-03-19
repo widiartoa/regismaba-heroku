@@ -44,24 +44,10 @@ public class MahasiswaController {
 	{
 		return "calon_mahasiswa-mengisi_idm";
 	}
-<<<<<<< HEAD
-	
-	@RequestMapping("/calon-mahasiswa/skema-pembayaran")
-	public String skemaMahasiswa()
-	{
-		return "calon_mahasiswa-melihat_skema_pembayaran";
-	}
-	
-	@RequestMapping("/calon-mahasiswa/pengajuan-skema")
-	public String pengajuanSkemaMahasiswa()
-	{
-		return "calon_mahasiswa-pengajuan_skema_pembayaran";
-	}
 	
 	@RequestMapping("/calon-mahasiswa/survey-kesehatan")
 	public String surveyKesehatan()
 	{
-		
 		return "calon_mahasiswa-survey_kesehatan";
 	}
 	
@@ -72,6 +58,4 @@ public class MahasiswaController {
 		
 		return "calon_mahasiswa-survey_kesehatan";
 	}*/
-=======
->>>>>>> 7589d95d5efeb4ff08535a26000633719edd8d8b
 }
