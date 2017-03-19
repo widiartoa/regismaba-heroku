@@ -15,5 +15,4 @@ public interface BiodataMapper
             + "#{scan_kk}, #{scan_surat_pernyataan_mahasiswa}, #{status_verifikasi}, #{flag_aktif})")
 
     void insertBiodata (BiodataModel biodata);
-
 }

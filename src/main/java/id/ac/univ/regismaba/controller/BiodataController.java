@@ -34,7 +34,7 @@ public class BiodataController
     {
         IjazahModel ijazah = new IjazahModel(nomor_ijazah, nama_institusi, jenjang, scan_ijazah, scan_pernyataan_ijazah);
         ijazahDAO.addIjazah (ijazah);
-        return "calon_mahasiswa-mengisi_idm";
+        return "success-biodata-insert";
     }
 
 //    @RequestMapping("/biodata/{biodata_id}")
