@@ -30,8 +30,8 @@ public interface PengajuanSkemaBiayaMapper {
 			+ "surat_keterangan_rtrw=#{surat_keterangan_rtrw}, foto_rumah=#{foto_rumah}, "
 			+ "slip_gaji_pribadi=#{slip_gaji_pribadi}, slip_gaji_wali1=#{slip_gaji_wali1}, "
 			+ "slip_gaji_wali2=#{slip_gaji_wali2}, tagihan_air=#{tagihan_air}, "
-			+ "tagihan_listrik=#{tagihan_listrik}, tagihan_telepon=#{tagihan_telepon}"
-			+ "where pengajuan_id = #{pengajuan_id}")
+			+ "tagihan_listrik=#{tagihan_listrik}, tagihan_telepon=#{tagihan_telepon} "
+			+ "where pengajuan_id=1")
 	void updatePSBM(PengajuanSkemaBiayaModel psbm);
 	
 }

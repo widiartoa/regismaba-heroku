@@ -71,6 +71,11 @@ public class PengajuanSkemaBiayaController {
 	{
 		List<SkemaBiayaModel> schemas = sbs.selectAllSBM();
 		
+		for(int i = 0; i < schemas.size(); i++)
+		{
+			System.out.println(schemas.get(i).getGolongan_id());
+		}
+		
 		model.addAttribute("schemas", schemas);
 		
 		return "calon_mahasiswa-pengajuan_skema_pembayaran";
@@ -78,7 +83,6 @@ public class PengajuanSkemaBiayaController {
 	
 	@PostMapping("/calon-mahasiswa/pengajuan-skema/submit")
 	public String pengajuanSkemaMahasiswaSubmit(Model model, 
-												@ModelAttribute PengajuanSkemaBiayaModel skema,
 												@RequestParam("surat_keterangan_rtrw") MultipartFile surat_keterangan_rtrw,
 												@RequestParam("foto_rumah") MultipartFile foto_rumah,
 												@RequestParam("slip_gaji_pribadi") MultipartFile slip_gaji_pribadi,
@@ -86,10 +90,12 @@ public class PengajuanSkemaBiayaController {
 												@RequestParam("slip_gaji_wali2") MultipartFile slip_gaji_wali2,
 												@RequestParam("tagihan_air") MultipartFile tagihan_air,
 												@RequestParam("tagihan_listrik") MultipartFile tagihan_listrik,
-												@RequestParam("tagihan_telepon") MultipartFile tagihan_telepon,
-				                                RedirectAttributes redirectAttributes)
+												@RequestParam("tagihan_telepon") MultipartFile tagihan_telepon)
 	{
 		MahasiswaModel mahasiswa = mahasiswaService.selectMahasiswa("1234567890");
+		PengajuanSkemaBiayaModel skema = new PengajuanSkemaBiayaModel();
+		
+		skema.setGolongan_id(1);
 		
 		storageService.store(surat_keterangan_rtrw);
 		storageService.store(foto_rumah);
@@ -168,7 +174,7 @@ public class PengajuanSkemaBiayaController {
                 .fromMethodName(PengajuanSkemaBiayaController.class, "serveFile", data7.getFileName().toString())
                 .build().toString();
         
-        skema.setTagihan_air(pdb7);
+        skema.setTagihan_listrik(pdb7);
         
         //TAGIHAN TELEPON//
         String pathDB8 = storageService.load(tagihan_telepon.getOriginalFilename()).toString();
@@ -178,7 +184,7 @@ public class PengajuanSkemaBiayaController {
                 .fromMethodName(PengajuanSkemaBiayaController.class, "serveFile", data8.getFileName().toString())
                 .build().toString();
         
-        skema.setTagihan_air(pdb8);
+        skema.setTagihan_telepon(pdb8);
         
 		//INSERT OR UPDATE//
 		if(mahasiswa.getPengajuan_id() == 0)
