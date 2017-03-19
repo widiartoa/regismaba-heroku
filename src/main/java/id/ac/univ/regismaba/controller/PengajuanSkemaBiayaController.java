@@ -1,6 +1,7 @@
 package id.ac.univ.regismaba.controller;
 
 import java.nio.file.Path;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
@@ -20,12 +21,13 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import id.ac.univ.regismaba.storage.StorageFileNotFoundException;
-
 import id.ac.univ.regismaba.model.MahasiswaModel;
 import id.ac.univ.regismaba.model.PengajuanSkemaBiayaModel;
+import id.ac.univ.regismaba.model.SkemaBiayaModel;
 import id.ac.univ.regismaba.service.MahasiswaService;
 import id.ac.univ.regismaba.service.PengajuanSkemaBiayaService;
+import id.ac.univ.regismaba.service.SkemaBiayaService;
+import id.ac.univ.regismaba.storage.StorageFileNotFoundException;
 import id.ac.univ.regismaba.storage.StorageService;
 
 @Controller
@@ -40,6 +42,9 @@ public class PengajuanSkemaBiayaController {
 	
 	@Autowired
 	PengajuanSkemaBiayaService psbs;
+	
+	@Autowired
+	SkemaBiayaService sbs;
 	
 	@Autowired
 	MahasiswaService mahasiswaService;
@@ -62,8 +67,12 @@ public class PengajuanSkemaBiayaController {
 	}
 	
 	@RequestMapping("/calon-mahasiswa/pengajuan-skema")
-	public String pengajuanSkemaMahasiswa()
+	public String pengajuanSkemaMahasiswa(Model model)
 	{
+		List<SkemaBiayaModel> schemas = sbs.selectAllSBM();
+		
+		model.addAttribute("schemas", schemas);
+		
 		return "calon_mahasiswa-pengajuan_skema_pembayaran";
 	}
 	

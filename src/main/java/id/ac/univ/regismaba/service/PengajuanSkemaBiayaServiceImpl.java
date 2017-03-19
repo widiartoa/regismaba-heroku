@@ -1,5 +1,7 @@
 package id.ac.univ.regismaba.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -32,5 +34,12 @@ public class PengajuanSkemaBiayaServiceImpl implements PengajuanSkemaBiayaServic
 		// TODO Auto-generated method stub
 		log.info ("update pengajuan skema biaya");
 		psbd.updatePSBM(psbm);
+	}
+
+	@Override
+	public List<PengajuanSkemaBiayaModel> selectAllPSBM() {
+		// TODO Auto-generated method stub
+		log.info ("select all pengajuan skema biaya");
+		return psbd.selectAllPSBM();
 	}
 }

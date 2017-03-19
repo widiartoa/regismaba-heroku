@@ -1,13 +1,14 @@
 package id.ac.univ.regismaba.service;
 
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Update;
+import java.util.List;
 
 import id.ac.univ.regismaba.model.PengajuanSkemaBiayaModel;
 
 public interface PengajuanSkemaBiayaService {
 
 	PengajuanSkemaBiayaModel selectPSBM (int pengajuan_id);
+	
+	List<PengajuanSkemaBiayaModel> selectAllPSBM ();
 
 	void insertPSBM(PengajuanSkemaBiayaModel psbm);
 	
