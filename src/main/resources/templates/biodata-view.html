@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<div th:replace="resources"></div>
+<title>Calon Mahasiswa - Lihat IDM</title>
+</head>
+
+<body>
+	<div th:include="calon_mahasiswa-navbar"></div>
+		<section class="content">
+		<!-- PUBLICATIONS -->
+		<div class="box box-primary">
+			<div class="box-header with-border">
+				<h3 class="box-title">Biodata Mahasiswa</h3>
+				<!-- /.box-header -->
+			</div>
+
+			<div class="box-body">
+				<dl class="dl-horizontal">
+					<dt>Nama</dt>
+					<dd th:text="${biodata.nama}"></dd>
+					<dt>Nomor Ijazah</dt>
+					<dd th:text="${biodata.nomor_ijazah}"></dd>
+					<dt>Nomor Telepon</dt>
+					<dd th:text="${biodata.nomor_telepon}"></dd>
+					<dt>Nomor Asuransi</dt>
+					<dd th:text="${biodata.nomor_asuransi}"></dd>
+					<dt>Tanggal Lahir</dt>
+					<dd th:text="${biodata.tanggal_lahir}"></dd>
+					<dt>Sidik Jari</dt>
+					<dd th:text="${biodata.sidik_jari}"></dd>
+					<dt>Jenis Kelamin</dt>
+					<dd th:text="${biodata.jenis_kelamin}"></dd>
+					<dt>Scan KK</dt>
+					<dd th:text="${biodata.scan_kk}"></dd>
+					<dt>Kewarganegaraan</dt>
+					<dd th:text="${biodata.kewarganegaraan}"></dd>
+					<dt>Scan Surat Pernyataan Mahasiswa</dt>
+					<dd th:text="${biodata.scan_surat_pernyataan_mahasiswa}"></dd>
+					<dt>Nomor KTP</dt>
+					<dd th:text="${biodata.nomor_ktp}"></dd>
+					<dt>Scan KTP</dt>
+					<dd th:text="${biodata.scan_ktp}"></dd>										
+				</dl>
+			</div>
+		</div>
+		</section>
+</body>
+</html>

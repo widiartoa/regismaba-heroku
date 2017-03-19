@@ -70,5 +70,7 @@ public interface MahasiswaMapper {
 	void updateJenjangMahasiswa(@Param("npm") String npm, @Param("jenjang_id") String jenjang_id);
 	
 	@Update("update mahasiswa set pengajuan_id = #{pengajuan_id} where npm = #{npm}")
-	void updatePengajuanMahasiswa(@Param("npm") String npm, @Param("pengajuan_id") String pengajuan_id);
+	void updatePengajuanMahasiswa(@Param("npm") String npm, @Param("pengajuan_id") String pengajuan_id);	
+	
 }
+

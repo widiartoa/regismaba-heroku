@@ -1400,6 +1400,11 @@ ALTER TABLE `verifikator_fakultas`
 ALTER TABLE `biodata`
   MODIFY `biodata_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
+-- DIGANTI CHYNJUL YG BAGIAN INI
+ALTER TABLE `alamat`
+  MODIFY `jalan_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+
 ALTER TABLE `data_kesehatan`
   MODIFY `data_kesehatan_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --

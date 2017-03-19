@@ -9,3 +9,4 @@ public class JadwalRegisModel {
 	Date timestamp_awal;
 	Date timestamp_akhir;
 }
+
