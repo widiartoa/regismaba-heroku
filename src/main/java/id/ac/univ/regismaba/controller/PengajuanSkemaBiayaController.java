@@ -2,6 +2,7 @@ package id.ac.univ.regismaba.controller;
 
 import java.nio.file.Path;
 import java.util.List;
+import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
@@ -11,7 +12,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import id.ac.univ.regismaba.model.MahasiswaModel;
 import id.ac.univ.regismaba.model.PengajuanSkemaBiayaModel;
@@ -98,21 +97,25 @@ public class PengajuanSkemaBiayaController {
 		
 		skema.setGolongan_id(golongan_id);
 		
-		storageService.store(surat_keterangan_rtrw);
-		storageService.store(foto_rumah);
-		storageService.store(slip_gaji_pribadi);
-		storageService.store(slip_gaji_wali1);
-		storageService.store(slip_gaji_wali2);
-		storageService.store(tagihan_air);
-		storageService.store(tagihan_listrik);
-		storageService.store(tagihan_telepon);
+		Random rand = new Random();
+		
+		int num = rand.nextInt(1000000) + 1;
+		
+		storageService.store(surat_keterangan_rtrw, num);
+		storageService.store(foto_rumah, num);
+		storageService.store(slip_gaji_pribadi, num);
+		storageService.store(slip_gaji_wali1, num);
+		storageService.store(slip_gaji_wali2, num);
+		storageService.store(tagihan_air, num);
+		storageService.store(tagihan_listrik, num);
+		storageService.store(tagihan_telepon, num);
 		
 		//SURAT KETERANGAN RT RW UPLOAD//
         String pathDB1 = storageService.load(surat_keterangan_rtrw.getOriginalFilename()).toString();
         
         Path data1 = storageService.load(surat_keterangan_rtrw.getOriginalFilename());
         String pdb1 = MvcUriComponentsBuilder
-                .fromMethodName(PengajuanSkemaBiayaController.class, "serveFile", data1.getFileName().toString())
+                .fromMethodName(PengajuanSkemaBiayaController.class, "serveFile", num + "-" + data1.getFileName().toString())
                 .build().toString();
         
         skema.setSurat_keterangan_rtrw(pdb1);
@@ -122,7 +125,7 @@ public class PengajuanSkemaBiayaController {
         
         Path data2 = storageService.load(foto_rumah.getOriginalFilename());
         String pdb2 = MvcUriComponentsBuilder
-                .fromMethodName(PengajuanSkemaBiayaController.class, "serveFile", data2.getFileName().toString())
+                .fromMethodName(PengajuanSkemaBiayaController.class, "serveFile", num + "-" + data2.getFileName().toString())
                 .build().toString();
         
         skema.setFoto_rumah(pdb2);
@@ -132,7 +135,7 @@ public class PengajuanSkemaBiayaController {
         
         Path data3 = storageService.load(slip_gaji_pribadi.getOriginalFilename());
         String pdb3 = MvcUriComponentsBuilder
-                .fromMethodName(PengajuanSkemaBiayaController.class, "serveFile", data3.getFileName().toString())
+                .fromMethodName(PengajuanSkemaBiayaController.class, "serveFile", num + "-" + data3.getFileName().toString())
                 .build().toString();
         
         skema.setSlip_gaji_pribadi(pdb3);
@@ -142,7 +145,7 @@ public class PengajuanSkemaBiayaController {
         
         Path data4 = storageService.load(slip_gaji_wali1.getOriginalFilename());
         String pdb4 = MvcUriComponentsBuilder
-                .fromMethodName(PengajuanSkemaBiayaController.class, "serveFile", data4.getFileName().toString())
+                .fromMethodName(PengajuanSkemaBiayaController.class, "serveFile", num + "-" + data4.getFileName().toString())
                 .build().toString();
         
         skema.setSlip_gaji_wali1(pdb4);
@@ -152,7 +155,7 @@ public class PengajuanSkemaBiayaController {
         
         Path data5 = storageService.load(slip_gaji_wali2.getOriginalFilename());
         String pdb5 = MvcUriComponentsBuilder
-                .fromMethodName(PengajuanSkemaBiayaController.class, "serveFile", data5.getFileName().toString())
+                .fromMethodName(PengajuanSkemaBiayaController.class, "serveFile", num + "-" + data5.getFileName().toString())
                 .build().toString();
         
         skema.setSlip_gaji_wali2(pdb5);
@@ -162,7 +165,7 @@ public class PengajuanSkemaBiayaController {
         
         Path data6 = storageService.load(tagihan_air.getOriginalFilename());
         String pdb6 = MvcUriComponentsBuilder
-                .fromMethodName(PengajuanSkemaBiayaController.class, "serveFile", data6.getFileName().toString())
+                .fromMethodName(PengajuanSkemaBiayaController.class, "serveFile", num + "-" + data6.getFileName().toString())
                 .build().toString();
         
         skema.setTagihan_air(pdb6);
@@ -172,7 +175,7 @@ public class PengajuanSkemaBiayaController {
         
         Path data7 = storageService.load(tagihan_listrik.getOriginalFilename());
         String pdb7 = MvcUriComponentsBuilder
-                .fromMethodName(PengajuanSkemaBiayaController.class, "serveFile", data7.getFileName().toString())
+                .fromMethodName(PengajuanSkemaBiayaController.class, "serveFile", num + "-" + data7.getFileName().toString())
                 .build().toString();
         
         skema.setTagihan_listrik(pdb7);
@@ -182,7 +185,7 @@ public class PengajuanSkemaBiayaController {
         
         Path data8 = storageService.load(tagihan_telepon.getOriginalFilename());
         String pdb8 = MvcUriComponentsBuilder
-                .fromMethodName(PengajuanSkemaBiayaController.class, "serveFile", data8.getFileName().toString())
+                .fromMethodName(PengajuanSkemaBiayaController.class, "serveFile", num + "-" + data8.getFileName().toString())
                 .build().toString();
         
         skema.setTagihan_telepon(pdb8);
