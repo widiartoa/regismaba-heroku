@@ -42,23 +42,32 @@ public class JadwalServiceImplement implements JadwalService {
 	}
 
 	@Override
-	public String parseTimestampAwalRegis(JadwalRegisModel jadwalRegis) {
+	public String parseHariRegis(JadwalRegisModel jadwalRegis) {
 		// TODO Auto-generated method stub
 		Date tsa = jadwalRegis.getTimestamp_awal();
-		DateFormat dateFormat = new SimpleDateFormat("HH:mm");
-		String waktuAwal = dateFormat.format(tsa);
-		return waktuAwal;
+		DateFormat dateFormat = new SimpleDateFormat("EEE");
+		String hari = dateFormat.format(tsa);
+		return hari;
 	}
 
 	@Override
-	public String parseTimestampAkhirRegis(JadwalRegisModel jadwalRegis) {
+	public String parseHariTesKes(JadwalKesehatanModel jadwalKesehatan) {
 		// TODO Auto-generated method stub
-		Date tsa = jadwalRegis.getTimestamp_akhir();
-		DateFormat dateFormat = new SimpleDateFormat("HH:mm");
-		String waktuAkhir = dateFormat.format(tsa);
-		return waktuAkhir;
+		Date tsa = jadwalKesehatan.getTimestamp_awal();
+		DateFormat dateFormat = new SimpleDateFormat("EEE");
+		String hari = dateFormat.format(tsa);
+		return hari;
 	}
 
+	@Override
+	public String parseHariEpt(JadwalEptModel jadwalEpt) {
+		// TODO Auto-generated method stub
+		Date tsa = jadwalEpt.getTimestamp_awal();
+		DateFormat dateFormat = new SimpleDateFormat("EEE");
+		String hari = dateFormat.format(tsa);
+		return hari;
+	}
+	
 	@Override
 	public String parseWaktuRegis(JadwalRegisModel jadwalRegis) {
 		// TODO Auto-generated method stub
@@ -69,12 +78,75 @@ public class JadwalServiceImplement implements JadwalService {
 	}
 
 	@Override
-	public String parseHariRegis(JadwalRegisModel jadwalRegis) {
+	public String parseWaktuTesKes(JadwalKesehatanModel jadwalKesehatan) {
+		// TODO Auto-generated method stub
+		Date tsa = jadwalKesehatan.getTimestamp_awal();
+		DateFormat dateFormat = new SimpleDateFormat("dd-MM-YYYY");
+		String waktu = dateFormat.format(tsa);
+		return waktu;
+	}
+
+	@Override
+	public String parseWaktuEpt(JadwalEptModel jadwalEpt) {
+		// TODO Auto-generated method stub
+		Date tsa = jadwalEpt.getTimestamp_awal();
+		DateFormat dateFormat = new SimpleDateFormat("dd-MM-YYYY");
+		String waktu = dateFormat.format(tsa);
+		return waktu;
+	}
+
+	@Override
+	public String parseTimestampAwalRegis(JadwalRegisModel jadwalRegis) {
 		// TODO Auto-generated method stub
 		Date tsa = jadwalRegis.getTimestamp_awal();
-		DateFormat dateFormat = new SimpleDateFormat("EEE");
-		String hari = dateFormat.format(tsa);
-		return hari;
+		DateFormat dateFormat = new SimpleDateFormat("HH:mm");
+		String waktuAwal = dateFormat.format(tsa);
+		return waktuAwal;
+	}
+
+	@Override
+	public String parseTimestampAwalTesKes(JadwalKesehatanModel jadwalKesehatan) {
+		// TODO Auto-generated method stub
+		Date tsa = jadwalKesehatan.getTimestamp_awal();
+		DateFormat dateFormat = new SimpleDateFormat("HH:mm");
+		String waktuAwal = dateFormat.format(tsa);
+		return waktuAwal;
+	}
+
+	@Override
+	public String parseTimestampAwalEpt(JadwalEptModel jadwalEpt) {
+		// TODO Auto-generated method stub
+		Date tsa = jadwalEpt.getTimestamp_awal();
+		DateFormat dateFormat = new SimpleDateFormat("HH:mm");
+		String waktuAwal = dateFormat.format(tsa);
+		return waktuAwal;
+	}
+	
+	@Override
+	public String parseTimestampAkhirRegis(JadwalRegisModel jadwalRegis) {
+		// TODO Auto-generated method stub
+		Date tsa = jadwalRegis.getTimestamp_akhir();
+		DateFormat dateFormat = new SimpleDateFormat("HH:mm");
+		String waktuAkhir = dateFormat.format(tsa);
+		return waktuAkhir;
+	}
+	
+	@Override
+	public String parseTimestampAkhirTesKes(JadwalKesehatanModel jadwalKesehatan) {
+		// TODO Auto-generated method stub
+		Date tsa = jadwalKesehatan.getTimestamp_akhir();
+		DateFormat dateFormat = new SimpleDateFormat("HH:mm");
+		String waktuAkhir = dateFormat.format(tsa);
+		return waktuAkhir;
+	}
+
+	@Override
+	public String parseTimestampAkhirEpt(JadwalEptModel jadwalEpt) {
+		// TODO Auto-generated method stub
+		Date tsa = jadwalEpt.getTimestamp_akhir();
+		DateFormat dateFormat = new SimpleDateFormat("HH:mm");
+		String waktuAkhir = dateFormat.format(tsa);
+		return waktuAkhir;
 	}
 
 }

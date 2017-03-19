@@ -47,7 +47,85 @@
 								<div class="col-sm-12"><h4 th:text="'Time Span'">Time Span</h4></div>
 							</td>
 							<td>
-								<div class="col-sm-12"><h4 th:text="${timestampAwalRegis}+'-'+${timestampAkhirRegis}">Pilihan Golongan</h4></div>
+								<div class="col-sm-12"><h4 th:text="${timestampAwalRegis}+'-'+${timestampAkhirRegis}">Waktu Awal-Waktu Akhir</h4></div>
+							</td>
+						</tr>
+					</tbody>
+  				</table>
+  				
+  				<table class="table">
+					<thead>
+						<tr>
+							<td>
+								<div class="col-sm-12"><h4 th:text="'Jadwal Tes Kesehatan'">Jenis Jadwal</h4></div>
+							</td>
+							<td>
+								<div class="col-sm-12"><h4></h4></div>
+							</td>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>
+								<div class="col-sm-12"><h4 th:text="'Day'">Day</h4></div>
+							</td>
+							<td>
+								<div class="col-sm-12"><h4 th:text="${hariTesKes}">Hari</h4></div>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<div class="col-sm-12"><h4 th:text="'Date'">Date</h4></div>
+							</td>
+							<td>
+								<div class="col-sm-12"><h4 th:text="${waktuTesKes}">Tanggal</h4></div>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<div class="col-sm-12"><h4 th:text="'Time Span'">Time Span</h4></div>
+							</td>
+							<td>
+								<div class="col-sm-12"><h4 th:text="${timestampAwalTesKes}+'-'+${timestampAkhirTesKes}">Waktu Awal-Waktu Akhir</h4></div>
+							</td>
+						</tr>
+					</tbody>
+  				</table>
+  				
+  				<table class="table">
+					<thead>
+						<tr>
+							<td>
+								<div class="col-sm-12"><h4 th:text="'Jadwal English Profiency Test (EPT)'">Jenis Jadwal</h4></div>
+							</td>
+							<td>
+								<div class="col-sm-12"><h4></h4></div>
+							</td>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>
+								<div class="col-sm-12"><h4 th:text="'Day'">Day</h4></div>
+							</td>
+							<td>
+								<div class="col-sm-12"><h4 th:text="${hariEpt}">Hari</h4></div>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<div class="col-sm-12"><h4 th:text="'Date'">Date</h4></div>
+							</td>
+							<td>
+								<div class="col-sm-12"><h4 th:text="${waktuEpt}">Tanggal</h4></div>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<div class="col-sm-12"><h4 th:text="'Time Span'">Time Span</h4></div>
+							</td>
+							<td>
+								<div class="col-sm-12"><h4 th:text="${timestampAwalEpt}+'-'+${timestampAkhirEpt}">Waktu Awal-Waktu Akhir</h4></div>
 							</td>
 						</tr>
 					</tbody>

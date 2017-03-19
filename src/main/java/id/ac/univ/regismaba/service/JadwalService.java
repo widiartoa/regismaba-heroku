@@ -12,11 +12,27 @@ public interface JadwalService {
 
 	JadwalRegisModel selectJadwalRegis(int jadwal_registrasi_id);
 
-	String parseTimestampAwalRegis(JadwalRegisModel jadwalRegis);
+	String parseHariRegis(JadwalRegisModel jadwalRegis);
 
-	String parseTimestampAkhirRegis(JadwalRegisModel jadwalRegis);
+	String parseHariTesKes(JadwalKesehatanModel jadwalKesehatan);
+
+	String parseHariEpt(JadwalEptModel jadwalEpt);
 
 	String parseWaktuRegis(JadwalRegisModel jadwalRegis);
 
-	String parseHariRegis(JadwalRegisModel jadwalRegis);
+	String parseWaktuTesKes(JadwalKesehatanModel jadwalKesehatan);
+
+	String parseWaktuEpt(JadwalEptModel jadwalEpt);
+	
+	String parseTimestampAwalRegis(JadwalRegisModel jadwalRegis);
+
+	String parseTimestampAwalTesKes(JadwalKesehatanModel jadwalKesehatan);
+
+	String parseTimestampAwalEpt(JadwalEptModel jadwalEpt);
+
+	String parseTimestampAkhirRegis(JadwalRegisModel jadwalRegis);
+
+	String parseTimestampAkhirTesKes(JadwalKesehatanModel jadwalKesehatan);
+
+	String parseTimestampAkhirEpt(JadwalEptModel jadwalEpt);
 }
