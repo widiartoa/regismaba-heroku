@@ -12,9 +12,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import id.ac.univ.regismaba.model.AlamatModel;
 import id.ac.univ.regismaba.model.BiodataModel;
 import id.ac.univ.regismaba.model.DataKesehatanModel;
 import id.ac.univ.regismaba.model.MahasiswaModel;
+import id.ac.univ.regismaba.service.AlamatService;
 import id.ac.univ.regismaba.service.BiodataService;
 import id.ac.univ.regismaba.service.DataKesehatanService;
 import id.ac.univ.regismaba.service.MahasiswaService;
@@ -23,23 +25,31 @@ import id.ac.univ.regismaba.service.MahasiswaService;
 public class BiodataController {
 	@Autowired
 	BiodataService biodataDAO;
-	
+
 	@Autowired
 	MahasiswaService mahasiswaDAO;
+
+//	@Autowired
+//	IjazahService ijazahDAO;
 	
 	@Autowired
 	DataKesehatanService dataKesehatanDAO;
-	
+
+	@Autowired
+	AlamatService alamatDAO;
+
+	// @Autowired
+	// ProvinsiService provinsiDAO;
+
 	@RequestMapping("/biodata/fill")
-	public String insert()
-	{
+	public String insert(Model model) {
+		// List<ProvinsiModel> provinsis = provinsiDAO.selectAllProvinsi();
+		// model.addAttribute("provinsis", provinsis);
 		return "calon_mahasiswa-mengisi_idm";
 	}
-	
+
 	@RequestMapping("/biodata/fill/submit")
-	public String insertBiodata (
-			@RequestParam(value = "nomor_ijazah", required = false) String nomor_ijazah,
-			@RequestParam(value = "nomor_asuransi", required = false) String nomor_asuransi,
+	public String insertBiodata(@RequestParam(value = "nomor_asuransi", required = false) String nomor_asuransi,
 			@RequestParam(value = "tanggal_lahir", required = false) String tanggal_lahir,
 			@RequestParam(value = "jenis_kelamin", required = false) String jenis_kelamin,
 			@RequestParam(value = "nomor_telepon", required = false) String nomor_telepon,
@@ -50,51 +60,56 @@ public class BiodataController {
 			@RequestParam(value = "scan_kk", required = false) String scan_kk,
 			@RequestParam(value = "scan_surat_pernyataan_mahasiswa", required = false) String scan_surat_pernyataan_mahasiswa,
 			@RequestParam(value = "form_survey_kesehatan", required = false) String form_survey_kesehatan,
-			@RequestParam(value = "hasil_tes_kesehatan", required = false) String hasil_tes_kesehatan) throws ParseException	
-	{
+			@RequestParam(value = "hasil_tes_kesehatan", required = false) String hasil_tes_kesehatan,
+			@RequestParam(value = "jalan", required = false) String jalan,
+			@RequestParam(value = "kota_kabupaten_id", required = false) String kota_kabupaten_id,
+			@RequestParam(value = "kecamatan", required = false) String kecamatan,
+			@RequestParam(value = "kelurahan", required = false) String kelurahan,
+			@RequestParam(value = "kode_pos", required = false) String kode_pos,
+			@RequestParam(value = "nomor_ijazah", required = false) String nomor_ijazah,
+			@RequestParam(value = "nama_institusi", required = false) String nama_institusi,
+			@RequestParam(value = "jenjang", required = false) String jenjang,
+			@RequestParam(value = "scan_ijazah", required = false) String scan_ijazah,
+			@RequestParam(value = "scan_pernyataan_ijazah", required = false) String scan_pernyataan_ijazah)
+			throws ParseException {
 		DateFormat format = new SimpleDateFormat("yyyy-mm-dd");
 		Date tanggalLahir = format.parse(tanggal_lahir);
 		System.out.println(tanggalLahir);
+		
+//		IjazahModel ijazah = new IjazahModel(nomor_ijazah, nama_institusi, jenjang, scan_ijazah, scan_pernyataan_ijazah);
+//        ijazahDAO.addIjazah (ijazah);
+		
 		DataKesehatanModel dataKesehatan = new DataKesehatanModel(0, form_survey_kesehatan, hasil_tes_kesehatan);
-		System.out.println("test " + dataKesehatan.getData_kesehatan_id()); //apus janlups
 		dataKesehatanDAO.insertDataKesehatan(dataKesehatan);
 		dataKesehatan.setData_kesehatan_id(dataKesehatanDAO.selectDataKesehatanId(dataKesehatan));
-		System.out.println("ID DAKES " + dataKesehatan.getData_kesehatan_id()); //apus janlups
-		
-		BiodataModel biodata = new BiodataModel(0, dataKesehatan.getData_kesehatan_id(), nomor_ijazah, nomor_asuransi, 0, tanggalLahir, jenis_kelamin, nomor_telepon, kewarganegaraan, nomor_ktp, sidik_jari, scan_ktp, scan_kk, scan_surat_pernyataan_mahasiswa, "Unverified", "1");
+
+		System.out.println(kota_kabupaten_id);
+		int idKoKab = Integer.parseInt(kota_kabupaten_id);
+
+		AlamatModel alamat = new AlamatModel(0, idKoKab, jalan, kecamatan, kelurahan, kode_pos);
+		int idAlamat = alamatDAO.selectJalanId(alamat);
+		if (idAlamat == 0) {
+			alamatDAO.insertAlamat(alamat);
+		}
+		alamat.setJalan_id(alamatDAO.selectJalanId(alamat));
+
+		BiodataModel biodata = new BiodataModel(0, dataKesehatan.getData_kesehatan_id(), nomor_ijazah, nomor_asuransi,
+				alamat.getJalan_id(), tanggalLahir, jenis_kelamin, nomor_telepon, kewarganegaraan, nomor_ktp,
+				sidik_jari, scan_ktp, scan_kk, scan_surat_pernyataan_mahasiswa, "Unverified", "1");
 		biodataDAO.insertBiodata(biodata);
 		return "success-biodata-insert";
-		
+
 	}
-	
+
 	@RequestMapping("/biodata/view/{npm}")
-	public String view(Model model, @PathVariable(value="npm") String npm)
-	{
+	public String view(Model model, @PathVariable(value = "npm") String npm) {
 		MahasiswaModel mahasiswa = mahasiswaDAO.selectMahasiswa(npm);
 		BiodataModel biodata = biodataDAO.selectBiodata(mahasiswa.getBiodata_id());
-		if(biodata!=null){
+		if (biodata != null) {
 			model.addAttribute("biodata", biodata);
 			return "biodata-view";
 		}
 		return "not-found";
-	} 
-	
-}
+	}
 
-/**
-@Param("data_kesehatan_id") int data_kesehatan_id,
-							@Param("nomor_ijazah") String nomor_ijazah,
-							@Param("nomor_asuransi") String nomor_asuransi,
-							@Param("jalan_id") int jalan_id,
-							@Param("tanggal_lahir") Date tanggal_lahir,
-							@Param("jenis_kelamin") String jenis_kelamin,
-							@Param("nomor_telepon") String nomor_telepon,
-							@Param("kewarganegaraan") String kewarganegaraan,
-							@Param("nomor_ktp") String nomor_ktp,
-							@Param("sidik_jari") String sidik_jari,
-							@Param("scan_ktp") String scan_ktp,
-							@Param("scan_kk") String scan_kk,
-							@Param("scan_surat_pernyataan_mahasiswa") String scan_surat_pernyataan_mahasiswa,
-							@Param("status_verifikasi") String status_verifikasi,
-							@Param("flag_aktif") String flag_aktif
-**/
+}

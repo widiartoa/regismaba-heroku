@@ -20,5 +20,4 @@ public interface DataKesehatanMapper {
 	@Insert("insert into data_kesehatan(form_survey_kesehatan, hasil_tes_kesehatan) values (#{form_survey_kesehatan}, #{hasil_tes_kesehatan})")
 	void insertDataKesehatan(DataKesehatanModel dataKesehatan);
 	
-	
 }

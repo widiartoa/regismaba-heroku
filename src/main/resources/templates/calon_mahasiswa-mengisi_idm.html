@@ -73,12 +73,11 @@
 				<div class="row">
 					<div class="col-md-6">
 						<div class="form-group">
-							<label for="jenis_kelamin">Jenis Kelamin</label>
-							<br></br>
-							<input type="radio" name="jenis_kelamin" value="L"> L</input> 
-							<input type="radio" name="jenis_kelamin" value="P"> P</input>
+							<label for="jenis_kelamin">Jenis Kelamin</label> <br></br> <input
+								type="radio" name="jenis_kelamin" value="L"> L</input> <input
+								type="radio" name="jenis_kelamin" value="P"> P</input>
 						</div>
-						
+
 					</div>
 					<div class="col-md-6">
 						<div class="form-group">
@@ -91,14 +90,16 @@
 					<div class="col-md-6">
 						<div class="form-group">
 							<label for="kewarganegaraan">Kewarganegaraan</label> <input
-								type="text" name="kewarganegaraan" class="form-control" placeholder="Kewarganegaraan"/>
+								type="text" name="kewarganegaraan" class="form-control"
+								placeholder="Kewarganegaraan" />
 						</div>
 					</div>
 					<div class="col-md-6">
 						<div class="form-group">
 							<label for="scan_surat_pernyataan_mahasiswa">Scan Surat
 								Pernyataan Mahasiswa</label> <input type="text"
-								name="scan_surat_pernyataan_mahasiswa" class="form-control" placeholder="Surat Pernyataan Mahasiswa"/>
+								name="scan_surat_pernyataan_mahasiswa" class="form-control"
+								placeholder="Surat Pernyataan Mahasiswa" />
 						</div>
 					</div>
 				</div>
@@ -106,13 +107,65 @@
 					<div class="col-md-6">
 						<div class="form-group">
 							<label for="nomor_ktp">Nomor KTP</label> <input type="text"
-								name="nomor_ktp" class="form-control" placeholder="Nomor KTP"/>
+								name="nomor_ktp" class="form-control" placeholder="Nomor KTP" />
 						</div>
 					</div>
 					<div class="col-md-6">
 						<div class="form-group">
-							<label for="form_survey_kesehatan">Form Survey Kesehatan</label> <input type="text"
-								name="form_survey_kesehatan" class="form-control" placeholder="Formulir Survey Kesehatan"/>
+							<label for="form_survey_kesehatan">Form Survey Kesehatan</label>
+							<input type="text" name="form_survey_kesehatan"
+								class="form-control" placeholder="Formulir Survey Kesehatan" />
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-6">
+						<div class="form-group">
+							<label for="jalan">Nama Jalan</label> <input type="text"
+								name="jalan" class="form-control" placeholder="Nama Jalan" />
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div class="form-group">
+							<label for="kecamatan">Nama Kecamatan</label> <input type="text"
+								name="kecamatan" class="form-control"
+								placeholder="Nama Kecamatan" />
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-6">
+						<div class="form-group">
+							<label for="kelurahan">Nama Kelurahan</label> <input type="text"
+								name="kelurahan" class="form-control"
+								placeholder="Nama Kelurahan" />
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div class="form-group">
+							<label for="kode_pos">Kode Pos</label> <input type="text"
+								name="kode_pos" class="form-control" placeholder="Kode Pos" />
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-6">
+						<div class="form-group">
+							<label for="nama_provinsi">Nama Provinsi</label> <select
+								class="form-control">
+								<option value="32">Jawa Barat</option>
+								<!-- <option th:each="provinsi : ${provinsis}" th:value="${provinsi.provinsi_id}" th:text="${provinsi.nama_provinsi}"></option> -->
+							</select>
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div class="form-group">
+							<label for="kota_kabupaten_id">Kabupaten/Kota</label> <select
+								name="kota_kabupaten_id" class="form-control">
+								<option value="3204">Bandung</option>
+								<option value="3216">Kabupaten Bekasi</option>
+								<option value="3275">Kota Bekasi</option>
+							</select>
 						</div>
 					</div>
 				</div>
@@ -120,19 +173,19 @@
 					<div class="col-md-6">
 						<div class="form-group">
 							<label for="scan_ktp">Scan KTP</label> <input type="text"
-								name="scan_ktp" class="form-control" placeholder="Scan KTP"/>
+								name="scan_ktp" class="form-control" placeholder="Scan KTP" />
 						</div>
 					</div>
 					<div class="col-md-6">
 						<div class="form-group">
-							<label for="hasil_tes_kesehatan">Hasil Tes Kesehatan</label> <input type="text"
-								name="hasil_tes_kesehatan" class="form-control" placeholder="Hasil Tes Kesehatan"/>
+							<label for="hasil_tes_kesehatan">Hasil Tes Kesehatan</label> <input
+								type="text" name="hasil_tes_kesehatan" class="form-control"
+								placeholder="Hasil Tes Kesehatan" />
 						</div>
 					</div>
 				</div>
 				<div class="form-group" style="text-align: center">
-					<button type="submit" value="save"
-						class="btn btn-primary">Simpan</button>
+					<button type="submit" value="save" class="btn btn-primary">Simpan</button>
 				</div>
 			</form>
 		</div>

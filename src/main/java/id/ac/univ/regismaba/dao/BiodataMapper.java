@@ -9,9 +9,9 @@ import id.ac.univ.regismaba.model.BiodataModel;
 @Mapper
 public interface BiodataMapper {
 	//INSERT BIODATA
-		@Insert("insert into biodata (data_kesehatan_id, nomor_ijazah, nomor_asuransi, "
+		@Insert("insert into biodata (flag_aktif, status_verifikasi, jalan_id, data_kesehatan_id, nomor_ijazah, nomor_asuransi, "
 				+ "tanggal_lahir, jenis_kelamin, nomor_telepon, kewarganegaraan, nomor_ktp, sidik_jari, scan_ktp,"
-				+ "scan_kk, scan_surat_pernyataan_mahasiswa) values (#{data_kesehatan_id}, #{nomor_ijazah}, #{nomor_asuransi},"
+				+ "scan_kk, scan_surat_pernyataan_mahasiswa) values (#{flag_aktif}, #{status_verifikasi}, #{jalan_id}, #{data_kesehatan_id}, #{nomor_ijazah}, #{nomor_asuransi},"
 				+ "#{tanggal_lahir}, #{jenis_kelamin}, #{nomor_telepon}, #{kewarganegaraan}, #{nomor_ktp}, #{sidik_jari}, #{scan_ktp},"
 				+ "#{scan_kk}, #{scan_surat_pernyataan_mahasiswa})")
 		void insertBiodata(BiodataModel biodata);
