@@ -56,4 +56,19 @@ public class MahasiswaController {
 	{
 		return "calon_mahasiswa-pengajuan_skema_pembayaran";
 	}
+	
+	@RequestMapping("/calon-mahasiswa/survey-kesehatan")
+	public String surveyKesehatan()
+	{
+		
+		return "calon_mahasiswa-survey_kesehatan";
+	}
+	
+	/*@RequestMapping("/calon-mahasiswa/survey-kesehatan/submit")
+	public String submitSurveyKesehatan(Model model, 
+		@RequestParam(value = "form_survey_kesehatan", required = false) String username
+	)	{
+		
+		return "calon_mahasiswa-survey_kesehatan";
+	}*/
 }
