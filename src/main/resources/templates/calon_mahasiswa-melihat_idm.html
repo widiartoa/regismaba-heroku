@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+		<div th:replace="resources"></div>
+        <title>Calon Mahasiswa - Melihat Isian Data Mahasiswa</title>
+    </head>
+	
+    <body>
+    	<div th:include="calon_mahasiswa-navbar"></div>
+		
+    	<div class="container">
+			<div class="content">
+				<div class="row">
+					<div class="col-sm-12"><h3>Isian Data Mahasiswa</h3></div>
+				</div>
+				<hr/>
+				<div class="col-xs-6 col-md-3">
+				    <a href="#" class="thumbnail">
+				      <img src="/img/logo.png" alt="profpic"/>
+					</a>
+				</div>
+				
+				<table class="table">
+					<tbody>
+						<tr><h4 th:text="${mahasiswa.username}">Pilihan Golongan</h4></tr>
+						<tr><h4 th:text="${mahasiswa.npm}">Pilihan Golongan</h4></tr>
+					</tbody>
+				</table>
+				
+				<table class="table">
+					<tbody>
+						<tr>
+							<td>
+								<div class="col-sm-12"><h4 th:text="'Golongan'">Pilihan Golongan</h4></div>
+							</td>
+							<td>
+								<div class="col-sm-12"><h4 th:text="${psbm.golongan_id}">Pilihan Golongan</h4></div>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<div class="col-sm-12"><h4 th:text="'Surat Keterangan RT RW'">Pilihan Golongan</h4></div>
+							</td>
+							<td>
+								<div class="col-sm-12"><h4 th:text="${psbm.surat_keterangan_rtrw}">Pilihan Golongan</h4></div>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<div class="col-sm-12"><h4 th:text="'Foto Rumah'">Pilihan Golongan</h4></div>
+							</td>
+							<td>
+								<div class="col-sm-12"><h4 th:text="${psbm.foto_rumah}">Pilihan Golongan</h4></div>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<div class="col-sm-12"><h4 th:text="'Slip Gaji Pribadi'">Pilihan Golongan</h4></div>
+							</td>
+							<td>
+								<div class="col-sm-12"><h4 th:text="${psbm.slip_gaji_pribadi}">Pilihan Golongan</h4></div>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<div class="col-sm-12"><h4 th:text="'Slip Gaji Wali 1'">Pilihan Golongan</h4></div>
+							</td>
+							<td>
+								<div class="col-sm-12"><h4 th:text="${psbm.slip_gaji_wali1}">Pilihan Golongan</h4></div>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<div class="col-sm-12"><h4 th:text="'Slip Gaji Wali 2'">Pilihan Golongan</h4></div>
+							</td>
+							<td>
+								<div class="col-sm-12"><h4 th:text="${psbm.slip_gaji_wali2}">Pilihan Golongan</h4></div>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<div class="col-sm-12"><h4 th:text="'Tagihan Air'">Pilihan Golongan</h4></div>
+							</td>
+							<td>
+								<div class="col-sm-12"><h4 th:text="${psbm.tagihan_air}">Pilihan Golongan</h4></div>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<div class="col-sm-12"><h4 th:text="'Tagihan Listrik'">Pilihan Golongan</h4></div>
+							</td>
+							<td>
+								<div class="col-sm-12"><h4 th:text="${psbm.tagihan_listrik}">Pilihan Golongan</h4></div>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<div class="col-sm-12"><h4 th:text="'Tagihan Telepon'">Pilihan Golongan</h4></div>
+							</td>
+							<td>
+								<div class="col-sm-12"><h4 th:text="${psbm.tagihan_telepon}">Pilihan Golongan</h4></div>
+							</td>
+						</tr>
+					</tbody>
+  				</table>
+  				<hr/>
+				
+				<div class="btn-group" role="group" aria-label="...">
+				  <a th:href="'/calon-mahasiswa/pengajuan-skema'"><button type="button" class="btn btn-warning">Ajukan Skema Pembayaran</button></a>
+				</div>
+			</div>
+       	</div>
+		
+		<div class="footer">Modul Registrasi Mahasiswa Baru</div>
+		
+		<script type="text/javascript">
+			$(document).ready(function(){
+				$('#myTable').dataTable();
+			});
+		</script>
+    </body>
+</html>

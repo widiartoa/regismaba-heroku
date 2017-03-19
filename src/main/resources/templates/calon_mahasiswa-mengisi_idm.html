@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
     <head>
 		<div th:replace="resources"></div>
-        <title>Calon Mahasiswa - Mengisi IDM</title>
+        <title>Calon Mahasiswa - Melihat Isian Data Mahasiswa</title>
     </head>
 	
     <body>
@@ -14,6 +14,68 @@
 					<div class="col-sm-12"><h3>Isian Data Mahasiswa</h3></div>
 				</div>
 				<hr/>
+				<div class="col-xs-6 col-md-3">
+				    <a href="#" class="thumbnail">
+				      <img src="/img/logo.png" alt="profpic"/>
+					</a>
+				</div>
+				
+				<table class="table">
+					<tbody>
+						<tr><h4 th:text="${mahasiswa.username}">Pilihan Golongan</h4></tr>
+						<tr><h4 th:text="${mahasiswa.npm}">Pilihan Golongan</h4></tr>
+					</tbody>
+				</table>
+				
+				<table class="table">
+					<tbody>
+						<tr>
+							<td>
+								<div class="col-sm-12"><h4 th:text="'Nomor Ijazah'">nomor ijazah</h4></div>
+							</td>
+							<td>
+								<div class="col-sm-12"><h4 th:text="${SESUATU.nomor_ijazah}">nomor ijazah</h4></div>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<div class="col-sm-12"><h4 th:text="'Nama Institusi'">nama institusi</h4></div>
+							</td>
+							<td>
+								<div class="col-sm-12"><h4 th:text="${SESUATU.nama_institusi}">nama institusi</h4></div>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<div class="col-sm-12"><h4 th:text="'Jenjang'">jenjang</h4></div>
+							</td>
+							<td>
+								<div class="col-sm-12"><h4 th:text="${SESUATU.jenjang}">jenjang</h4></div>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<div class="col-sm-12"><h4 th:text="'Scan Ijazah'">scan ijazah</h4></div>
+							</td>
+							<td>
+								<div class="col-sm-12"><h4 th:text="${SESUATU.scan_ijazah}">scan ijazah</h4></div>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<div class="col-sm-12"><h4 th:text="'Slip Gaji Wali 1'">scan pernyataan ijazah</h4></div>
+							</td>
+							<td>
+								<div class="col-sm-12"><h4 th:text="${SESUATU.scan_pernyataan_ijazah}">scan pernyataan ijazah</h4></div>
+							</td>
+						</tr>
+					</tbody>
+  				</table>
+  				<hr/>
+				
+				<div class="btn-group" role="group" aria-label="...">
+				  <a th:href="'/calon-mahasiswa/pengajuan-skema'"><button type="button" class="btn btn-warning">Simpan</button></a>
+				</div>
 			</div>
        	</div>
 		
