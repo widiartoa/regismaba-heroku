@@ -83,6 +83,7 @@ public class PengajuanSkemaBiayaController {
 	
 	@PostMapping("/calon-mahasiswa/pengajuan-skema/submit")
 	public String pengajuanSkemaMahasiswaSubmit(Model model, 
+												@RequestParam("golongan_id") int golongan_id,
 												@RequestParam("surat_keterangan_rtrw") MultipartFile surat_keterangan_rtrw,
 												@RequestParam("foto_rumah") MultipartFile foto_rumah,
 												@RequestParam("slip_gaji_pribadi") MultipartFile slip_gaji_pribadi,
@@ -95,7 +96,7 @@ public class PengajuanSkemaBiayaController {
 		MahasiswaModel mahasiswa = mahasiswaService.selectMahasiswa("1234567890");
 		PengajuanSkemaBiayaModel skema = new PengajuanSkemaBiayaModel();
 		
-		skema.setGolongan_id(1);
+		skema.setGolongan_id(golongan_id);
 		
 		storageService.store(surat_keterangan_rtrw);
 		storageService.store(foto_rumah);

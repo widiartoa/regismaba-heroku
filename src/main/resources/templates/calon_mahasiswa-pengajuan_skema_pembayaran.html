@@ -20,7 +20,7 @@
 					<div class="input-group">
 						<span class="input-group-addon" id="basic-addon1">Pilihan Golongan - Jumlah Biaya - Uang Pangkal</span>
 						<div class="btn-group">
-							<select type="button" class="btn btn-default" data-toggle="dropdown" name="golongan">
+							<select type="button" class="btn btn-default" data-toggle="dropdown" name="golongan_id">
 								<option th:each="schema,iterationStatus: ${schemas}" th:value="${schema.golongan_id}" th:text="${schema.golongan_id + ' - ' + schema.jumlah_biaya + ' - ' + schema.uang_pangkal}"></option>
 						    </select>
 						</div>
