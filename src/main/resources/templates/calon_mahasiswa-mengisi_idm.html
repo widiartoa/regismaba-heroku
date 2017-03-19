@@ -1,28 +1,138 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-    <head>
-		<div th:replace="resources"></div>
-        <title>Calon Mahasiswa - Mengisi IDM</title>
-    </head>
-	
-    <body>
-    	<div th:include="calon_mahasiswa-navbar"></div>
-		
-    	<div class="container">
-			<div class="content">
-				<div class="row">
-					<div class="col-sm-12"><h3>Isian Data Mahasiswa</h3></div>
+<head>
+<div th:replace="resources"></div>
+<title>Calon Mahasiswa - Mengisi IDM</title>
+</head>
+
+<body>
+	<div th:include="calon_mahasiswa-navbar"></div>
+
+
+	<div class="container">
+		<div class="content">
+			<div class="row">
+				<div class="col-sm-12">
+					<h2>Isian Data Mahasiswa</h2>
 				</div>
-				<hr/>
 			</div>
-       	</div>
-		
-		<div class="footer">Modul Registrasi Mahasiswa Baru</div>
-		
-		<script type="text/javascript">
-			$(document).ready(function(){
-				$('#myTable').dataTable();
-			});
-		</script>
-    </body>
+		</div>
+
+		<!-- =============================================================== -->
+		<div id="contact" class="container">
+			<h1 class="page-header">Isi Biodata</h1>
+			<form action="/biodata/fill/submit" method="post">
+				<h4>Masukkan Data Mahasiswa</h4>
+				<br />
+				<div class="row">
+					<div class="col-md-6">
+						<div class="form-group">
+							<label for="name">Nama</label> <input type="text" name="name"
+								class="form-control" placeholder="Nama" />
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div class="form-group">
+							<label for="nomor_ijazah">Nomor Ijazah</label> <input type="text"
+								name="nomor_ijazah" class="form-control"
+								placeholder="Nomor Ijazah" />
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-6">
+						<div class="form-group">
+							<label for="nomor_telepon">Nomor Telepon</label> <input
+								type="text" name="nomor_telepon" class="form-control"
+								placeholder="Nomor Telepon" />
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div class="form-group">
+							<label for="nomor_asuransi">Nomor Asuransi</label> <input
+								type="text" name="nomor_asuransi" class="form-control"
+								placeholder="Nomor Asuransi" />
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-6">
+						<div class="form-group">
+							<label for="tanggal_lahir">Tanggal Lahir</label> <input
+								type="text" name="tanggal_lahir" class="form-control"
+								placeholder="YYYY-MM-DD" />
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div class="form-group">
+							<label for="sidik_jari">Sidik Jari</label> <input type="text"
+								name="sidik_jari" class="form-control" placeholder="Sidik Jari" />
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-6">
+						<div class="form-group">
+							<label for="jenis_kelamin">Jenis Kelamin</label>
+							<br></br>
+							<input type="radio" name="jenis_kelamin" value="L"> L</input> 
+							<input type="radio" name="jenis_kelamin" value="P"> P</input>
+						</div>
+						
+					</div>
+					<div class="col-md-6">
+						<div class="form-group">
+							<label for="scan_kk">Scan KK</label> <input type="text"
+								name="scan_kk" class="form-control" placeholder="Scan KK" />
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-6">
+						<div class="form-group">
+							<label for="kewarganegaraan">Kewarganegaraan</label> <input
+								type="text" name="kewarganegaraan" class="form-control" placeholder="Kewarganegaraan"/>
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div class="form-group">
+							<label for="scan_surat_pernyataan_mahasiswa">Scan Surat
+								Pernyataan Mahasiswa</label> <input type="text"
+								name="scan_surat_pernyataan_mahasiswa" class="form-control" placeholder="Surat Pernyataan Mahasiswa"/>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-6">
+						<div class="form-group">
+							<label for="nomor_ktp">Nomor KTP</label> <input type="text"
+								name="nomor_ktp" class="form-control" placeholder="Nomor KTP"/>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-6">
+						<div class="form-group">
+							<label for="scan_ktp">Scan KTP</label> <input type="text"
+								name="scan_ktp" class="form-control" placeholder="Scan KTP"/>
+						</div>
+					</div>
+				</div>
+				<div class="form-group" style="text-align: center">
+					<button type="submit" value="save"
+						class="btn btn-primary">Simpan</button>
+				</div>
+			</form>
+		</div>
+	</div>
+
+	<div class="footer">Modul Registrasi Mahasiswa Baru</div>
+
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$('#myTable').dataTable();
+		});
+	</script>
+
+</body>
 </html>
