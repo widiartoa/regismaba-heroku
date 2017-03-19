@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+		<div th:replace="resources"></div>
+        <title>Calon Mahasiswa - Melihat Skema Pembayaran</title>
+    </head>
+	
+    <body>
+    	<div th:include="calon_mahasiswa-navbar"></div>
+		
+    	<div class="container">
+			<div class="content">
+				<div class="row">
+					<div class="col-sm-12"><h3>Lihat Jadwal</h3></div>
+				</div>
+				
+				<table class="table">
+					<thead>
+						<tr>
+							<td>
+								<div class="col-sm-12"><h4 th:text="'Jadwal Registrasi'">Jenis Jadwal</h4></div>
+							</td>
+							<td>
+								<div class="col-sm-12"><h4></h4></div>
+							</td>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>
+								<div class="col-sm-12"><h4 th:text="'Day'">Day</h4></div>
+							</td>
+							<td>
+								<div class="col-sm-12"><h4 th:text="${hariRegis}">Hari</h4></div>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<div class="col-sm-12"><h4 th:text="'Date'">Date</h4></div>
+							</td>
+							<td>
+								<div class="col-sm-12"><h4 th:text="${waktuRegis}">Tanggal</h4></div>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<div class="col-sm-12"><h4 th:text="'Time Span'">Time Span</h4></div>
+							</td>
+							<td>
+								<div class="col-sm-12"><h4 th:text="${timestampAwalRegis}+'-'+${timestampAkhirRegis}">Pilihan Golongan</h4></div>
+							</td>
+						</tr>
+					</tbody>
+  				</table>
+			</div>
+       	</div>
+		
+		<div class="footer">Modul Registrasi Mahasiswa Baru</div>
+		
+		<script type="text/javascript">
+			$(document).ready(function(){
+				$('#myTable').dataTable();
+			});
+		</script>
+    </body>
+</html>
