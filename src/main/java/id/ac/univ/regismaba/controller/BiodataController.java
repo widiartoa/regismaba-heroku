@@ -1,5 +1,6 @@
 package id.ac.univ.regismaba.controller;
 
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -12,15 +13,22 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import id.ac.univ.regismaba.model.BiodataModel;
+import id.ac.univ.regismaba.model.DataKesehatanModel;
 import id.ac.univ.regismaba.model.MahasiswaModel;
 import id.ac.univ.regismaba.service.BiodataService;
+import id.ac.univ.regismaba.service.DataKesehatanService;
 import id.ac.univ.regismaba.service.MahasiswaService;
 
 @Controller
 public class BiodataController {
 	@Autowired
 	BiodataService biodataDAO;
+	
+	@Autowired
 	MahasiswaService mahasiswaDAO;
+	
+	@Autowired
+	DataKesehatanService dataKesehatanDAO;
 	
 	@RequestMapping("/biodata/fill")
 	public String insert()
@@ -41,13 +49,19 @@ public class BiodataController {
 			@RequestParam(value = "scan_ktp", required = false) String scan_ktp,
 			@RequestParam(value = "scan_kk", required = false) String scan_kk,
 			@RequestParam(value = "scan_surat_pernyataan_mahasiswa", required = false) String scan_surat_pernyataan_mahasiswa,
-			@RequestParam(value = "status_verifikasi", required = false) String status_verifikasi,
-			@RequestParam(value = "flag_aktif", required = false) String flag_aktif) throws ParseException	
+			@RequestParam(value = "form_survey_kesehatan", required = false) String form_survey_kesehatan,
+			@RequestParam(value = "hasil_tes_kesehatan", required = false) String hasil_tes_kesehatan) throws ParseException	
 	{
-		SimpleDateFormat format = new SimpleDateFormat("yyyy-mm-dd");
+		DateFormat format = new SimpleDateFormat("yyyy-mm-dd");
 		Date tanggalLahir = format.parse(tanggal_lahir);
 		System.out.println(tanggalLahir);
-		BiodataModel biodata = new BiodataModel(0, 0, nomor_ijazah, nomor_asuransi, 0, tanggalLahir, jenis_kelamin, nomor_telepon, kewarganegaraan, nomor_ktp, sidik_jari, scan_ktp, scan_kk, scan_surat_pernyataan_mahasiswa, "Unverified", "1");
+		DataKesehatanModel dataKesehatan = new DataKesehatanModel(0, form_survey_kesehatan, hasil_tes_kesehatan);
+		System.out.println("test " + dataKesehatan.getData_kesehatan_id()); //apus janlups
+		dataKesehatanDAO.insertDataKesehatan(dataKesehatan);
+		dataKesehatan.setData_kesehatan_id(dataKesehatanDAO.selectDataKesehatanId(dataKesehatan));
+		System.out.println("ID DAKES " + dataKesehatan.getData_kesehatan_id()); //apus janlups
+		
+		BiodataModel biodata = new BiodataModel(0, dataKesehatan.getData_kesehatan_id(), nomor_ijazah, nomor_asuransi, 0, tanggalLahir, jenis_kelamin, nomor_telepon, kewarganegaraan, nomor_ktp, sidik_jari, scan_ktp, scan_kk, scan_surat_pernyataan_mahasiswa, "Unverified", "1");
 		biodataDAO.insertBiodata(biodata);
 		return "success-biodata-insert";
 		

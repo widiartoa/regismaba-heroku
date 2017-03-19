@@ -1,6 +1,6 @@
 package id.ac.univ.regismaba.service;
 
-import org.springframework.stereotype.Service;
+
 
 import id.ac.univ.regismaba.model.BiodataModel;
 
