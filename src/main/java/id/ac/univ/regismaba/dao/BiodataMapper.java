@@ -2,18 +2,18 @@ package id.ac.univ.regismaba.dao;
 
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
 
-import id.ac.univ.regismaba.model.IjazahModel;
+import id.ac.univ.regismaba.model.BiodataModel;
 
 @Mapper
 public interface BiodataMapper
 {
-    @Select("select nama_institusi as nama_institusi, jenjang as jenjang, scan_ijazah as scan_ijazah, scan_pernyataan_ijazah as scan_pernyataan_ijazah from ijazah where nomor_ijazah = #{nomor_ijazah}")
-    IjazahModel selectIjazah(@Param("nomor_ijazah") String nomor_ijazah);
-    
-    @Insert("INSERT into ijazah (nomor_ijazah, nama_institusi, jenjang, scan_ijazah, scan_pernyataan_ijazah) " +
-            "VALUES (#{nomor_ijazah}, #{nama_institusi}, #{jenjang}, #{scan_ijazah}, #{scan_pernyataan_ijazah})")
-    void addIjazah(String nomor_ijazah);
+    @Insert("insert into biodata (biodata_id, data_kesehatan_id, nomor_ijazah, nomor_asuransi, jalan_id,"
+            + "tanggal_lahir, jenis_kelamin, nomor_telepon, kewarganegaraan, nomor_ktp, sidik_jari, scan_ktp"
+            + "scan_kk, scan_surat_pernyataan_mahasiswa, status_verifikasi, flag_aktif) values (#{biodata_id}, #{data_kesehatan_id}, #{nomor_ijazah}, #{nomor_asuransi}, #{jalan_id},"
+            + "#{tanggal_lahir}, #{jenis_kelamin}, #{nomor_telepon}, #{kewarganegaraan}, #{nomor_ktp}, #{sidik_jari}, #{scan_ktp}"
+            + "#{scan_kk}, #{scan_surat_pernyataan_mahasiswa}, #{status_verifikasi}, #{flag_aktif})")
+
+    void insertBiodata (BiodataModel biodata);
+
 }
