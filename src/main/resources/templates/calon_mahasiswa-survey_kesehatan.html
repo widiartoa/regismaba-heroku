@@ -21,7 +21,11 @@
 						2) Silahkan mengisi template tersebut dengan apapun, diperbolehkan mengedit langsung template tersebut atau mencetak terlebih dahulu kemudian scan template tersebut.<br/>
 						3) Setelah melakukan pengisian, simpan template dalam bentuk .pdf<br/>
 						4) Unggah template ke box yang tersedia di halaman ini dengan cara menekan browse kemudian menekan submit<br/>
-						5) Survey yang sudah di submit TIDAK bisa di unggah ulang setelah registrasi, jadi harap melakukan pengecekan terlebih dahulu.					
+						5) Survey yang sudah di submit TIDAK bisa di unggah ulang setelah registrasi, jadi harap melakukan pengecekan terlebih dahulu.<br/>
+						<br/>
+						<strong>File yang sudah diunggah :</strong><br/>	
+						<div th:if="${form_survey_kesehatan_error}">Anda belum mengunggah survey kesehatan.</div>
+						<div th:unless="${form_survey_kesehatan_error}"><a th:href="${form_survey_kesehatan}" th:text="${form_survey_kesehatan}" /></div>
 					</p>
 					<form action="/calon-mahasiswa/survey-kesehatan/submit" method="post">
 						<div class="input-group">
@@ -53,13 +57,13 @@
 						<div class="col-sm-12"><h3>Hasil Survey Kesehatan</h3></div>
 					</div>
 					<hr/>
-					<div th:if="${error}">
+					<div th:if="${hasil_tes_kesehatan_error}">
 						<p>
 							Hasil survey kesehatan belum selesai di proses oleh staff kesehatan. <br/>
 							Terima Kasih.
 						</p>
 					</div>
-					<div th:unless="${error}">
+					<div th:unless="${hasil_tes_kesehatan_error}">
 						<p>
 							Hasil survey kesehatan bisa dilihat di <a th:href="${hasil_tes_kesehatan}">sini</a>
 						</p>

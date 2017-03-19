@@ -7,8 +7,6 @@ import id.ac.univ.regismaba.dao.BiodataMapper;
 import id.ac.univ.regismaba.model.BiodataModel;
 import lombok.extern.slf4j.Slf4j;
 
-@Slf4j
-@Service
 public interface BiodataService {
 	BiodataModel selectBiodata(int biodata_id);
 		

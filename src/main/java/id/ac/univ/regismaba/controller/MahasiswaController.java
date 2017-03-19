@@ -23,6 +23,7 @@ import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBui
 import id.ac.univ.regismaba.model.MahasiswaModel;
 import id.ac.univ.regismaba.model.PengajuanSkemaBiayaModel;
 import id.ac.univ.regismaba.model.SkemaBiayaModel;
+import id.ac.univ.regismaba.model.DataKesehatanModel;
 import id.ac.univ.regismaba.service.MahasiswaService;
 import id.ac.univ.regismaba.service.PengajuanSkemaBiayaService;
 import id.ac.univ.regismaba.service.SkemaBiayaService;
@@ -41,13 +42,16 @@ public class MahasiswaController {
     @Autowired
     MahasiswaService mahasiswaDAO;
 	
+    //@Autowired
+    //DataKesehatanService dataKesehatanDAO;
+	
 	@RequestMapping("/")
 	public String index()
 	{
 		return "index";
 	}
 	
-	@RequestMapping("/calon-mahasiswa/login-submit")
+	@RequestMapping("/calon-mahasiswa/login/submit")
 	public String loginMahasiswa(Model model, 
 		@RequestParam(value = "username", required = true) String username,
 		@RequestParam(value = "password", required = true) String password
@@ -56,6 +60,7 @@ public class MahasiswaController {
 
         if (mahasiswa != null) {
             model.addAttribute ("mahasiswa", mahasiswa);
+			// todo : cek mahasiswa udah ngisi idm apa belom, kalo belom ke mengisi idm kalo udah view idm
 			return "calon_mahasiswa-mengisi_idm";
         } else {
 			model.addAttribute ("error", true);
@@ -63,24 +68,43 @@ public class MahasiswaController {
         }
 	}
 	
-	@RequestMapping("/idm/fill")
+	@RequestMapping("/calon-mahasiswa/idm")
 	public String idmMahasiswa()
-	{
+	{		
+		// todo : kalo belom isi idm ke fill idm, udah ke view idm
 		return "calon_mahasiswa-mengisi_idm";
 	}
 	
 	@RequestMapping("/calon-mahasiswa/survey-kesehatan")
-	public String surveyKesehatan()
+	public String surveyKesehatan(Model model)
 	{
-		return "calon_mahasiswa-survey_kesehatan";
+		// todo : jangan di hardcode plz
+		MahasiswaModel mahasiswa = mahasiswaDAO.selectMahasiswa("1234567890");
+		//DataKesehatanModel dataKesehatan = dataKesehatanDAO.selectDataKesehatan("1");
+		DataKesehatanModel dataKesehatan = null;
+		
+		if(dataKesehatan != null) {
+			model.addAttribute("form_survey_kesehatan_error", dataKesehatan.form_survey_kesehatan == null);
+			model.addAttribute("hasil_tes_kesehatan_error", dataKesehatan.hasil_tes_kesehatan == null);	
+			model.addAttribute("form_survey_kesehatan", dataKesehatan.form_survey_kesehatan);
+			model.addAttribute("hasil_tes_kesehatan", dataKesehatan.hasil_tes_kesehatan);
+		} else {
+			model.addAttribute("form_survey_kesehatan_error", true);
+			model.addAttribute("hasil_tes_kesehatan_error", true);	
+		}
+		
+		return "calon_mahasiswa-survey_kesehatan";	
 	}
 	
 	@RequestMapping("/calon-mahasiswa/survey-kesehatan/submit")
 	public String submitSurveyKesehatan(Model model, 
 		@RequestParam(value = "form_survey_kesehatan", required = false) MultipartFile form_survey_kesehatan
 	)	{
+		
+		// todo : jangan di hardcode plz
 		MahasiswaModel mahasiswa = mahasiswaDAO.selectMahasiswa("1234567890");
-		storageService.store(form_survey_kesehatan, mahasiswa.npm);
+		
+		//storageService.store(form_survey_kesehatan, mahasiswa.npm);
 		
 		return "calon_mahasiswa-survey_kesehatan";
 	}
