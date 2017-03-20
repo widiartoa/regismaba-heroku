@@ -1,9 +1,11 @@
 package id.ac.univ.regismaba.controller;
 
+import java.nio.file.Path;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,18 +13,31 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder;
 
 import id.ac.univ.regismaba.model.AlamatModel;
 import id.ac.univ.regismaba.model.BiodataModel;
 import id.ac.univ.regismaba.model.DataKesehatanModel;
+import id.ac.univ.regismaba.model.IjazahModel;
 import id.ac.univ.regismaba.model.MahasiswaModel;
 import id.ac.univ.regismaba.service.AlamatService;
 import id.ac.univ.regismaba.service.BiodataService;
 import id.ac.univ.regismaba.service.DataKesehatanService;
+//import id.ac.univ.regismaba.service.IjazahService;
 import id.ac.univ.regismaba.service.MahasiswaService;
+import id.ac.univ.regismaba.storage.StorageService;
 
 @Controller
 public class BiodataController {
+
+    private final StorageService storageService;
+    
+    @Autowired
+    public BiodataController(StorageService storageService) {
+        this.storageService = storageService;
+    }
+    
 	@Autowired
 	BiodataService biodataDAO;
 
@@ -68,17 +83,47 @@ public class BiodataController {
 			@RequestParam(value = "kode_pos", required = false) String kode_pos,
 			@RequestParam(value = "nomor_ijazah", required = false) String nomor_ijazah,
 			@RequestParam(value = "nama_institusi", required = false) String nama_institusi,
-			@RequestParam(value = "jenjang", required = false) String jenjang,
-			@RequestParam(value = "scan_ijazah", required = false) String scan_ijazah,
-			@RequestParam(value = "scan_pernyataan_ijazah", required = false) String scan_pernyataan_ijazah)
+	        @RequestParam(value = "jenjang", required = false) String jenjang,
+	        @RequestParam("scan_ijazah") MultipartFile scan_ijazah,
+	        @RequestParam("scan_pernyataan_ijazah") MultipartFile scan_pernyataan_ijazah)
 			throws ParseException {
 		DateFormat format = new SimpleDateFormat("yyyy-mm-dd");
 		Date tanggalLahir = format.parse(tanggal_lahir);
 		System.out.println(tanggalLahir);
 		
-//		IjazahModel ijazah = new IjazahModel(nomor_ijazah, nama_institusi, jenjang, scan_ijazah, scan_pernyataan_ijazah);
+		//========================
+        IjazahModel ijazah = new IjazahModel();
+        ijazah.setNomor_ijazah (nomor_ijazah);
 //        ijazahDAO.addIjazah (ijazah);
+        
+        Random rand = new Random();
+        
+        int num = rand.nextInt(1000000) + 1;
+        
+        storageService.store (scan_ijazah, num);
+        storageService.store (scan_pernyataan_ijazah, num);
+        
+        //SCAN IJAZAH UPLOAD//
+        String pathDB1 = storageService.load(scan_ijazah.getOriginalFilename()).toString();
+        
+        Path data1 = storageService.load(scan_ijazah.getOriginalFilename());
+        String pdb1 = MvcUriComponentsBuilder
+                .fromMethodName(BiodataController.class, "serveFile", data1.getFileName().toString())
+                .build().toString();
+        
+        ijazah.setScan_ijazah (pdb1);
+        
+        //SCAN PERNYATAAN IJAZAH UPLOAD//
+        String pathDB2 = storageService.load(scan_ijazah.getOriginalFilename()).toString();
+        
+        Path data2 = storageService.load(scan_ijazah.getOriginalFilename());
+        String pdb2 = MvcUriComponentsBuilder
+                .fromMethodName(BiodataController.class, "serveFile", data2.getFileName().toString())
+                .build().toString();
+        
+        ijazah.setScan_pernyataan_ijazah (pdb2);
 		
+		//==============================
 		DataKesehatanModel dataKesehatan = new DataKesehatanModel(0, form_survey_kesehatan, hasil_tes_kesehatan);
 		dataKesehatanDAO.insertDataKesehatan(dataKesehatan);
 		dataKesehatan.setData_kesehatan_id(dataKesehatanDAO.selectDataKesehatanId(dataKesehatan));
@@ -111,5 +156,4 @@ public class BiodataController {
 		}
 		return "not-found";
 	}
-
 }

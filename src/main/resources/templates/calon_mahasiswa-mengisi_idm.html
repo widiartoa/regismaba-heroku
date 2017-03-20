@@ -21,7 +21,7 @@
 		<!-- =============================================================== -->
 		<div id="contact" class="container">
 			<h1 class="page-header">Isi Biodata</h1>
-			<form action="/biodata/fill/submit" method="post">
+			<form>
 				<h4>Masukkan Data Mahasiswa</h4>
 				<br />
 				<div class="row">
@@ -29,29 +29,6 @@
 						<div class="form-group">
 							<label for="name">Nama</label> <input type="text" name="name"
 								class="form-control" placeholder="Nama" />
-						</div>
-					</div>
-					<div class="col-md-6">
-						<div class="form-group">
-							<label for="nomor_ijazah">Nomor Ijazah</label> <input type="text"
-								name="nomor_ijazah" class="form-control"
-								placeholder="Nomor Ijazah" />
-						</div>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-md-6">
-						<div class="form-group">
-							<label for="nomor_telepon">Nomor Telepon</label> <input
-								type="text" name="nomor_telepon" class="form-control"
-								placeholder="Nomor Telepon" />
-						</div>
-					</div>
-					<div class="col-md-6">
-						<div class="form-group">
-							<label for="nomor_asuransi">Nomor Asuransi</label> <input
-								type="text" name="nomor_asuransi" class="form-control"
-								placeholder="Nomor Asuransi" />
 						</div>
 					</div>
 				</div>
@@ -63,26 +40,22 @@
 								placeholder="YYYY-MM-DD" />
 						</div>
 					</div>
+				</div>
+				<div class="row">
 					<div class="col-md-6">
 						<div class="form-group">
-							<label for="sidik_jari">Sidik Jari</label> <input type="text"
-								name="sidik_jari" class="form-control" placeholder="Sidik Jari" />
+							<label for="jenis_kelamin">Jenis Kelamin</label> <br></br> <input
+								type="radio" name="jenis_kelamin" value="L">L</input> <input
+								type="radio" name="jenis_kelamin" value="P">P</input>
 						</div>
 					</div>
 				</div>
 				<div class="row">
 					<div class="col-md-6">
 						<div class="form-group">
-							<label for="jenis_kelamin">Jenis Kelamin</label> <br></br> <input
-								type="radio" name="jenis_kelamin" value="L"> L</input> <input
-								type="radio" name="jenis_kelamin" value="P"> P</input>
-						</div>
-
-					</div>
-					<div class="col-md-6">
-						<div class="form-group">
-							<label for="scan_kk">Scan KK</label> <input type="text"
-								name="scan_kk" class="form-control" placeholder="Scan KK" />
+							<label for="nomor_telepon">Nomor Telepon</label> <input
+								type="text" name="nomor_telepon" class="form-control"
+								placeholder="Nomor Telepon" />
 						</div>
 					</div>
 				</div>
@@ -94,14 +67,6 @@
 								placeholder="Kewarganegaraan" />
 						</div>
 					</div>
-					<div class="col-md-6">
-						<div class="form-group">
-							<label for="scan_surat_pernyataan_mahasiswa">Scan Surat
-								Pernyataan Mahasiswa</label> <input type="text"
-								name="scan_surat_pernyataan_mahasiswa" class="form-control"
-								placeholder="Surat Pernyataan Mahasiswa" />
-						</div>
-					</div>
 				</div>
 				<div class="row">
 					<div class="col-md-6">
@@ -110,21 +75,96 @@
 								name="nomor_ktp" class="form-control" placeholder="Nomor KTP" />
 						</div>
 					</div>
+<!-- 					<div class="col-md-6">
+						<div class="form-group">
+							<label for="form_survey_kesehatan">Form Survey Kesehatan</label> <input type="text"
+								name="form_survey_kesehatan" class="form-control" placeholder="Formulir Survey Kesehatan"/>
+						</div>
+					</div> -->
+				</div>
+				<div class="row">
 					<div class="col-md-6">
 						<div class="form-group">
-							<label for="form_survey_kesehatan">Form Survey Kesehatan</label>
-							<input type="text" name="form_survey_kesehatan"
-								class="form-control" placeholder="Formulir Survey Kesehatan" />
+							<div class="input-group">
+								<span class="input-group-addon" id="basic-addon1">Scan KTP</span>
+								<span class="input-group-btn">
+									<input class="btn btn-warning" type="file" name="scan_ktp" placeholder="Scan KTP">Browse</input>
+								</span>
+							</div>
+						</div>
+					</div>
+<!-- 					<div class="col-md-6">
+						<div class="form-group">
+							<label for="hasil_tes_kesehatan">Hasil Tes Kesehatan</label> <input type="text"
+								name="hasil_tes_kesehatan" class="form-control" placeholder="Hasil Tes Kesehatan"/>
+						</div>
+					</div> -->
+				</div>
+				<div class="row">
+					<div class="col-md-6">
+						<div class="form-group">
+							<div class="input-group">
+								<span class="input-group-addon" id="basic-addon1">Sidik Jari</span>
+								<span class="input-group-btn">
+									<input class="btn btn-warning" type="file" name="sidik_jari"
+								placeholder="Scan Sidik Jari">Browse</input>
+								</span>
+							</div>
 						</div>
 					</div>
 				</div>
 				<div class="row">
 					<div class="col-md-6">
 						<div class="form-group">
-							<label for="jalan">Nama Jalan</label> <input type="text"
-								name="jalan" class="form-control" placeholder="Nama Jalan" />
+							<div class="input-group">
+								<span class="input-group-addon" id="basic-addon1">Scan KK</span>
+								<span class="input-group-btn">
+									<input class="btn btn-warning" type="file" name="scan_kk"
+								placeholder="Scan KK">Browse</input>
+								</span>
+							</div>
 						</div>
 					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-6">
+						<div class="form-group">
+							<div class="input-group">
+								<span class="input-group-addon" id="basic-addon1">Scan Surat Pernyataan Mahasiswa</span>
+								<span class="input-group-btn">
+									<input class="btn btn-warning" type="file" name="scan_surat_pernyataan_mahasiswa" placeholder="Surat Pernyataan Mahasiswa">Browse</input>
+								</span>
+							</div>
+						</div>
+					</div>
+				</div>
+				<hr></hr>
+				<span><h4>Alamat</h4></span>
+				<br />
+				<div class="row">
+					<div class="col-md-6">
+						<div class="form-group">
+							<label for="nama_provinsi">Provinsi</label> <select
+								class="form-control">
+								<option value="32">Jawa Barat</option>
+								<!-- <option th:each="provinsi : ${provinsis}" th:value="${provinsi.provinsi_id}" th:text="${provinsi.nama_provinsi}"></option> -->
+							</select>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-6">
+						<div class="form-group">
+							<label for="kota_kabupaten_id">Kabupaten/Kota</label> <select
+								name="kota_kabupaten_id" class="form-control">
+								<option value="3204">Bandung</option>
+								<option value="3216">Kabupaten Bekasi</option>
+								<option value="3275">Kota Bekasi</option>
+							</select>
+						</div>
+					</div>
+				</div>
+				<div class="row">
 					<div class="col-md-6">
 						<div class="form-group">
 							<label for="kecamatan">Nama Kecamatan</label> <input type="text"
@@ -141,6 +181,16 @@
 								placeholder="Nama Kelurahan" />
 						</div>
 					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-6">
+						<div class="form-group">
+							<label for="jalan">Nama Jalan</label> <input type="text"
+								name="jalan" class="form-control" placeholder="Nama Jalan" />
+						</div>
+					</div>
+				</div>
+				<div class="row">	
 					<div class="col-md-6">
 						<div class="form-group">
 							<label for="kode_pos">Kode Pos</label> <input type="text"
@@ -148,34 +198,80 @@
 						</div>
 					</div>
 				</div>
+				<hr></hr>
+				<span><h4>Pendidikan terakhir</h4></span>
+				<br />
 				<div class="row">
 					<div class="col-md-6">
 						<div class="form-group">
-							<label for="nama_provinsi">Nama Provinsi</label> <select
-								class="form-control">
-								<option value="32">Jawa Barat</option>
-								<!-- <option th:each="provinsi : ${provinsis}" th:value="${provinsi.provinsi_id}" th:text="${provinsi.nama_provinsi}"></option> -->
-							</select>
-						</div>
-					</div>
-					<div class="col-md-6">
-						<div class="form-group">
-							<label for="kota_kabupaten_id">Kabupaten/Kota</label> <select
-								name="kota_kabupaten_id" class="form-control">
-								<option value="3204">Bandung</option>
-								<option value="3216">Kabupaten Bekasi</option>
-								<option value="3275">Kota Bekasi</option>
-							</select>
+							<label for="jenjang">Jenjang</label> <input type="text" name="jenjang"
+								class="form-control" placeholder="Jenjang" />
 						</div>
 					</div>
 				</div>
 				<div class="row">
 					<div class="col-md-6">
 						<div class="form-group">
-							<label for="scan_ktp">Scan KTP</label> <input type="text"
-								name="scan_ktp" class="form-control" placeholder="Scan KTP" />
+							<label for="nama_institusi">Nama Institusi</label> <input type="text" name="nama_institusi"
+								class="form-control" placeholder="Nama Institusi" />
 						</div>
 					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-6">
+						<div class="form-group">
+							<label for="nomor_ijazah">Nomor Ijazah</label> <input type="text"
+								name="nomor_ijazah" class="form-control"
+								placeholder="Nomor Ijazah" />
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-6">
+						<div class="form-group">
+							<div class="input-group">
+								<span class="input-group-addon" id="basic-addon1">Scan Ijazah</span>
+								<span class="input-group-btn">
+									<input class="btn btn-warning" type="file" name="scan_ijazah" placeholder="Scan Ijazah">Browse</input>
+								</span>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-6">
+						<div class="form-group">
+							<div class="input-group">
+								<span class="input-group-addon" id="basic-addon1">Scan Pernyataan Ijazah</span>
+								<span class="input-group-btn">
+									<input class="btn btn-warning" type="file" name="scan_pernyataan_ijazah" placeholder="Scan Pernyataan Ijazah">Browse</input>
+								</span>
+							</div>
+						</div>
+					</div>					
+				</div>
+				<hr></hr>
+				<span><h4>Data Kesehatan</h4></span>
+				<br />
+				<div class="row">
+					<div class="col-md-6">
+						<div class="form-group">
+							<label for="nomor_asuransi">Nomor Asuransi</label> <input
+								type="text" name="nomor_asuransi" class="form-control"
+								placeholder="Nomor Asuransi" />
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-6">
+						<div class="form-group">
+							<label for="form_survey_kesehatan">Form Survey Kesehatan</label>
+							<input type="text" name="form_survey_kesehatan"
+								class="form-control" placeholder="Formulir Survey Kesehatan" />
+						</div>
+					</div>
+				</div>	
+				<div class="row">
 					<div class="col-md-6">
 						<div class="form-group">
 							<label for="hasil_tes_kesehatan">Hasil Tes Kesehatan</label> <input
@@ -183,13 +279,14 @@
 								placeholder="Hasil Tes Kesehatan" />
 						</div>
 					</div>
-				</div>
+				</div>				
 				<div class="form-group" style="text-align: center">
-					<button type="submit" value="save" class="btn btn-primary">Simpan</button>
+					<button href="#" class="btn btn-primary">Simpan</button>
 				</div>
 			</form>
 		</div>
 	</div>
+	
 
 	<div class="footer">Modul Registrasi Mahasiswa Baru</div>
 
