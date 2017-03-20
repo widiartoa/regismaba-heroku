@@ -16,71 +16,110 @@
 				
 				<hr/>
 				
-				<form method="POST" enctype="multipart/form-data" action="/calon-mahasiswa/pengajuan-skema/submit">
-					<div class="input-group">
-						<span class="input-group-addon" id="basic-addon1">Pilihan Golongan - Jumlah Biaya - Uang Pangkal</span>
-						<div class="btn-group">
-							<select type="button" class="btn btn-default" data-toggle="dropdown" name="golongan_id">
+				<form method="POST" enctype="multipart/form-data" action="/calon-mahasiswa/pengajuan-skema/submit" class="form-horizontal">
+					<div class="form-group">
+						<label class="control-label col-sm-4" for="golongan_id">Pilihan Golongan - Jumlah Biaya - Uang Pangkal : </label>
+						<div class="input-group col-sm-8">
+							<select type="button" class="form-control" data-toggle="dropdown" name="golongan_id" id="golongan_id">
 								<option th:each="schema,iterationStatus: ${schemas}" th:value="${schema.golongan_id}" th:text="${schema.golongan_id + ' - ' + schema.jumlah_biaya + ' - ' + schema.uang_pangkal}"></option>
-						    </select>
+							</select>
 						</div>
 					</div>
 					
-					<div class="input-group">
-					  <span class="input-group-addon" id="basic-addon1">Surat Keterangan RT RW</span>
-					  <span class="input-group-btn">
-				        <!-- <button class="btn btn-warning" type="button">Browse</button> -->
-				        <input class="btn btn-warning" type="file" name="surat_keterangan_rtrw">Browse</input>
-				      </span>
+					<div class="form-group">
+						<label class="control-label col-sm-4" for="surat_keterangan_rtrw">Surat Keterangan RT RW : </label>
+						<div class="input-group">
+							<input type="text" class="form-control" readonly="true" id="surat_keterangan_rtrw" />
+							<label class="input-group-btn">
+								<span class="btn btn-default">
+									Browse&hellip; <input type="file" name="surat_keterangan_rtrw" style="display: none;" multiple="true" />
+								</span>
+							</label>
+						</div>
 					</div>
 					
-					<div class="input-group">
-					  <span class="input-group-addon" id="basic-addon1">Foto Rumah</span>
-					  <span class="input-group-btn">
-				        <input class="btn btn-warning" type="file" name="foto_rumah">Browse</input>
-				      </span>
+					<div class="form-group">
+						<label class="control-label col-sm-4" for="foto_rumah">Foto Rumah : </label>
+						<div class="input-group">
+							<input type="text" class="form-control" readonly="true" id="foto_rumah" />
+							<label class="input-group-btn">
+								<span class="btn btn-default">
+									Browse&hellip; <input type="file" name="foto_rumah" style="display: none;" multiple="true" />
+								</span>
+							</label>
+						</div>
 					</div>
 					
-					<div class="input-group">
-					  <span class="input-group-addon" id="basic-addon1">Slip Gaji Pribadi</span>
-					  <span class="input-group-btn">
-				        <input class="btn btn-warning" type="file" name="slip_gaji_pribadi">Browse</input>
-				      </span>
+					<div class="form-group">
+						<label class="control-label col-sm-4" for="slip_gaji_pribadi">Slip Gaji Pribadi : </label>
+						<div class="input-group">
+							<input type="text" class="form-control" readonly="true" id="slip_gaji_pribadi" />
+							<label class="input-group-btn">
+								<span class="btn btn-default">
+									Browse&hellip; <input type="file" name="slip_gaji_pribadi" style="display: none;" multiple="true" />
+								</span>
+							</label>
+						</div>
 					</div>
 					
-					<div class="input-group">
-					  <span class="input-group-addon" id="basic-addon1">Slip Gaji Wali 1</span>
-					  <span class="input-group-btn">
-				      	<input class="btn btn-warning" type="file" name="slip_gaji_wali1">Browse</input>
-				      </span>
+					<div class="form-group">
+						<label class="control-label col-sm-4" for="slip_gaji_wali1">Slip Gaji Wali 1 : </label>
+						<div class="input-group">
+							<input type="text" class="form-control" readonly="true" id="slip_gaji_wali1" />
+							<label class="input-group-btn">
+								<span class="btn btn-default">
+									Browse&hellip; <input type="file" name="slip_gaji_wali1" style="display: none;" multiple="true" />
+								</span>
+							</label>
+						</div>
 					</div>
 					
-					<div class="input-group">
-					  <span class="input-group-addon" id="basic-addon1">Slip Gaji Wali 2</span>
-					  <span class="input-group-btn">
-				        <input class="btn btn-warning" type="file" name="slip_gaji_wali2">Browse</input>
-				      </span>
+					<div class="form-group">
+						<label class="control-label col-sm-4" for="slip_gaji_wali2">Slip Gaji Wali 2 : </label>
+						<div class="input-group">
+							<input type="text" class="form-control" readonly="true" id="slip_gaji_wali2" />
+							<label class="input-group-btn">
+								<span class="btn btn-default">
+									Browse&hellip; <input type="file" name="slip_gaji_wali1" style="display: none;" multiple="true" />
+								</span>
+							</label>
+						</div>
 					</div>
 					
-					<div class="input-group">
-					  <span class="input-group-addon" id="basic-addon1">Tagihan Air</span>
-					  <span class="input-group-btn">
-				        <input class="btn btn-warning" type="file" name="tagihan_air">Browse</input>
-				      </span>
+					<div class="form-group">
+						<label class="control-label col-sm-4" for="tagihan_air">Tagihan Air : </label>
+						<div class="input-group">
+							<input type="text" class="form-control" readonly="true" id="tagihan_air" />
+							<label class="input-group-btn">
+								<span class="btn btn-default">
+									Browse&hellip; <input type="file" name="tagihan_air" style="display: none;" multiple="true" />
+								</span>
+							</label>
+						</div>
 					</div>
 					
-					<div class="input-group">
-					  <span class="input-group-addon" id="basic-addon1">Tagihan Listrik</span>
-					  <span class="input-group-btn">
-				        <input class="btn btn-warning" type="file" name="tagihan_listrik">Browse</input>
-				      </span>
+					<div class="form-group">
+						<label class="control-label col-sm-4" for="tagihan_listrik">Tagihan Listrik : </label>
+						<div class="input-group">
+							<input type="text" class="form-control" readonly="true" id="tagihan_listrik" />
+							<label class="input-group-btn">
+								<span class="btn btn-default">
+									Browse&hellip; <input type="file" name="tagihan_listrik" style="display: none;" multiple="true" />
+								</span>
+							</label>
+						</div>
 					</div>
 					
-					<div class="input-group">
-					  <span class="input-group-addon" id="basic-addon1">Tagihan Telepon</span>
-					  <span class="input-group-btn">
-				        <input class="btn btn-warning" type="file" name="tagihan_telepon">Browse</input>
-				      </span>
+					<div class="form-group">
+						<label class="control-label col-sm-4" for="tagihan_telepon">Tagihan Telepon : </label>
+						<div class="input-group">
+							<input type="text" class="form-control" readonly="true" id="tagihan_telepon" />
+							<label class="input-group-btn">
+								<span class="btn btn-default">
+									Browse&hellip; <input type="file" name="tagihan_telepon" style="display: none;" multiple="true" />
+								</span>
+							</label>
+						</div>
 					</div>
 					
 					<hr/>
@@ -101,6 +140,31 @@
 		<script type="text/javascript">
 			$(document).ready(function(){
 				$('#myTable').dataTable();
+			});
+			
+			$(function() {
+				// We can attach the `fileselect` event to all file inputs on the page
+				$(document).on('change', ':file', function() {
+					var input = $(this),
+						numFiles = input.get(0).files ? input.get(0).files.length : 1,
+						label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
+					input.trigger('fileselect', [numFiles, label]);
+				});
+
+				// We can watch for our custom `fileselect` event like this
+				$(document).ready( function() {
+					$(':file').on('fileselect', function(event, numFiles, label) {
+
+						var input = $(this).parents('.input-group').find(':text'),
+						log = numFiles > 1 ? numFiles + ' files selected' : label;
+
+						if( input.length ) {
+							input.val(log);
+						} else {
+							if( log ) alert(log);
+						}
+					});
+				});
 			});
 		</script>
     </body>

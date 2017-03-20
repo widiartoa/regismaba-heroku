@@ -8,6 +8,8 @@ public interface MahasiswaService {
 
 	MahasiswaModel selectMahasiswa(String npm);
 	
+	MahasiswaModel loginMahasiswa (String username, String password);
+	
 	List<MahasiswaModel> selectAllMahasiswa();
 	
 	void insertBiodataMahasiswa(String npm, String biodata_id);
@@ -21,5 +23,4 @@ public interface MahasiswaService {
 	void updateJenjangMahasiswa(String npm, String jenjang_id);
 	
 	void updatePengajuanMahasiswa(String npm, String pengajuan_id);
-	
 }
