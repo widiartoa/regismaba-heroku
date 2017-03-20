@@ -24,4 +24,5 @@ public class RegismabaApplication {
             storageService.init();
 		};
 	}
+	
 }
