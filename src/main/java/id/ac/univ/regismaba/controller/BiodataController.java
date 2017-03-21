@@ -100,8 +100,8 @@ public class BiodataController {
         
         int num = rand.nextInt(1000000) + 1;
         
-        storageService.store (scan_ijazah, num);
-        storageService.store (scan_pernyataan_ijazah, num);
+        storageService.store (scan_ijazah, num+"");
+        storageService.store (scan_pernyataan_ijazah, num+"");
         
         //SCAN IJAZAH UPLOAD//
         String pathDB1 = storageService.load(scan_ijazah.getOriginalFilename()).toString();
