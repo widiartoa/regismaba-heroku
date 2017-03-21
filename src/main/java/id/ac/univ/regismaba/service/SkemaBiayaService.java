@@ -14,4 +14,6 @@ public interface SkemaBiayaService {
 	
 	void updateSBM(SkemaBiayaModel sbm);
 	
+	
+	//anjir propensi
 }
