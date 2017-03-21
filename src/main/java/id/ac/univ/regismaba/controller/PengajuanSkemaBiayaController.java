@@ -110,7 +110,7 @@ public class PengajuanSkemaBiayaController {
 		storageService.store(tagihan_listrik, num + "-7");
 		storageService.store(tagihan_telepon, num + "-8");
 		
-		//SURAT KETERANGAN RT RW UPLOAD//
+		//SURAT KETERANGAN RT RW UPLOAD //
         String pathDB1 = storageService.load(surat_keterangan_rtrw.getOriginalFilename()).toString();
         
         Path data1 = storageService.load(surat_keterangan_rtrw.getOriginalFilename());
