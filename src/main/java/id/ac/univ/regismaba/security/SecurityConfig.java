@@ -16,9 +16,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		http.authorizeRequests()
 			.antMatchers("/").permitAll()
 			.antMatchers("/img/**").permitAll()
-			.antMatchers("/calon-mahasiswa/**").hasAuthority("1")
+			.antMatchers("/calon-mahasiswa/**").hasRole("1")
 			.anyRequest().authenticated()
-			.and().formLogin().loginPage("/calon-mahasiswa/login/submit").permitAll()
+			.and().formLogin().loginPage("/").permitAll()
 			.and().logout().permitAll();
 	}
 
@@ -27,11 +27,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Autowired
 	public void configAuthentication(AuthenticationManagerBuilder auth) throws Exception {
-		String selectUsername = "SELECT username, password, ENABLED FROM user WHERE username=?";
-		String selectAuth2 = "SELECT username, id_role FROM user WHERE username=?";
+		String selectUsername = "SELECT username, password, 1 AS ENABLED FROM user WHERE username=?";
+		String selectAuth = "SELECT username, id_role FROM user WHERE username=?";
 
 		auth.jdbcAuthentication().dataSource(dataSource)
 			.usersByUsernameQuery(selectUsername)
-			.authoritiesByUsernameQuery(selectAuth2);
+			.authoritiesByUsernameQuery(selectAuth);
 	}
 }
