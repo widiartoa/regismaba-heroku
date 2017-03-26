@@ -16,7 +16,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		http.authorizeRequests()
 			.antMatchers("/").permitAll()
 			.antMatchers("/img/**").permitAll()
-			.antMatchers("/calon-mahasiswa/**").hasRole("1")
+			.antMatchers("/calon-mahasiswa/**").hasAuthority("1")
 			.anyRequest().authenticated()
 			.and().formLogin().loginPage("/").permitAll()
 			.and().logout().permitAll();

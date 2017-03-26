@@ -52,9 +52,8 @@ public class MahasiswaController {
 	{
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		Collection<? extends GrantedAuthority> authorities = auth.getAuthorities();
-		System.out.println(auth + " " + authorities);
-		if (authorities != null){
-		//	System.out.println("ke redirect cuyyy");
+		System.out.println(auth);
+		if (authorities.contains(new SimpleGrantedAuthority("1"))){
 			return "redirect:/calon-mahasiswa/idm";
 		} else {
 			return "index";
