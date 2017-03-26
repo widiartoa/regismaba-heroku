@@ -48,36 +48,17 @@ public class MahasiswaController {
     MahasiswaService mahasiswaDAO;
 	
 	@RequestMapping("/")
-	public String index()
+	public String index(Model model,
+		@RequestParam(value = "error", required = false) String error) 
 	{
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		Collection<? extends GrantedAuthority> authorities = auth.getAuthorities();
-		System.out.println(auth);
 		if (authorities.contains(new SimpleGrantedAuthority("1"))){
 			return "redirect:/calon-mahasiswa/idm";
 		} else {
+			model.addAttribute("error", error != null);
 			return "index";
 		}
-	}
-	
-	@RequestMapping("/login")
-	public String loginMahasiswa(Model model)	
-	{
-		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		Collection<? extends GrantedAuthority> authorities = auth.getAuthorities();
-		System.out.println("login : " + authorities);
-		//MahasiswaModel mahasiswa = mahasiswaDAO.loginMahasiswa (username, password);
-
-		// todo : cek authorities mahasiswa apa staff
-        if (authorities != null) {
-            //model.addAttribute ("mahasiswa", mahasiswa);
-			// todo : cek mahasiswa udah ngisi idm apa belom, kalo belom ke mengisi idm kalo udah view idm
-			return "calon_mahasiswa-mengisi_idm";
-			//return "redirect:/calon-mahasiswa/idm";
-        } else {
-			//model.addAttribute ("error", true);
-            return "index";
-        }
 	}
 	
 	@RequestMapping("/calon-mahasiswa/idm")

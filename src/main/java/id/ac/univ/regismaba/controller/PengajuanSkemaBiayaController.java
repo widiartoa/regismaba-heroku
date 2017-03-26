@@ -9,6 +9,8 @@ import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -50,8 +52,10 @@ public class PengajuanSkemaBiayaController {
 	
 	@RequestMapping("/calon-mahasiswa/skema-pembayaran")
 	public String skemaMahasiswa(Model model)
-	{
-		//hardcode first psbm
+	{	
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		String user = auth.getName();
+		System.out.println(user);
 		MahasiswaModel mahasiswa = mahasiswaService.selectMahasiswa("1234567890");
 		
 		int pengajuanId = mahasiswa.getPengajuan_id();
