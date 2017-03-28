@@ -7,6 +7,13 @@ public class PengajuanSkemaBiayaModel
 {
     int pengajuan_id;
     int golongan_id;
+    String username;
+    int gaji_pribadi;
+    int gaji_wali1;
+    int gaji_wali2;
+    int nilai_tagihan_air;
+    int nilai_tagihan_listrik;
+    int nilai_tagihan_telepon;
     String surat_keterangan_rtrw;
     String foto_rumah;
     String slip_gaji_pribadi;

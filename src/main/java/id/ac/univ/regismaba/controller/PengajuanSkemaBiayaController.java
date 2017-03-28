@@ -52,11 +52,13 @@ public class PengajuanSkemaBiayaController {
 	public String skemaMahasiswa(Model model)
 	{
 		//hardcode first psbm
-		MahasiswaModel mahasiswa = mahasiswaService.selectMahasiswa("1234567890");
+		MahasiswaModel mahasiswa = mahasiswaService.selectMahasiswa("1123456798");
 		
-		int pengajuanId = mahasiswa.getPengajuan_id();
+//		int pengajuanId = mahasiswa.getPengajuan_id();
+//		
+//		PengajuanSkemaBiayaModel psbm = psbs.selectPSBM(pengajuanId);
 		
-		PengajuanSkemaBiayaModel psbm = psbs.selectPSBM(pengajuanId);
+		PengajuanSkemaBiayaModel psbm = psbs.selectPSBMFromUsername(mahasiswa.getUsername());
 		
 		model.addAttribute("mahasiswa", mahasiswa);
 		
