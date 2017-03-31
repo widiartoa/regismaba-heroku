@@ -1,6 +1,7 @@
 package id.ac.univ.regismaba.controller;
 
 import java.nio.file.Path;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
@@ -33,6 +34,7 @@ import id.ac.univ.regismaba.storage.StorageService;
 public class PengajuanSkemaBiayaController {
 
 	private final StorageService storageService;
+	private static final List<String> contentTypes = Arrays.asList("image/png", "image/jpeg");
 	
 	@Autowired
 	public PengajuanSkemaBiayaController(StorageService storageService){
@@ -103,14 +105,44 @@ public class PengajuanSkemaBiayaController {
 		
 		int num = rand.nextInt(1000000) + 1;
 		
-		storageService.store(surat_keterangan_rtrw, num + "-1");
-		storageService.store(foto_rumah, num + "-2");
-		storageService.store(slip_gaji_pribadi, num + "-3");
-		storageService.store(slip_gaji_wali1, num + "-4");
-		storageService.store(slip_gaji_wali2, num + "-5");
-		storageService.store(tagihan_air, num + "-6");
-		storageService.store(tagihan_listrik, num + "-7");
-		storageService.store(tagihan_telepon, num + "-8");
+		if(surat_keterangan_rtrw.isEmpty() == false)
+		{
+			storageService.store(surat_keterangan_rtrw, num + "-1");
+		}
+		
+		if(foto_rumah.isEmpty() == false)
+		{
+			storageService.store(foto_rumah, num + "-2");
+		}
+		
+		if(slip_gaji_pribadi.isEmpty() == false)
+		{
+			storageService.store(slip_gaji_pribadi, num + "-3");
+		}
+		
+		if(slip_gaji_wali1.isEmpty() == false)
+		{
+			storageService.store(slip_gaji_wali1, num + "-4");
+		}
+		
+		if(slip_gaji_wali2.isEmpty() == false)
+		{
+			storageService.store(slip_gaji_wali2, num + "-5");
+		}
+		
+		if(tagihan_air.isEmpty() == false)
+		{
+			storageService.store(tagihan_air, num + "-6");
+		}
+		
+		if(tagihan_listrik.isEmpty() == false)
+		{
+			storageService.store(tagihan_listrik, num + "-7");
+		}
+		if(tagihan_telepon.isEmpty() == false)
+		{
+			storageService.store(tagihan_telepon, num + "-8");
+		}
 		
 		//SURAT KETERANGAN RT RW UPLOAD//
         String pathDB1 = storageService.load(surat_keterangan_rtrw.getOriginalFilename()).toString();
@@ -193,9 +225,10 @@ public class PengajuanSkemaBiayaController {
         skema.setTagihan_telepon(pdb8);
         
 		//INSERT OR UPDATE//
-		if(mahasiswa.getPengajuan_id() == 0)
+		if(psbs.selectPSBMFromUsername(mahasiswa.getUsername()) != null)
 		{
 			//insert new pengajuan
+			skema.setUsername(mahasiswa.getUsername());
 			psbs.insertPSBM(skema);
 		}
 		else
