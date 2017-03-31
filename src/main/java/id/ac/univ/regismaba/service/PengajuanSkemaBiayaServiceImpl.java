@@ -42,4 +42,11 @@ public class PengajuanSkemaBiayaServiceImpl implements PengajuanSkemaBiayaServic
 		log.info ("select all pengajuan skema biaya");
 		return psbd.selectAllPSBM();
 	}
+
+	@Override
+	public PengajuanSkemaBiayaModel selectPSBMFromUsername(String username) {
+		// TODO Auto-generated method stub
+		log.info ("select pengajuan skema biaya with username {}", username);
+		return psbd.selectPSBMFromUsername(username);
+	}
 }
