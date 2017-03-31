@@ -16,6 +16,9 @@ public interface PengajuanSkemaBiayaMapper {
 	@Select("select * from pengajuan_skema_pembayaran where pengajuan_id = #{pengajuan_id}")
 	PengajuanSkemaBiayaModel selectPSBM (@Param("pengajuan_id") int pengajuan_id);
 
+	@Select("select * from pengajuan_skema_pembayaran where username = #{username}")
+	PengajuanSkemaBiayaModel selectPSBMFromUsername (@Param("username") String username);
+	
 	@Select("select * from pengajuan_skema_pembayaran")
 	List<PengajuanSkemaBiayaModel> selectAllPSBM ();
 	
