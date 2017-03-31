@@ -24,12 +24,13 @@ public interface PengajuanSkemaBiayaMapper {
 	
 	@Insert("insert into pengajuan_skema_pembayaran (golongan_id, surat_keterangan_rtrw, "
 			+ "foto_rumah, slip_gaji_pribadi, slip_gaji_wali1, slip_gaji_wali2, tagihan_air, "
-			+ "tagihan_listrik, tagihan_telepon, gaji_pribadi, gali_wali1, gaji_wali2, "
-			+ "nilai_tagihan_air, nilai_tagihan_listrik, nilai_tagihan_telepon) "
+			+ "tagihan_listrik, tagihan_telepon, gaji_pribadi, gaji_wali1, gaji_wali2, "
+			+ "nilai_tagihan_air, nilai_tagihan_listrik, nilai_tagihan_telepon, username) "
 			+ "values (#{golongan_id}, #{surat_keterangan_rtrw}, "
 			+ "#{foto_rumah}, #{slip_gaji_pribadi}, #{slip_gaji_wali1}, #{slip_gaji_wali2}, "
 			+ "#{tagihan_air}, #{tagihan_listrik}, #{tagihan_telepon}, #{gaji_pribadi}, #{gaji_wali1}, "
-			+ "#{gaji_wali2}, #{nilai_tagihan_air}, #{nilai_tagihan_listrik}, #{nilai_tagihan_telepon})")
+			+ "#{gaji_wali2}, #{nilai_tagihan_air}, #{nilai_tagihan_listrik}, #{nilai_tagihan_telepon}, "
+			+ "#{username})")
 	void insertPSBM(PengajuanSkemaBiayaModel psbm);
 	
 	@Update("update pengajuan_skema_pembayaran set golongan_id=#{golongan_id}, "
