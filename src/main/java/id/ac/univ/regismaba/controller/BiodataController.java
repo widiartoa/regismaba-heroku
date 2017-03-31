@@ -146,14 +146,14 @@ public class BiodataController {
 
 	}
 
-	@RequestMapping("/biodata/view/{npm}")
-	public String view(Model model, @PathVariable(value = "npm") String npm) {
-		MahasiswaModel mahasiswa = mahasiswaDAO.selectMahasiswa(npm);
-		BiodataModel biodata = biodataDAO.selectBiodata(mahasiswa.getBiodata_id());
-		if (biodata != null) {
-			model.addAttribute("biodata", biodata);
-			return "biodata-view";
-		}
-		return "not-found";
-	}
+//	@RequestMapping("/biodata/view/{npm}")
+//	public String view(Model model, @PathVariable(value = "npm") String npm) {
+//		MahasiswaModel mahasiswa = mahasiswaDAO.selectMahasiswa(npm);
+//		BiodataModel biodata = biodataDAO.selectBiodata(mahasiswa.getBiodata_id());
+//		if (biodata != null) {
+//			model.addAttribute("biodata", biodata);
+//			return "biodata-view";
+//		}
+//		return "not-found";
+//	}
 }
