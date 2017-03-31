@@ -111,7 +111,7 @@ public class PengajuanSkemaBiayaController {
 												@RequestParam("nilai_tagihan_listrik") String nilai_tagihan_listrik,
 												@RequestParam("nilai_tagihan_telepon") String nilai_tagihan_telepon)
 	{
-		MahasiswaModel mahasiswa = mahasiswaService.selectMahasiswa("1234567892");
+		MahasiswaModel mahasiswa = mahasiswaService.selectMahasiswa("1234567890");
 		PengajuanSkemaBiayaModel skema = new PengajuanSkemaBiayaModel();
 		
 		System.out.println("nih golongan " + golongan_id);
