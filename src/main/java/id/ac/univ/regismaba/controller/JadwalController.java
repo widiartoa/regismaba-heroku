@@ -2,6 +2,8 @@ package id.ac.univ.regismaba.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -21,9 +23,11 @@ public class JadwalController {
 	@Autowired
 	JadwalService jadwalService;
 
-	@RequestMapping("/calon-mahasiswa/jadwal")
+	@RequestMapping("/calon-mahasiswa/")
 	public String getJadwal(Model model) {
-		// hardcode
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		String user = auth.getName();
+		System.out.println(user);
 		MahasiswaModel mahasiswa = mahasiswaService.selectMahasiswa("1234567890");
 
 		model.addAttribute("mahasiswa", mahasiswa);

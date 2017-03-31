@@ -3,6 +3,9 @@ package id.ac.univ.regismaba.controller;
 import java.nio.file.Path;
 import java.util.List;
 import java.util.Random;
+import java.util.Collection;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
@@ -16,9 +19,15 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 
 import id.ac.univ.regismaba.model.MahasiswaModel;
 import id.ac.univ.regismaba.model.PengajuanSkemaBiayaModel;
@@ -27,85 +36,33 @@ import id.ac.univ.regismaba.model.DataKesehatanModel;
 import id.ac.univ.regismaba.service.MahasiswaService;
 import id.ac.univ.regismaba.service.PengajuanSkemaBiayaService;
 import id.ac.univ.regismaba.service.SkemaBiayaService;
-import id.ac.univ.regismaba.storage.StorageFileNotFoundException;
-import id.ac.univ.regismaba.storage.StorageService;
 
 @Controller
 public class MahasiswaController {
-	private final StorageService storageService;
-	
-	@Autowired
-	public MahasiswaController(StorageService storageService){
-		this.storageService = storageService;
-	}
 	
     @Autowired
     MahasiswaService mahasiswaDAO;
 	
-    //@Autowired
-    //DataKesehatanService dataKesehatanDAO;
-	
 	@RequestMapping("/")
-	public String index()
+	public String index(Model model,
+		@RequestParam(value = "error", required = false) String error) 
 	{
-		return "index";
-	}
-	
-	@RequestMapping("/calon-mahasiswa/login/submit")
-	public String loginMahasiswa(Model model, 
-		@RequestParam(value = "username", required = true) String username,
-		@RequestParam(value = "password", required = true) String password
-	)	{
-		MahasiswaModel mahasiswa = mahasiswaDAO.loginMahasiswa (username, password);
-
-        if (mahasiswa != null) {
-            model.addAttribute ("mahasiswa", mahasiswa);
-			// todo : cek mahasiswa udah ngisi idm apa belom, kalo belom ke mengisi idm kalo udah view idm
-			return "calon_mahasiswa-mengisi_idm";
-        } else {
-			model.addAttribute ("error", true);
-            return "index";
-        }
-	}
-	
-	@RequestMapping("/calon-mahasiswa/idm")
-	public String idmMahasiswa()
-	{		
-		// todo : kalo belom isi idm ke fill idm, udah ke view idm
-		return "calon_mahasiswa-mengisi_idm";
-	}
-	
-	@RequestMapping("/calon-mahasiswa/survey-kesehatan")
-	public String surveyKesehatan(Model model)
-	{
-		// todo : jangan di hardcode plz
-		MahasiswaModel mahasiswa = mahasiswaDAO.selectMahasiswa("1234567890");
-		//DataKesehatanModel dataKesehatan = dataKesehatanDAO.selectDataKesehatan("1");
-		DataKesehatanModel dataKesehatan = null;
-		
-		if(dataKesehatan != null) {
-			model.addAttribute("form_survey_kesehatan_error", dataKesehatan.form_survey_kesehatan == null);
-			model.addAttribute("hasil_tes_kesehatan_error", dataKesehatan.hasil_tes_kesehatan == null);	
-			model.addAttribute("form_survey_kesehatan", dataKesehatan.form_survey_kesehatan);
-			model.addAttribute("hasil_tes_kesehatan", dataKesehatan.hasil_tes_kesehatan);
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		Collection<? extends GrantedAuthority> authorities = auth.getAuthorities();
+		if (authorities.contains(new SimpleGrantedAuthority("1"))){
+			return "redirect:/calon-mahasiswa/";
 		} else {
-			model.addAttribute("form_survey_kesehatan_error", true);
-			model.addAttribute("hasil_tes_kesehatan_error", true);	
+			model.addAttribute("error", error != null);
+			return "index";
 		}
-		
-		return "calon_mahasiswa-survey_kesehatan";	
 	}
 	
-	@RequestMapping("/calon-mahasiswa/survey-kesehatan/submit")
-	public String submitSurveyKesehatan(Model model, 
-		@RequestParam(value = "form_survey_kesehatan", required = false) MultipartFile form_survey_kesehatan
-	)	{
-		
-		// todo : jangan di hardcode plz
-		MahasiswaModel mahasiswa = mahasiswaDAO.selectMahasiswa("1234567890");
-		
-		//storageService.store(form_survey_kesehatan, mahasiswa.npm);
-		
-		return "calon_mahasiswa-survey_kesehatan";
+	@RequestMapping(value="/logout", method = RequestMethod.GET)
+	public String logoutPage (HttpServletRequest request, HttpServletResponse response) {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		if (auth != null){    
+			new SecurityContextLogoutHandler().logout(request, response, auth);
+		}
+		return "redirect:/";
 	}
 }

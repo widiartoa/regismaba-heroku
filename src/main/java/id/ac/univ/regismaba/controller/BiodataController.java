@@ -55,6 +55,14 @@ public class BiodataController {
 
 	// @Autowired
 	// ProvinsiService provinsiDAO;
+	
+	
+	@RequestMapping("/calon-mahasiswa/idm")
+	public String idmMahasiswa()
+	{		
+		// todo : kalo belom isi idm ke fill idm, udah ke view idm
+		return "calon_mahasiswa-mengisi_idm";
+	}
 
 	@RequestMapping("/biodata/fill")
 	public String insert(Model model) {
@@ -146,14 +154,14 @@ public class BiodataController {
 
 	}
 
-	@RequestMapping("/biodata/view/{npm}")
-	public String view(Model model, @PathVariable(value = "npm") String npm) {
-		MahasiswaModel mahasiswa = mahasiswaDAO.selectMahasiswa(npm);
-		BiodataModel biodata = biodataDAO.selectBiodata(mahasiswa.getBiodata_id());
-		if (biodata != null) {
-			model.addAttribute("biodata", biodata);
-			return "biodata-view";
-		}
-		return "not-found";
-	}
+//	@RequestMapping("/biodata/view/{npm}")
+//	public String view(Model model, @PathVariable(value = "npm") String npm) {
+//		MahasiswaModel mahasiswa = mahasiswaDAO.selectMahasiswa(npm);
+//		BiodataModel biodata = biodataDAO.selectBiodata(mahasiswa.getBiodata_id());
+//		if (biodata != null) {
+//			model.addAttribute("biodata", biodata);
+//			return "biodata-view";
+//		}
+//		return "not-found";
+//	}
 }
