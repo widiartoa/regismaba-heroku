@@ -23,7 +23,7 @@ public class JadwalController {
 	@Autowired
 	JadwalService jadwalService;
 
-	@RequestMapping("/calon-mahasiswa/jadwal")
+	@RequestMapping("/calon-mahasiswa/")
 	public String getJadwal(Model model) {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		String user = auth.getName();

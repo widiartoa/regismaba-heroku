@@ -4,6 +4,8 @@ import java.nio.file.Path;
 import java.util.List;
 import java.util.Random;
 import java.util.Collection;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
@@ -17,9 +19,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -32,17 +36,9 @@ import id.ac.univ.regismaba.model.DataKesehatanModel;
 import id.ac.univ.regismaba.service.MahasiswaService;
 import id.ac.univ.regismaba.service.PengajuanSkemaBiayaService;
 import id.ac.univ.regismaba.service.SkemaBiayaService;
-import id.ac.univ.regismaba.storage.StorageFileNotFoundException;
-import id.ac.univ.regismaba.storage.StorageService;
 
 @Controller
 public class MahasiswaController {
-	private final StorageService storageService;
-	
-	@Autowired
-	public MahasiswaController(StorageService storageService){
-		this.storageService = storageService;
-	}
 	
     @Autowired
     MahasiswaService mahasiswaDAO;
@@ -61,10 +57,12 @@ public class MahasiswaController {
 		}
 	}
 	
-	@RequestMapping("/calon-mahasiswa/idm")
-	public String idmMahasiswa()
-	{		
-		// todo : kalo belom isi idm ke fill idm, udah ke view idm
-		return "calon_mahasiswa-mengisi_idm";
+	@RequestMapping(value="/logout", method = RequestMethod.GET)
+	public String logoutPage (HttpServletRequest request, HttpServletResponse response) {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		if (auth != null){    
+			new SecurityContextLogoutHandler().logout(request, response, auth);
+		}
+		return "redirect:/";
 	}
 }

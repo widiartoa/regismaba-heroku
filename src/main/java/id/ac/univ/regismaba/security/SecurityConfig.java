@@ -7,6 +7,8 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @Configuration
 @EnableWebSecurity
@@ -31,7 +33,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		String selectAuth = "SELECT username, id_role FROM user WHERE username=?";
 
 		auth.jdbcAuthentication().dataSource(dataSource)
+			.passwordEncoder(passwordEncoder())
 			.usersByUsernameQuery(selectUsername)
 			.authoritiesByUsernameQuery(selectAuth);
 	}
+	
+	public PasswordEncoder passwordEncoder() {
+		PasswordEncoder encoder = new BCryptPasswordEncoder();
+		return encoder;
+	}
+	
 }
