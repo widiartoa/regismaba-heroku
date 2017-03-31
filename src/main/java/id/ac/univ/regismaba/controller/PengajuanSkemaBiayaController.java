@@ -66,14 +66,21 @@ public class PengajuanSkemaBiayaController {
 		
 		PengajuanSkemaBiayaModel psbm = psbs.selectPSBMFromUsername(mahasiswa.getUsername());
 		
-		model.addAttribute("mahasiswa", mahasiswa);
+		if(psbm.getPengajuan_id() != 0)
+		{
+			model.addAttribute("mahasiswa", mahasiswa);
+			model.addAttribute("psbm", psbm);
+			return "calon_mahasiswa-melihat_skema_pembayaran";
+		}
+		else
+		{
+			return "calon_mahasiswa-melihat_skema_pembayaran";
+		}
 		
-		model.addAttribute("psbm", psbm);
 		
-		return "calon_mahasiswa-melihat_skema_pembayaran";
 	}
 	
-	@RequestMapping("/calon-mahasiswa/pengajuan-skema")
+	@RequestMapping("/calon-mahasiswa/skema-pembayaran/pengajuan")
 	public String pengajuanSkemaMahasiswa(Model model)
 	{
 		List<SkemaBiayaModel> schemas = sbs.selectAllSBM();
@@ -88,7 +95,7 @@ public class PengajuanSkemaBiayaController {
 		return "calon_mahasiswa-pengajuan_skema_pembayaran";
 	}
 	
-	@PostMapping("/calon-mahasiswa/pengajuan-skema/submit")
+	@PostMapping("/calon-mahasiswa/skema-pembayaran/submit")
 	public String pengajuanSkemaMahasiswaSubmit(Model model, 
 												@RequestParam("golongan_id") int golongan_id,
 												@RequestParam("surat_keterangan_rtrw") MultipartFile surat_keterangan_rtrw,
@@ -98,12 +105,25 @@ public class PengajuanSkemaBiayaController {
 												@RequestParam("slip_gaji_wali2") MultipartFile slip_gaji_wali2,
 												@RequestParam("tagihan_air") MultipartFile tagihan_air,
 												@RequestParam("tagihan_listrik") MultipartFile tagihan_listrik,
-												@RequestParam("tagihan_telepon") MultipartFile tagihan_telepon)
+												@RequestParam("tagihan_telepon") MultipartFile tagihan_telepon,
+												@RequestParam("gaji_pribadi") String gaji_pribadi,
+												@RequestParam("gaji_Wali1") String gaji_wali1,
+												@RequestParam("gaji_wali2") String gaji_wali2,
+												@RequestParam("nilai_tagihan_air") String nilai_tagihan_air,
+												@RequestParam("nilai_tagihan_listrik") String nilai_tagihan_listrik,
+												@RequestParam("nilai_tagihan_telepon") String nilai_tagihan_telepon)
 	{
 		MahasiswaModel mahasiswa = mahasiswaService.selectMahasiswa("1234567890");
 		PengajuanSkemaBiayaModel skema = new PengajuanSkemaBiayaModel();
 		
 		skema.setGolongan_id(golongan_id);
+		skema.setUsername(mahasiswa.getUsername());
+		skema.setGaji_pribadi(Integer.parseInt(gaji_pribadi));
+		skema.setGaji_wali1(Integer.parseInt(gaji_wali1));
+		skema.setGaji_wali2(Integer.parseInt(gaji_wali2));
+		skema.setNilai_tagihan_air(Integer.parseInt(nilai_tagihan_air));
+		skema.setNilai_tagihan_listrik(Integer.parseInt(nilai_tagihan_listrik));
+		skema.setNilai_tagihan_telepon(Integer.parseInt(nilai_tagihan_telepon));
 		
 		Random rand = new Random();
 		
@@ -229,10 +249,10 @@ public class PengajuanSkemaBiayaController {
         skema.setTagihan_telepon(pdb8);
         
 		//INSERT OR UPDATE//
+        System.out.println("Test123 " + psbs.selectPSBMFromUsername(mahasiswa.getUsername()).toString());
 		if(psbs.selectPSBMFromUsername(mahasiswa.getUsername()) != null)
 		{
 			//insert new pengajuan
-			skema.setUsername(mahasiswa.getUsername());
 			psbs.insertPSBM(skema);
 		}
 		else
@@ -243,13 +263,13 @@ public class PengajuanSkemaBiayaController {
 		
 		mahasiswa = mahasiswaService.selectMahasiswa("1234567890");
 		
-		int pengajuanId = mahasiswa.getPengajuan_id();
+/*		int pengajuanId = mahasiswa.getPengajuan_id();
 		
 		PengajuanSkemaBiayaModel psbm = psbs.selectPSBM(pengajuanId);
 		
 		model.addAttribute("mahasiswa", mahasiswa);
 		
-		model.addAttribute("psbm", psbm);
+		model.addAttribute("psbm", psbm);*/
 		
 		return "calon_mahasiswa-melihat_skema_pembayaran";
 	}
