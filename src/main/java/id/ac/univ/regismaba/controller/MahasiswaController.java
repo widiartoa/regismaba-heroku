@@ -50,7 +50,7 @@ public class MahasiswaController {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		Collection<? extends GrantedAuthority> authorities = auth.getAuthorities();
 		if (authorities.contains(new SimpleGrantedAuthority("1"))){
-			return "redirect:/calon-mahasiswa/idm";
+			return "redirect:/calon-mahasiswa/";
 		} else {
 			model.addAttribute("error", error != null);
 			return "index";
