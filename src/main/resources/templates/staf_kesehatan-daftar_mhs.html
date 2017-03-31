@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<div th:replace="resources"></div>
+<title>Staf Kesehatan - Daftar Mahasiswa</title>
+</head>
+
+<body>
+	<div th:include="staf-navbar"></div>
+
+	<div class="container">
+		<div class="content">
+			<div class="row">
+				<div class="col-sm-12">
+					<h3>Daftar Mahasiswa</h3>
+				</div>
+			</div>
+
+			<table class="table">
+				<thead>
+					<tr>
+						<td>
+							<h4 th:text="'Username'">Username</h4>
+						</td>
+						<td>
+							<h4 th:text="'NPM'">NPM</h4>
+						</td>
+						<td>
+							<h4 th:text="'Survei Kesehatan'">Survei Kesehatan</h4>
+						</td>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="mahasiswa,iterationStatus: ${mahasiswas}">
+						<td th:text="${mahasiswa.username}" class="center">username</td>
+						<td th:text="${mahasiswa.npm}">npm</td>
+						<td><a th:href="'/staf/' + ${mahasiswa.npm} + '/survey_kesehatan'"
+							class="btn btn-info"> <i class="glyphicon glyphicon-pencil"></i>
+						</a></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+
+	<div class="footer">Modul Registrasi Mahasiswa Baru</div>
+
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$('#myTable').dataTable();
+		});
+	</script>
+</body>
+</html>
