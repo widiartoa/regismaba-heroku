@@ -55,6 +55,14 @@ public class BiodataController {
 
 	// @Autowired
 	// ProvinsiService provinsiDAO;
+	
+	
+	@RequestMapping("/calon-mahasiswa/idm")
+	public String idmMahasiswa()
+	{		
+		// todo : kalo belom isi idm ke fill idm, udah ke view idm
+		return "calon_mahasiswa-mengisi_idm";
+	}
 
 	@RequestMapping("/biodata/fill")
 	public String insert(Model model) {
