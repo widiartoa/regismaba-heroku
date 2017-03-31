@@ -8,6 +8,8 @@ public interface PengajuanSkemaBiayaService {
 
 	PengajuanSkemaBiayaModel selectPSBM (int pengajuan_id);
 	
+	PengajuanSkemaBiayaModel selectPSBMFromUsername (String username);
+	
 	List<PengajuanSkemaBiayaModel> selectAllPSBM ();
 
 	void insertPSBM(PengajuanSkemaBiayaModel psbm);
