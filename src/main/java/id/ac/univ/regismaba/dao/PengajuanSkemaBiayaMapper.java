@@ -24,17 +24,22 @@ public interface PengajuanSkemaBiayaMapper {
 	
 	@Insert("insert into pengajuan_skema_pembayaran (golongan_id, surat_keterangan_rtrw, "
 			+ "foto_rumah, slip_gaji_pribadi, slip_gaji_wali1, slip_gaji_wali2, tagihan_air, "
-			+ "tagihan_listrik, tagihan_telepon) values (#{golongan_id}, #{surat_keterangan_rtrw}, "
+			+ "tagihan_listrik, tagihan_telepon, gaji_pribadi, gali_wali1, gaji_wali2, "
+			+ "nilai_tagihan_air, nilai_tagihan_listrik, nilai_tagihan_telepon) "
+			+ "values (#{golongan_id}, #{surat_keterangan_rtrw}, "
 			+ "#{foto_rumah}, #{slip_gaji_pribadi}, #{slip_gaji_wali1}, #{slip_gaji_wali2}, "
-			+ "#{tagihan_air}, #{tagihan_listrik}, #{tagihan_telepon})")
+			+ "#{tagihan_air}, #{tagihan_listrik}, #{tagihan_telepon}, #{gaji_pribadi}, #{gaji_wali1}, "
+			+ "#{gaji_wali2}, #{nilai_tagihan_air}, #{nilai_tagihan_listrik}, #{nilai_tagihan_telepon})")
 	void insertPSBM(PengajuanSkemaBiayaModel psbm);
 	
 	@Update("update pengajuan_skema_pembayaran set golongan_id=#{golongan_id}, "
 			+ "surat_keterangan_rtrw=#{surat_keterangan_rtrw}, foto_rumah=#{foto_rumah}, "
 			+ "slip_gaji_pribadi=#{slip_gaji_pribadi}, slip_gaji_wali1=#{slip_gaji_wali1}, "
 			+ "slip_gaji_wali2=#{slip_gaji_wali2}, tagihan_air=#{tagihan_air}, "
-			+ "tagihan_listrik=#{tagihan_listrik}, tagihan_telepon=#{tagihan_telepon} "
-			+ "where pengajuan_id=1")
+			+ "tagihan_listrik=#{tagihan_listrik}, tagihan_telepon=#{tagihan_telepon}, "
+			+ "gaji_pribadi=#{gaji_pribadi}, gaji_wali1=#{gaji_wali1}, gaji_wali2=#{gaji_wali2}, "
+			+ "nilai_tagihan_air=#{nilai_tagihan_air}, nilai_tagihan_listrik=#{nilai_tagihan_listrik}, "
+			+ "nilai_tagihan_telepon=#{nilai_tagihan_telepon} where username=#{username}")
 	void updatePSBM(PengajuanSkemaBiayaModel psbm);
 	
 }
