@@ -1,19 +1,28 @@
 package id.ac.univ.regismaba.dao;
 
-import java.util.List;
-
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Result;
-import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Update;
+import org.apache.ibatis.annotations.Results;
+import org.apache.ibatis.annotations.Result;
+import org.apache.ibatis.annotations.Many;
+import org.apache.ibatis.annotations.One;
+
+import java.util.List;
 
 import id.ac.univ.regismaba.model.MahasiswaModel;
 
 @Mapper
 public interface MahasiswaMapper {
+
+	@Select("SELECT username FROM user WHERE username = #{username} AND password = MD5(#{password}) AND id_role = '1'")
+	@Results(value = {
+		@Result(property="username", column="username")
+	})
+    MahasiswaModel loginMahasiswa (@Param("username") String username, @Param("password") String password);
 
 	@Select("select * from mahasiswa where npm = #{npm}")
 	@Results (value = {
@@ -61,5 +70,7 @@ public interface MahasiswaMapper {
 	void updateJenjangMahasiswa(@Param("npm") String npm, @Param("jenjang_id") String jenjang_id);
 	
 	@Update("update mahasiswa set pengajuan_id = #{pengajuan_id} where npm = #{npm}")
-	void updatePengajuanMahasiswa(@Param("npm") String npm, @Param("pengajuan_id") String pengajuan_id);
+	void updatePengajuanMahasiswa(@Param("npm") String npm, @Param("pengajuan_id") String pengajuan_id);	
+	
 }
+
