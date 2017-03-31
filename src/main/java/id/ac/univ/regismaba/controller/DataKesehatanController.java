@@ -19,6 +19,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 
 import id.ac.univ.regismaba.model.MahasiswaModel;
 import id.ac.univ.regismaba.model.PengajuanSkemaBiayaModel;
@@ -45,9 +47,11 @@ public class DataKesehatanController {
     //@Autowired
     //DataKesehatanService dataKesehatanDAO;
 	
-	@RequestMapping("/calon-mahasiswa/survey-kesehatan")
+	@RequestMapping("/calon-mahasiswa/riwayat-kesehatan")
 	public String surveyKesehatan(Model model)
 	{
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		String user = auth.getName();
 		// todo : jangan di hardcode plz
 		MahasiswaModel mahasiswa = mahasiswaDAO.selectMahasiswa("1234567890");
 		//DataKesehatanModel dataKesehatan = dataKesehatanDAO.selectDataKesehatan("1");
