@@ -21,7 +21,9 @@
 		<!-- =============================================================== -->
 		<div id="contact" class="container">
 			<h1 class="page-header">Isi Biodata</h1>
-			<form action="/biodata/fill/submit" method="post" enctype="multipart/form-data" >
+		<!-- 	<p th:text="${_csrf.token}"></p>  -->
+			<form action="/calon-mahasiswa/biodata/fill/submit" method="post" enctype="multipart/form-data" >
+				<input type="hidden"  th:name="${_csrf.parameterName}"   th:value="${_csrf.token}"/>
 				<h4>Masukkan Data Mahasiswa</h4>
 				<br />
 				<div class="row">
@@ -281,7 +283,7 @@
 					</div>
 				</div>				
 				<div class="form-group" style="text-align: center">
-					<button href="#" class="btn btn-default">Simpan</button>
+					<button class="btn btn-default">Simpan</button>
 				</div>
 			</form>
 		</div>

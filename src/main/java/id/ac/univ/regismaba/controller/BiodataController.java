@@ -8,11 +8,17 @@ import java.util.Date;
 import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.Resource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder;
 
@@ -57,21 +63,21 @@ public class BiodataController {
 	// ProvinsiService provinsiDAO;
 	
 	
-	@RequestMapping("/calon-mahasiswa/idm")
+	@RequestMapping("calon-mahasiswa/calon-mahasiswa/idm")
 	public String idmMahasiswa()
 	{		
 		// todo : kalo belom isi idm ke fill idm, udah ke view idm
 		return "calon_mahasiswa-mengisi_idm";
 	}
 
-	@RequestMapping("/biodata/fill")
+	@RequestMapping("calon-mahasiswa/biodata/fill")
 	public String insert(Model model) {
 		// List<ProvinsiModel> provinsis = provinsiDAO.selectAllProvinsi();
 		// model.addAttribute("provinsis", provinsis);
 		return "calon_mahasiswa-mengisi_idm";
 	}
 
-	@RequestMapping("/biodata/fill/submit")
+	@PostMapping("calon-mahasiswa/biodata/fill/submit")
 	public String insertBiodata(@RequestParam(value = "nomor_asuransi", required = false) String nomor_asuransi,
 			@RequestParam(value = "tanggal_lahir", required = false) String tanggal_lahir,
 			@RequestParam(value = "jenis_kelamin", required = false) String jenis_kelamin,
@@ -238,6 +244,17 @@ public class BiodataController {
 //		return "success-biodata-insert";
 
 	}
+	
+    @GetMapping("/files2/{filename:.+}")
+    @ResponseBody
+    public ResponseEntity<Resource> serveFile(@PathVariable String filename) {
+
+        Resource file = storageService.loadAsResource(filename);
+        return ResponseEntity
+                .ok()
+                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\""+file.getFilename()+"\"")
+                .body(file);
+    }
 
 //	@RequestMapping("/biodata/view/{npm}")
 //	public String view(Model model, @PathVariable(value = "npm") String npm) {
