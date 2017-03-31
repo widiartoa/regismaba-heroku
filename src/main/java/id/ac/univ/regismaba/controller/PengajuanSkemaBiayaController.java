@@ -54,7 +54,7 @@ public class PengajuanSkemaBiayaController {
 	public String skemaMahasiswa(Model model)
 	{
 		//hardcode first psbm
-		MahasiswaModel mahasiswa = mahasiswaService.selectMahasiswa("1123456798");
+		MahasiswaModel mahasiswa = mahasiswaService.selectMahasiswa("1234567890");
 		
 //		int pengajuanId = mahasiswa.getPengajuan_id();
 //		
