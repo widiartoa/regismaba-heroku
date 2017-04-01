@@ -59,12 +59,7 @@ public class PengajuanSkemaBiayaController {
 	{	
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		String user = auth.getName();
-		System.out.println(user);
-		MahasiswaModel mahasiswa = mahasiswaService.selectMahasiswa("1234567890");
-		
-//		int pengajuanId = mahasiswa.getPengajuan_id();
-//		
-//		PengajuanSkemaBiayaModel psbm = psbs.selectPSBM(pengajuanId);
+		MahasiswaModel mahasiswa = mahasiswaService.selectMahasiswaByUsername(user);
 		
 		PengajuanSkemaBiayaModel psbm = psbs.selectPSBMFromUsername(mahasiswa.getUsername());
 		model.addAttribute("mahasiswa", mahasiswa);
@@ -113,9 +108,10 @@ public class PengajuanSkemaBiayaController {
 												@RequestParam("nilai_tagihan_listrik") String nilai_tagihan_listrik,
 												@RequestParam("nilai_tagihan_telepon") String nilai_tagihan_telepon)
 	{
-		MahasiswaModel mahasiswa = mahasiswaService.selectMahasiswa("1234567890");
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		String user = auth.getName();
+		MahasiswaModel mahasiswa = mahasiswaService.selectMahasiswaByUsername(user);
 		
-		System.out.println("nih golongan " + golongan_id);
 		skema.setGolongan_id(golongan_id);
 		skema.setUsername(mahasiswa.getUsername());
 		if(gaji_pribadi.equals("") == false){
@@ -402,8 +398,7 @@ public class PengajuanSkemaBiayaController {
     			if(type == 8) {skema.setTagihan_telepon(dbURL);}
     			
     		} else {
-    			//return "calon_mahasiswa-salah_file_pengajuan";
-    			//return fileError;
+    			//triggering return "calon_mahasiswa-salah_file_pengajuan";
     			fileError = true;
     		}
     	}
@@ -423,7 +418,7 @@ public class PengajuanSkemaBiayaController {
     		}
     		//insert failed
     		else{
-    			//return "calon_mahasiswa-salah_file_pengajuan";
+    			//triggering return "calon_mahasiswa-salah_file_pengajuan";
     			if( type == 1 ||
     				type == 2 ||
     				type == 6 ||
