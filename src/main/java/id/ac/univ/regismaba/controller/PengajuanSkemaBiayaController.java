@@ -78,6 +78,10 @@ public class PengajuanSkemaBiayaController {
 	@RequestMapping("/calon-mahasiswa/skema-pembayaran/pengajuan")
 	public String pengajuanSkemaMahasiswa(Model model)
 	{
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		String user = auth.getName();
+		MahasiswaModel mahasiswa = mahasiswaService.selectMahasiswaByUsername(user);
+		
 		List<SkemaBiayaModel> schemas = sbs.selectAllSBM();
 		
 		for(int i = 0; i < schemas.size(); i++)
@@ -87,7 +91,15 @@ public class PengajuanSkemaBiayaController {
 		
 		model.addAttribute("schemas", schemas);
 		
-		return "calon_mahasiswa-pengajuan_skema_pembayaran";
+		if(psbs.selectPSBMFromUsername(mahasiswa.getUsername()) != null)
+		{
+			return "calon_mahasiswa-pengajuan_skema_pembayaran";
+		}
+		else
+		{
+			return "calon_mahasiswa-pengajuan_skema_pembayaran_add";
+		}
+		
 	}
 	
 	@PostMapping("/calon-mahasiswa/skema-pembayaran/submit")
