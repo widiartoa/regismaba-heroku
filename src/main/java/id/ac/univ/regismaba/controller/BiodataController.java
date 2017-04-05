@@ -5,6 +5,7 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,14 +25,14 @@ import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBui
 
 import id.ac.univ.regismaba.model.AlamatModel;
 import id.ac.univ.regismaba.model.BiodataModel;
-import id.ac.univ.regismaba.model.DataKesehatanModel;
 import id.ac.univ.regismaba.model.IjazahModel;
-import id.ac.univ.regismaba.model.MahasiswaModel;
+import id.ac.univ.regismaba.model.ProvinsiModel;
 import id.ac.univ.regismaba.service.AlamatService;
 import id.ac.univ.regismaba.service.BiodataService;
 import id.ac.univ.regismaba.service.DataKesehatanService;
 //import id.ac.univ.regismaba.service.IjazahService;
 import id.ac.univ.regismaba.service.MahasiswaService;
+import id.ac.univ.regismaba.service.ProvinsiService;
 import id.ac.univ.regismaba.storage.StorageService;
 
 @Controller
@@ -59,8 +60,8 @@ public class BiodataController {
 	@Autowired
 	AlamatService alamatDAO;
 
-	// @Autowired
-	// ProvinsiService provinsiDAO;
+	@Autowired
+	ProvinsiService provinsiDAO;
 	
 	
 	@RequestMapping("calon-mahasiswa/calon-mahasiswa/idm")
@@ -72,8 +73,8 @@ public class BiodataController {
 
 	@RequestMapping("calon-mahasiswa/biodata/fill")
 	public String insert(Model model) {
-		// List<ProvinsiModel> provinsis = provinsiDAO.selectAllProvinsi();
-		// model.addAttribute("provinsis", provinsis);
+		 List<ProvinsiModel> provinsis = provinsiDAO.selectAllProvinsi();
+		 model.addAttribute("provinsis", provinsis);
 		return "calon_mahasiswa-mengisi_idm";
 	}
 
@@ -121,7 +122,7 @@ public class BiodataController {
         
         //================================IJAZAH=====================================
         //SCAN IJAZAH UPLOAD//
-        String pathDB1 = storageService.load(scan_ijazah.getOriginalFilename()).toString();
+        //String pathDB1 = storageService.load(scan_ijazah.getOriginalFilename()).toString();
         
         Path data1 = storageService.load(scan_ijazah.getOriginalFilename());
         String pdb1 = MvcUriComponentsBuilder
@@ -131,7 +132,7 @@ public class BiodataController {
         ijazah.setScan_ijazah (pdb1);
         
         //SCAN PERNYATAAN IJAZAH UPLOAD//
-        String pathDB2 = storageService.load(scan_ijazah.getOriginalFilename()).toString();
+        //String pathDB2 = storageService.load(scan_ijazah.getOriginalFilename()).toString();
         
         Path data2 = storageService.load(scan_ijazah.getOriginalFilename());
         String pdb2 = MvcUriComponentsBuilder
@@ -143,7 +144,7 @@ public class BiodataController {
         //=================================BIODATA======================================
         BiodataModel bio = new BiodataModel();
         //SCAN SIDIK JARI UPLOAD//
-        String pathDB3 = storageService.load(sidik_jari.getOriginalFilename()).toString();
+        //String pathDB3 = storageService.load(sidik_jari.getOriginalFilename()).toString();
         
         Path data3 = storageService.load(sidik_jari.getOriginalFilename());
         String pdb3 = MvcUriComponentsBuilder
@@ -155,7 +156,7 @@ public class BiodataController {
         
         //SCAN SCAN KTP UPLOAD//
         //baris kayak yg dibawah ini harusnya gak dipake
-        String pathDB4 = storageService.load(scan_ktp.getOriginalFilename()).toString();
+        //String pathDB4 = storageService.load(scan_ktp.getOriginalFilename()).toString();
         
         Path data4 = storageService.load(scan_ktp.getOriginalFilename());
         String pdb4 = MvcUriComponentsBuilder
@@ -166,7 +167,7 @@ public class BiodataController {
         
         
         //SCAN SCAN KK UPLOAD//
-        String pathDB5 = storageService.load(scan_kk.getOriginalFilename()).toString();
+        //String pathDB5 = storageService.load(scan_kk.getOriginalFilename()).toString();
         
         Path data5 = storageService.load(scan_kk.getOriginalFilename());
         String pdb5 = MvcUriComponentsBuilder
@@ -177,7 +178,7 @@ public class BiodataController {
         
         
         //SCAN SCAN SURAT PERNYATAAN MAHASISWA UPLOAD//
-        String pathDB6 = storageService.load(scan_surat_pernyataan_mahasiswa.getOriginalFilename()).toString();
+        //String pathDB6 = storageService.load(scan_surat_pernyataan_mahasiswa.getOriginalFilename()).toString();
         
         Path data6 = storageService.load(scan_surat_pernyataan_mahasiswa.getOriginalFilename());
         String pdb6 = MvcUriComponentsBuilder
@@ -197,17 +198,17 @@ public class BiodataController {
 //        
 //        bio.setScan_surat_pernyataan_mahasiswa(pdb7);
 //        
-//        bio.setBiodata_id(0);
-//        bio.setFlag_aktif("1");
-//        bio.setJenis_kelamin(jenis_kelamin);
-//        bio.setKewarganegaraan(kewarganegaraan);
-//        bio.setNomor_ktp(nomor_ktp);
-//        bio.setNomor_telepon(nomor_telepon);
-//        bio.setStatus_verifikasi("Unverified");
-////        bio.setTanggal_lahir(tanggal_lahir.toString());
-//        bio.setUkuran_jaket(ukuran_jaket);
+        bio.setBiodata_id(0);
+        bio.setFlag_aktif("1");
+        bio.setJenis_kelamin(jenis_kelamin);
+        bio.setKewarganegaraan(kewarganegaraan);
+        bio.setNomor_ktp(nomor_ktp);
+        bio.setNomor_telepon(nomor_telepon);
+        bio.setStatus_verifikasi("Unverified");
+        bio.setTanggal_lahir(tanggalLahir);
+        bio.setUkuran_jaket(ukuran_jaket);
         
-        
+ 
         //===================================
 
         AlamatModel alamat = new AlamatModel(0, kota_kabupaten_id, jalan, kecamatan, kelurahan, kode_pos);

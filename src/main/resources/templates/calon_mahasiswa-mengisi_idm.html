@@ -146,10 +146,10 @@
 				<div class="row">
 					<div class="col-md-6">
 						<div class="form-group">
-							<label for="nama_provinsi">Provinsi</label> <select
+							<label for="nama_provinsi">Provinsi</label> 
+							<select id="nama_provinsi_select"
 								class="form-control">
-								<option value="32">Jawa Barat</option>
-								<!-- <option th:each="provinsi : ${provinsis}" th:value="${provinsi.provinsi_id}" th:text="${provinsi.nama_provinsi}"></option> -->
+								<option th:each="provinsi : ${provinsis}" th:value="${provinsi.provinsi_id}" th:text="${provinsi.nama_provinsi}"></option>							
 							</select>
 						</div>
 					</div>
@@ -157,7 +157,8 @@
 				<div class="row">
 					<div class="col-md-6">
 						<div class="form-group">
-							<label for="kota_kabupaten_id">Kabupaten/Kota</label> <select
+							<label for="kota_kabupaten_id">Kabupaten/Kota</label>
+							<select id="kota_kabupaten_select"
 								name="kota_kabupaten_id" class="form-control">
 								<option value="3204">Bandung</option>
 								<option value="3216">Kabupaten Bekasi</option>
@@ -295,6 +296,26 @@
 	<script type="text/javascript">
 		$(document).ready(function() {
 			$('#myTable').dataTable();
+			$('#nama_provinsi_select').on('change', function() {
+				alert($(this).find(':selected').text() + " dipilih");
+				var nama_provinsi_id = $(this).find(':selected').val();
+				
+				$.ajax("/api/provinsi/" + nama_provinsi_id, {
+			        success: function(data) {
+			        	var listOfKotaKabupaten = JSON.parse(data);
+			            
+			            var options = "";
+			            listOfKotaKabupaten.forEach(function(element) {
+			                options += '<option value="' + element.id + '">' + element.nama + '</option>';
+			            });
+			            console.log(options);
+			            $('#kota_kabupaten_select').html(options);
+			        },
+			        error: function (data) {
+			        	alert('cek koneksi internet Anda');
+			        }
+			    });
+			});
 		});
 	</script>
 
