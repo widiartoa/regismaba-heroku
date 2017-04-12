@@ -33,7 +33,7 @@
 							<input type="text" class="form-control" readonly="true" id="surat_keterangan_rtrw"/>
 							<label class="input-group-btn">
 								<span class="btn btn-default">
-									Browse&hellip; <input type="file" accept="image/*" name="surat_keterangan_rtrw" style="display: none;" multiple="true" required="true"/>
+									Browse&hellip; <input type="file" accept="image/*" name="surat_keterangan_rtrw" style="display: none;" multiple="true"  />
 								</span>
 							</label>
 						</div>
@@ -45,7 +45,7 @@
 							<input type="text" class="form-control" readonly="true" id="foto_rumah" />
 							<label class="input-group-btn">
 								<span class="btn btn-default">
-									Browse&hellip; <input type="file" accept="image/*" name="foto_rumah" style="display: none;" multiple="true" required="true"/>
+									Browse&hellip; <input type="file" accept="image/*" name="foto_rumah" style="display: none;" multiple="true"  />
 								</span>
 							</label>
 						</div>
@@ -111,7 +111,7 @@
 					<div class="form-group">
 						<label class="control-label col-sm-4" for="nilai_tagihan_air">Tagihan Air (rupiah/bulan)* : </label>
 						<div class="input-group">
-							<input type="number" min="0" class="form-control" id="nilai_tagihan_air" name="nilai_tagihan_air" placeholder="Contoh: 1000000" required="true"/>
+							<input type="number" min="0" class="form-control" id="nilai_tagihan_air" name="nilai_tagihan_air" placeholder="Contoh: 1000000"  />
 						</div>
 					</div>
 					
@@ -121,7 +121,7 @@
 							<input type="text" class="form-control" readonly="true" id="tagihan_air" />
 							<label class="input-group-btn">
 								<span class="btn btn-default">
-									Browse&hellip; <input type="file" accept="image/*" name="tagihan_air" style="display: none;" multiple="true" required="true"/>
+									Browse&hellip; <input type="file" accept="image/*" name="tagihan_air" style="display: none;" multiple="true"  />
 								</span>
 							</label>
 						</div>
@@ -130,7 +130,7 @@
 					<div class="form-group">
 						<label class="control-label col-sm-4" for="nilai_tagihan_listrik">Tagihan Listrik (rupiah/bulan)* : </label>
 						<div class="input-group">
-							<input type="number" min="0" class="form-control" id="nilai_tagihan_listrik" name="nilai_tagihan_listrik" placeholder="Contoh: 1000000" required="true"/>
+							<input type="number" min="0" class="form-control" id="nilai_tagihan_listrik" name="nilai_tagihan_listrik" placeholder="Contoh: 1000000"  />
 						</div>
 					</div>
 					
@@ -140,7 +140,7 @@
 							<input type="text" class="form-control" readonly="true" id="tagihan_listrik" />
 							<label class="input-group-btn">
 								<span class="btn btn-default">
-									Browse&hellip; <input type="file" accept="image/*" name="tagihan_listrik" style="display: none;" multiple="true" required="true"/>
+									Browse&hellip; <input type="file" accept="image/*" name="tagihan_listrik" style="display: none;" multiple="true"  />
 								</span>
 							</label>
 						</div>
@@ -149,7 +149,7 @@
 					<div class="form-group">
 						<label class="control-label col-sm-4" for="nilai_tagihan_telepon">Tagihan Telepon* (rupiah/bulan) : </label>
 						<div class="input-group">
-							<input type="number" min="0" class="form-control" id="nilai_tagihan_telepon" name="nilai_tagihan_telepon" placeholder="Contoh: 1000000" required="true"/>
+							<input type="number" min="0" class="form-control" id="nilai_tagihan_telepon" name="nilai_tagihan_telepon" placeholder="Contoh: 1000000"  />
 						</div>
 					</div>
 					
@@ -159,7 +159,7 @@
 							<input type="text" class="form-control" readonly="true" id="tagihan_telepon" />
 							<label class="input-group-btn">
 								<span class="btn btn-default">
-									Browse&hellip; <input type="file" accept="image/*" name="tagihan_telepon" style="display: none;" multiple="true" required="true"/>
+									Browse&hellip; <input type="file" accept="image/*" name="tagihan_telepon" style="display: none;" multiple="true"  />
 								</span>
 							</label>
 						</div>
@@ -210,13 +210,22 @@
 				});
 			});
 			
-/* 			function validateForm() {
-			    var x = document.forms["skemaForm"]["foto_rumah"].value;
-			    if (x == "") {
-			        alert("Nilai gaji pribadi perlu dimasukkan");
-			        return false;
-			    }
-			} */
+			function validateForm()
+		    {
+			    var a = document.forms["skemaForm"]["surat_keterangan_rtrw"].value;
+			    var b = document.forms["skemaForm"]["foto_rumah"].value;
+			    var c1 = document.forms["skemaForm"]["tagihan_air"].value;
+			    var c2 = document.forms["skemaForm"]["nilai_tagihan_air"].value;
+			    var d1 = document.forms["skemaForm"]["tagihan_listrik"].value;
+			    var d2 = document.forms["skemaForm"]["nilai_tagihan_listrik"].value;
+			    var e1 = document.forms["skemaForm"]["tagihan_telepon"].value;
+			    var e2 = document.forms["skemaForm"]["nilai_tagihan_telepon"].value;
+			    if (a==null || a=="", b==null || b=="", c1==null || c1=="", c2==null || c2=="", d1==null || d1=="", d2==null || d2=="", e1==null || e1=="", e2==null || e2=="")
+			      {
+				      alert("Please Fill All Required Field");
+				      return false;				
+			      }
+		    }
 		</script>
     </body>
 </html>
