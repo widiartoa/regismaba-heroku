@@ -93,10 +93,12 @@ public class PengajuanSkemaBiayaController {
 		
 		if(psbs.selectPSBMFromUsername(mahasiswa.getUsername()) != null)
 		{
+			System.out.println("Send update pengajuan page");
 			return "calon_mahasiswa-pengajuan_skema_pembayaran";
 		}
 		else
 		{
+			System.out.println("Send new pengajuan page");
 			return "calon_mahasiswa-pengajuan_skema_pembayaran_add";
 		}
 		
