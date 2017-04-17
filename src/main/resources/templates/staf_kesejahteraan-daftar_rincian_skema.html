@@ -31,7 +31,11 @@
 							<td th:text="${schema.golongan_id}">Jenis Jadwal</td>
 							<td th:text="${schema.jumlah_biaya}">Hari</td>
 							<td th:text="${schema.uang_pangkal}">Tanggal</td>
-							<td th:href="'/staf-kesejahteraan/skema-pembayaran/update/' + ${schema.golongan_id}">Ubah</td>
+							<td>
+								<a th:href="'/staf-kesejahteraan/skema-pembayaran/update/' + ${schema.golongan_id}">
+									<button type="button" class="btn btn-warning">Ubah</button>
+								</a>
+							</td>
 						</tr>
 					</div>
 				</tbody>
