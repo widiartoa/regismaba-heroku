@@ -8,10 +8,12 @@ import java.util.Date;
 import java.util.List;
 import java.util.Random;
 
+import org.springframework.security.core.userdetails.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,6 +29,7 @@ import id.ac.univ.regismaba.model.AlamatModel;
 import id.ac.univ.regismaba.model.BiodataModel;
 import id.ac.univ.regismaba.model.IjazahModel;
 import id.ac.univ.regismaba.model.ProvinsiModel;
+import id.ac.univ.regismaba.model.UserModel;
 import id.ac.univ.regismaba.service.AlamatService;
 import id.ac.univ.regismaba.service.BiodataService;
 import id.ac.univ.regismaba.service.DataKesehatanService;
@@ -198,6 +201,11 @@ public class BiodataController {
 //        
 //        bio.setScan_surat_pernyataan_mahasiswa(pdb7);
 //        
+        User user = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String name = user.getUsername(); //get logged in username
+
+        
+        bio.setUsername(name);
         bio.setBiodata_id(0);
         bio.setFlag_aktif("1");
         bio.setJenis_kelamin(jenis_kelamin);
@@ -208,7 +216,8 @@ public class BiodataController {
         bio.setTanggal_lahir(tanggalLahir);
         bio.setUkuran_jaket(ukuran_jaket);
         
- 
+        biodataDAO.insertBiodata(bio);
+        
         //===================================
 
         AlamatModel alamat = new AlamatModel(0, kota_kabupaten_id, jalan, kecamatan, kelurahan, kode_pos);
@@ -217,7 +226,8 @@ public class BiodataController {
 			alamatDAO.insertAlamat(alamat);
 		}
 		alamat.setJalan_id(alamatDAO.selectJalanId(alamat));
-     
+		bio.setJalan_id(alamatDAO.selectJalanId(alamat));
+		
 		// ini kayaknya harus disesuaiin sama bio
 //        BiodataModel biodata = new BiodataModel(0, "bena", nomor_ijazah, alamat.getJalan_id(), tanggalLahir,
 //        		jenis_kelamin, nomor_telepon, kewarganegaraan, nomor_ktp,sidik_jari, scan_ktp,
