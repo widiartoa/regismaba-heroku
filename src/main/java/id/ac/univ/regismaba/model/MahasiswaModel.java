@@ -14,5 +14,6 @@ public class MahasiswaModel {
 	int jadwal_registrasi_id;
 	int jadwal_tes_kesehatan_id;
 	int jadwal_ept_id;
+	BiodataModel biodata;
 	
 }

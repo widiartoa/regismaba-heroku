@@ -39,6 +39,21 @@ public interface MahasiswaMapper {
 	})
 	MahasiswaModel selectMahasiswa(@Param("npm") String npm);
 	
+	@Select("select * from mahasiswa where username = #{username}")
+	@Results (value = {
+				@Result(property="username", column="username"),
+				@Result(property="npm", column="npm"),
+				@Result(property="uid_sso", column="uid_sso"),
+				@Result(property="biodata_id", column="biodata_id"),
+				@Result(property="jenjang_id", column="jenjang_id"),
+				@Result(property="pengajuan_id", column="pengajuan_id"),
+				@Result(property="no_seleksi", column="no_seleksi"),
+				@Result(property="jadwal_registrasi_id", column="jadwal_registrasi_id"),
+				@Result(property="jadwal_tes_kesehatan_id", column="jadwal_tes_kesehatan_id"),
+				@Result(property="jadwal_ept_id", column="jadwal_ept_id")
+	})
+	MahasiswaModel selectMahasiswaByUsername(@Param("username") String username);
+	
 	@Select("select * from mahasiswa")
 	@Results (value = {
 				@Result(property="username", column="username"),

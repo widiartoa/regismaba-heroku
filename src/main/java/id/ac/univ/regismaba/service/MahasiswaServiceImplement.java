@@ -81,4 +81,11 @@ public class MahasiswaServiceImplement implements MahasiswaService{
     {
         return mahasiswaMapper.loginMahasiswa (username, password);
     }
+
+	@Override
+	public MahasiswaModel selectMahasiswaByUsername(String username) {
+		// TODO Auto-generated method stub
+		log.info ("select mahasiswa with username {}", username);
+		return mahasiswaMapper.selectMahasiswaByUsername(username);
+	}
 }
