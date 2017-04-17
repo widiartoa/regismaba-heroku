@@ -35,9 +35,13 @@ public class SkemaBiayaController {
 	}
 	
 	@RequestMapping("/staf-kesejahteraan/skema-pembayaran/insert-submit")
-	public String submitNewRincianSkemaPembayaran(@ModelAttribute SkemaBiayaModel sbm)
+	public String submitNewRincianSkemaPembayaran(Model model, @ModelAttribute SkemaBiayaModel sbm)
 	{
 		sbs.insertSBM(sbm);
+		
+		List<SkemaBiayaModel> schemas = sbs.selectAllSBM();
+		
+		model.addAttribute("schemas", schemas);
 		
 		return "staf_kesejahteraan-daftar_rincian_skema";
 	}
