@@ -1,0 +1,29 @@
+<nav class="navbar-inverse navbar-fixed-top">
+	<div class="container">
+		<div class="navbar-header">
+			<a th:href="'/'"><img class="navbar-brand" src="/img/logo.png" alt="Logo"/></a>
+		</div>
+		
+		<div>
+			<ul class="nav navbar-nav navbar-left">
+				<div class="dropdown">
+					<a th:href="'/staf_kesejahteraan/daftar_mhs'"><button class="dropbtn">Daftar Mahasiswa</button></a>
+				</div>
+			</ul>
+			
+			<ul class="nav navbar-nav navbar-left">
+				<div class="dropdown">
+					<a th:href="'/staf-kesejahteraan/skema-pembayaran/daftar'"><button class="dropbtn">Rincian Skema Pembayaran</button></a>
+				</div>
+			</ul>
+		</div>
+		
+		<div>
+			<ul class="nav navbar-nav navbar-right">
+				<div class="dropdown">
+					<a th:href="'/logout'"><button class="dropbtn">Keluar</button></a>
+				</div>
+			</ul>
+		</div>
+	</div>
+</nav>

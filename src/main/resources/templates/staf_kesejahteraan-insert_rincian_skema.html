@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+		<div th:replace="resources"></div>
+        <title>Staf Kesejahteraan - Membuat Rincian Skema Pembayaran</title>
+    </head>
+	
+    <body>
+    	<div th:include="staf_kesejahteraan-navbar"></div>
+		
+    	<div class="container">
+			<div class="content">
+				<div class="row">
+					<div class="col-sm-12"><h3>Pengajuan Skema Pembayaran</h3></div>
+				</div>
+				
+				<hr/>
+				
+				<form name="skemaForm" method="POST" enctype="multipart/form-data" action="/calon-mahasiswa/skema-pembayaran/submit" onsubmit="return validateForm()" class="form-horizontal">
+					<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+				</form>
+				
+				<div class="btn-group" role="group" aria-label="...">
+				  <a th:href="'/staf-kesejahteraan/skema-pembayaran/daftar'"><button type="button" class="btn btn-warning">Buat Skema Pembayaran</button></a>
+				</div>
+			</div>
+       	</div>
+		
+		<div class="footer">Modul Registrasi Mahasiswa Baru</div>
+		
+		<script type="text/javascript">
+			$(document).ready(function(){
+				$('#myTable').dataTable();
+			});
+			
+			$(function() {
+				// We can attach the `fileselect` event to all file inputs on the page
+				$(document).on('change', ':file', function() {
+					var input = $(this),
+						numFiles = input.get(0).files ? input.get(0).files.length : 1,
+						label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
+					input.trigger('fileselect', [numFiles, label]);
+				});
+
+				// We can watch for our custom `fileselect` event like this
+				$(document).ready( function() {
+					$(':file').on('fileselect', function(event, numFiles, label) {
+
+						var input = $(this).parents('.input-group').find(':text'),
+						log = numFiles > 1 ? numFiles + ' files selected' : label;
+
+						if( input.length ) {
+							input.val(log);
+						} else {
+							if( log ) alert(log);
+						}
+					});
+				});
+			});
+			
+			function validateForm()
+		    {
+			    var a = document.forms["skemaForm"]["surat_keterangan_rtrw"].value;
+			    var b = document.forms["skemaForm"]["foto_rumah"].value;
+			    var c1 = document.forms["skemaForm"]["tagihan_air"].value;
+			    var c2 = document.forms["skemaForm"]["nilai_tagihan_air"].value;
+			    var d1 = document.forms["skemaForm"]["tagihan_listrik"].value;
+			    var d2 = document.forms["skemaForm"]["nilai_tagihan_listrik"].value;
+			    var e1 = document.forms["skemaForm"]["tagihan_telepon"].value;
+			    var e2 = document.forms["skemaForm"]["nilai_tagihan_telepon"].value;
+			    if (a==null || a=="" || a=0, b==null || b=="" || b=0, c1==null || c1=="" c1=0, c2==null || c2=="" || c2=0, d1==null || d1=="" || d1=0, d2==null || d2=="" || d2=0, e1==null || e1=="" || e1=0, e2==null || e2=="" || e2=0)
+			      {
+				      alert("Please Fill All Required Field");
+				      return false;				
+			      }
+		    }
+		</script>
+    </body>
+</html>

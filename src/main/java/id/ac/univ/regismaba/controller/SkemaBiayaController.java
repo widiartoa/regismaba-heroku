@@ -25,13 +25,13 @@ public class SkemaBiayaController {
 		
 		model.addAttribute("schemas", schemas);
 		
-		return "daftar-rincian-skema";
+		return "staf_kesejahteraan-daftar_rincian_skema";
 	}
 	
 	@RequestMapping("/staf-kesejahteraan/skema-pembayaran/insert")
 	public String insertRincianSkemaPembayaran()
 	{
-		return "insert-rincian-skema";
+		return "staf_kesejahteraan-insert_rincian_skema";
 	}
 	
 	@RequestMapping("/staf-kesejahteraan/skema-pembayaran/insert-submit")
@@ -39,7 +39,7 @@ public class SkemaBiayaController {
 	{
 		sbs.insertSBM(sbm);
 		
-		return "daftar-rincian-skema";
+		return "staf_kesejahteraan-daftar_rincian_skema";
 	}
 	
 	@RequestMapping("/staf-kesejahteraan/skema-pembayaran/update/{id}")
@@ -49,7 +49,7 @@ public class SkemaBiayaController {
 		
 		model.addAttribute("schema", schema);
 		
-		return "update-rincian-skema";
+		return "staf_kesejahteraan-update_rincian_skema";
 	}
 	
 	@RequestMapping("/staf-kesejahteraan/skema-pembayaran/update-submit")
@@ -57,6 +57,6 @@ public class SkemaBiayaController {
 	{
 		sbs.updateSBM(sbm);
 		
-		return "daftar-rincian-skema";
+		return "staf_kesejahteraan-daftar_rincian_skema";
 	}
 }
