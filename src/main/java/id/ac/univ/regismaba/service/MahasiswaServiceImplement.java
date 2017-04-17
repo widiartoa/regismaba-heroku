@@ -6,12 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import id.ac.univ.regismaba.dao.MahasiswaMapper;
+import id.ac.univ.regismaba.model.BiodataModel;
 import id.ac.univ.regismaba.model.MahasiswaModel;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
-
-import id.ac.univ.regismaba.model.MahasiswaModel;
-import id.ac.univ.regismaba.dao.MahasiswaMapper;
 
 @Slf4j
 @Service
@@ -32,6 +29,18 @@ public class MahasiswaServiceImplement implements MahasiswaService{
 		// TODO Auto-generated method stub
 		log.info ("select all mahasiswa");
 		return mahasiswaMapper.selectAllMahasiswa();
+	}
+	
+	@Override
+	public List<MahasiswaModel> selectAllMahasiswaWithBiodata() {
+		// TODO Auto-generated method stub
+		log.info ("select all mahasiswa");
+		List<MahasiswaModel> mahasiswas = mahasiswaMapper.selectAllMahasiswa();
+		for (MahasiswaModel mahasiswa : mahasiswas){
+			BiodataModel biodataMhs = mahasiswaMapper.selectBiodataMahasiswa(mahasiswa.getUsername());
+			mahasiswa.setBiodata(biodataMhs);
+		}
+		return mahasiswas;
 	}
 
 	@Override

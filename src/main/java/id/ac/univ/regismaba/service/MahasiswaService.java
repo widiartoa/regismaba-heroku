@@ -14,6 +14,8 @@ public interface MahasiswaService {
 	
 	List<MahasiswaModel> selectAllMahasiswa();
 	
+	List<MahasiswaModel> selectAllMahasiswaWithBiodata();
+	
 	void insertBiodataMahasiswa(String npm, String biodata_id);
 	
 	void insertJenjangMahasiswa(String npm, String jenjang_id);
