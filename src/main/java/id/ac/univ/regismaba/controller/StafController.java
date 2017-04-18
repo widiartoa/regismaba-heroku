@@ -26,8 +26,7 @@ public class StafController {
 	public String daftarMhsVerifikator(Model model) {
 		List<MahasiswaModel> mahasiswas = mahasiswaDAO.selectAllMahasiswa();
 		model.addAttribute("mahasiswas", mahasiswas);
-		// TODO: Tambahkan BiodataModel pada MahasiswaModel untuk Status
-		// Verifikasi
+		// TODO: BiodataModel harus memiliki atribut username
 		return "staf_verifikasi-daftar_mhs";
 	}
 

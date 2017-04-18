@@ -8,6 +8,8 @@ public interface MahasiswaService {
 
 	MahasiswaModel selectMahasiswa(String npm);
 	
+	MahasiswaModel selectMahasiswaByUsername(String username);
+	
 	MahasiswaModel loginMahasiswa (String username, String password);
 	
 	List<MahasiswaModel> selectAllMahasiswa();
