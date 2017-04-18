@@ -23,16 +23,44 @@
 					<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
 					
 					<div class="form-group">
-						<label class="control-label col-sm-4" for="jumlah_biaya">Jumlah uang semester* : </label>
+						<label class="control-label col-sm-4" for="jumlah_biaya_ipa">Jumlah uang semester (IPA)* : </label>
 						<div class="input-group">
-							<input type="number" min="0" class="form-control" name="jumlah_biaya" id="jumlah_biaya" placeholder="Contoh: 1000000" required="true"></input>						
+							<input type="number" min="0" class="form-control" name="jumlah_biaya_ipa" id="jumlah_biaya_ipa" placeholder="Contoh: 1000000" required="true"></input>						
 						</div>
 					</div>
 					
 					<div class="form-group">
-						<label class="control-label col-sm-4" for="uang_pangkal">Uang pangkal* : </label>
+						<label class="control-label col-sm-4" for="uang_pangkal_ipa">Uang pangkal (IPA)* : </label>
 						<div class="input-group">
-							<input type="number" min="0" class="form-control" name="uang_pangkal" id="uang_pangkal" placeholder="Contoh: 1000000" required="true"></input>
+							<input type="number" min="0" class="form-control" name="uang_pangkal_ipa" id="uang_pangkal_ipa" placeholder="Contoh: 1000000" required="true"></input>
+						</div>
+					</div>
+					
+					<div class="form-group">
+						<label class="control-label col-sm-4" for="jumlah_biaya_ips">Jumlah uang semester (IPS)* : </label>
+						<div class="input-group">
+							<input type="number" min="0" class="form-control" name="jumlah_biaya_ips" id="jumlah_biaya_ips" placeholder="Contoh: 1000000" required="true"></input>						
+						</div>
+					</div>
+					
+					<div class="form-group">
+						<label class="control-label col-sm-4" for="uang_pangkal_ips">Uang pangkal (IPS)* : </label>
+						<div class="input-group">
+							<input type="number" min="0" class="form-control" name="uang_pangkal_ips" id="uang_pangkal_ips" placeholder="Contoh: 1000000" required="true"></input>
+						</div>
+					</div>
+					
+					<div class="form-group">
+						<label class="control-label col-sm-4" for="jumlah_biaya_ik">Jumlah uang semester (IK)* : </label>
+						<div class="input-group">
+							<input type="number" min="0" class="form-control" name="jumlah_biaya_ik" id="jumlah_biaya_ik" placeholder="Contoh: 1000000" required="true"></input>						
+						</div>
+					</div>
+					
+					<div class="form-group">
+						<label class="control-label col-sm-4" for="uang_pangkal_ik">Uang pangkal (IK)* : </label>
+						<div class="input-group">
+							<input type="number" min="0" class="form-control" name="uang_pangkal_ik" id="uang_pangkal_ik" placeholder="Contoh: 1000000" required="true"></input>
 						</div>
 					</div>
 					
@@ -55,9 +83,13 @@
 		<script type="text/javascript">
 			function validateForm()
 		    {
-			    var a = document.forms["skemaForm"]["jumlah_biaya"].value;
-			    var b = document.forms["skemaForm"]["uang_pangkal"].value;
-			    if (a==null || a=="", b==null || b=="")
+			    var a = document.forms["skemaForm"]["jumlah_biaya_ipa"].value;
+			    var b = document.forms["skemaForm"]["uang_pangkal_ipa"].value;
+			    var c = document.forms["skemaForm"]["jumlah_biaya_ips"].value;
+			    var d = document.forms["skemaForm"]["uang_pangkal_ips"].value;
+			    var e = document.forms["skemaForm"]["jumlah_biaya_ik"].value;
+			    var f = document.forms["skemaForm"]["uang_pangkal_ik"].value;
+			    if (a==null || a=="", b==null || b=="", c==null || c=="", d==null || d=="", e==null || e=="", f==null || f=="")
 			      {
 				      alert("Please fill all required field");
 				      return false;				

@@ -1,8 +1,11 @@
 package id.ac.univ.regismaba.controller;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -37,6 +40,10 @@ public class SkemaBiayaController {
 	@RequestMapping("/staf-kesejahteraan/skema-pembayaran/insert-submit")
 	public String submitNewRincianSkemaPembayaran(Model model, @ModelAttribute SkemaBiayaModel sbm)
 	{
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		String user = auth.getName();
+		sbm.setCreated_by(user);
+		
 		sbs.insertSBM(sbm);
 		
 		List<SkemaBiayaModel> schemas = sbs.selectAllSBM();
@@ -48,7 +55,7 @@ public class SkemaBiayaController {
 	
 	@RequestMapping("/staf-kesejahteraan/skema-pembayaran/update/{id}")
 	public String updateRincianSkemaPembayaran(Model model, @PathVariable(value = "id") int golongan_id)
-	{
+	{	
 		SkemaBiayaModel schema = sbs.selectSBM(golongan_id);
 		
 		model.addAttribute("schema", schema);
