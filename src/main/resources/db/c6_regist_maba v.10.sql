@@ -103,8 +103,8 @@ CREATE TABLE `biodata` (
 --
 
 INSERT INTO `biodata` (`biodata_id`, `username`, `jalan_id`, `tanggal_lahir`, `jenis_kelamin`, `nomor_telepon`, `kewarganegaraan`, `nomor_ktp`, `sidik_jari`, `scan_ktp`, `scan_kk`, `scan_surat_pernyataan_mahasiswa`, `status_verifikasi`, `flag_aktif`, `ukuran_jaket`, `created_by`, `created_at`, `updated_by`, `updated_at`, `agama_id`) VALUES
-(5, 'benathavia.saladdin', 1, '0000-00-00', 'L', '085700000001', 'WNI', '1234567890123456', 'sj1.jpg', 'sktp1.jpg', 'skk1.jpg', 'sspm1.jpg', 'Unverified', '1', 'M', 'benathavia.saladdin', '2017-08-20 08:00:00', 'benathavia.saladdin', '2017-08-20 08:00:00', 1),
-(6, 'hardyn.adiyoso', 2, '0000-00-00', 'P', '085700000002', 'WNI', '1234567890123457', 'sj2.jpg', 'sktp2.jpg', 'skk2.jpg', 'sspm2.jpg', 'Verified', '1', 'L', 'hardyn.adiyoso', '2017-08-20 10:00:00', 'hardyn.adiyoso', '2017-08-20 10:00:00', 1);
+(5, 'benathavia.saladdin', 1, '1997-03-10', 'L', '085700000001', 'WNI', '1234567890123456', 'sj1.jpg', 'sktp1.jpg', 'skk1.jpg', 'sspm1.jpg', 'Unverified', '1', 'M', 'benathavia.saladdin', '2017-08-20 08:00:00', 'benathavia.saladdin', '2017-08-20 08:00:00', 1),
+(6, 'hardyn.adiyoso', 2, '1998-02-05', 'P', '085700000002', 'WNI', '1234567890123457', 'sj2.jpg', 'sktp2.jpg', 'skk2.jpg', 'sspm2.jpg', 'Verified', '1', 'L', 'hardyn.adiyoso', '2017-08-20 10:00:00', 'hardyn.adiyoso', '2017-08-20 10:00:00', 1);
 
 -- --------------------------------------------------------
 
@@ -192,8 +192,8 @@ INSERT INTO `ijazah` (`nomor_ijazah`, `username`, `nama_institusi`, `jenjang`, `
 
 CREATE TABLE `jadwal_ept` (
   `jadwal_ept_id` int(11) NOT NULL,
-  `timestamp_awal` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `timestamp_akhir` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `timestamp_awal` timestamp NOT NULL DEFAULT '2017-04-18 00:00:00',
+  `timestamp_akhir` timestamp NOT NULL DEFAULT '2017-04-18 00:00:00',
   `created_by` varchar(30) NOT NULL,
   `created_at` timestamp NOT NULL,
   `updated_by` varchar(30) NOT NULL,
@@ -218,8 +218,8 @@ INSERT INTO `jadwal_ept` (`jadwal_ept_id`, `timestamp_awal`, `timestamp_akhir`, 
 
 CREATE TABLE `jadwal_registrasi` (
   `jadwal_registrasi_id` int(11) NOT NULL,
-  `timestamp_awal` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `timestamp_akhir` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `timestamp_awal` timestamp NOT NULL DEFAULT '2017-04-18 00:00:00',
+  `timestamp_akhir` timestamp NOT NULL DEFAULT '2017-04-18 00:00:00',
   `created_by` varchar(30) NOT NULL,
   `created_at` timestamp NOT NULL,
   `updated_by` varchar(30) NOT NULL,
@@ -250,8 +250,8 @@ INSERT INTO `jadwal_registrasi` (`jadwal_registrasi_id`, `timestamp_awal`, `time
 
 CREATE TABLE `jadwal_tes_kesehatan` (
   `jadwal_tes_kesehatan_id` int(11) NOT NULL,
-  `timestamp_awal` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `timestamp_akhir` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `timestamp_awal` timestamp NOT NULL DEFAULT '2017-04-18 00:00:00',
+  `timestamp_akhir` timestamp NOT NULL DEFAULT '2017-04-18 00:00:00',
   `created_by` varchar(30) NOT NULL,
   `created_at` timestamp NOT NULL,
   `updated_by` varchar(30) NOT NULL,
