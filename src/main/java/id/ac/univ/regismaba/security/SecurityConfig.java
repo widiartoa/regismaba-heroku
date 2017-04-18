@@ -18,6 +18,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		http.authorizeRequests()
 			.antMatchers("/").permitAll()
 			.antMatchers("/img/**").permitAll()
+			.antMatchers("/js/**").permitAll()
+			.antMatchers("/css/**").permitAll()
 			.antMatchers("/calon-mahasiswa/**").hasAuthority("1")
 			.anyRequest().authenticated()
 			.and().formLogin().loginPage("/").permitAll()
