@@ -146,6 +146,7 @@ public class BiodataController {
         
         //=================================BIODATA======================================
         BiodataModel bio = new BiodataModel();
+        
         //SCAN SIDIK JARI UPLOAD//
         //String pathDB3 = storageService.load(sidik_jari.getOriginalFilename()).toString();
         
@@ -215,8 +216,7 @@ public class BiodataController {
         bio.setStatus_verifikasi("Unverified");
         bio.setTanggal_lahir(tanggalLahir);
         bio.setUkuran_jaket(ukuran_jaket);
-        
-        biodataDAO.insertBiodata(bio);
+
         
         //===================================
 
@@ -227,6 +227,8 @@ public class BiodataController {
 		}
 		alamat.setJalan_id(alamatDAO.selectJalanId(alamat));
 		bio.setJalan_id(alamatDAO.selectJalanId(alamat));
+
+		biodataDAO.insertBiodata(bio);
 		
 		// ini kayaknya harus disesuaiin sama bio
 //        BiodataModel biodata = new BiodataModel(0, "bena", nomor_ijazah, alamat.getJalan_id(), tanggalLahir,
