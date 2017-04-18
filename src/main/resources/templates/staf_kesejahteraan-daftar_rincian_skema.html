@@ -20,17 +20,25 @@
 				<thead>
 					<tr>
 						<td>Golongan</td>
-						<td>Jumlah Biaya Semester</td>
-						<td>Uang pangkal</td>
+						<td>Jumlah Biaya Semester (IPA)</td>
+						<td>Uang pangkal (IPA)</td>
+						<td>Jumlah Biaya Semester (IPS)</td>
+						<td>Uang pangkal (IPS)</td>
+						<td>Jumlah Biaya Semester (IK)</td>
+						<td>Uang pangkal (IK)</td>
 						<td>Ubah</td>
 					</tr>
 				</thead>
 				<tbody>
 					<div th:each="schema,iterationStatus: ${schemas}">
 						<tr>
-							<td th:text="${schema.golongan_id}">Jenis Jadwal</td>
-							<td th:text="${schema.jumlah_biaya}">Hari</td>
-							<td th:text="${schema.uang_pangkal}">Tanggal</td>
+							<td th:text="${schema.golongan_id}">Golongan</td>
+							<td th:text="${schema.jumlah_biaya_ipa}">Jumlah Biaya IPA</td>
+							<td th:text="${schema.uang_pangkal_ipa}">Uang Pangkal IPA</td>
+							<td th:text="${schema.jumlah_biaya_ips}">Jumlah Biaya IPS</td>
+							<td th:text="${schema.uang_pangkal_ips}">Uang Pangkal IPS</td>
+							<td th:text="${schema.jumlah_biaya_ik}">Jumlah Biaya IK</td>
+							<td th:text="${schema.uang_pangkal_ik}">Uang Pangkal IK</td>
 							<td>
 								<a th:href="'/staf-kesejahteraan/skema-pembayaran/update/' + ${schema.golongan_id}">
 									<button type="button" class="btn btn-warning">Ubah</button>
