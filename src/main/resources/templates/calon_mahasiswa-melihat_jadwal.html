@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <div th:replace="resources"></div>
-<title>Calon Mahasiswa - Melihat Skema Pembayaran</title>
+<title>Calon Mahasiswa</title>
 </head>
 
 <body>
@@ -11,8 +11,46 @@
 	<div class="container">
 		<div class="content">
 			<div class="row">
+				<div class="col-sm-12"><h3>Home</h3></div>
+			</div>
+			
+			<hr/>
+			
+			<div class="row">
+				<div class="col-sm-6">
+					<table>
+						<tbody>
+							<tr>
+								<td>Username</td>
+								<td th:text="${usernameMahasiswa}">Username</td>
+							</tr>
+							<tr>
+								<td>NPM</td>
+								<td th:text="${npmMahasiswa}">NPM</td>
+							</tr>
+							<tr>
+								<td>Fakultas</td>
+								<td th:text="${fakultasMahasiswa}">Fakultas</td>
+							</tr>
+							<tr>
+								<td>Jurusan</td>
+								<td th:text="${jurusanMahasiswa}">Jurusan</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<div class="col-sm-6">
+					<div class="col-xs-6 col-md-6" style="float:right;" >
+						<a href="#" class="thumbnail">
+						  <img src="/img/logo.png" alt="profpic"/>
+						</a>
+					</div>
+				</div>
+			</div>			
+			
+			<div class="row" style="text-align:center; padding:3%;" >
 				<div class="col-sm-12">
-					<h3>Lihat Jadwal</h3>
+					<a href="#" ><img src="/img/profile_timeline.png" alt="Timeline"/></a>
 				</div>
 			</div>
 
