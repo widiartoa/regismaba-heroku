@@ -35,17 +35,17 @@ CREATE TABLE `alamat` (
   `kode_pos` varchar(5) NOT NULL,
   `created_by` varchar(30) NOT NULL,
   `created_at` timestamp NOT NULL,
-  `updated_by` varchar(30) DEFAULT NULL,
-  `updated_at` timestamp
+  `updated_by` varchar(30) NOT NULL,
+  `updated_at` timestamp NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `alamat`
 --
 
-INSERT INTO `alamat` (`jalan_id`, `kota_kabupaten_id`, `jalan`, `kecamatan`, `kelurahan`, `kode_pos`, `created_by`, `created_at`) VALUES
-(1, 1102, 'Jalan Harum', 'Bunga', 'Semerbak', '11120', 'benathavia.saladdin', '2017-08-20 08:00:00'),
-(2, 1107, 'Jalan Wangi', 'Kembang', 'Mekar', '11121', 'hardyn.adiyoso', '2017-08-22 09:00:00');
+INSERT INTO `alamat` (`jalan_id`, `kota_kabupaten_id`, `jalan`, `kecamatan`, `kelurahan`, `kode_pos`, `created_by`, `created_at`, `updated_by`, `updated_at`) VALUES
+(1, 1102, 'Jalan Harum', 'Bunga', 'Semerbak', '11120', 'benathavia.saladdin', '2017-08-20 08:00:00', 'benathavia.saladdin', '2017-08-20 08:00:00'),
+(2, 1107, 'Jalan Wangi', 'Kembang', 'Mekar', '11121', 'hardyn.adiyoso', '2017-08-22 09:00:00', 'benathavia.saladdin', '2017-08-20 08:00:00');
 
 -- --------------------------------------------------------
 
@@ -93,8 +93,8 @@ CREATE TABLE `biodata` (
   `ukuran_jaket` varchar(4) DEFAULT NULL,
   `created_by` varchar(30) NOT NULL,
   `created_at` timestamp NOT NULL,
-  `updated_by` varchar(30) DEFAULT NULL,
-  `updated_at` timestamp,
+  `updated_by` varchar(30) NOT NULL,
+  `updated_at` timestamp NOT NULL,
   `agama_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -102,9 +102,9 @@ CREATE TABLE `biodata` (
 -- Dumping data for table `biodata`
 --
 
-INSERT INTO `biodata` (`biodata_id`, `username`, `jalan_id`, `tanggal_lahir`, `jenis_kelamin`, `nomor_telepon`, `kewarganegaraan`, `nomor_ktp`, `sidik_jari`, `scan_ktp`, `scan_kk`, `scan_surat_pernyataan_mahasiswa`, `status_verifikasi`, `flag_aktif`, `ukuran_jaket`, `created_by`, `created_at`, `agama_id`) VALUES
-(5, 'benathavia.saladdin', 1, '0000-00-00', 'L', '085700000001', 'WNI', '1234567890123456', 'sj1.jpg', 'sktp1.jpg', 'skk1.jpg', 'sspm1.jpg', 'Unverified', '1', 'M', 'benathavia.saladdin', '2017-08-20 08:00:00', 1),
-(6, 'hardyn.adiyoso', 2, '0000-00-00', 'P', '085700000002', 'WNI', '1234567890123457', 'sj2.jpg', 'sktp2.jpg', 'skk2.jpg', 'sspm2.jpg', 'Verified', '1', 'L', 'hardyn.adiyoso', '2017-08-20 10:00:00', 1);
+INSERT INTO `biodata` (`biodata_id`, `username`, `jalan_id`, `tanggal_lahir`, `jenis_kelamin`, `nomor_telepon`, `kewarganegaraan`, `nomor_ktp`, `sidik_jari`, `scan_ktp`, `scan_kk`, `scan_surat_pernyataan_mahasiswa`, `status_verifikasi`, `flag_aktif`, `ukuran_jaket`, `created_by`, `created_at`, `updated_by`, `updated_at`, `agama_id`) VALUES
+(5, 'benathavia.saladdin', 1, '1997-03-10', 'L', '085700000001', 'WNI', '1234567890123456', 'sj1.jpg', 'sktp1.jpg', 'skk1.jpg', 'sspm1.jpg', 'Unverified', '1', 'M', 'benathavia.saladdin', '2017-08-20 08:00:00', 'benathavia.saladdin', '2017-08-20 08:00:00', 1),
+(6, 'hardyn.adiyoso', 2, '1998-02-05', 'P', '085700000002', 'WNI', '1234567890123457', 'sj2.jpg', 'sktp2.jpg', 'skk2.jpg', 'sspm2.jpg', 'Verified', '1', 'L', 'hardyn.adiyoso', '2017-08-20 10:00:00', 'hardyn.adiyoso', '2017-08-20 10:00:00', 1);
 
 -- --------------------------------------------------------
 
@@ -192,23 +192,23 @@ INSERT INTO `ijazah` (`nomor_ijazah`, `username`, `nama_institusi`, `jenjang`, `
 
 CREATE TABLE `jadwal_ept` (
   `jadwal_ept_id` int(11) NOT NULL,
-  `timestamp_awal` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `timestamp_akhir` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `timestamp_awal` timestamp NOT NULL DEFAULT '2017-04-18 00:00:00',
+  `timestamp_akhir` timestamp NOT NULL DEFAULT '2017-04-18 00:00:00',
   `created_by` varchar(30) NOT NULL,
   `created_at` timestamp NOT NULL,
-  `updated_by` varchar(30) DEFAULT NULL,
-  `updated_at` timestamp
+  `updated_by` varchar(30) NOT NULL,
+  `updated_at` timestamp NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `jadwal_ept`
 --
 
-INSERT INTO `jadwal_ept` (`jadwal_ept_id`, `timestamp_awal`, `timestamp_akhir`, `created_by`, `updated_by`) VALUES
-(1, '2017-08-28 01:00:00', '2017-08-28 05:00:00', 'redita.arifin', '2017-08-15 10:05:00'),
-(2, '2017-08-28 06:00:00', '2017-08-28 10:00:00', 'redita.arifin', '2017-08-15 10:10:00'),
-(3, '2017-08-29 01:00:00', '2017-08-29 05:00:00', 'redita.arifin', '2017-08-15 10:15:00'),
-(4, '2017-08-29 06:00:00', '2017-08-29 10:00:00', 'redita.arifin', '2017-08-15 10:20:00');
+INSERT INTO `jadwal_ept` (`jadwal_ept_id`, `timestamp_awal`, `timestamp_akhir`, `created_by`, `created_at`, `updated_by`, `updated_at`) VALUES
+(1, '2017-08-28 01:00:00', '2017-08-28 05:00:00', 'redita.arifin', '2017-08-15 10:05:00', 'redita.arifin', '2017-08-15 10:05:00'),
+(2, '2017-08-28 06:00:00', '2017-08-28 10:00:00', 'redita.arifin', '2017-08-15 10:10:00', 'redita.arifin', '2017-08-15 10:05:00'),
+(3, '2017-08-29 01:00:00', '2017-08-29 05:00:00', 'redita.arifin', '2017-08-15 10:15:00', 'redita.arifin', '2017-08-15 10:05:00'),
+(4, '2017-08-29 06:00:00', '2017-08-29 10:00:00', 'redita.arifin', '2017-08-15 10:20:00', 'redita.arifin', '2017-08-15 10:05:00');
 
 -- --------------------------------------------------------
 
@@ -218,29 +218,29 @@ INSERT INTO `jadwal_ept` (`jadwal_ept_id`, `timestamp_awal`, `timestamp_akhir`, 
 
 CREATE TABLE `jadwal_registrasi` (
   `jadwal_registrasi_id` int(11) NOT NULL,
-  `timestamp_awal` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `timestamp_akhir` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `timestamp_awal` timestamp NOT NULL DEFAULT '2017-04-18 00:00:00',
+  `timestamp_akhir` timestamp NOT NULL DEFAULT '2017-04-18 00:00:00',
   `created_by` varchar(30) NOT NULL,
   `created_at` timestamp NOT NULL,
-  `updated_by` varchar(30) DEFAULT NULL,
-  `updated_at` timestamp
+  `updated_by` varchar(30) NOT NULL,
+  `updated_at` timestamp NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `jadwal_registrasi`
 --
 
-INSERT INTO `jadwal_registrasi` (`jadwal_registrasi_id`, `timestamp_awal`, `timestamp_akhir`, `created_by`, `updated_by`) VALUES
-(1, '2017-08-21 01:00:00', '2017-08-21 03:00:00', 'redita.arifin', '2017-08-15 10:00:00'),
-(2, '2017-08-21 03:00:00', '2017-08-21 05:00:00', 'redita.arifin', '2017-08-15 10:05:00'),
-(3, '2017-08-21 06:00:00', '2017-08-22 08:00:00', 'redita.arifin', '2017-08-15 10:10:00'),
-(4, '2017-08-22 01:00:00', '2017-08-22 03:00:00', 'redita.arifin', '2017-08-15 10:15:00'),
-(5, '2017-08-22 03:00:00', '2017-08-22 05:00:00', 'redita.arifin', '2017-08-15 10:20:00'),
-(6, '2017-08-22 06:00:00', '2017-08-22 08:00:00', 'redita.arifin', '2017-08-15 10:25:00'),
-(7, '2017-08-23 01:00:00', '2017-08-23 03:00:00', 'redita.arifin', '2017-08-15 10:30:00'),
-(8, '2017-08-23 03:00:00', '2017-08-23 05:00:00', 'redita.arifin', '2017-08-15 10:35:00'),
-(9, '2017-08-23 06:00:00', '2017-08-23 08:00:00', 'redita.arifin', '2017-08-15 10:40:00'),
-(10, '2017-08-24 01:00:00', '2017-08-24 03:00:00', 'redita.arifin', '2017-08-15 10:45:00');
+INSERT INTO `jadwal_registrasi` (`jadwal_registrasi_id`, `timestamp_awal`, `timestamp_akhir`, `created_by`, `created_at`, `updated_by`, `updated_at`) VALUES
+(1, '2017-08-21 01:00:00', '2017-08-21 03:00:00', 'redita.arifin', '2017-08-15 10:00:00', 'redita.arifin', '2017-08-15 10:00:00'),
+(2, '2017-08-21 03:00:00', '2017-08-21 05:00:00', 'redita.arifin', '2017-08-15 10:05:00', 'redita.arifin', '2017-08-15 10:00:00'),
+(3, '2017-08-21 06:00:00', '2017-08-22 08:00:00', 'redita.arifin', '2017-08-15 10:10:00', 'redita.arifin', '2017-08-15 10:00:00'),
+(4, '2017-08-22 01:00:00', '2017-08-22 03:00:00', 'redita.arifin', '2017-08-15 10:15:00', 'redita.arifin', '2017-08-15 10:00:00'),
+(5, '2017-08-22 03:00:00', '2017-08-22 05:00:00', 'redita.arifin', '2017-08-15 10:20:00', 'redita.arifin', '2017-08-15 10:00:00'),
+(6, '2017-08-22 06:00:00', '2017-08-22 08:00:00', 'redita.arifin', '2017-08-15 10:25:00', 'redita.arifin', '2017-08-15 10:00:00'),
+(7, '2017-08-23 01:00:00', '2017-08-23 03:00:00', 'redita.arifin', '2017-08-15 10:30:00', 'redita.arifin', '2017-08-15 10:00:00'),
+(8, '2017-08-23 03:00:00', '2017-08-23 05:00:00', 'redita.arifin', '2017-08-15 10:35:00', 'redita.arifin', '2017-08-15 10:00:00'),
+(9, '2017-08-23 06:00:00', '2017-08-23 08:00:00', 'redita.arifin', '2017-08-15 10:40:00', 'redita.arifin', '2017-08-15 10:00:00'),
+(10, '2017-08-24 01:00:00', '2017-08-24 03:00:00', 'redita.arifin', '2017-08-15 10:45:00', 'redita.arifin', '2017-08-15 10:00:00');
 
 -- --------------------------------------------------------
 
@@ -250,29 +250,29 @@ INSERT INTO `jadwal_registrasi` (`jadwal_registrasi_id`, `timestamp_awal`, `time
 
 CREATE TABLE `jadwal_tes_kesehatan` (
   `jadwal_tes_kesehatan_id` int(11) NOT NULL,
-  `timestamp_awal` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `timestamp_akhir` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `timestamp_awal` timestamp NOT NULL DEFAULT '2017-04-18 00:00:00',
+  `timestamp_akhir` timestamp NOT NULL DEFAULT '2017-04-18 00:00:00',
   `created_by` varchar(30) NOT NULL,
   `created_at` timestamp NOT NULL,
-  `updated_by` varchar(30) DEFAULT NULL,
-  `updated_at` timestamp
+  `updated_by` varchar(30) NOT NULL,
+  `updated_at` timestamp NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `jadwal_tes_kesehatan`
 --
 
-INSERT INTO `jadwal_tes_kesehatan` (`jadwal_tes_kesehatan_id`, `timestamp_awal`, `timestamp_akhir`, `created_by`, `created_at`) VALUES
-(1, '2017-08-21 01:00:00', '2017-08-21 03:00:00', 'wilson.mokoginta', '2017-08-15 10:00:00'),
-(2, '2017-08-21 03:00:00', '2017-08-21 05:00:00', 'wilson.mokoginta', '2017-08-15 10:05:00'),
-(3, '2017-08-21 06:00:00', '2017-08-22 08:00:00', 'wilson.mokoginta', '2017-08-15 10:10:00'),
-(4, '2017-08-22 01:00:00', '2017-08-22 03:00:00', 'wilson.mokoginta', '2017-08-15 10:15:00'),
-(5, '2017-08-22 03:00:00', '2017-08-22 05:00:00', 'wilson.mokoginta', '2017-08-15 10:20:00'),
-(6, '2017-08-22 06:00:00', '2017-08-22 08:00:00', 'wilson.mokoginta', '2017-08-15 10:25:00'),
-(7, '2017-08-23 01:00:00', '2017-08-23 03:00:00', 'wilson.mokoginta', '2017-08-15 10:30:00'),
-(8, '2017-08-23 03:00:00', '2017-08-23 05:00:00', 'wilson.mokoginta', '2017-08-15 10:35:00'),
-(9, '2017-08-23 06:00:00', '2017-08-23 08:00:00', 'wilson.mokoginta', '2017-08-15 10:40:00'),
-(10, '2017-08-24 01:00:00', '2017-08-24 03:00:00', 'wilson.mokoginta', '2017-08-15 10:45:00');
+INSERT INTO `jadwal_tes_kesehatan` (`jadwal_tes_kesehatan_id`, `timestamp_awal`, `timestamp_akhir`, `created_by`, `created_at`, `updated_by`, `updated_at`) VALUES
+(1, '2017-08-21 01:00:00', '2017-08-21 03:00:00', 'wilson.mokoginta', '2017-08-15 10:00:00', 'wilson.mokoginta', '2017-08-15 10:00:00'),
+(2, '2017-08-21 03:00:00', '2017-08-21 05:00:00', 'wilson.mokoginta', '2017-08-15 10:05:00', 'wilson.mokoginta', '2017-08-15 10:00:00'),
+(3, '2017-08-21 06:00:00', '2017-08-22 08:00:00', 'wilson.mokoginta', '2017-08-15 10:10:00', 'wilson.mokoginta', '2017-08-15 10:00:00'),
+(4, '2017-08-22 01:00:00', '2017-08-22 03:00:00', 'wilson.mokoginta', '2017-08-15 10:15:00', 'wilson.mokoginta', '2017-08-15 10:00:00'),
+(5, '2017-08-22 03:00:00', '2017-08-22 05:00:00', 'wilson.mokoginta', '2017-08-15 10:20:00', 'wilson.mokoginta', '2017-08-15 10:00:00'),
+(6, '2017-08-22 06:00:00', '2017-08-22 08:00:00', 'wilson.mokoginta', '2017-08-15 10:25:00', 'wilson.mokoginta', '2017-08-15 10:00:00'),
+(7, '2017-08-23 01:00:00', '2017-08-23 03:00:00', 'wilson.mokoginta', '2017-08-15 10:30:00', 'wilson.mokoginta', '2017-08-15 10:00:00'),
+(8, '2017-08-23 03:00:00', '2017-08-23 05:00:00', 'wilson.mokoginta', '2017-08-15 10:35:00', 'wilson.mokoginta', '2017-08-15 10:00:00'),
+(9, '2017-08-23 06:00:00', '2017-08-23 08:00:00', 'wilson.mokoginta', '2017-08-15 10:40:00', 'wilson.mokoginta', '2017-08-15 10:00:00'),
+(10, '2017-08-24 01:00:00', '2017-08-24 03:00:00', 'wilson.mokoginta', '2017-08-15 10:45:00', 'wilson.mokoginta', '2017-08-15 10:00:00');
 
 -- --------------------------------------------------------
 
@@ -826,9 +826,9 @@ CREATE TABLE `mahasiswa` (
   `uid_sso` varchar(30) NOT NULL,
   `program_studi_id` int(11) NOT NULL,
   `no_seleksi` varchar(10) NOT NULL,
-  `jadwal_registrasi_id` int(11) NOT NULL,
-  `jadwal_tes_kesehatan_id` int(11) NOT NULL,
-  `jadwal_ept_id` int(11) NOT NULL,
+  `jadwal_registrasi_id` int(11),
+  `jadwal_tes_kesehatan_id` int(11),
+  `jadwal_ept_id` int(11),
   `created_by` varchar(30) NOT NULL,
   `created_at` timestamp NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -871,7 +871,7 @@ CREATE TABLE `pengajuan_skema_pembayaran` (
   `tagihan_telepon` varchar(255) DEFAULT NULL,
   `created_by` varchar(30) NOT NULL,
   `created_at` timestamp NOT NULL,
-  `updated_by` varchar(30) DEFAULT NULL,
+  `updated_by` varchar(30) NOT NULL,
   `updated_at` timestamp NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -1033,7 +1033,7 @@ CREATE TABLE `skema_pembayaran` (
   `uang_pangkal_ik` int(11) NOT NULL,
   `created_by` varchar(30) NOT NULL,
   `created_at` timestamp NOT NULL,
-  `updated_by` varchar(30) DEFAULT NULL,
+  `updated_by` varchar(30) NOT NULL,
   `updated_at` timestamp NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
