@@ -31,6 +31,14 @@
 					<tbody>
 						<tr>
 							<td>
+								<div class="col-sm-12"><h4 th:text="'Status Pengajuan'">Status Pengajuan</h4></div>
+							</td>
+							<td>
+								<div class="col-sm-12"><h4 th:text="${psbm.status_pengajuan}">Status Pengajuan</h4></div>
+							</td>
+						</tr>
+						<tr>
+							<td>
 								<div class="col-sm-12"><h4 th:text="'Golongan'">Pilihan Golongan</h4></div>
 							</td>
 							<td>
@@ -101,10 +109,18 @@
 								<div class="col-sm-12"><a th:text="'Rp ' + ${psbm.nilai_tagihan_telepon}" th:href="${psbm.tagihan_telepon}">Unduh Scan Tagihan Telepon</a></div>
 							</td>
 						</tr>
+						<tr>
+							<td>
+								<div class="col-sm-12"><h4 th:text="'Komentar'">Komentar</h4></div>
+							</td>
+							<td>
+								<div class="col-sm-12"><h4 th:text="${psbm.komentar}">Komentar</h4></div>
+							</td>
+						</tr>
 					</tbody>
   				</table>
   				
-  				<div><h5 th:text="'Terakhir diubah pada ' + ${psbm.created_at}"></h5></div>
+  				<div><h5 th:text="'Terakhir diubah pada ' + ${psbm.updated_at}"></h5></div>
   				
   				<hr/>
 				

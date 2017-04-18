@@ -1,6 +1,6 @@
 package id.ac.univ.regismaba.model;
 
-import java.sql.Date;
+import java.sql.Timestamp;
 
 import lombok.Data;
 
@@ -16,4 +16,6 @@ public class SkemaBiayaModel
     int uang_pangkal_ik;
     String created_by;
     String updated_by;
+    Timestamp created_at;
+    Timestamp updated_at;
 }
