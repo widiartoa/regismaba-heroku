@@ -24,7 +24,7 @@ public class StafController {
 
 	@RequestMapping("/staf_verifikasi/daftar_mhs")
 	public String daftarMhsVerifikator(Model model) {
-		List<MahasiswaModel> mahasiswas = mahasiswaDAO.selectAllMahasiswa();
+		List<MahasiswaModel> mahasiswas = mahasiswaDAO.selectAllMahasiswaWithBiodata();
 		model.addAttribute("mahasiswas", mahasiswas);
 		// TODO: BiodataModel harus memiliki atribut username
 		return "staf_verifikasi-daftar_mhs";
@@ -32,7 +32,7 @@ public class StafController {
 
 	@RequestMapping("/staf_registrasi/daftar_mhs")
 	public String daftarMhsRegistrasi(Model model) {
-		List<MahasiswaModel> mahasiswas = mahasiswaDAO.selectAllMahasiswa();
+		List<MahasiswaModel> mahasiswas = mahasiswaDAO.selectAllMahasiswaWithBiodata();
 		model.addAttribute("mahasiswas", mahasiswas);
 		return "staf_registrasi-daftar_mhs";
 	}

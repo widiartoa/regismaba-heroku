@@ -1,18 +1,16 @@
 package id.ac.univ.regismaba.dao;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Delete;
-import org.apache.ibatis.annotations.Update;
-import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Result;
-import org.apache.ibatis.annotations.Many;
-import org.apache.ibatis.annotations.One;
+import org.apache.ibatis.annotations.Results;
+import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
-import java.util.List;
-
+import id.ac.univ.regismaba.model.BiodataModel;
 import id.ac.univ.regismaba.model.MahasiswaModel;
 
 @Mapper
@@ -68,6 +66,9 @@ public interface MahasiswaMapper {
 				@Result(property="jadwal_ept_id", column="jadwal_ept_id")
 	})
 	List<MahasiswaModel> selectAllMahasiswa();
+	
+	@Select("select * from biodata where username=#{username}")
+	BiodataModel selectBiodataMahasiswa(@Param("username") String username);
 	
 	@Insert("insert into mahasiswa (biodata_id) values (#{biodata_id}) where npm = #{npm}")
 	void insertBiodataMahasiswa(@Param("npm") String npm, @Param("biodata_id") String biodata_id);
