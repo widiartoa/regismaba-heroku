@@ -48,7 +48,7 @@
 				<tbody>
 					<tr th:each="mahasiswa,iterationStatus: ${mahasiswas}" th:if="${mahasiswa.biodata!=null}">
 						<td th:text="${mahasiswa.username}" class="center">username</td>
-						<td th:text="'nunggu update database'" class="center">nama lengkap</td>
+						<td th:text="${mahasiswa.nama_lengkap}" class="center">nama lengkap</td>
 						<td th:text="${mahasiswa.npm}">npm</td>
 						<td th:text="${mahasiswa.program_studi.nama_program_studi}" class="center">jurusan</td>
 						<td th:text="${mahasiswa.fakultas}" class="center">fakultas</td>

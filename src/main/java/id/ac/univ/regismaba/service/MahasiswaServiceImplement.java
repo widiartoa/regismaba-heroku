@@ -31,6 +31,7 @@ public class MahasiswaServiceImplement implements MahasiswaService{
 		log.info ("select all mahasiswa");
 		List<MahasiswaModel> mahasiswas = mahasiswaMapper.selectAllMahasiswa();
 		for (MahasiswaModel mahasiswa : mahasiswas){
+			mahasiswa.setNama_lengkap(mahasiswaMapper.selectNamaLengkap(mahasiswa.getUsername()));
 			BiodataModel biodataMhs = mahasiswaMapper.selectBiodataMahasiswa(mahasiswa.getUsername());
 			mahasiswa.setBiodata(biodataMhs);
 			ProgramStudiModel program_studi = mahasiswaMapper.selectProgramStudiMahasiswa(mahasiswa.getProgram_studi_id());

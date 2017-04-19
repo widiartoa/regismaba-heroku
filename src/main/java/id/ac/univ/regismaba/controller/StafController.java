@@ -8,13 +8,18 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import id.ac.univ.regismaba.model.MahasiswaModel;
+import id.ac.univ.regismaba.model.PengajuanSkemaBiayaModel;
 import id.ac.univ.regismaba.service.MahasiswaService;
+import id.ac.univ.regismaba.service.PengajuanSkemaBiayaService;
 
 @Controller
 public class StafController {
 
 	@Autowired
 	MahasiswaService mahasiswaDAO;
+	
+	@Autowired
+	PengajuanSkemaBiayaService pengajuanSkemaBiayaDAO;
 
 	// TODO: Tambahkan @RequestMapping("/") setelah bisa ambil session
 	// untuk Verifikator redirect:/staf_verifikasi/daftar_mhs
@@ -48,6 +53,8 @@ public class StafController {
 	public String daftarMhsKesejahteraan(Model model) {
 		List<MahasiswaModel> mahasiswas = mahasiswaDAO.selectAllMahasiswa();
 		model.addAttribute("mahasiswas", mahasiswas);
+		List<PengajuanSkemaBiayaModel> pengajuans = pengajuanSkemaBiayaDAO.selectAllPSBM();
+		model.addAttribute("pengajuans", pengajuans);
 		return "staf_kesejahteraan-daftar_mhs";
 	}
 }

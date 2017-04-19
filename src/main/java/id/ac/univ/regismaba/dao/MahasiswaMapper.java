@@ -68,6 +68,9 @@ public interface MahasiswaMapper {
 	})
 	List<MahasiswaModel> selectAllMahasiswa();
 	
+	@Select("select nama_lengkap from user where username=#{username}")
+	String selectNamaLengkap(@Param("username") String username);
+	
 	@Select("select * from biodata where username=#{username}")
 	BiodataModel selectBiodataMahasiswa(@Param("username") String username);
 	
