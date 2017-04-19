@@ -74,7 +74,7 @@ public interface MahasiswaMapper {
 	@Select("select * from program_studi where program_studi_id=#{program_studi_id}")
 	ProgramStudiModel selectProgramStudiMahasiswa(@Param("program_studi_id") int program_studi_id);
 	
-	@Select("select nama_program from program where program_ide=#{program_id}")
+	@Select("select nama_program from program where program_id=#{program_id}")
 	String selectProgramMahasiswa(@Param("program_id") int program_id);
 	
 	@Select("select nama_fakultas from fakultas where fakultas_id=#{fakultas_id}")

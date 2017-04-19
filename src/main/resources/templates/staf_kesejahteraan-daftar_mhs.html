@@ -29,10 +29,10 @@
 							<h4 th:text="'NPM'">NPM</h4>
 						</td>
 						<td>
-							<h4 th:text="'Fakultas'">Fakultas</h4>
+							<h4 th:text="'Jurusan'">Jurusan</h4>
 						</td>
 						<td>
-							<h4 th:text="'Jurusan'">Jurusan</h4>
+							<h4 th:text="'Fakultas'">Fakultas</h4>
 						</td>
 						<td>
 							<h4 th:text="'Golongan'">Golongan</h4>
@@ -50,8 +50,8 @@
 						<td th:text="${mahasiswa.username}" class="center">username</td>
 						<td th:text="'nunggu update database'" class="center">nama lengkap</td>
 						<td th:text="${mahasiswa.npm}">npm</td>
-						<td th:text="'nunggu update database'" class="center">fakultas</td>
-						<td th:text="'nunggu update database'" class="center">jurusan</td>
+						<td th:text="${mahasiswa.program_studi.nama_program_studi}" class="center">jurusan</td>
+						<td th:text="${mahasiswa.fakultas}" class="center">fakultas</td>
 						<td th:text="'masih dipikirkan'" class="center">golongan</td>
 						<td th:text="'masih dipikirkan'" class="center">status verifikasi</td>
 						<td><a th:href="'/staf/' + ${mahasiswa.npm} + '/pengajuan_skema_pembayaran'"
