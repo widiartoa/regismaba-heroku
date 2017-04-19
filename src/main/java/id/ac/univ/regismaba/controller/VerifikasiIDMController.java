@@ -32,15 +32,18 @@ public class VerifikasiIDMController
        
         if(mahasiswa != null) {
 // if(biodata.get status verif == not yet) masuk sini
-//            String status_verifikasi = verifikasiIdmService
+            String status_verifikasi = verifikasiIdmService.selectStatusVerifikasi (mahasiswa.getUsername ());
             model.addAttribute ("mahasiswa", mahasiswa);
 //            model.addAttribute ("biodata", biodata);
-            return "staf_verifikasi-detail_idm_mhs";
-// else if(biodata.get status verif == unverified) masuk ke halaman yg merah2
-// else ya masuk ke halaman yg ijo
+            if (status_verifikasi.equals ("Not yet")) {
+                return "staf_verifikasi-detail_idm_mhs";
+            } else if (status_verifikasi.equals ("Verified")) {
+                return "staf_verifikasi-detail_idm_mhs_verified";
+            }
         } else {
             return "not-registered";
         }
+        return "not-registered";
     }
     
     @RequestMapping("/staf_verifikasi/detailIDM/verified")
