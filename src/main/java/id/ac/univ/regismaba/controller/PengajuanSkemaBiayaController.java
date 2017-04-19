@@ -93,13 +93,10 @@ public class PengajuanSkemaBiayaController {
 		MahasiswaModel mahasiswa = mahasiswaService.selectMahasiswaByUsername(user);
 		
 		List<SkemaBiayaModel> schemas = sbs.selectAllSBM();
-		
-		for(int i = 0; i < schemas.size(); i++)
-		{
-			System.out.println(schemas.get(i).getGolongan_id());
-		}
-		
 		model.addAttribute("schemas", schemas);
+		
+		RumpunModel rumpun = rm.getRumpun(mahasiswa.getUsername());
+		model.addAttribute("rumpun", rumpun);
 		
 		if(psbs.selectPSBMFromUsername(mahasiswa.getUsername()) != null)
 		{
