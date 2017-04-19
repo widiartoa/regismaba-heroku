@@ -45,6 +45,62 @@
 								<div class="col-sm-12"><h4 th:text="${psbm.golongan_id}">Pilihan Golongan</h4></div>
 							</td>
 						</tr>
+						<div th:switch="${rumpun.rumpun_id}">
+							<div th:case="'1'">
+								<tr>
+									<td>
+										<div class="col-sm-12"><h4 th:text="'Jumlah Biaya Semester Rumpun Saintek'">Jumlah Biaya</h4></div>
+									</td>
+									<td>
+										<div class="col-sm-12"><h4 th:text="'Rp ' + ${sbm.jumlah_biaya_ipa}">Jumlah Biaya</h4></div>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<div class="col-sm-12"><h4 th:text="'Uang Pangkal Rumpun Saintek'">Uang Pangkal</h4></div>
+									</td>
+									<td>
+										<div class="col-sm-12"><h4 th:text="'Rp ' + ${sbm.uang_pangkal_ipa}">Uang Pangkal</h4></div>
+									</td>
+								</tr>
+							</div>
+							<div th:case="'2'">
+								<tr>
+									<td>
+										<div class="col-sm-12"><h4 th:text="'Jumlah Biaya Semester Rumpun Soshum'">Jumlah Biaya</h4></div>
+									</td>
+									<td>
+										<div class="col-sm-12"><h4 th:text="'Rp ' + ${sbm.jumlah_biaya_ips}">Jumlah Biaya</h4></div>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<div class="col-sm-12"><h4 th:text="'Uang Pangkal Rumpun Soshum'">Uang Pangkal</h4></div>
+									</td>
+									<td>
+										<div class="col-sm-12"><h4 th:text="'Rp ' + ${sbm.uang_pangkal_ips}">Uang Pangkal</h4></div>
+									</td>
+								</tr>
+							</div>
+							<div th:case="'3'">
+								<tr>
+									<td>
+										<div class="col-sm-12"><h4 th:text="'Jumlah Biaya Semester Rumpun Kesehatan'">Jumlah Biaya</h4></div>
+									</td>
+									<td>
+										<div class="col-sm-12"><h4 th:text="'Rp ' + ${sbm.jumlah_biaya_ik}">Jumlah Biaya</h4></div>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<div class="col-sm-12"><h4 th:text="'Uang Pangkal Rumpun Kesehatan'">Uang Pangkal</h4></div>
+									</td>
+									<td>
+										<div class="col-sm-12"><h4 th:text="'Rp ' + ${sbm.uang_pangkal_ik}">Uang Pangkal</h4></div>
+									</td>
+								</tr>
+							</div>
+						</div>
 						<tr>
 							<td>
 								<div class="col-sm-12"><h4 th:text="'Surat Keterangan RT RW'">Surat Keterangan RT RW</h4></div>

@@ -5,10 +5,13 @@ import java.util.List;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Result;
+import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
 import id.ac.univ.regismaba.model.PengajuanSkemaBiayaModel;
+import id.ac.univ.regismaba.model.RumpunModel;
 
 @Mapper
 public interface PengajuanSkemaBiayaMapper {
@@ -42,5 +45,4 @@ public interface PengajuanSkemaBiayaMapper {
 			+ "nilai_tagihan_air=#{nilai_tagihan_air}, nilai_tagihan_listrik=#{nilai_tagihan_listrik}, "
 			+ "nilai_tagihan_telepon=#{nilai_tagihan_telepon} where username=#{username}")
 	void updatePSBM(PengajuanSkemaBiayaModel psbm);
-	
 }

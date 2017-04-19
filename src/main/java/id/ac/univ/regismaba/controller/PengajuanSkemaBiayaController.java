@@ -9,9 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,9 +25,11 @@ import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBui
 
 import id.ac.univ.regismaba.model.MahasiswaModel;
 import id.ac.univ.regismaba.model.PengajuanSkemaBiayaModel;
+import id.ac.univ.regismaba.model.RumpunModel;
 import id.ac.univ.regismaba.model.SkemaBiayaModel;
 import id.ac.univ.regismaba.service.MahasiswaService;
 import id.ac.univ.regismaba.service.PengajuanSkemaBiayaService;
+import id.ac.univ.regismaba.service.RumpunService;
 import id.ac.univ.regismaba.service.SkemaBiayaService;
 import id.ac.univ.regismaba.storage.StorageFileNotFoundException;
 import id.ac.univ.regismaba.storage.StorageService;
@@ -54,6 +56,9 @@ public class PengajuanSkemaBiayaController {
 	@Autowired
 	MahasiswaService mahasiswaService;
 	
+	@Autowired
+	RumpunService rm;
+	
 	@RequestMapping("/calon-mahasiswa/skema-pembayaran")
 	public String skemaMahasiswa(Model model)
 	{	
@@ -66,7 +71,12 @@ public class PengajuanSkemaBiayaController {
 		
 		if(psbm != null)
 		{	
+			RumpunModel rumpun = rm.getRumpun(mahasiswa.getUsername());
+			SkemaBiayaModel sbm = sbs.selectSBM(psbm.getGolongan_id());
+				
 			model.addAttribute("psbm", psbm);
+			model.addAttribute("sbm", sbm);
+			model.addAttribute("rumpun", rumpun);
 			return "calon_mahasiswa-melihat_skema_pembayaran";
 		}
 		else
