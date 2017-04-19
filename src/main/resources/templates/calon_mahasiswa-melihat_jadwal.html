@@ -21,19 +21,23 @@
 					<table>
 						<tbody>
 							<tr>
-								<td>Username</td>
-								<td th:text="${usernameMahasiswa}">Username</td>
+								<td th:text="Username ">Username</td>
+								<td th:text=": ">:</td>
+								<td th:text="${mahasiswa.username}">Username</td>
 							</tr>
 							<tr>
-								<td>NPM</td>
-								<td th:text="${npmMahasiswa}">NPM</td>
+								<td th:text="NPM ">NPM</td>
+								<td th:text=": ">: </td>
+								<td th:text="${mahasiswa.npm}">NPM</td>
 							</tr>
 							<tr>
-								<td>Fakultas</td>
+								<td th:text="Fakultas ">Fakultas</td>
+								<td th:text=": "> : </td>
 								<td th:text="${fakultasMahasiswa}">Fakultas</td>
 							</tr>
 							<tr>
-								<td>Jurusan</td>
+								<td th:text="Jurusan ">Jurusan</td>
+								<td th:text=": "> : </td>
 								<td th:text="${jurusanMahasiswa}">Jurusan</td>
 							</tr>
 						</tbody>
@@ -46,14 +50,10 @@
 						</a>
 					</div>
 				</div>
-			</div>			
-			
-			<div class="row" style="text-align:center; padding:3%;" >
-				<div class="col-sm-12">
-					<a href="#" ><img src="/img/profile_timeline.png" alt="Timeline"/></a>
-				</div>
 			</div>
 
+			<hr/>
+			
 			<table class="table">
 				<thead>
 					<tr>
@@ -88,6 +88,12 @@
 					</tr>
 				</tbody>
 			</table>
+						
+			<div class="row" style="text-align:center; padding:3%;" >
+				<div class="col-sm-12">
+					<a href="#" ><img src="/img/profile_timeline.png" alt="Timeline" style="width:100%;"/></a>
+				</div>
+			</div>
 		</div>
 	</div>
 
