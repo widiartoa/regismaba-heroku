@@ -11,9 +11,9 @@ public interface BiodataMapper {
 	//INSERT BIODATA
 		@Insert("insert into biodata (biodata_id, username, flag_aktif, status_verifikasi, jalan_id, "
 				+ "tanggal_lahir, jenis_kelamin, nomor_telepon, kewarganegaraan, nomor_ktp, sidik_jari, scan_ktp,"
-				+ "scan_kk, scan_surat_pernyataan_mahasiswa, ukuran_jaket) values (#{biodata_id}, #{username}, #{flag_aktif}, #{status_verifikasi}, #{jalan_id},"
+				+ "scan_kk, scan_surat_pernyataan_mahasiswa, ukuran_jaket, created_by, updated_by, updated_at, agama_id) values (#{biodata_id}, #{username}, #{flag_aktif}, #{status_verifikasi}, #{jalan_id},"
 				+ "#{tanggal_lahir}, #{jenis_kelamin}, #{nomor_telepon}, #{kewarganegaraan}, #{nomor_ktp}, #{sidik_jari}, #{scan_ktp},"
-				+ "#{scan_kk}, #{scan_surat_pernyataan_mahasiswa}, #{ukuran_jaket})")
+				+ "#{scan_kk}, #{scan_surat_pernyataan_mahasiswa}, #{ukuran_jaket}, #{created_by}, #{updated_by}, #{updated_at}, #{agama_id})")
 		void insertBiodata(BiodataModel biodata);
 
 		@Select("SELECT * FROM BIODATA WHERE biodata_id=#{biodata_id}")

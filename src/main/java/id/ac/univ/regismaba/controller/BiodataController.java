@@ -106,6 +106,7 @@ public class BiodataController {
 	        @RequestParam(value = "jenjang", required = false) String jenjang,
 	        @RequestParam("scan_ijazah") MultipartFile scan_ijazah,
 	        @RequestParam("scan_pernyataan_ijazah") MultipartFile scan_pernyataan_ijazah)
+	        //@RequestParam("agama_id") int agama_id)
 			throws ParseException {
 		DateFormat format = new SimpleDateFormat("yyyy-mm-dd");
 		Date tanggalLahir = format.parse(tanggal_lahir);
@@ -124,9 +125,6 @@ public class BiodataController {
         storageService.store (scan_pernyataan_ijazah, num+"");
         
         //================================IJAZAH=====================================
-        //SCAN IJAZAH UPLOAD//
-        //String pathDB1 = storageService.load(scan_ijazah.getOriginalFilename()).toString();
-        
         Path data1 = storageService.load(scan_ijazah.getOriginalFilename());
         String pdb1 = MvcUriComponentsBuilder
                 .fromMethodName(BiodataController.class, "serveFile", data1.getFileName().toString())
@@ -135,8 +133,6 @@ public class BiodataController {
         ijazah.setScan_ijazah (pdb1);
         
         //SCAN PERNYATAAN IJAZAH UPLOAD//
-        //String pathDB2 = storageService.load(scan_ijazah.getOriginalFilename()).toString();
-        
         Path data2 = storageService.load(scan_ijazah.getOriginalFilename());
         String pdb2 = MvcUriComponentsBuilder
                 .fromMethodName(BiodataController.class, "serveFile", data2.getFileName().toString())
@@ -147,9 +143,7 @@ public class BiodataController {
         //=================================BIODATA======================================
         BiodataModel bio = new BiodataModel();
         
-        //SCAN SIDIK JARI UPLOAD//
-        //String pathDB3 = storageService.load(sidik_jari.getOriginalFilename()).toString();
-        
+        //SCAN SIDIK JARI UPLOAD//        
         Path data3 = storageService.load(sidik_jari.getOriginalFilename());
         String pdb3 = MvcUriComponentsBuilder
                 .fromMethodName(BiodataController.class, "serveFile", data3.getFileName().toString())
@@ -159,9 +153,6 @@ public class BiodataController {
 
         
         //SCAN SCAN KTP UPLOAD//
-        //baris kayak yg dibawah ini harusnya gak dipake
-        //String pathDB4 = storageService.load(scan_ktp.getOriginalFilename()).toString();
-        
         Path data4 = storageService.load(scan_ktp.getOriginalFilename());
         String pdb4 = MvcUriComponentsBuilder
                 .fromMethodName(BiodataController.class, "serveFile", data4.getFileName().toString())
@@ -171,8 +162,6 @@ public class BiodataController {
         
         
         //SCAN SCAN KK UPLOAD//
-        //String pathDB5 = storageService.load(scan_kk.getOriginalFilename()).toString();
-        
         Path data5 = storageService.load(scan_kk.getOriginalFilename());
         String pdb5 = MvcUriComponentsBuilder
                 .fromMethodName(BiodataController.class, "serveFile", data5.getFileName().toString())
@@ -182,8 +171,6 @@ public class BiodataController {
         
         
         //SCAN SCAN SURAT PERNYATAAN MAHASISWA UPLOAD//
-        //String pathDB6 = storageService.load(scan_surat_pernyataan_mahasiswa.getOriginalFilename()).toString();
-        
         Path data6 = storageService.load(scan_surat_pernyataan_mahasiswa.getOriginalFilename());
         String pdb6 = MvcUriComponentsBuilder
                 .fromMethodName(BiodataController.class, "serveFile", data6.getFileName().toString())
@@ -193,7 +180,6 @@ public class BiodataController {
         
         
 //        //SCAN FORM SURVEY KESEHATAN UPLOAD//
-//        String pathDB7 = storageService.load(form_survey_kesehatan.getOriginalFilename()).toString();
 //        
 //        Path data7 = storageService.load(form_survey_kesehatan.getOriginalFilename());
 //        String pdb7 = MvcUriComponentsBuilder
@@ -204,7 +190,6 @@ public class BiodataController {
 //        
         User user = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         String name = user.getUsername(); //get logged in username
-
         
         bio.setUsername(name);
         bio.setBiodata_id(0);
@@ -216,25 +201,27 @@ public class BiodataController {
         bio.setStatus_verifikasi("Unverified");
         bio.setTanggal_lahir(tanggalLahir);
         bio.setUkuran_jaket(ukuran_jaket);
-
+        bio.setCreated_by(name);
+        bio.setUpdated_at(null);
+        bio.setUpdated_by(name);
+        bio.setAgama_id(1);
         
         //===================================
 
-        AlamatModel alamat = new AlamatModel(0, kota_kabupaten_id, jalan, kecamatan, kelurahan, kode_pos);
-		int idAlamat = alamatDAO.selectJalanId(alamat);
+        AlamatModel alamat = new AlamatModel(0, kota_kabupaten_id, jalan, kecamatan, kelurahan, kode_pos, null, null, null);
+        alamat.setCreated_by(name);
+		alamat.setUpdated_by(name);
+		alamat.setUpdated_at(null);
+        int idAlamat = alamatDAO.selectJalanId(alamat);
 		if (idAlamat == 0) {
 			alamatDAO.insertAlamat(alamat);
 		}
 		alamat.setJalan_id(alamatDAO.selectJalanId(alamat));
 		bio.setJalan_id(alamatDAO.selectJalanId(alamat));
+		
 
 		biodataDAO.insertBiodata(bio);
-		
-		// ini kayaknya harus disesuaiin sama bio
-//        BiodataModel biodata = new BiodataModel(0, "bena", nomor_ijazah, alamat.getJalan_id(), tanggalLahir,
-//        		jenis_kelamin, nomor_telepon, kewarganegaraan, nomor_ktp,sidik_jari, scan_ktp,
-//        		scan_kk, scan_surat_pernyataan_mahasiswa, "Unverified", "1", ukuran_jaket);
-//		biodataDAO.insertBiodata(biodata);
+
 		return "success-biodata-insert";
            
         
@@ -244,18 +231,6 @@ public class BiodataController {
 //		dataKesehatan.setData_kesehatan_id(dataKesehatanDAO.selectDataKesehatanId(dataKesehatan));
 
 		
-		
-//		System.out.println(kota_kabupaten_id);
-//		int idKoKab = Integer.parseInt(kota_kabupaten_id);
-
-
-
-//		BiodataModel biodata = new BiodataModel(0, dataKesehatan.getData_kesehatan_id(), nomor_ijazah, nomor_asuransi,
-//				alamat.getJalan_id(), tanggalLahir, jenis_kelamin, nomor_telepon, kewarganegaraan, nomor_ktp,
-//				sidik_jari, scan_ktp, scan_kk, scan_surat_pernyataan_mahasiswa, "Unverified", "1");
-//		biodataDAO.insertBiodata(biodata);
-//		return "success-biodata-insert";
-
 	}
 	
     @GetMapping("/files2/{filename:.+}")
@@ -269,8 +244,8 @@ public class BiodataController {
                 .body(file);
     }
 
-//	@RequestMapping("/biodata/view/{npm}")
-//	public String view(Model model, @PathVariable(value = "npm") String npm) {
+//	@RequestMapping("/biodata/view/{username}")
+//	public String view(Model model, @PathVariable(value = "username") String username) {
 //		MahasiswaModel mahasiswa = mahasiswaDAO.selectMahasiswa(npm);
 //		BiodataModel biodata = biodataDAO.selectBiodata(mahasiswa.getBiodata_id());
 //		if (biodata != null) {

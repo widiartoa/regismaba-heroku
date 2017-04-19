@@ -11,7 +11,8 @@ import id.ac.univ.regismaba.model.AlamatModel;
 @Mapper
 public interface AlamatMapper {
 	
-	@Insert("insert into alamat(kota_kabupaten_id, jalan, kecamatan, kelurahan, kode_pos) values (#{kota_kabupaten_id}, #{jalan}, #{kecamatan}, #{kelurahan}, #{kode_pos})")
+	@Insert("insert into alamat(kota_kabupaten_id, jalan, kecamatan, kelurahan, kode_pos, created_by, updated_by, updated_at)"
+			+ "values (#{kota_kabupaten_id}, #{jalan}, #{kecamatan}, #{kelurahan}, #{kode_pos}, #{created_by}, #{updated_by}, #{updated_at})")
 	void insertAlamat(AlamatModel alamat);
 
 	@Select("select jalan_id from alamat where kota_kabupaten_id = #{kota_kabupaten_id} and jalan = #{jalan} and kecamatan = #{kecamatan} and kelurahan = #{kelurahan} and kode_pos = #{kode_pos}")
