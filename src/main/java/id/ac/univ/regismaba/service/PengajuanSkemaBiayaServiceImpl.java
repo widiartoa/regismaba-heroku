@@ -56,4 +56,11 @@ public class PengajuanSkemaBiayaServiceImpl implements PengajuanSkemaBiayaServic
 		log.info ("insert golongan pengajuan skema biaya");
 		psbd.insertGolongan(psbm);
 	}
+
+	@Override
+	public void updateGolongan(PengajuanSkemaBiayaModel psbm) {
+		// TODO Auto-generated method stub
+		log.info ("update golongan pengajuan skema biaya");
+		psbd.updateGolongan(psbm);
+	}
 }

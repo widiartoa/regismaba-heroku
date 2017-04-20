@@ -101,12 +101,6 @@ public class PengajuanSkemaBiayaController {
 		return "calon_mahasiswa-pengajuan_golongan";
 	}
 	
-//	@PostMapping("/calon-mahasiswa/skema-pembayaran/golongan-submit")
-//	public String pengajuanGolonganSubmit(Model model, @RequestParam("golongan_id") int golongan_id)
-//	{
-//		return "calon_mahasiswa-pengajuan_skema_pembayaran";
-//	}
-	
 	@PostMapping("/calon-mahasiswa/skema-pembayaran/pengajuan")
 	public String pengajuanSkemaMahasiswa(Model model, @RequestParam("golongan_id") int golongan_id)
 	{
@@ -114,37 +108,62 @@ public class PengajuanSkemaBiayaController {
 		String user = auth.getName();
 		MahasiswaModel mahasiswa = mahasiswaService.selectMahasiswaByUsername(user);
 		
-		if(psbs.selectPSBMFromUsername(user) == null)
+		skema.setGolongan_id(golongan_id);
+		skema.setUsername(mahasiswa.getUsername());
+		
+		if(golongan_id == 1)
 		{
-			skema.setGolongan_id(golongan_id);
-			skema.setUsername(mahasiswa.getUsername());
-			psbs.insertGolongan(skema);
-		}
-		else
-		{
+			if(psbs.selectPSBMFromUsername(user) == null)
+			{
+				psbs.insertGolongan(skema);
+			}
+			else
+			{
+				skema.setUpdated_by(mahasiswa.getUsername());
+				psbs.updateGolongan(skema);
+			}
 			
-		}
-		
-		
-		List<SkemaBiayaModel> schemas = sbs.selectAllSBM();
-		model.addAttribute("schemas", schemas);
-		
-		RumpunModel rumpun = rm.getRumpun(mahasiswa.getUsername());
-		model.addAttribute("rumpun", rumpun);
-		
-		if(psbs.selectPSBMFromUsername(mahasiswa.getUsername()) != null)
-		{
-			System.out.println("Send update pengajuan page");
 			PengajuanSkemaBiayaModel psbm = psbs.selectPSBMFromUsername(mahasiswa.getUsername());
+			model.addAttribute("mahasiswa", mahasiswa);
+			RumpunModel rumpun = rm.getRumpun(mahasiswa.getUsername());
+			SkemaBiayaModel sbm = sbs.selectSBM(psbm.getGolongan_id());		
 			model.addAttribute("psbm", psbm);
-			return "calon_mahasiswa-pengajuan_skema_pembayaran";
+			model.addAttribute("sbm", sbm);
+			model.addAttribute("rumpun", rumpun);
+			return "calon_mahasiswa-melihat_skema_pembayaran";
 		}
 		else
 		{
-			System.out.println("Send new pengajuan page");
-			return "calon_mahasiswa-pengajuan_skema_pembayaran_add";
+
+			if(psbs.selectPSBMFromUsername(user) == null)
+			{
+				psbs.insertGolongan(skema);
+			}
+			else
+			{
+				skema.setUpdated_by(mahasiswa.getUsername());
+				psbs.updateGolongan(skema);
+			}
+			
+			List<SkemaBiayaModel> schemas = sbs.selectAllSBM();
+			model.addAttribute("schemas", schemas);
+			
+			RumpunModel rumpun = rm.getRumpun(mahasiswa.getUsername());
+			model.addAttribute("rumpun", rumpun);
+			
+			if(psbs.selectPSBMFromUsername(mahasiswa.getUsername()) != null)
+			{
+				System.out.println("Send update pengajuan page");
+				PengajuanSkemaBiayaModel psbm = psbs.selectPSBMFromUsername(mahasiswa.getUsername());
+				model.addAttribute("psbm", psbm);
+				return "calon_mahasiswa-pengajuan_skema_pembayaran";
+			}
+			else
+			{
+				System.out.println("Send new pengajuan page");
+				return "calon_mahasiswa-pengajuan_skema_pembayaran_add";
+			}
 		}
-		
 	}
 	
 	@PostMapping("/calon-mahasiswa/skema-pembayaran/submit")

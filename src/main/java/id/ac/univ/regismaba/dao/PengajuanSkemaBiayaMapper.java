@@ -59,4 +59,8 @@ public interface PengajuanSkemaBiayaMapper {
 			+ "'0', '0', '0', '0', "
 			+ "#{username}, 'Unverified', current_timestamp, #{username}, current_timestamp, #{username})")
 	void insertGolongan(PengajuanSkemaBiayaModel psbm);
+	
+	@Update("update pengajuan_skema_pembayaran set golongan_id=#{golongan_id}, updated_at=current_timestamp, "
+			+ "updated_by=#{updated_by} where username=#{username}")
+	void updateGolongan(PengajuanSkemaBiayaModel psbm);
 }
