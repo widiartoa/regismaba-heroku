@@ -1,0 +1,42 @@
+<!-- 
+Navbar/Header buat semua page Calon Mahasiswa
+Bedanya ama navbar lain cuma beda menu doang
+Di setiap page Calon Mahasiswa include ini aja
+Link-link yang ke menu lain diganti aja kalo perlu
+-->
+
+<nav class="navbar-inverse navbar-fixed-top">
+	<div class="container">
+		<div class="navbar-header">
+			<a th:href="'/'"><img class="navbar-brand" src="/img/logo.png" alt="Logo"/></a>
+		</div>
+		
+		<div>
+			<ul class="nav navbar-nav navbar-left">
+				<div class="dropdown">
+					<a th:href="'#'"><button class="dropbtn">Daftar Mahasiswa</button></a>
+				</div>
+			</ul>
+			
+			<ul class="nav navbar-nav navbar-left">
+				<div class="dropdown">
+					<a th:href="'#'"><button class="dropbtn">Setup Jadwal Fakultas</button></a>
+				</div>
+			</ul>
+			
+			<ul class="nav navbar-nav navbar-left">
+				<div class="dropdown">
+					<a th:href="'#'"><button class="dropbtn">Rekapitulasi Data Jaket</button></a>
+				</div>
+			</ul>
+		</div>
+		
+		<div>
+			<ul class="nav navbar-nav navbar-right">
+				<div class="dropdown">
+					<a th:href="'/'"><button class="dropbtn">Keluar</button></a>
+				</div>
+			</ul>
+		</div>
+	</div>
+</nav>
