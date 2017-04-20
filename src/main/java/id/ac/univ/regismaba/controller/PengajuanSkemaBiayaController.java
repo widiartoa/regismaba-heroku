@@ -446,6 +446,8 @@ public class PengajuanSkemaBiayaController {
 //    			if(type == 7) {skema.setTagihan_listrik(tmp.getTagihan_listrik());}
 //    			if(type == 8) {skema.setTagihan_telepon(tmp.getTagihan_telepon());}
     			
+    			System.out.println("update pengajuan");
+    			
     			if(type == 1) {skema.setSurat_keterangan_rtrw("no_data");}
     			if(type == 2) {skema.setFoto_rumah("no_data");}
     			if(type == 3) {skema.setSlip_gaji_pribadi("no_data");}
@@ -458,6 +460,8 @@ public class PengajuanSkemaBiayaController {
     		//for insert
     		else{
     			//triggering return "calon_mahasiswa-salah_file_pengajuan";
+    			
+    			System.out.println("insert pengajuan");
     			if( type == 1 ||
     				type == 2 ||
     				type == 6 ||
