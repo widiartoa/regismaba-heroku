@@ -13,20 +13,31 @@ public class VerifikasiIDMServiceImplement implements VerifikasiIDMService
     @Autowired
     VerifikasiIDMMapper verifikasiIDMMapper;
 
-
-    @Override
-    public void updateStatus (String username)
-    {
-        log.info ("update " + username);
-        verifikasiIDMMapper.updateStatus (username);
-    }
-
-
     @Override
     public String selectStatusVerifikasi (String username)
     {
         log.info ("select status_verifikasi of " + username);
         return verifikasiIDMMapper.selectStatusVerifikasi (username);
     }
+    
+    @Override
+    public void updateStatusVerify (String username)
+    {
+        log.info ("update " + username);
+        verifikasiIDMMapper.updateStatusVerify (username);
+    }
 
+    @Override
+    public void updateStatusUnverify (String username)
+    {
+        log.info ("update " + username);
+        verifikasiIDMMapper.updateStatusUnverify (username);
+    }
+    
+    @Override
+    public void updateComment(String username, String komentar)
+    {
+        log.info ("update comment " + username);
+        verifikasiIDMMapper.updateComment (username, komentar);
+    }
 }
