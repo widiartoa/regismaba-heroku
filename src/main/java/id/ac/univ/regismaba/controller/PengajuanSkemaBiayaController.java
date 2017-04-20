@@ -73,10 +73,15 @@ public class PengajuanSkemaBiayaController {
 		{	
 			RumpunModel rumpun = rm.getRumpun(mahasiswa.getUsername());
 			SkemaBiayaModel sbm = sbs.selectSBM(psbm.getGolongan_id());
-				
+			
+			boolean show = true;
+			
+			if(psbm.getGolongan_id() == 1){ show = false;}
+			
 			model.addAttribute("psbm", psbm);
 			model.addAttribute("sbm", sbm);
 			model.addAttribute("rumpun", rumpun);
+			model.addAttribute("show", show);
 			return "calon_mahasiswa-melihat_skema_pembayaran";
 		}
 		else

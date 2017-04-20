@@ -106,84 +106,86 @@
 					</tbody>
 				</table>
 				
-				<h3>Dokumen Pengajuan</h3>
+				<div th:if="${show}">
+					<h3>Dokumen Pengajuan</h3>
+					<table class="table">
+						<tbody>
+							<tr>
+								<td>
+									<div class="col-sm-12"><h4 th:text="'Surat Keterangan RT RW'">Surat Keterangan RT RW</h4></div>
+								</td>
+								<td>
+									<div class="col-sm-12"><a th:href="${psbm.surat_keterangan_rtrw}">Unduh Scan Surat Keterangan RT RW</a></div>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<div class="col-sm-12"><h4 th:text="'Foto Rumah'">Foto Rumah</h4></div>
+								</td>
+								<td>
+									<div class="col-sm-12"><a th:href="${psbm.foto_rumah}">Unduh Foto Rumah</a></div>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<div class="col-sm-12"><h4 th:text="'Slip Gaji Pribadi'">Slip Gaji Pribadi</h4></div>
+								</td>
+								<td>
+									<div class="col-sm-12"><a th:text="'Rp ' + ${psbm.gaji_pribadi}" th:href="${psbm.slip_gaji_pribadi}">Unduh Scan Slip Gaji Pribadi</a></div>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<div class="col-sm-12"><h4 th:text="'Slip Gaji Wali 1'">Slip Gaji Wali 1</h4></div>
+								</td>
+								<td>
+									<div class="col-sm-12"><a th:text="'Rp ' + ${psbm.gaji_wali1}" th:href="${psbm.slip_gaji_wali1}">Unduh Scan Slip Gaji Wali 1</a></div>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<div class="col-sm-12"><h4 th:text="'Slip Gaji Wali 2'">Slip Gaji Wali 2</h4></div>
+								</td>
+								<td>
+									<div class="col-sm-12"><a th:text="'Rp ' + ${psbm.gaji_wali2}" th:href="${psbm.slip_gaji_wali2}">Unduh Scan Slip Gaji Wali 2</a></div>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<div class="col-sm-12"><h4 th:text="'Tagihan Air'">Tagihan Air</h4></div>
+								</td>
+								<td>
+									<div class="col-sm-12"><a th:text="'Rp ' + ${psbm.nilai_tagihan_air}" th:href="${psbm.tagihan_air}">Unduh Scan Tagihan Air</a></div>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<div class="col-sm-12"><h4 th:text="'Tagihan Listrik'">Tagihan Listrik</h4></div>
+								</td>
+								<td>
+									<div class="col-sm-12"><a th:text="'Rp ' + ${psbm.nilai_tagihan_listrik}" th:href="${psbm.tagihan_listrik}">Unduh Scan Tagihan Listrik</a></div>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<div class="col-sm-12"><h4 th:text="'Tagihan Telepon'">Tagihan Telepon</h4></div>
+								</td>
+								<td>
+									<div class="col-sm-12"><a th:text="'Rp ' + ${psbm.nilai_tagihan_telepon}" th:href="${psbm.tagihan_telepon}">Unduh Scan Tagihan Telepon</a></div>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<div class="col-sm-12"><h4 th:text="'Komentar'">Komentar</h4></div>
+								</td>
+								<td>
+									<div class="col-sm-12"><h4 th:text="${psbm.komentar}">Komentar</h4></div>
+								</td>
+							</tr>
+						</tbody>
+	  				</table>
+				</div>
 				
-				<table class="table">
-					<tbody>
-						<tr>
-							<td>
-								<div class="col-sm-12"><h4 th:text="'Surat Keterangan RT RW'">Surat Keterangan RT RW</h4></div>
-							</td>
-							<td>
-								<div class="col-sm-12"><a th:href="${psbm.surat_keterangan_rtrw}">Unduh Scan Surat Keterangan RT RW</a></div>
-							</td>
-						</tr>
-						<tr>
-							<td>
-								<div class="col-sm-12"><h4 th:text="'Foto Rumah'">Foto Rumah</h4></div>
-							</td>
-							<td>
-								<div class="col-sm-12"><a th:href="${psbm.foto_rumah}">Unduh Foto Rumah</a></div>
-							</td>
-						</tr>
-						<tr>
-							<td>
-								<div class="col-sm-12"><h4 th:text="'Slip Gaji Pribadi'">Slip Gaji Pribadi</h4></div>
-							</td>
-							<td>
-								<div class="col-sm-12"><a th:text="'Rp ' + ${psbm.gaji_pribadi}" th:href="${psbm.slip_gaji_pribadi}">Unduh Scan Slip Gaji Pribadi</a></div>
-							</td>
-						</tr>
-						<tr>
-							<td>
-								<div class="col-sm-12"><h4 th:text="'Slip Gaji Wali 1'">Slip Gaji Wali 1</h4></div>
-							</td>
-							<td>
-								<div class="col-sm-12"><a th:text="'Rp ' + ${psbm.gaji_wali1}" th:href="${psbm.slip_gaji_wali1}">Unduh Scan Slip Gaji Wali 1</a></div>
-							</td>
-						</tr>
-						<tr>
-							<td>
-								<div class="col-sm-12"><h4 th:text="'Slip Gaji Wali 2'">Slip Gaji Wali 2</h4></div>
-							</td>
-							<td>
-								<div class="col-sm-12"><a th:text="'Rp ' + ${psbm.gaji_wali2}" th:href="${psbm.slip_gaji_wali2}">Unduh Scan Slip Gaji Wali 2</a></div>
-							</td>
-						</tr>
-						<tr>
-							<td>
-								<div class="col-sm-12"><h4 th:text="'Tagihan Air'">Tagihan Air</h4></div>
-							</td>
-							<td>
-								<div class="col-sm-12"><a th:text="'Rp ' + ${psbm.nilai_tagihan_air}" th:href="${psbm.tagihan_air}">Unduh Scan Tagihan Air</a></div>
-							</td>
-						</tr>
-						<tr>
-							<td>
-								<div class="col-sm-12"><h4 th:text="'Tagihan Listrik'">Tagihan Listrik</h4></div>
-							</td>
-							<td>
-								<div class="col-sm-12"><a th:text="'Rp ' + ${psbm.nilai_tagihan_listrik}" th:href="${psbm.tagihan_listrik}">Unduh Scan Tagihan Listrik</a></div>
-							</td>
-						</tr>
-						<tr>
-							<td>
-								<div class="col-sm-12"><h4 th:text="'Tagihan Telepon'">Tagihan Telepon</h4></div>
-							</td>
-							<td>
-								<div class="col-sm-12"><a th:text="'Rp ' + ${psbm.nilai_tagihan_telepon}" th:href="${psbm.tagihan_telepon}">Unduh Scan Tagihan Telepon</a></div>
-							</td>
-						</tr>
-						<tr>
-							<td>
-								<div class="col-sm-12"><h4 th:text="'Komentar'">Komentar</h4></div>
-							</td>
-							<td>
-								<div class="col-sm-12"><h4 th:text="${psbm.komentar}">Komentar</h4></div>
-							</td>
-						</tr>
-					</tbody>
-  				</table>
   				
   				<div><h5 th:text="'Terakhir diubah pada ' + ${psbm.updated_at}"></h5></div>
   				
