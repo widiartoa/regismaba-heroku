@@ -85,12 +85,46 @@ public class PengajuanSkemaBiayaController {
 		}
 	}
 	
-	@RequestMapping("/calon-mahasiswa/skema-pembayaran/pengajuan")
-	public String pengajuanSkemaMahasiswa(Model model)
+	@RequestMapping("/calon-mahasiswa/skema-pembayaran/golongan")
+	public String pengajuanGolongan(Model model)
 	{
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		String user = auth.getName();
 		MahasiswaModel mahasiswa = mahasiswaService.selectMahasiswaByUsername(user);
+		
+		RumpunModel rumpun = rm.getRumpun(mahasiswa.getUsername());
+		model.addAttribute("rumpun", rumpun);
+		
+		List<SkemaBiayaModel> schemas = sbs.selectAllSBM();
+		model.addAttribute("schemas", schemas);
+		
+		return "calon_mahasiswa-pengajuan_golongan";
+	}
+	
+//	@PostMapping("/calon-mahasiswa/skema-pembayaran/golongan-submit")
+//	public String pengajuanGolonganSubmit(Model model, @RequestParam("golongan_id") int golongan_id)
+//	{
+//		return "calon_mahasiswa-pengajuan_skema_pembayaran";
+//	}
+	
+	@PostMapping("/calon-mahasiswa/skema-pembayaran/pengajuan")
+	public String pengajuanSkemaMahasiswa(Model model, @RequestParam("golongan_id") int golongan_id)
+	{
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		String user = auth.getName();
+		MahasiswaModel mahasiswa = mahasiswaService.selectMahasiswaByUsername(user);
+		
+		if(psbs.selectPSBMFromUsername(user) == null)
+		{
+			skema.setGolongan_id(golongan_id);
+			skema.setUsername(mahasiswa.getUsername());
+			psbs.insertGolongan(skema);
+		}
+		else
+		{
+			
+		}
+		
 		
 		List<SkemaBiayaModel> schemas = sbs.selectAllSBM();
 		model.addAttribute("schemas", schemas);
