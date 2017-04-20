@@ -17,5 +17,11 @@ public interface VerifikasiIDMMapper
     String selectStatusVerifikasi(@Param("username") String username);
     
     @Update("update biodata set status_verifikasi = 'Verified' where username = #{username}")
-    void updateStatus(@Param("username") String username);
+    void updateStatusVerify(@Param("username") String username);
+    
+    @Update("update biodata set status_verifikasi = 'Unverified' where username = #{username}")
+    void updateStatusUnverify(@Param("username") String username);
+    
+    @Update("update biodata set komentar = #{komentar} where username = #{username}")
+    void updateComment(@Param("username") String username, @Param("komentar") String komentar);
 }
