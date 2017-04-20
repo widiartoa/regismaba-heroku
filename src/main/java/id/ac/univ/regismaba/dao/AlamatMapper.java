@@ -20,4 +20,19 @@ public interface AlamatMapper {
 				@Result(property="jalan_id", column="jalan_id")
 	})
 	Integer selectJalanId(AlamatModel alamat);	
+	
+	@Select("SELECT * FROM ALAMAT WHERE jalan_id=#{jalan_id}")
+	@Results(value = {
+		@Result(property="kota_kabupaten_id", column="kota_kabupaten_id"),    
+		@Result(property="jalan", column="jalan"),
+		@Result(property="kecamatan", column="kecamatan"),
+		@Result(property="kelurahan", column="kelurahan"),
+		@Result(property="kode_pos", column="kode_pos"),
+		@Result(property="created_by", column="created_by"),
+		@Result(property="created_at", column="created_at"),
+		@Result(property="updated_by", column="updated_by"),
+		@Result(property="updated_at", column="updated_at"),
+		@Result(property="agama_id", column="agama_id"),			
+	})
+	AlamatModel selectAlamat(int jalan_id);
 }

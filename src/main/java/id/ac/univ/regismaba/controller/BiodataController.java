@@ -28,6 +28,7 @@ import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBui
 import id.ac.univ.regismaba.model.AlamatModel;
 import id.ac.univ.regismaba.model.BiodataModel;
 import id.ac.univ.regismaba.model.IjazahModel;
+import id.ac.univ.regismaba.model.MahasiswaModel;
 import id.ac.univ.regismaba.model.ProvinsiModel;
 import id.ac.univ.regismaba.model.UserModel;
 import id.ac.univ.regismaba.service.AlamatService;
@@ -244,14 +245,15 @@ public class BiodataController {
                 .body(file);
     }
 
-//	@RequestMapping("/biodata/view/{username}")
-//	public String view(Model model, @PathVariable(value = "username") String username) {
-//		MahasiswaModel mahasiswa = mahasiswaDAO.selectMahasiswa(npm);
-//		BiodataModel biodata = biodataDAO.selectBiodata(mahasiswa.getBiodata_id());
-//		if (biodata != null) {
-//			model.addAttribute("biodata", biodata);
-//			return "biodata-view";
-//		}
-//		return "not-found";
-//	}
+	@RequestMapping("/biodata/view/{username}")
+	public String view(Model model, @PathVariable(value = "username") String username) {
+//		MahasiswaModel mahasiswa = mahasiswaDAO.selectMahasiswa(username);
+		BiodataModel biodata = biodataDAO.selectBiodata(username);
+		if (biodata != null) {
+			model.addAttribute("biodata", biodata);
+			return "biodata-view";
+		}
+		return "not-found";
+	}
+    
 }
