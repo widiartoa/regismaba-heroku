@@ -1,5 +1,7 @@
 package id.ac.univ.regismaba.model;
 
+import java.sql.Timestamp;
+
 import lombok.Data;
 
 @Data
@@ -22,4 +24,10 @@ public class PengajuanSkemaBiayaModel
     String tagihan_air;
     String tagihan_listrik;
     String tagihan_telepon;
+    Timestamp created_at;
+    Timestamp updated_at;
+    String created_by;
+    String updated_by;
+    String status_pengajuan;
+    String komentar;
 }
