@@ -57,7 +57,7 @@
 					<div class="form-group">
 						<label class="control-label col-sm-4" name="label_surat_keterangan_rtrw" for="surat_keterangan_rtrw">Scan Surat Keterangan RT RW* : </label>
 						<div class="input-group">
-							<input type="text" class="form-control" readonly="true" id="surat_keterangan_rtrw"/>
+							<input type="text" class="form-control" readonly="true" name="val_surat_keterangan_rtrw" id="val_surat_keterangan_rtrw"/>
 							<label class="input-group-btn">
 								<span class="btn btn-default">
 									Browse&hellip; <input type="file" accept="image/*" name="surat_keterangan_rtrw" style="display: none;" multiple="true"  />
@@ -81,7 +81,7 @@
 					<div class="form-group">
 						<label class="control-label col-sm-4" for="gaji_pribadi">Gaji Pribadi (rupiah/bulan)* : </label>
 						<div class="input-group">
-							<input type="number" min="0" class="form-control" name="gaji_pribadi" id="gaji_pribadi" placeholder="Contoh: 1000000"/>
+							<input type="number" min="0" max="1000000000" class="form-control" name="gaji_pribadi" id="gaji_pribadi" placeholder="Contoh: 1000000"/>
 						</div>
 					</div>
 					
@@ -100,7 +100,7 @@
 					<div class="form-group">
 						<label class="control-label col-sm-4" for="gaji_wali1">Gaji Wali 1 (rupiah/bulan)* : </label>
 						<div class="input-group">
-							<input type="number" min="0" class="form-control" name="gaji_wali1" id="gaji_wali1" placeholder="Contoh: 1000000"/>
+							<input type="number" min="0" max="1000000000" class="form-control" name="gaji_wali1" id="gaji_wali1" placeholder="Contoh: 1000000"/>
 						</div>
 					</div>
 					
@@ -119,7 +119,7 @@
 					<div class="form-group">
 						<label class="control-label col-sm-4" for="gaji_wali2">Gaji Wali 2 (rupiah/bulan)* : </label>
 						<div class="input-group">
-							<input type="number" min="0" class="form-control" name="gaji_wali2" id="gaji_wali2" placeholder="Contoh: 1000000"/>
+							<input type="number" min="0" max="1000000000" class="form-control" name="gaji_wali2" id="gaji_wali2" placeholder="Contoh: 1000000"/>
 						</div>
 					</div>
 					
@@ -138,7 +138,7 @@
 					<div class="form-group">
 						<label class="control-label col-sm-4" for="nilai_tagihan_air">Tagihan Air (rupiah/bulan)* : </label>
 						<div class="input-group">
-							<input type="number" min="0" class="form-control" id="nilai_tagihan_air" name="nilai_tagihan_air" placeholder="Contoh: 1000000"  />
+							<input type="number" min="0" max="1000000000" class="form-control" id="nilai_tagihan_air" name="nilai_tagihan_air" placeholder="Contoh: 1000000"  />
 						</div>
 					</div>
 					
@@ -157,7 +157,7 @@
 					<div class="form-group">
 						<label class="control-label col-sm-4" for="nilai_tagihan_listrik">Tagihan Listrik (rupiah/bulan)* : </label>
 						<div class="input-group">
-							<input type="number" min="0" class="form-control" id="nilai_tagihan_listrik" name="nilai_tagihan_listrik" placeholder="Contoh: 1000000"  />
+							<input type="number" min="0" max="1000000000" class="form-control" id="nilai_tagihan_listrik" name="nilai_tagihan_listrik" placeholder="Contoh: 1000000"  />
 						</div>
 					</div>
 					
@@ -176,7 +176,7 @@
 					<div class="form-group">
 						<label class="control-label col-sm-4" for="nilai_tagihan_telepon">Tagihan Telepon* (rupiah/bulan) : </label>
 						<div class="input-group">
-							<input type="number" min="0" class="form-control" id="nilai_tagihan_telepon" name="nilai_tagihan_telepon" placeholder="Contoh: 1000000"  />
+							<input type="number" min="0" max="1000000000" class="form-control" id="nilai_tagihan_telepon" name="nilai_tagihan_telepon" placeholder="Contoh: 1000000"  />
 						</div>
 					</div>
 					
@@ -208,10 +208,6 @@
 		<div class="footer">Modul Registrasi Mahasiswa Baru</div>
 		
 		<script type="text/javascript">
-			$(document).ready(function(){
-				$('#myTable').dataTable();
-			});
-			
 			$(function() {
 				// We can attach the `fileselect` event to all file inputs on the page
 				$(document).on('change', ':file', function() {
@@ -239,7 +235,7 @@
 			
 			function validateForm()
 		    {
-			    var a = document.forms["skemaForm"]["surat_keterangan_rtrw"].value;
+			    var a = document.forms["skemaForm"]["val_surat_keterangan_rtrw"].value;
 			    var b = document.forms["skemaForm"]["foto_rumah"].value;
 			    var c1 = document.forms["skemaForm"]["tagihan_air"].value;
 			    var c2 = document.forms["skemaForm"]["nilai_tagihan_air"].value;
@@ -247,7 +243,7 @@
 			    var d2 = document.forms["skemaForm"]["nilai_tagihan_listrik"].value;
 			    var e1 = document.forms["skemaForm"]["tagihan_telepon"].value;
 			    var e2 = document.forms["skemaForm"]["nilai_tagihan_telepon"].value;
-			    if (a==null || a=="" || a=0, b==null || b=="" || b=0, c1==null || c1=="" c1=0, c2==null || c2=="" || c2=0, d1==null || d1=="" || d1=0, d2==null || d2=="" || d2=0, e1==null || e1=="" || e1=0, e2==null || e2=="" || e2=0)
+			    if (a==null || a=="", b==null || b=="", c1==null || c1=="", c2==null || c2=0, d1==null || d1=="", d2==null || d2=0, e1==null || e1=="", e2==null || e2=0)
 			      {
 				      alert("Please Fill All Required Field");
 				      return false;				

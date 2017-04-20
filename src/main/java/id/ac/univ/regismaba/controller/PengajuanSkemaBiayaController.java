@@ -101,6 +101,8 @@ public class PengajuanSkemaBiayaController {
 		if(psbs.selectPSBMFromUsername(mahasiswa.getUsername()) != null)
 		{
 			System.out.println("Send update pengajuan page");
+			PengajuanSkemaBiayaModel psbm = psbs.selectPSBMFromUsername(mahasiswa.getUsername());
+			model.addAttribute("psbm", psbm);
 			return "calon_mahasiswa-pengajuan_skema_pembayaran";
 		}
 		else
@@ -366,12 +368,18 @@ public class PengajuanSkemaBiayaController {
 		}
 		
 		PengajuanSkemaBiayaModel psbm = psbs.selectPSBMFromUsername(mahasiswa.getUsername());
-		
-		model.addAttribute("mahasiswa", mahasiswa);
-		
+		RumpunModel rumpun = rm.getRumpun(mahasiswa.getUsername());
+		SkemaBiayaModel sbm = sbs.selectSBM(psbm.getGolongan_id());
+		model.addAttribute("mahasiswa", mahasiswa);	
 		model.addAttribute("psbm", psbm);
-		
+		model.addAttribute("sbm", sbm);
+		model.addAttribute("rumpun", rumpun);
 		return "calon_mahasiswa-melihat_skema_pembayaran";
+	}
+	
+	@RequestMapping("/skema-pembayaran/no_data")
+	public String noData(){
+		return "error";
 	}
 	
     @GetMapping("/files/{filename:.+}")
@@ -392,7 +400,9 @@ public class PengajuanSkemaBiayaController {
     
     public void storeFile(MultipartFile file, int type)
     {
-    	MahasiswaModel mahasiswa = mahasiswaService.selectMahasiswa("1234567890");
+    	Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		String user = auth.getName();
+		MahasiswaModel mahasiswa = mahasiswaService.selectMahasiswaByUsername(user);
     	Random rand = new Random();
 		int num = rand.nextInt(1000000) + 1;
 		
@@ -424,20 +434,28 @@ public class PengajuanSkemaBiayaController {
     		}
     	}
     	else{
-    		//dont update, pengajuan exist
+    		//for update
     		if(psbs.selectPSBMFromUsername(mahasiswa.getUsername()) != null){
     			PengajuanSkemaBiayaModel tmp = psbs.selectPSBMFromUsername(mahasiswa.getUsername());
-    			skema.setSurat_keterangan_rtrw(psbs.selectPSBMFromUsername(mahasiswa.getUsername()).getSurat_keterangan_rtrw());
-    			if(type == 1) {skema.setSurat_keterangan_rtrw(tmp.getSurat_keterangan_rtrw());}
-    			if(type == 2) {skema.setFoto_rumah(tmp.getFoto_rumah());}
-    			if(type == 3) {skema.setSlip_gaji_pribadi(tmp.getSlip_gaji_pribadi());}
-    			if(type == 4) {skema.setSlip_gaji_wali1(tmp.getSlip_gaji_wali1());}
-    			if(type == 5) {skema.setSlip_gaji_wali2(tmp.getSlip_gaji_wali2());}
-    			if(type == 6) {skema.setTagihan_air(tmp.getTagihan_air());}
-    			if(type == 7) {skema.setTagihan_listrik(tmp.getTagihan_listrik());}
-    			if(type == 8) {skema.setTagihan_telepon(tmp.getTagihan_telepon());}
+//    			if(type == 1) {skema.setSurat_keterangan_rtrw(tmp.getSurat_keterangan_rtrw());}
+//    			if(type == 2) {skema.setFoto_rumah(tmp.getFoto_rumah());}
+//    			if(type == 3) {skema.setSlip_gaji_pribadi(tmp.getSlip_gaji_pribadi());}
+//    			if(type == 4) {skema.setSlip_gaji_wali1(tmp.getSlip_gaji_wali1());}
+//    			if(type == 5) {skema.setSlip_gaji_wali2(tmp.getSlip_gaji_wali2());}
+//    			if(type == 6) {skema.setTagihan_air(tmp.getTagihan_air());}
+//    			if(type == 7) {skema.setTagihan_listrik(tmp.getTagihan_listrik());}
+//    			if(type == 8) {skema.setTagihan_telepon(tmp.getTagihan_telepon());}
+    			
+    			if(type == 1) {skema.setSurat_keterangan_rtrw("no_data");}
+    			if(type == 2) {skema.setFoto_rumah("no_data");}
+    			if(type == 3) {skema.setSlip_gaji_pribadi("no_data");}
+    			if(type == 4) {skema.setSlip_gaji_wali1("no_data");}
+    			if(type == 5) {skema.setSlip_gaji_wali2("no_data");}
+    			if(type == 6) {skema.setTagihan_air("no_data");}
+    			if(type == 7) {skema.setTagihan_listrik("no_data");}
+    			if(type == 8) {skema.setTagihan_telepon("no_data");}
     		}
-    		//insert failed
+    		//for insert
     		else{
     			//triggering return "calon_mahasiswa-salah_file_pengajuan";
     			if( type == 1 ||
