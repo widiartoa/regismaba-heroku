@@ -75,13 +75,12 @@ public class PengajuanSkemaBiayaController {
 			SkemaBiayaModel sbm = sbs.selectSBM(psbm.getGolongan_id());
 			
 			boolean show = true;
-			
 			if(psbm.getGolongan_id() == 1){ show = false;}
+			model.addAttribute("show", show);
 			
 			model.addAttribute("psbm", psbm);
 			model.addAttribute("sbm", sbm);
 			model.addAttribute("rumpun", rumpun);
-			model.addAttribute("show", show);
 			return "calon_mahasiswa-melihat_skema_pembayaran";
 		}
 		else
@@ -150,30 +149,27 @@ public class PengajuanSkemaBiayaController {
 				psbs.updateGolongan(skema);
 			}
 			
-			List<SkemaBiayaModel> schemas = sbs.selectAllSBM();
-			model.addAttribute("schemas", schemas);
-			
 			RumpunModel rumpun = rm.getRumpun(mahasiswa.getUsername());
 			model.addAttribute("rumpun", rumpun);
+			return "calon_mahasiswa-pengajuan_skema_pembayaran";
 			
-			if(psbs.selectPSBMFromUsername(mahasiswa.getUsername()) != null)
-			{
-				System.out.println("Send update pengajuan page");
-				PengajuanSkemaBiayaModel psbm = psbs.selectPSBMFromUsername(mahasiswa.getUsername());
-				model.addAttribute("psbm", psbm);
-				return "calon_mahasiswa-pengajuan_skema_pembayaran";
-			}
-			else
-			{
-				System.out.println("Send new pengajuan page");
-				return "calon_mahasiswa-pengajuan_skema_pembayaran_add";
-			}
+//			if(psbs.selectPSBMFromUsername(mahasiswa.getUsername()) != null)
+//			{
+//				System.out.println("Send update pengajuan page");
+//				PengajuanSkemaBiayaModel psbm = psbs.selectPSBMFromUsername(mahasiswa.getUsername());
+//				model.addAttribute("psbm", psbm);
+//				return "calon_mahasiswa-pengajuan_skema_pembayaran";
+//			}
+//			else
+//			{
+//				System.out.println("Send new pengajuan page");
+//				return "calon_mahasiswa-pengajuan_skema_pembayaran_add";
+//			}
 		}
 	}
 	
 	@PostMapping("/calon-mahasiswa/skema-pembayaran/submit")
 	public String pengajuanSkemaMahasiswaSubmit(Model model, 
-												@RequestParam("golongan_id") int golongan_id,
 												@RequestParam("surat_keterangan_rtrw") MultipartFile surat_keterangan_rtrw,
 												@RequestParam("foto_rumah") MultipartFile foto_rumah,
 												@RequestParam("slip_gaji_pribadi") MultipartFile slip_gaji_pribadi,
@@ -192,8 +188,7 @@ public class PengajuanSkemaBiayaController {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		String user = auth.getName();
 		MahasiswaModel mahasiswa = mahasiswaService.selectMahasiswaByUsername(user);
-		
-		skema.setGolongan_id(golongan_id);
+
 		skema.setUsername(mahasiswa.getUsername());
 		if(gaji_pribadi.equals("") == false){
 			skema.setGaji_pribadi(Integer.parseInt(gaji_pribadi));
@@ -246,188 +241,22 @@ public class PengajuanSkemaBiayaController {
 		storeFile(tagihan_listrik, 7);
 		storeFile(tagihan_telepon, 8);
 		
-		
-//		Random rand = new Random();
-//		int num = rand.nextInt(1000000) + 1;
-//		
-//		if(surat_keterangan_rtrw.isEmpty() == false){	
-//		    String fileContentType = surat_keterangan_rtrw.getContentType();
-//		    if(contentTypes.contains(fileContentType)) {
-//				storageService.store(surat_keterangan_rtrw, num + "-1");
-//				
-//				//SURAT KETERANGAN RT RW UPLOAD //
-//		        String pathDB1 = storageService.load(surat_keterangan_rtrw.getOriginalFilename()).toString();
-//		        
-//		        Path data1 = storageService.load(surat_keterangan_rtrw.getOriginalFilename());
-//		        String pdb1 = MvcUriComponentsBuilder
-//		                .fromMethodName(PengajuanSkemaBiayaController.class, "serveFile", num + "-1-" + data1.getFileName().toString())
-//		                .build().toString();
-//		        
-//		        skema.setSurat_keterangan_rtrw(pdb1);
-//		    } else {
-//		    	return "calon_mahasiswa-salah_file_pengajuan";
-//		    }
-//		}
-//		else{
-//			if(psbs.selectPSBMFromUsername(mahasiswa.getUsername()) != null){
-//				skema.setSurat_keterangan_rtrw(psbs.selectPSBMFromUsername(mahasiswa.getUsername()).getSurat_keterangan_rtrw());
-//			}
-//			else{
-//				return "calon_mahasiswa-salah_file_pengajuan";
-//			}
-//		}
-//		
-//		if(foto_rumah.isEmpty() == false){
-//		    String fileContentType = foto_rumah.getContentType();
-//		    if(contentTypes.contains(fileContentType)) {
-//				storageService.store(foto_rumah, num + "-2");
-//				
-//		        //FOTO RUMAH//
-//		        String pathDB2 = storageService.load(foto_rumah.getOriginalFilename()).toString();
-//		        
-//		        Path data2 = storageService.load(foto_rumah.getOriginalFilename());
-//		        String pdb2 = MvcUriComponentsBuilder
-//		                .fromMethodName(PengajuanSkemaBiayaController.class, "serveFile", num + "-2-" + data2.getFileName().toString())
-//		                .build().toString();
-//		        
-//		        skema.setFoto_rumah(pdb2);
-//		    } else {
-//		    	return "calon_mahasiswa-salah_file_pengajuan";
-//		    }
-//		}
-//		else {
-//			skema.setFoto_rumah("no_data");
-//		}
-//		
-//		if(slip_gaji_pribadi.isEmpty() == false){
-//			storageService.store(slip_gaji_pribadi, num + "-3");
-//			
-//	        //SLIP GAJI PRIBADI//
-//	        String pathDB3 = storageService.load(slip_gaji_pribadi.getOriginalFilename()).toString();
-//	        
-//	        Path data3 = storageService.load(slip_gaji_pribadi.getOriginalFilename());
-//	        String pdb3 = MvcUriComponentsBuilder
-//	                .fromMethodName(PengajuanSkemaBiayaController.class, "serveFile", num + "-3-" + data3.getFileName().toString())
-//	                .build().toString();
-//	        
-//	        skema.setSlip_gaji_pribadi(pdb3);
-//		}
-//		else{
-//			skema.setSlip_gaji_pribadi("no_data");
-//		}
-//		
-//		if(slip_gaji_wali1.isEmpty() == false)
-//		{
-//			storageService.store(slip_gaji_wali1, num + "-4");
-//			
-//	        //SLIP GAJI WALI 1//
-//	        String pathDB4 = storageService.load(slip_gaji_wali1.getOriginalFilename()).toString();
-//	        
-//	        Path data4 = storageService.load(slip_gaji_wali1.getOriginalFilename());
-//	        String pdb4 = MvcUriComponentsBuilder
-//	                .fromMethodName(PengajuanSkemaBiayaController.class, "serveFile", num + "-4-" + data4.getFileName().toString())
-//	                .build().toString();
-//	        
-//	        skema.setSlip_gaji_wali1(pdb4);
-//		}
-//		else{
-//			skema.setSlip_gaji_wali1("no_data");
-//		}
-//		
-//		if(slip_gaji_wali2.isEmpty() == false)
-//		{
-//			storageService.store(slip_gaji_wali2, num + "-5");
-//			
-//	        //SLIP GAJI WALI 2//
-//	        String pathDB5 = storageService.load(slip_gaji_wali2.getOriginalFilename()).toString();
-//	        
-//	        Path data5 = storageService.load(slip_gaji_wali2.getOriginalFilename());
-//	        String pdb5 = MvcUriComponentsBuilder
-//	                .fromMethodName(PengajuanSkemaBiayaController.class, "serveFile", num + "-5-" + data5.getFileName().toString())
-//	                .build().toString();
-//	        
-//	        skema.setSlip_gaji_wali2(pdb5);
-//		}
-//		else{
-//			skema.setSlip_gaji_wali2("no_data");
-//		}
-//			
-//		
-//		if(tagihan_air.isEmpty() == false)
-//		{
-//			storageService.store(tagihan_air, num + "-6");
-//			
-//	        //TAGIHAN AIR//
-//	        String pathDB6 = storageService.load(tagihan_air.getOriginalFilename()).toString();
-//	        
-//	        Path data6 = storageService.load(tagihan_air.getOriginalFilename());
-//	        String pdb6 = MvcUriComponentsBuilder
-//	                .fromMethodName(PengajuanSkemaBiayaController.class, "serveFile", num + "-6-" + data6.getFileName().toString())
-//	                .build().toString();
-//	        
-//	        skema.setTagihan_air(pdb6);
-//		}
-//		else{
-//			skema.setTagihan_air("no_data");
-//		}
-//		
-//		if(tagihan_listrik.isEmpty() == false)
-//		{
-//			storageService.store(tagihan_listrik, num + "-7");
-//			
-//	        //TAGIHAN LISTRIK//
-//	        String pathDB7 = storageService.load(tagihan_listrik.getOriginalFilename()).toString();
-//	        
-//	        Path data7 = storageService.load(tagihan_listrik.getOriginalFilename());
-//	        String pdb7 = MvcUriComponentsBuilder
-//	                .fromMethodName(PengajuanSkemaBiayaController.class, "serveFile", num + "-7-" + data7.getFileName().toString())
-//	                .build().toString();
-//	        
-//	        skema.setTagihan_listrik(pdb7);
-//		}
-//		else{
-//			skema.setTagihan_listrik("no_data");
-//		}
-//		
-//		if(tagihan_telepon.isEmpty() == false)
-//		{
-//			storageService.store(tagihan_telepon, num + "-8");
-//			
-//	        //TAGIHAN TELEPON//
-//	        String pathDB8 = storageService.load(tagihan_telepon.getOriginalFilename()).toString();
-//	        
-//	        Path data8 = storageService.load(tagihan_telepon.getOriginalFilename());
-//	        String pdb8 = MvcUriComponentsBuilder
-//	                .fromMethodName(PengajuanSkemaBiayaController.class, "serveFile", num + "-8-" + data8.getFileName().toString())
-//	                .build().toString();
-//	        
-//	        skema.setTagihan_telepon(pdb8);
-//		}
-//		else{
-//			skema.setTagihan_telepon("no_data");
-//		}
-        
-		
 		if(fileError == true)
 		{
+			fileError = false;
 			return "calon_mahasiswa-salah_file_pengajuan";
 		}
 		
-		//INSERT OR UPDATE//
-		if(psbs.selectPSBMFromUsername(mahasiswa.getUsername()) == null)
-		{
-			//insert new pengajuan
-			psbs.insertPSBM(skema);
-		}
-		else
-		{
-			//update existing pengajuan
-			psbs.updatePSBM(skema);
-		}
+		psbs.updatePSBM(skema);
 		
 		PengajuanSkemaBiayaModel psbm = psbs.selectPSBMFromUsername(mahasiswa.getUsername());
 		RumpunModel rumpun = rm.getRumpun(mahasiswa.getUsername());
 		SkemaBiayaModel sbm = sbs.selectSBM(psbm.getGolongan_id());
+		
+		boolean show = true;
+		if(psbm.getGolongan_id() == 1){ show = false;}
+		model.addAttribute("show", show);
+		
 		model.addAttribute("mahasiswa", mahasiswa);	
 		model.addAttribute("psbm", psbm);
 		model.addAttribute("sbm", sbm);
