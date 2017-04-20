@@ -192,10 +192,11 @@
 				  <a><button id="unverify" type="button" class="btn btn-warning" data-toggle="collapse" data-target="#commentForm">Belum Sesuai</button></a>
 				</div>
 				
-				<form id="commentForm" name="commentForm" method="POST" action="/staf-verifikasi/unverify/submit">
+				<form id="commentForm" name="commentForm" method="POST" action="/staf_verifikasi/detailIDM/unverified">
+					<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
 					<div class="form-group">
-						<label class="control-label col-sm-4" for="comment">Komentar</label>
-						<textarea rows="5" class="form-control" name="comment" id="comment"></textarea>
+						<label class="control-label col-sm-4" for="komentar">Komentar</label>
+						<textarea rows="5" class="form-control" name="komentar" id="komentar"></textarea>
 					</div>
 					<div class="btn-pull-right" role="group" aria-label="..." align="right">
 				  		<button id="submitComment" type="submit" class="btn btn-success" value="Upload">Simpan</button>
