@@ -1,9 +1,11 @@
 package id.ac.univ.regismaba.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -64,21 +66,15 @@ public class JadwalController {
 
 		JadwalRegisModel jadwalRegis = jadwalService.selectJadwalRegis(jadwalRegisId);
 
-		String hariRegis = jadwalService.parseHariRegis(jadwalRegis);
-		String waktuRegis = jadwalService.parseWaktuRegis(jadwalRegis);
-		String timestampAwalRegis = jadwalService.parseTimestampAwalRegis(jadwalRegis);
-		String timestampAkhirRegis = jadwalService.parseTimestampAkhirRegis(jadwalRegis);
-
-		model.addAttribute("hariRegis", hariRegis);
-		model.addAttribute("waktuRegis", waktuRegis);
-		model.addAttribute("timestampAwalRegis", timestampAwalRegis);
-		model.addAttribute("timestampAkhirRegis", timestampAkhirRegis);
+		model.addAttribute("jadwalRegis", jadwalRegis);
 
 		return "calon_mahasiswa-melihat_jadwal";
 	}
 	
 	@RequestMapping("/staf-registrasi/daftar-jadwal")
 	public String getAllJadwal(Model model) {
+		List<JadwalRegisModel> jadwalRegisList = jadwalService.selectAllJadwalRegis();
+		model.addAttribute("jadwalRegisList", jadwalRegisList);
 		return "staf_registrasi-daftar_jadwal";
 	}
 	

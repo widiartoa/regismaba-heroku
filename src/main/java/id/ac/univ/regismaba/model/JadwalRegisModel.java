@@ -8,6 +8,13 @@ public class JadwalRegisModel {
 	int jadwal_registrasi_id;
 	Date timestamp_awal;
 	Date timestamp_akhir;
+	String tanggal;
+	String hari;
+	String waktu_awal;
+	String waktu_akhir;
+	String fakultas;
+	int kapasitas;
+	int fakultas_id;
 	String created_by;
 	Date created_at;
 	String updated_by;
