@@ -27,7 +27,7 @@ public class StafController {
 	// untuk Staf Kesehatan redirect:/staf_kesehatan/daftar_mhs
 	// untuk Staf Kesejahteraan redirect:/staf_kesejahteraan/daftar_mhs
 
-	@RequestMapping("/staf_verifikasi/daftar_mhs")
+	@RequestMapping("/staf-verifikasi/daftar-mhs")
 	public String daftarMhsVerifikator(Model model) {
 		List<MahasiswaModel> mahasiswas = mahasiswaDAO.selectAllMahasiswa();
 		model.addAttribute("mahasiswas", mahasiswas);
@@ -35,21 +35,21 @@ public class StafController {
 		return "staf_verifikasi-daftar_mhs";
 	}
 
-	@RequestMapping("/staf_registrasi/daftar_mhs")
+	@RequestMapping("/staf-registrasi/daftar-mhs")
 	public String daftarMhsRegistrasi(Model model) {
 		List<MahasiswaModel> mahasiswas = mahasiswaDAO.selectAllMahasiswa();
 		model.addAttribute("mahasiswas", mahasiswas);
 		return "staf_registrasi-daftar_mhs";
 	}
 
-	@RequestMapping("/staf_kesehatan/daftar_mhs")
+	@RequestMapping("/staf-kesehatan/daftar-mhs")
 	public String daftarMhsKesehatan(Model model) {
 		List<MahasiswaModel> mahasiswas = mahasiswaDAO.selectAllMahasiswa();
 		model.addAttribute("mahasiswas", mahasiswas);
 		return "staf_kesehatan-daftar_mhs";
 	}
 
-	@RequestMapping("/staf_kesejahteraan/daftar_mhs")
+	@RequestMapping("/staf-kesejahteraan/daftar-mhs")
 	public String daftarMhsKesejahteraan(Model model) {
 		List<MahasiswaModel> mahasiswas = mahasiswaDAO.selectAllMahasiswa();
 		model.addAttribute("mahasiswas", mahasiswas);

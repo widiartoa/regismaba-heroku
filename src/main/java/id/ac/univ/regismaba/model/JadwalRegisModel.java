@@ -8,5 +8,9 @@ public class JadwalRegisModel {
 	int jadwal_registrasi_id;
 	Date timestamp_awal;
 	Date timestamp_akhir;
+	String created_by;
+	Date created_at;
+	String updated_by;
+	Date updated_at;
 }
 

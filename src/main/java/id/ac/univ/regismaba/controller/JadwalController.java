@@ -76,4 +76,10 @@ public class JadwalController {
 
 		return "calon_mahasiswa-melihat_jadwal";
 	}
+	
+	@RequestMapping("/staf-registrasi/daftar-jadwal")
+	public String getAllJadwal(Model model) {
+		return "staf_registrasi-daftar_jadwal";
+	}
+	
 }
