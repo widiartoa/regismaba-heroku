@@ -36,4 +36,12 @@ public class AlamatServiceImplement implements AlamatService {
 		}
 	}
 
+	@Override
+	public AlamatModel selectAlamat(int jalan_id) {
+		// TODO Auto-generated method stub
+		return alamatMapper.selectAlamat(jalan_id);
+	}
+	
+	
+
 }

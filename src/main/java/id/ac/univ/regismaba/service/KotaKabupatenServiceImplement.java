@@ -19,4 +19,10 @@ public class KotaKabupatenServiceImplement implements KotaKabupatenService {
 		return kotaKabupatenMapper.selectKotaKabupatenByProvinsiId(provinsi_id);
 	}
 
+	@Override
+	public KotaKabupatenModel selectKotaKabupaten(int kota_kabupaten_id) {
+		// TODO Auto-generated method stub
+		return kotaKabupatenMapper.selectKotaKabupaten(kota_kabupaten_id);
+	}
+
 }

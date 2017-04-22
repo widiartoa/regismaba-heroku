@@ -46,7 +46,7 @@
 						<td th:text="${mahasiswa.npm}">npm</td>
 						<td th:text="${mahasiswa.program_studi.nama_program_studi}" class="center">jurusan</td>
 						<td th:text="${mahasiswa.biodata.status_verifikasi}">status_verifikasi </td>
-						<td><a th:href="'/staf/' + ${mahasiswa.npm} + '/verifikasi'"
+						<td><a th:href="'/staf-verifikasi/detailIDM/' + ${mahasiswa.npm}"
 							class="btn btn-warning"> <i class="glyphicon glyphicon-pencil"></i>
 						</a></td>
 					</tr>

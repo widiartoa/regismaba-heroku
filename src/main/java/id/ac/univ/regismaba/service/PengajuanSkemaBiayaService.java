@@ -15,4 +15,8 @@ public interface PengajuanSkemaBiayaService {
 	void insertPSBM(PengajuanSkemaBiayaModel psbm);
 	
 	void updatePSBM(PengajuanSkemaBiayaModel psbm);
+	
+	void insertGolongan(PengajuanSkemaBiayaModel psbm);
+	
+	void updateGolongan(PengajuanSkemaBiayaModel psbm);
 }
