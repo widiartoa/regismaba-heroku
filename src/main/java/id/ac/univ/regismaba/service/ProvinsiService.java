@@ -7,5 +7,5 @@ import id.ac.univ.regismaba.model.ProvinsiModel;
 public interface ProvinsiService {
 //	int selectProvinsiId(ProvinsiModel provinsi);
 //
-//	List<ProvinsiModel> selectAllProvinsi();
+	List<ProvinsiModel> selectAllProvinsi();
 }

@@ -3,6 +3,7 @@ package id.ac.univ.regismaba.service;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,27 +20,69 @@ public class JadwalServiceImplement implements JadwalService {
 
 	@Autowired
 	JadwalMapper jadwalMapper;
-	
+
 	@Override
 	public JadwalEptModel selectJadwalEpt(int jadwal_ept_id) {
 		// TODO Auto-generated method stub
-		log.info ("select jadwal ept with id {}", jadwal_ept_id);
+		log.info("select jadwal ept with id {}", jadwal_ept_id);
 		return jadwalMapper.selectJadwalEpt(jadwal_ept_id);
 	}
 
 	@Override
 	public JadwalKesehatanModel selectJadwalKesehatan(int jadwal_tes_kesehatan_id) {
 		// TODO Auto-generated method stub
-		log.info ("select jadwal tes kesehatan with id {}", jadwal_tes_kesehatan_id);
+		log.info("select jadwal tes kesehatan with id {}", jadwal_tes_kesehatan_id);
 		return jadwalMapper.selectJadwalKesehatan(jadwal_tes_kesehatan_id);
 	}
 
 	@Override
 	public JadwalRegisModel selectJadwalRegis(int jadwal_registrasi_id) {
 		// TODO Auto-generated method stub
-		log.info ("select jadwal registrasi with id {}", jadwal_registrasi_id);
-		return jadwalMapper.selectJadwalRegis(jadwal_registrasi_id);
+		log.info("select jadwal registrasi with id {}", jadwal_registrasi_id);
+		JadwalRegisModel jadwalRegis = jadwalMapper.selectJadwalRegis(jadwal_registrasi_id);
+
+		String hariRegis = this.parseHariRegis(jadwalRegis);
+		String waktuRegis = this.parseWaktuRegis(jadwalRegis);
+		String timestampAwalRegis = this.parseTimestampAwalRegis(jadwalRegis);
+		String timestampAkhirRegis = this.parseTimestampAkhirRegis(jadwalRegis);
+
+		jadwalRegis.setHari(hariRegis);
+		jadwalRegis.setTanggal(waktuRegis);
+		jadwalRegis.setWaktu_awal(timestampAwalRegis);
+		jadwalRegis.setWaktu_akhir(timestampAkhirRegis);
+
+		return jadwalRegis;
 	}
+
+	@Override
+	public List<JadwalRegisModel> selectAllJadwalRegis() {
+		// TODO Auto-generated method stub
+		log.info("select all jadwal registrasi");
+		List<JadwalRegisModel> jadwalRegisList = jadwalMapper.selectAllJadwalRegis();
+
+		for (JadwalRegisModel jadwalRegis : jadwalRegisList) {
+			String hariRegis = this.parseHariRegis(jadwalRegis);
+			String waktuRegis = this.parseWaktuRegis(jadwalRegis);
+			String timestampAwalRegis = this.parseTimestampAwalRegis(jadwalRegis);
+			String timestampAkhirRegis = this.parseTimestampAkhirRegis(jadwalRegis);
+
+			jadwalRegis.setHari(hariRegis);
+			jadwalRegis.setTanggal(waktuRegis);
+			jadwalRegis.setWaktu_awal(timestampAwalRegis);
+			jadwalRegis.setWaktu_akhir(timestampAkhirRegis);
+			
+			if (!(jadwalRegis.getFakultas_id()>0)){
+				jadwalRegis.setFakultas("fakultas belum ditentukan");
+			}
+		}
+
+		return jadwalRegisList;
+	}
+
+	/**
+	 * Parsing Methods
+	 *
+	 */
 
 	@Override
 	public String parseHariRegis(JadwalRegisModel jadwalRegis) {
@@ -67,7 +110,7 @@ public class JadwalServiceImplement implements JadwalService {
 		String hari = dateFormat.format(tsa);
 		return hari;
 	}
-	
+
 	@Override
 	public String parseWaktuRegis(JadwalRegisModel jadwalRegis) {
 		// TODO Auto-generated method stub
@@ -121,7 +164,7 @@ public class JadwalServiceImplement implements JadwalService {
 		String waktuAwal = dateFormat.format(tsa);
 		return waktuAwal;
 	}
-	
+
 	@Override
 	public String parseTimestampAkhirRegis(JadwalRegisModel jadwalRegis) {
 		// TODO Auto-generated method stub
@@ -130,7 +173,7 @@ public class JadwalServiceImplement implements JadwalService {
 		String waktuAkhir = dateFormat.format(tsa);
 		return waktuAkhir;
 	}
-	
+
 	@Override
 	public String parseTimestampAkhirTesKes(JadwalKesehatanModel jadwalKesehatan) {
 		// TODO Auto-generated method stub

@@ -7,5 +7,6 @@ public class ProgramStudiModel {
 	int program_studi_id;
 	int program_id;
 	int fakultas_id;
+	int jenjang_id;
 	String nama_program_studi;
 }

@@ -10,10 +10,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class BiodataModel {
-	int biodata_id;	
-	int data_kesehatan_id;	
-	String nomor_ijazah;
-	String nomor_asuransi;
+	int biodata_id;
+	String username;
 	int jalan_id;
 	Date tanggal_lahir;
 	String jenis_kelamin;
@@ -26,4 +24,5 @@ public class BiodataModel {
 	String scan_surat_pernyataan_mahasiswa;
 	String status_verifikasi;
 	String flag_aktif;
+	String ukuran_jaket;
 }

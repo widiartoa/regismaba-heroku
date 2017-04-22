@@ -17,11 +17,11 @@
 				</div>
 			</div>
 		</div>
-
-		<!-- =============================================================== -->
 		<div id="contact" class="container">
 			<h1 class="page-header">Isi Biodata</h1>
-			<form>
+		<!-- 	<p th:text="${_csrf.token}"></p>  -->
+			<form action="/calon-mahasiswa/biodata/fill/submit" method="post" enctype="multipart/form-data" >
+				<input type="hidden"  th:name="${_csrf.parameterName}"   th:value="${_csrf.token}"/>
 				<h4>Masukkan Data Mahasiswa</h4>
 				<br />
 				<div class="row">
@@ -144,10 +144,10 @@
 				<div class="row">
 					<div class="col-md-6">
 						<div class="form-group">
-							<label for="nama_provinsi">Provinsi</label> <select
+							<label for="nama_provinsi">Provinsi</label> 
+							<select id="nama_provinsi_select"
 								class="form-control">
-								<option value="32">Jawa Barat</option>
-								<!-- <option th:each="provinsi : ${provinsis}" th:value="${provinsi.provinsi_id}" th:text="${provinsi.nama_provinsi}"></option> -->
+								<option th:each="provinsi : ${provinsis}" th:value="${provinsi.provinsi_id}" th:text="${provinsi.nama_provinsi}"></option>							
 							</select>
 						</div>
 					</div>
@@ -155,11 +155,12 @@
 				<div class="row">
 					<div class="col-md-6">
 						<div class="form-group">
-							<label for="kota_kabupaten_id">Kabupaten/Kota</label> <select
+							<label for="kota_kabupaten_id">Kabupaten/Kota</label>
+							<select id="kota_kabupaten_select"
 								name="kota_kabupaten_id" class="form-control">
-								<option value="3204">Bandung</option>
+								<!-- <option value="3204">Bandung</option>
 								<option value="3216">Kabupaten Bekasi</option>
-								<option value="3275">Kota Bekasi</option>
+								<option value="3275">Kota Bekasi</option>  -->
 							</select>
 						</div>
 					</div>
@@ -281,7 +282,7 @@
 					</div>
 				</div>				
 				<div class="form-group" style="text-align: center">
-					<button href="#" class="btn btn-default">Simpan</button>
+					<button class="btn btn-default">Simpan</button>
 				</div>
 			</form>
 		</div>
@@ -293,6 +294,26 @@
 	<script type="text/javascript">
 		$(document).ready(function() {
 			$('#myTable').dataTable();
+			$('#nama_provinsi_select').on('change', function() {
+				alert($(this).find(':selected').text() + " dipilih");
+				var nama_provinsi_id = $(this).find(':selected').val();
+				
+				$.ajax("/api/provinsi/" + nama_provinsi_id, {
+			        success: function(data) {
+			        	var listOfKotaKabupaten = JSON.parse(data);
+			            
+			            var options = "";
+			            listOfKotaKabupaten.forEach(function(element) {
+			                options += '<option value="' + element.id + '">' + element.nama + '</option>';
+			            });
+			            console.log(options);
+			            $('#kota_kabupaten_select').html(options);
+			        },
+			        error: function (data) {
+			        	alert('cek koneksi internet Anda');
+			        }
+			    });
+			});
 		});
 	</script>
 
