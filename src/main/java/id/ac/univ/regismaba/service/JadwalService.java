@@ -1,5 +1,7 @@
 package id.ac.univ.regismaba.service;
 
+import java.util.List;
+
 import id.ac.univ.regismaba.model.JadwalEptModel;
 import id.ac.univ.regismaba.model.JadwalKesehatanModel;
 import id.ac.univ.regismaba.model.JadwalRegisModel;
@@ -11,6 +13,8 @@ public interface JadwalService {
 	JadwalKesehatanModel selectJadwalKesehatan(int jadwal_tes_kesehatan_id);
 
 	JadwalRegisModel selectJadwalRegis(int jadwal_registrasi_id);
+	
+	List<JadwalRegisModel> selectAllJadwalRegis();
 
 	String parseHariRegis(JadwalRegisModel jadwalRegis);
 

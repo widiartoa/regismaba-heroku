@@ -6,7 +6,7 @@
 </head>
 
 <body>
-	<div th:include="staf-navbar"></div>
+	<div th:include="staf_verifikasi-navbar"></div>
 
 	<div class="container">
 		<div class="content">
@@ -23,7 +23,13 @@
 							<h4 th:text="'Username'">Username</h4>
 						</td>
 						<td>
+							<h4 th:text="'Nama Lengkap'">Nama Lengkap</h4>
+						</td>
+						<td>
 							<h4 th:text="'NPM'">NPM</h4>
+						</td>
+						<td>
+							<h4 th:text="'Jurusan'">Jurusan</h4>
 						</td>
 						<td>
 							<h4 th:text="'Status Verifikasi'">Status Verifikasi</h4>
@@ -34,16 +40,14 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr th:each="mahasiswa,iterationStatus: ${mahasiswas}">
+					<tr th:each="mahasiswa,iterationStatus: ${mahasiswas}" th:if="${mahasiswa.biodata!=null}">
 						<td th:text="${mahasiswa.username}" class="center">username</td>
+						<td th:text="${mahasiswa.nama_lengkap}" class="center">nama lengkap</td>
 						<td th:text="${mahasiswa.npm}">npm</td>
-						<a th:each="biodata,iterationStatus: ${mahasiswa.biodata}">
-							<td th:if="${biodata.username.equals(mahasiswa.username)}"
-							th:text="${biodata.status_verifikasi}">status_verifikasi/td>
-						
-						</a>
-						<td><a th:href="'/staf/' + ${mahasiswa.npm} + '/verifikasi'"
-							class="btn btn-info"> <i class="glyphicon glyphicon-pencil"></i>
+						<td th:text="${mahasiswa.program_studi.nama_program_studi}" class="center">jurusan</td>
+						<td th:text="${mahasiswa.biodata.status_verifikasi}">status_verifikasi </td>
+						<td><a th:href="'/staf-verifikasi/detailIDM/' + ${mahasiswa.npm}"
+							class="btn btn-warning"> <i class="glyphicon glyphicon-pencil"></i>
 						</a></td>
 					</tr>
 				</tbody>
@@ -55,7 +59,7 @@
 
 	<script type="text/javascript">
 		$(document).ready(function() {
-			$('#table').dataTable();
+			$('.table').dataTable();
 		});
 	</script>
 </body>

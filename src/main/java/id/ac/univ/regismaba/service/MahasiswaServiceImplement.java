@@ -6,12 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import id.ac.univ.regismaba.dao.MahasiswaMapper;
+import id.ac.univ.regismaba.model.BiodataModel;
 import id.ac.univ.regismaba.model.MahasiswaModel;
+import id.ac.univ.regismaba.model.ProgramStudiModel;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
-
-import id.ac.univ.regismaba.model.MahasiswaModel;
-import id.ac.univ.regismaba.dao.MahasiswaMapper;
 
 @Slf4j
 @Service
@@ -31,7 +29,18 @@ public class MahasiswaServiceImplement implements MahasiswaService{
 	public List<MahasiswaModel> selectAllMahasiswa() {
 		// TODO Auto-generated method stub
 		log.info ("select all mahasiswa");
-		return mahasiswaMapper.selectAllMahasiswa();
+		List<MahasiswaModel> mahasiswas = mahasiswaMapper.selectAllMahasiswa();
+		for (MahasiswaModel mahasiswa : mahasiswas){
+			mahasiswa.setNama_lengkap(mahasiswaMapper.selectNamaLengkap(mahasiswa.getUsername()));
+			BiodataModel biodataMhs = mahasiswaMapper.selectBiodataMahasiswa(mahasiswa.getUsername());
+			mahasiswa.setBiodata(biodataMhs);
+			ProgramStudiModel program_studi = mahasiswaMapper.selectProgramStudiMahasiswa(mahasiswa.getProgram_studi_id());
+			mahasiswa.setProgram_studi(program_studi);
+			mahasiswa.setProgram(mahasiswaMapper.selectProgramMahasiswa(program_studi.getProgram_id()));
+			mahasiswa.setFakultas(mahasiswaMapper.selectFakultasMahasiswa(program_studi.getFakultas_id()));
+			mahasiswa.setJenjang(mahasiswaMapper.selectJenjangMahasiswa(program_studi.getJenjang_id()));
+		}
+		return mahasiswas;
 	}
 
 	@Override

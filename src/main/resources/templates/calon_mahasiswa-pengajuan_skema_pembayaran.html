@@ -11,7 +11,7 @@
     	<div class="container">
 			<div class="content">
 				<div class="row">
-					<div class="col-sm-12"><h3>Pengajuan Skema Pembayaran</h3></div>
+					<div class="col-sm-12"><h3>Ubah Pengajuan Skema Pembayaran</h3></div>
 				</div>
 				
 				<hr/>
@@ -19,7 +19,7 @@
 				<form name="skemaForm" method="POST" enctype="multipart/form-data" action="/calon-mahasiswa/skema-pembayaran/submit" onsubmit="return validateForm()" class="form-horizontal">
 					<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
 					<div class="form-group">
-						<label class="control-label col-sm-4" for="golongan_id">Pilihan Golongan - Jumlah Biaya - Uang Pangkal* : </label>
+						<label class="control-label col-sm-4" for="golongan_id">Pilihan Golongan - Jumlah Biaya - Uang Pangkal : </label>
 						<div class="input-group col-sm-8">
 							<select type="button" class="form-control" data-toggle="dropdown" name="golongan_id" id="golongan_id">
 								<option th:each="schema,iterationStatus: ${schemas}" th:value="${schema.golongan_id}" th:text="${schema.golongan_id + ' - Rp ' + schema.jumlah_biaya + ' - Rp ' + schema.uang_pangkal}"></option>
@@ -28,7 +28,7 @@
 					</div>
 					
 					<div class="form-group">
-						<label class="control-label col-sm-4" for="surat_keterangan_rtrw">Scan Surat Keterangan RT RW* : </label>
+						<label class="control-label col-sm-4" for="surat_keterangan_rtrw">Scan Surat Keterangan RT RW : </label>
 						<div class="input-group">
 							<input type="text" class="form-control" readonly="true" id="surat_keterangan_rtrw" />
 							<label class="input-group-btn">
@@ -40,7 +40,7 @@
 					</div>
 					
 					<div class="form-group">
-						<label class="control-label col-sm-4" for="foto_rumah">Foto Rumah* : </label>
+						<label class="control-label col-sm-4" for="foto_rumah">Foto Rumah : </label>
 						<div class="input-group">
 							<input type="text" class="form-control" readonly="true" id="foto_rumah" />
 							<label class="input-group-btn">
@@ -52,14 +52,14 @@
 					</div>
 					
 					<div class="form-group">
-						<label class="control-label col-sm-4" for="gaji_pribadi">Gaji Pribadi (rupiah/bulan)* : </label>
+						<label class="control-label col-sm-4" for="gaji_pribadi">Gaji Pribadi (rupiah/bulan) : </label>
 						<div class="input-group">
-							<input type="text" class="form-control" name="gaji_pribadi" id="gaji_pribadi" placeholder="Contoh: 1000000"/>
+							<input type="number" min="0" class="form-control" name="gaji_pribadi" id="gaji_pribadi" placeholder="Contoh: 1000000"/>
 						</div>
 					</div>
 					
 					<div class="form-group">
-						<label class="control-label col-sm-4" for="slip_gaji_pribadi">Scan Slip Gaji Pribadi* : </label>
+						<label class="control-label col-sm-4" for="slip_gaji_pribadi">Scan Slip Gaji Pribadi : </label>
 						<div class="input-group">
 							<input type="text" class="form-control" readonly="true" id="slip_gaji_pribadi" />
 							<label class="input-group-btn">
@@ -71,14 +71,14 @@
 					</div>
 
 					<div class="form-group">
-						<label class="control-label col-sm-4" for="gaji_wali1">Gaji Wali 1 (rupiah/bulan)* : </label>
+						<label class="control-label col-sm-4" for="gaji_wali1">Gaji Wali 1 (rupiah/bulan) : </label>
 						<div class="input-group">
-							<input type="text" class="form-control" name="gaji_wali1" id="gaji_wali1" placeholder="Contoh: 1000000"/>
+							<input type="number" min="0" class="form-control" name="gaji_wali1" id="gaji_wali1" placeholder="Contoh: 1000000"/>
 						</div>
 					</div>
 					
 					<div class="form-group">
-						<label class="control-label col-sm-4" for="slip_gaji_wali1">Scan Slip Gaji Wali 1* : </label>
+						<label class="control-label col-sm-4" for="slip_gaji_wali1">Scan Slip Gaji Wali 1 : </label>
 						<div class="input-group">
 							<input type="text" class="form-control" readonly="true" id="slip_gaji_wali1" />
 							<label class="input-group-btn">
@@ -90,14 +90,14 @@
 					</div>
 					
 					<div class="form-group">
-						<label class="control-label col-sm-4" for="gaji_wali2">Gaji Wali 2 (rupiah/bulan)* : </label>
+						<label class="control-label col-sm-4" for="gaji_wali2">Gaji Wali 2 (rupiah/bulan) : </label>
 						<div class="input-group">
-							<input type="text" class="form-control" name="gaji_wali2" id="gaji_wali2" placeholder="Contoh: 1000000"/>
+							<input type="number" min="0" class="form-control" name="gaji_wali2" id="gaji_wali2" placeholder="Contoh: 1000000"/>
 						</div>
 					</div>
 					
 					<div class="form-group">
-						<label class="control-label col-sm-4" for="slip_gaji_wali2">Scan Slip Gaji Wali 2* : </label>
+						<label class="control-label col-sm-4" for="slip_gaji_wali2">Scan Slip Gaji Wali 2 : </label>
 						<div class="input-group">
 							<input type="text" class="form-control" readonly="true" id="slip_gaji_wali2" />
 							<label class="input-group-btn">
@@ -109,14 +109,14 @@
 					</div>
 					
 					<div class="form-group">
-						<label class="control-label col-sm-4" for="nilai_tagihan_air">Tagihan Air (rupiah/bulan)* : </label>
+						<label class="control-label col-sm-4" for="nilai_tagihan_air">Tagihan Air (rupiah/bulan) : </label>
 						<div class="input-group">
-							<input type="text" class="form-control" id="nilai_tagihan_air" name="nilai_tagihan_air" placeholder="Contoh: 1000000"/>
+							<input type="number" min="0" class="form-control" id="nilai_tagihan_air" name="nilai_tagihan_air" placeholder="Contoh: 1000000"/>
 						</div>
 					</div>
 					
 					<div class="form-group">
-						<label class="control-label col-sm-4" for="tagihan_air">Scan Tagihan Air* : </label>
+						<label class="control-label col-sm-4" for="tagihan_air">Scan Tagihan Air : </label>
 						<div class="input-group">
 							<input type="text" class="form-control" readonly="true" id="tagihan_air" />
 							<label class="input-group-btn">
@@ -128,14 +128,14 @@
 					</div>
 					
 					<div class="form-group">
-						<label class="control-label col-sm-4" for="nilai_tagihan_listrik">Tagihan Listrik (rupiah/bulan)* : </label>
+						<label class="control-label col-sm-4" for="nilai_tagihan_listrik">Tagihan Listrik (rupiah/bulan) : </label>
 						<div class="input-group">
-							<input type="text" class="form-control" id="nilai_tagihan_listrik" name="nilai_tagihan_listrik" placeholder="Contoh: 1000000"/>
+							<input type="number" min="0" class="form-control" id="nilai_tagihan_listrik" name="nilai_tagihan_listrik" placeholder="Contoh: 1000000"/>
 						</div>
 					</div>
 					
 					<div class="form-group">
-						<label class="control-label col-sm-4" for="tagihan_listrik">Scan Tagihan Listrik* : </label>
+						<label class="control-label col-sm-4" for="tagihan_listrik">Scan Tagihan Listrik : </label>
 						<div class="input-group">
 							<input type="text" class="form-control" readonly="true" id="tagihan_listrik" />
 							<label class="input-group-btn">
@@ -147,14 +147,14 @@
 					</div>
 					
 					<div class="form-group">
-						<label class="control-label col-sm-4" for="nilai_tagihan_telepon">Tagihan Telepon* (rupiah/bulan) : </label>
+						<label class="control-label col-sm-4" for="nilai_tagihan_telepon">Tagihan Telepon (rupiah/bulan) : </label>
 						<div class="input-group">
-							<input type="text" class="form-control" id="nilai_tagihan_telepon" name="nilai_tagihan_telepon" placeholder="Contoh: 1000000"/>
+							<input type="number" min="0" class="form-control" id="nilai_tagihan_telepon" name="nilai_tagihan_telepon" placeholder="Contoh: 1000000"/>
 						</div>
 					</div>
 					
 					<div class="form-group">
-						<label class="control-label col-sm-4" for="tagihan_telepon">Scan Tagihan Telepon* : </label>
+						<label class="control-label col-sm-4" for="tagihan_telepon">Scan Tagihan Telepon : </label>
 						<div class="input-group">
 							<input type="text" class="form-control" readonly="true" id="tagihan_telepon" />
 							<label class="input-group-btn">
@@ -164,7 +164,6 @@
 							</label>
 						</div>
 					</div>
-					<div>* wajib diisi</div>
 					<hr/>
 					
 					<div class="btn-group" role="group" aria-label="...">

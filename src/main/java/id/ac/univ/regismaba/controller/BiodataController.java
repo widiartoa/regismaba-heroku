@@ -81,10 +81,11 @@ public class BiodataController {
 	@Autowired
 	AgamaService agamaDAO;
 	
-	@RequestMapping("calon-mahasiswa/calon-mahasiswa/idm")
+
+	@RequestMapping("calon-mahasiswa/idm")
 	public String idmMahasiswa()
 	{		
-		// todo : kalo belom isi idm --> ke fill idm, kalo udah ke view idm
+		// todo : kalo belom isi idm ke fill idm, udah ke view idm
 		return "calon_mahasiswa-mengisi_idm";
 	}
 
