@@ -62,12 +62,11 @@ public class BiodataController {
 
 	@Autowired
 	AlamatService alamatDAO;
-
+	
 	@Autowired
 	ProvinsiService provinsiDAO;
 	
-	
-	@RequestMapping("calon-mahasiswa/calon-mahasiswa/idm")
+	@RequestMapping("calon-mahasiswa/idm")
 	public String idmMahasiswa()
 	{		
 		// todo : kalo belom isi idm ke fill idm, udah ke view idm

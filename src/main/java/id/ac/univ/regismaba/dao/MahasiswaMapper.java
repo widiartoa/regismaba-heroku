@@ -105,4 +105,3 @@ public interface MahasiswaMapper {
 	void updatePengajuanMahasiswa(@Param("npm") String npm, @Param("pengajuan_id") String pengajuan_id);	
 	
 }
-

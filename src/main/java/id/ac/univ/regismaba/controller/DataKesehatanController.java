@@ -75,6 +75,8 @@ public class DataKesehatanController {
 		@RequestParam(value = "form_survey_kesehatan", required = false) MultipartFile form_survey_kesehatan
 	)	{
 		
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		String user = auth.getName();
 		// todo : jangan di hardcode plz
 		MahasiswaModel mahasiswa = mahasiswaDAO.selectMahasiswa("1234567890");
 		
