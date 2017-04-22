@@ -31,37 +31,41 @@
 							<h4 th:text="'NPM'">NPM</h4>
 						</td>
 						<td>
-							<h4 th:text="'Fakultas'">Fakultas</h4>
+							<h4 th:text="'Jurusan'">Jurusan</h4>
 						</td>
 						<td>
-							<h4 th:text="'Jurusan'">Jurusan</h4>
+							<h4 th:text="'Fakultas'">Fakultas</h4>
 						</td>
 						<td>
 							<h4 th:text="'Golongan'">Golongan</h4>
 						</td>
 						<td>
-							<h4 th:text="'Status Verifikasi'">Status Verifikasi</h4>
+							<h4 th:text="'Status Pengajuan'">Status Verifikasi</h4>
 						</td>
 						<td>
-							<h4 th:text="'Lihat Pengajuan Skema Pembayaran'">Lihat Pengajuan Skema Pembayaran</h4>
+							<h4 th:text="'Lihat Pengajuan Skema Pembayaran'">Lihat
+								Pengajuan Skema Pembayaran</h4>
 						</td>
 					</tr>
 				</thead>
 				<tbody>
-					<tr th:each="mahasiswa,iterationStatus: ${mahasiswas}">
-						<td th:text="${mahasiswa.username}" class="center">username</td>
-						<td th:text="'nunggu update database'" class="center">nama lengkap</td>
-						<td th:text="${mahasiswa.npm}">npm</td>
-						<td th:text="'nunggu update database'" class="center">fakultas</td>
-						<td th:text="'nunggu update database'" class="center">jurusan</td>
-						<td th:text="'masih dipikirkan'" class="center">golongan</td>
-						<td th:text="'masih dipikirkan'" class="center">status verifikasi</td>
-						<td>
-							<a type="button" data-toggle="modal" th:attr="data-target='#mahasiswaModel'+${mahasiswa.npm}" class="btn btn-warning"> 
-								<i class="glyphicon glyphicon-eye-open"></i>
-							</a>
-						</td>
-					</tr>
+					<span th:each="pengajuan,iterationStatus: ${pengajuans}">
+						<tr th:each="mahasiswa,iterationStatus: ${mahasiswas}"
+							th:if="${pengajuan.username=mahasiswa.username}">
+							<td th:text="${mahasiswa.username}">username</td>
+							<td th:text="${mahasiswa.nama_lengkap}">nama lengkap</td>
+							<td th:text="${mahasiswa.npm}">npm</td>
+							<td th:text="${mahasiswa.program_studi.nama_program_studi}">jurusan</td>
+							<td th:text="${mahasiswa.fakultas}">fakultas</td>
+							<td th:text="${pengajuan.golongan_id}">golongan</td>
+							<td th:text="${pengajuan.status_pengajuan}">status pengajuan</td>
+							<td>
+								<a type="button" data-toggle="modal" th:attr="data-target='#mahasiswaModel'+${mahasiswa.npm}" class="btn btn-warning"> 
+									<i class="glyphicon glyphicon-eye-open"></i>
+								</a>
+							</td>
+						</tr>
+					</span>
 				</tbody>
 			</table>
 		</div>

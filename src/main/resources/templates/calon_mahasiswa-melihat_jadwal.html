@@ -60,9 +60,9 @@
 				<tbody>
 					<tr>
 						<td th:text="'Jadwal Registrasi'">Jenis Jadwal</td>
-						<td th:text="${hariRegis}">Hari</td>
-						<td th:text="${waktuRegis}">Tanggal</td>
-						<td th:text="${timestampAwalRegis}+'-'+${timestampAkhirRegis}">Waktu
+						<td th:text="${jadwalRegis.hari}">Hari</td>
+						<td th:text="${jadwakRegis.tanggal}">Tanggal</td>
+						<td th:text="${jadwalRegis.waktu_awal}+'-'+${jadwalRegis.waktu_akhir}">Waktu
 							Awal-Waktu Akhir</td>
 					</tr>
 					<tr>

@@ -31,10 +31,10 @@
 							<h4 th:text="'NPM'">NPM</h4>
 						</td>
 						<td>
-							<h4 th:text="'Fakultas'">Fakultas</h4>
+							<h4 th:text="'Jurusan'">Jurusan</h4>
 						</td>
 						<td>
-							<h4 th:text="'Jurusan'">Jurusan</h4>
+							<h4 th:text="'Fakultas'">Fakultas</h4>
 						</td>
 						<td>
 							<h4 th:text="'Status Verifikasi'">Status Verifikasi</h4>
@@ -50,10 +50,10 @@
 				<tbody>
 					<tr th:each="mahasiswa,iterationStatus: ${mahasiswas}" th:if="${mahasiswa.biodata!=null}">
 						<td th:text="${mahasiswa.username}" class="center">username</td>
-						<td th:text="'nunggu update database'" class="center">nama lengkap</td>
+						<td th:text="${mahasiswa.nama_lengkap}" class="center">nama lengkap</td>
 						<td th:text="${mahasiswa.npm}">npm</td>
-						<td th:text="'nunggu update database'" class="center">fakultas</td>
-						<td th:text="'nunggu update database'" class="center">jurusan</td>
+						<td th:text="${mahasiswa.program_studi.nama_program_studi}" class="center">jurusan</td>
+						<td th:text="${mahasiswa.fakultas}" class="center">fakultas</td>
 						<td th:text="${mahasiswa.biodata.status_verifikasi}">status_verifikasi </td>
 						<td th:text="'menunggu antrian cetakan'">menunggu antrian cetakan</td>
 						<td><a th:href="'/staf/' + ${mahasiswa.npm} + '/idm'"
