@@ -9,8 +9,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import id.ac.univ.regismaba.model.MahasiswaModel;
 import id.ac.univ.regismaba.model.PengajuanSkemaBiayaModel;
+import id.ac.univ.regismaba.model.RumpunModel;
+import id.ac.univ.regismaba.model.SkemaBiayaModel;
 import id.ac.univ.regismaba.service.MahasiswaService;
 import id.ac.univ.regismaba.service.PengajuanSkemaBiayaService;
+import id.ac.univ.regismaba.service.RumpunService;
+import id.ac.univ.regismaba.service.SkemaBiayaService;
 
 @Controller
 public class StafController {
@@ -21,6 +25,12 @@ public class StafController {
 	@Autowired
 	PengajuanSkemaBiayaService pengajuanSkemaBiayaDAO;
 
+	@Autowired
+	SkemaBiayaService sbs;
+	
+	@Autowired
+	RumpunService rm;
+	
 	// TODO: Tambahkan @RequestMapping("/") setelah bisa ambil session
 	// untuk Verifikator redirect:/staf_verifikasi/daftar_mhs
 	// untuk Staf Registrasi redirect:/staf_registrasi/daftar_mhs
@@ -55,6 +65,24 @@ public class StafController {
 		model.addAttribute("mahasiswas", mahasiswas);
 		List<PengajuanSkemaBiayaModel> pengajuans = pengajuanSkemaBiayaDAO.selectAllPSBM();
 		model.addAttribute("pengajuans", pengajuans);
+		if(mahasiswas.size() > 0) {
+			RumpunModel[] rumpuns = new RumpunModel[pengajuans.size()];
+			for(int i=0; i<rumpuns.length; i++) {
+				rumpuns[i] = rm.getRumpun(pengajuans.get(i).getUsername());
+			}
+			model.addAttribute("rumpuns", rumpuns);
+		}
+		if(pengajuans.size() > 0) {
+			SkemaBiayaModel[] skemas = new SkemaBiayaModel[pengajuans.size()];
+			for(int i=0; i<skemas.length; i++) {
+				skemas[i] = sbs.selectSBM(pengajuans.get(i).getGolongan_id());
+			}
+			model.addAttribute("skemas", skemas);
+		}
+		
+		List<SkemaBiayaModel> skemaList = sbs.selectAllSBM();
+		model.addAttribute("skemaList", skemaList);
+		
 		return "staf_kesejahteraan-daftar_mhs";
 	}
 }
