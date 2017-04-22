@@ -3,6 +3,7 @@ package id.ac.univ.regismaba.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -26,10 +27,11 @@ public class VerifikasiIDMController
     VerifikasiIDMService verifikasiIdmService;
 
 
-    @RequestMapping("/staf_verifikasi/detailIDM/")
-    public String detailIDM (Model model)
+    @RequestMapping("/staf-verifikasi/detailIDM/{npm}")
+    public String detailIDM (Model model,
+            @PathVariable(value = "npm") String npm)
     {
-        MahasiswaModel mahasiswa = mahasiswaService.selectMahasiswaByUsername ("benathavia.saladdin");
+        MahasiswaModel mahasiswa = mahasiswaService.selectMahasiswa (npm);
         // BiodataModel biodata = biodataService.selectBiodata
         // (mahasiswa.getBiodata ().getBiodata_id ());
 
@@ -53,7 +55,7 @@ public class VerifikasiIDMController
     }
 
 
-    @RequestMapping("/staf_verifikasi/detailIDM/verified")
+    @RequestMapping("/staf-verifikasi/detailIDM/verified")
     public String VerifiedDetailIDM (Model model)
     {
         // status = "Verified";
@@ -68,7 +70,7 @@ public class VerifikasiIDMController
     }
 
 
-    @RequestMapping("/staf_verifikasi/detailIDM/unverified")
+    @RequestMapping("/staf-verifikasi/detailIDM/unverified")
     public String unverifyDetailIDM (Model model,
             @RequestParam("komentar") String komentar)
     {
