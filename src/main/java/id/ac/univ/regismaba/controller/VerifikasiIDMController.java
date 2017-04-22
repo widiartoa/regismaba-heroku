@@ -29,23 +29,23 @@ public class VerifikasiIDMController
     @RequestMapping("/staf_verifikasi/detailIDM/")
     public String detailIDM (Model model)
     {
-        MahasiswaModel mahasiswa = mahasiswaService
-                .selectMahasiswaByUsername ("benathavia.saladdin");
+        MahasiswaModel mahasiswa = mahasiswaService.selectMahasiswaByUsername ("benathavia.saladdin");
         // BiodataModel biodata = biodataService.selectBiodata
         // (mahasiswa.getBiodata ().getBiodata_id ());
 
         if (mahasiswa != null) {
             // if(biodata.get status verif == not yet) masuk sini
-            String status_verifikasi = verifikasiIdmService
-                    .selectStatusVerifikasi (mahasiswa.getUsername ());
+            String status_verifikasi = verifikasiIdmService.selectStatusVerifikasi (mahasiswa.getUsername ());
             model.addAttribute ("mahasiswa", mahasiswa);
             // model.addAttribute ("biodata", biodata);
-            if (status_verifikasi.equals ("Not yet")) {
-                return "staf_verifikasi-detail_idm_mhs";
+            if (status_verifikasi.equals ("Unverified")) {
+                String komentarAdded = verifikasiIdmService.selectKomentar ("benathavia.saladdin");
+                model.addAttribute ("komentarAdded", komentarAdded);
+                return "staf_verifikasi-detail_idm_mhs_unverified";
             } else if (status_verifikasi.equals ("Verified")) {
                 return "staf_verifikasi-detail_idm_mhs_verified";
             } else {
-                return "staf_verifikasi-detail_idm_mhs_unverified";
+                return "staf_verifikasi-detail_idm_mhs";
             }
         } else {
             return "not-registered";
@@ -75,8 +75,10 @@ public class VerifikasiIDMController
         MahasiswaModel mahasiswa = mahasiswaService.selectMahasiswaByUsername ("benathavia.saladdin");
         verifikasiIdmService.updateComment ("benathavia.saladdin", komentar);
         verifikasiIdmService.updateStatusUnverify ("benathavia.saladdin");
+        String komentarAdded = verifikasiIdmService.selectKomentar ("benathavia.saladdin");
         if (mahasiswa != null) {
             model.addAttribute ("mahasiswa", mahasiswa);
+            model.addAttribute ("komentarAdded", komentarAdded);
             return "staf_verifikasi-detail_idm_mhs_unverified";
         } else {
             return "not-registered";
