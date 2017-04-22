@@ -25,12 +25,14 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder;
 
+import id.ac.univ.regismaba.model.AgamaModel;
 import id.ac.univ.regismaba.model.AlamatModel;
 import id.ac.univ.regismaba.model.BiodataModel;
 import id.ac.univ.regismaba.model.DataKesehatanModel;
 import id.ac.univ.regismaba.model.IjazahModel;
 import id.ac.univ.regismaba.model.InstitusiModel;
 import id.ac.univ.regismaba.model.KotaKabupatenModel;
+import id.ac.univ.regismaba.model.MahasiswaModel;
 import id.ac.univ.regismaba.model.ProvinsiModel;
 import id.ac.univ.regismaba.service.AgamaService;
 import id.ac.univ.regismaba.service.AlamatService;
@@ -39,7 +41,6 @@ import id.ac.univ.regismaba.service.DataKesehatanService;
 import id.ac.univ.regismaba.service.IjazahService;
 import id.ac.univ.regismaba.service.InstitusiService;
 import id.ac.univ.regismaba.service.KotaKabupatenService;
-//import id.ac.univ.regismaba.service.IjazahService;
 import id.ac.univ.regismaba.service.MahasiswaService;
 import id.ac.univ.regismaba.service.ProvinsiService;
 import id.ac.univ.regismaba.storage.StorageService;
@@ -222,7 +223,7 @@ public class BiodataController {
         
         //===================================
 
-        AlamatModel alamat = new AlamatModel(0, kota_kabupaten_id, jalan, kecamatan, kelurahan, kode_pos, null, null, null);
+        AlamatModel alamat = new AlamatModel(0, kota_kabupaten_id, jalan, kecamatan, kelurahan, kode_pos, null, null, null, null);
         alamat.setCreated_by(name);
 		alamat.setUpdated_by(name);
 		alamat.setUpdated_at(null);
@@ -269,47 +270,81 @@ public class BiodataController {
 //	}
     
 	
-	@RequestMapping("/biodata/view/{username}")
-	public String view(Model model, @PathVariable(value = "username") String username) {
-		BiodataModel biodata = biodataDAO.selectBiodata(username);
+	@RequestMapping("/biodata/view/{npm}")
+	public String view(Model model, @PathVariable(value = "npm") String npm) {
+		System.out.println(npm);
+		System.out.println("masuk atas");
+		MahasiswaModel mahasiswa = mahasiswaDAO.selectMahasiswa(npm);
+		String username = mahasiswa.getUsername();
+		BiodataModel biodata = biodataDAO.selectBiodataByUsername(username);
+		System.out.println("biodata ke select");
+		System.out.println(biodata);
 		if (biodata != null) {
+			System.out.println("biodata gak null");
 			model.addAttribute("biodata", biodata);
+			System.out.println("biodata ke add ke model");
 			//ALAMAT
 			int jalan_id = biodata.getJalan_id();
+			System.out.println("jalan id = " + jalan_id);
 			AlamatModel alamat = alamatDAO.selectAlamat(jalan_id);
+			System.out.println(alamat);
 			if (alamat != null) {
 				model.addAttribute("alamat, alamat");
+					System.out.println("alamat ke add ke model");
 				//KOTA KABUPATEN
 				int kota_kabupaten_id = alamat.getKota_kabupaten_id();
+					System.out.println("kota kabupaten id " + kota_kabupaten_id);
 				KotaKabupatenModel kotaKabupaten = kotaKabupatenDAO.selectKotaKabupaten(kota_kabupaten_id);
+					System.out.println(kotaKabupaten);
 				if (kotaKabupaten != null) {
-					model.addAttribute(kotaKabupaten);
+					model.addAttribute("kotaKabupaten", kotaKabupaten);
+						System.out.println("kota kabupaten ke add ke model");
 					//PROVINSI
 					int provinsi_id = kotaKabupaten.getProvinsi_id();
+					System.out.println("provinsi id " + provinsi_id);
 					ProvinsiModel provinsi = provinsiDAO.selectProvinsi(provinsi_id);
+					System.out.println(provinsi);
 					if (provinsi != null) {
-						model.addAttribute(provinsi);
+						model.addAttribute("provinsi", provinsi);
+							System.out.println("provinsi ke add ke model");
+							
+						int agama_id = biodata.getAgama_id();
+						AgamaModel agama = agamaDAO.selectAgama(agama_id);
+						if (agama != null) {
+							model.addAttribute("agama", agama);
+							System.out.println(agama.getNama_agama());
+						} else {
+							return "error";
+						}
+						
 						DataKesehatanModel dataKesehatan = dataKesehatanDAO.selectDataKesehatanByUsername(username);
+						System.out.println(provinsi);
 						if (dataKesehatan != null) {
-							model.addAttribute(dataKesehatan);
+							model.addAttribute("dataKesehatan", dataKesehatan);
+								System.out.println("data kesehatan ke add ke model");
 							IjazahModel ijazah = ijazahDAO.selectIjazahByUsername(username);
+							System.out.println(ijazah);
 							if (ijazah != null){
-								model.addAttribute(ijazah);
+								model.addAttribute("ijazah", ijazah);
+									System.out.println("ijazah ke add ke model");
 								int institusi_id = ijazah.getInstitusi_id();
 								InstitusiModel institusi = institusiDAO.selectInstitusi(institusi_id);
-								model.addAttribute(institusi);
-								return "calon_mahasiswa_melihat_idm";
+								System.out.println(provinsi);
+								model.addAttribute("institusi", institusi);
+									System.out.println("institusi ke add ke model");
+								return "calon_mahasiswa-melihat_idm";
 							} else {
-								return "not-found";
+								return "error";
 							}
 						} else {
-							return "not-found";
+							return "error";
 						}
 					}
 				}
 			}
 		}
-		return "not-found";
+		System.out.println("keluuarrrr");
+		return "error";
 	}
 
 	
