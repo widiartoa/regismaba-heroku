@@ -41,7 +41,7 @@ public class VerifikasiIDMController
             model.addAttribute ("mahasiswa", mahasiswa);
             // model.addAttribute ("biodata", biodata);
             if (status_verifikasi.equals ("Unverified")) {
-                String komentarAdded = verifikasiIdmService.selectKomentar ("benathavia.saladdin");
+                String komentarAdded = verifikasiIdmService.selectKomentar (mahasiswa.getUsername ());
                 model.addAttribute ("komentarAdded", komentarAdded);
                 return "staf_verifikasi-detail_idm_mhs_unverified";
             } else if (status_verifikasi.equals ("Verified")) {
@@ -50,16 +50,17 @@ public class VerifikasiIDMController
                 return "staf_verifikasi-detail_idm_mhs";
             }
         } else {
-            return "not-registered";
+            return "error";
         }
     }
 
 
-    @RequestMapping("/staf-verifikasi/detailIDM/verified")
-    public String VerifiedDetailIDM (Model model)
+    @RequestMapping("/staf-verifikasi/detailIDM/verified/{npm}")
+    public String VerifiedDetailIDM (Model model,
+            @PathVariable(value = "npm") String npm)
     {
         // status = "Verified";
-        MahasiswaModel mahasiswa = mahasiswaService.selectMahasiswaByUsername ("benathavia.saladdin");
+        MahasiswaModel mahasiswa = mahasiswaService.selectMahasiswa (npm);
         verifikasiIdmService.updateStatusVerify (mahasiswa.getUsername ());
         if (mahasiswa != null) {
             model.addAttribute ("mahasiswa", mahasiswa);
@@ -70,14 +71,15 @@ public class VerifikasiIDMController
     }
 
 
-    @RequestMapping("/staf-verifikasi/detailIDM/unverified")
+    @RequestMapping("/staf-verifikasi/detailIDM/unverified/{npm}")
     public String unverifyDetailIDM (Model model,
+            @PathVariable(value = "npm") String npm,
             @RequestParam("komentar") String komentar)
     {
-        MahasiswaModel mahasiswa = mahasiswaService.selectMahasiswaByUsername ("benathavia.saladdin");
-        verifikasiIdmService.updateComment ("benathavia.saladdin", komentar);
-        verifikasiIdmService.updateStatusUnverify ("benathavia.saladdin");
-        String komentarAdded = verifikasiIdmService.selectKomentar ("benathavia.saladdin");
+        MahasiswaModel mahasiswa = mahasiswaService.selectMahasiswa (npm);
+        verifikasiIdmService.updateComment (mahasiswa.getUsername (), komentar);
+        verifikasiIdmService.updateStatusUnverify (mahasiswa.getUsername ());
+        String komentarAdded = verifikasiIdmService.selectKomentar (mahasiswa.getUsername ());
         if (mahasiswa != null) {
             model.addAttribute ("mahasiswa", mahasiswa);
             model.addAttribute ("komentarAdded", komentarAdded);
