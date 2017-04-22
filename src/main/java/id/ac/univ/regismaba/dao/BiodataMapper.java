@@ -2,6 +2,8 @@ package id.ac.univ.regismaba.dao;
 
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Result;
+import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
 
 import id.ac.univ.regismaba.model.BiodataModel;
@@ -11,22 +13,36 @@ public interface BiodataMapper {
 	//INSERT BIODATA
 		@Insert("insert into biodata (biodata_id, username, flag_aktif, status_verifikasi, jalan_id, "
 				+ "tanggal_lahir, jenis_kelamin, nomor_telepon, kewarganegaraan, nomor_ktp, sidik_jari, scan_ktp,"
-				+ "scan_kk, scan_surat_pernyataan_mahasiswa, ukuran_jaket) values (#{biodata_id}, #{username}, #{flag_aktif}, #{status_verifikasi}, #{jalan_id},"
+				+ "scan_kk, scan_surat_pernyataan_mahasiswa, ukuran_jaket, created_by, updated_by, updated_at, agama_id) values (#{biodata_id}, #{username}, #{flag_aktif}, #{status_verifikasi}, #{jalan_id},"
 				+ "#{tanggal_lahir}, #{jenis_kelamin}, #{nomor_telepon}, #{kewarganegaraan}, #{nomor_ktp}, #{sidik_jari}, #{scan_ktp},"
-				+ "#{scan_kk}, #{scan_surat_pernyataan_mahasiswa}, #{ukuran_jaket})")
+				+ "#{scan_kk}, #{scan_surat_pernyataan_mahasiswa}, #{ukuran_jaket}, #{created_by}, #{updated_by}, #{updated_at}, #{agama_id})")
 		void insertBiodata(BiodataModel biodata);
 
 		@Select("SELECT * FROM BIODATA WHERE biodata_id=#{biodata_id}")
 		BiodataModel selectBiodata(int biodata_id);
+		
+		@Select("SELECT * FROM BIODATA WHERE username=#{username}")
+		@Results(value = {
+			@Result(property="jalan_id", column="jalan_id"),    
+			@Result(property="tanggal_lahir", column="tanggal_lahir"),
+			@Result(property="jenis_kelamin", column="jenis_kelamin"),
+			@Result(property="nomor_telepon", column="nomor_telepon"),
+			@Result(property="kewarganegaraan", column="kewarganegaraan"),
+			@Result(property="nomor_ktp", column="nomor_ktp"),
+			@Result(property="sidik_jari", column="sidik_jari"),    
+			@Result(property="scan_ktp", column="scan_ktp"),
+			@Result(property="scan_kk", column="scan_kk"),
+			@Result(property="scan_surat_pernyataan_mahasiswa", column="scan_surat_pernyataan_mahasiswa"),
+			@Result(property="status_verifikasi", column="status_verifikasi"),
+			@Result(property="flag_aktif", column="flag_aktif"),
+			@Result(property="ukuran_jaket", column="ukuran_jaket"),
+			@Result(property="created_by", column="created_by"),
+			@Result(property="created_at", column="created_at"),
+			@Result(property="updated_by", column="updated_by"),
+			@Result(property="updated_at", column="updated_at"),
+			@Result(property="agama_id", column="agama_id"),			
+		})
+		BiodataModel selectBiodataByUsername(String username);
+		
+		
 }
-
-
-
-
-
-//@Insert("insert into biodata (biodata_id, data_kesehatan_id, nomor_ijazah, nomor_asuransi, jalan_id, "
-//		+ "tanggal_lahir, jenis_kelamin, nomor_telepon, kewarganegaraan, nomor_ktp, sidik_jari, scan_ktp"
-//		+ "scan_kk, scan_surat_pernyataan_mahasiswa, status_verifikasi, flag_aktif) values (#{biodata_id}, #{data_kesehatan_id}, #{nomor_ijazah}, #{nomor_asuransi}, #{jalan_id},"
-//		+ "#{tanggal_lahir}, #{jenis_kelamin}, #{nomor_telepon}, #{kewarganegaraan}, #{nomor_ktp}, #{sidik_jari}, #{scan_ktp},"
-//		+ "#{scan_kk}, #{scan_surat_pernyataan_mahasiswa}, #{status_verifikasi}, #{flag_aktif})")
-//void insertBiodata(BiodataModel biodata);

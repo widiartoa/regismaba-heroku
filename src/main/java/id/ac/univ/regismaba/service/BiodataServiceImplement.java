@@ -16,16 +16,13 @@ public class BiodataServiceImplement implements BiodataService{
 	@Override
 	public BiodataModel selectBiodata(int biodata_id) {
 		// TODO Auto-generated method stub
-		biodataMapper.selectBiodata(biodata_id);
-		return null;
+		return biodataMapper.selectBiodata(biodata_id);
 	}
 
 	@Override
 	public void insertBiodata(BiodataModel biodata) {
 		log.info("insert "+biodata.getBiodata_id());
 		biodataMapper.insertBiodata(biodata);
-		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
@@ -33,5 +30,10 @@ public class BiodataServiceImplement implements BiodataService{
 		// TODO Auto-generated method stub
 		return null;
 		
+	}
+
+	@Override
+	public BiodataModel selectBiodata(String username) {
+		return biodataMapper.selectBiodataByUsername(username);
 	}
 }

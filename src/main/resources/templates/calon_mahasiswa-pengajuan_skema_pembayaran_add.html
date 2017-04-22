@@ -18,153 +18,184 @@
 				
 				<form name="skemaForm" method="POST" enctype="multipart/form-data" action="/calon-mahasiswa/skema-pembayaran/submit" onsubmit="return validateForm()" class="form-horizontal">
 					<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
-					<div class="form-group">
-						<label class="control-label col-sm-4" for="golongan_id">Pilihan Golongan - Jumlah Biaya - Uang Pangkal* : </label>
-						<div class="input-group col-sm-8">
-							<select type="button" class="form-control" data-toggle="dropdown" name="golongan_id" id="golongan_id">
-								<option th:each="schema,iterationStatus: ${schemas}" th:value="${schema.golongan_id}" th:text="${schema.golongan_id + ' - Rp ' + schema.jumlah_biaya + ' - Rp ' + schema.uang_pangkal}"></option>
-							</select>
+					
+					<div th:switch="${rumpun.rumpun_id}">
+						<div th:case="'1'">
+							<div class="form-group">
+								<label class="control-label col-sm-4" for="golongan_id">Pilihan Golongan - Jumlah Biaya - Uang Pangkal Rumpun Saintek* : </label>
+								<div class="input-group col-sm-8">
+									<select type="button" class="form-control" data-toggle="dropdown" name="golongan_id" id="golongan_id">
+										<option th:each="schema,iterationStatus: ${schemas}" th:value="${schema.golongan_id}" th:text="${schema.golongan_id + ' - Rp ' + schema.jumlah_biaya_ipa + ' - Rp ' + schema.uang_pangkal_ipa}"></option>
+									</select>
+								</div>
+							</div>
+						</div>
+						
+						<div th:case="'2'">
+							<div class="form-group">
+								<label class="control-label col-sm-4" for="golongan_id">Pilihan Golongan - Jumlah Biaya - Uang Pangkal Rumpun Soshum* : </label>
+								<div class="input-group col-sm-8">
+									<select type="button" class="form-control" data-toggle="dropdown" name="golongan_id" id="golongan_id">
+										<option th:each="schema,iterationStatus: ${schemas}" th:value="${schema.golongan_id}" th:text="${schema.golongan_id + ' - Rp ' + schema.jumlah_biaya_ips + ' - Rp ' + schema.uang_pangkal_ips}"></option>
+									</select>
+								</div>
+							</div>
+						</div>
+						
+						<div th:case="'3'">
+							<div class="form-group">
+								<label class="control-label col-sm-4" for="golongan_id">Pilihan Golongan - Jumlah Biaya - Uang Pangkal Rumpun Kesehatan* : </label>
+								<div class="input-group col-sm-8">
+									<select type="button" class="form-control" data-toggle="dropdown" name="golongan_id" id="golongan_id">
+										<option th:each="schema,iterationStatus: ${schemas}" th:value="${schema.golongan_id}" th:text="${schema.golongan_id + ' - Rp ' + schema.jumlah_biaya_ik + ' - Rp ' + schema.uang_pangkal_ik}"></option>
+									</select>
+								</div>
+							</div>
 						</div>
 					</div>
 					
 					<div class="form-group">
-						<label class="control-label col-sm-4" name="label_surat_keterangan_rtrw" for="surat_keterangan_rtrw">Scan Surat Keterangan RT RW* : </label>
+						<label class="control-label col-sm-4" for="surat_keterangan_rtrw">Scan Surat Keterangan RT RW : </label>
 						<div class="input-group">
-							<input type="text" class="form-control" readonly="true" id="surat_keterangan_rtrw"/>
+							<input type="text" class="form-control" readonly="true" id="surat_keterangan_rtrw" />
 							<label class="input-group-btn">
 								<span class="btn btn-default">
-									Browse&hellip; <input type="file" accept="image/*" name="surat_keterangan_rtrw" style="display: none;" multiple="true"  />
+									Browse&hellip; <input type="file" accept="image/*" name="surat_keterangan_rtrw" style="display: none;" multiple="true" />
 								</span>
 							</label>
 						</div>
 					</div>
 					
 					<div class="form-group">
-						<label class="control-label col-sm-4" name="label_foto_rumah" for="foto_rumah">Foto Rumah* : </label>
+						<label class="control-label col-sm-4" for="foto_rumah">Foto Rumah : </label>
 						<div class="input-group">
 							<input type="text" class="form-control" readonly="true" id="foto_rumah" />
 							<label class="input-group-btn">
 								<span class="btn btn-default">
-									Browse&hellip; <input type="file" accept="image/*" name="foto_rumah" style="display: none;" multiple="true"  />
+									Browse&hellip; <input type="file" accept="image/*" name="foto_rumah" style="display: none;" multiple="true" />
 								</span>
 							</label>
 						</div>
 					</div>
 					
 					<div class="form-group">
-						<label class="control-label col-sm-4" for="gaji_pribadi">Gaji Pribadi (rupiah/bulan)* : </label>
+						<label class="control-label col-sm-4" for="gaji_pribadi">Gaji Pribadi (rupiah/bulan) : </label>
 						<div class="input-group">
 							<input type="number" min="0" class="form-control" name="gaji_pribadi" id="gaji_pribadi" placeholder="Contoh: 1000000"/>
 						</div>
 					</div>
 					
 					<div class="form-group">
-						<label class="control-label col-sm-4" name="label_slip_gaji_pribadi" for="slip_gaji_pribadi">Scan Slip Gaji Pribadi* : </label>
+						<label class="control-label col-sm-4" for="slip_gaji_pribadi">Scan Slip Gaji Pribadi : </label>
 						<div class="input-group">
 							<input type="text" class="form-control" readonly="true" id="slip_gaji_pribadi" />
 							<label class="input-group-btn">
 								<span class="btn btn-default">
-									Browse&hellip; <input type="file" accept="image/*" name="slip_gaji_pribadi" style="display: none;" multiple="true"/>
+									Browse&hellip; <input type="file" accept="image/*" name="slip_gaji_pribadi" style="display: none;" multiple="true" />
 								</span>
 							</label>
 						</div>
 					</div>
 
 					<div class="form-group">
-						<label class="control-label col-sm-4" for="gaji_wali1">Gaji Wali 1 (rupiah/bulan)* : </label>
+						<label class="control-label col-sm-4" for="gaji_wali1">Gaji Wali 1 (rupiah/bulan) : </label>
 						<div class="input-group">
 							<input type="number" min="0" class="form-control" name="gaji_wali1" id="gaji_wali1" placeholder="Contoh: 1000000"/>
 						</div>
 					</div>
 					
 					<div class="form-group">
-						<label class="control-label col-sm-4" name="label_slip_gaji_wali1" for="slip_gaji_wali1">Scan Slip Gaji Wali 1* : </label>
+						<label class="control-label col-sm-4" for="slip_gaji_wali1">Scan Slip Gaji Wali 1 : </label>
 						<div class="input-group">
-							<input type="text" class="form-control" readonly="true" id="slip_gaji_wali1"/>
+							<input type="text" class="form-control" readonly="true" id="slip_gaji_wali1" />
 							<label class="input-group-btn">
 								<span class="btn btn-default">
-									Browse&hellip; <input type="file" accept="image/*" name="slip_gaji_wali1" style="display: none;" multiple="true"/>
+									Browse&hellip; <input type="file" accept="image/*" name="slip_gaji_wali1" style="display: none;" multiple="true" />
 								</span>
 							</label>
 						</div>
 					</div>
 					
 					<div class="form-group">
-						<label class="control-label col-sm-4" for="gaji_wali2">Gaji Wali 2 (rupiah/bulan)* : </label>
+						<label class="control-label col-sm-4" for="gaji_wali2">Gaji Wali 2 (rupiah/bulan) : </label>
 						<div class="input-group">
 							<input type="number" min="0" class="form-control" name="gaji_wali2" id="gaji_wali2" placeholder="Contoh: 1000000"/>
 						</div>
 					</div>
 					
 					<div class="form-group">
-						<label class="control-label col-sm-4" name="label_slip_gaji_wali2" for="slip_gaji_wali2">Scan Slip Gaji Wali 2* : </label>
+						<label class="control-label col-sm-4" for="slip_gaji_wali2">Scan Slip Gaji Wali 2 : </label>
 						<div class="input-group">
 							<input type="text" class="form-control" readonly="true" id="slip_gaji_wali2" />
 							<label class="input-group-btn">
 								<span class="btn btn-default">
-									Browse&hellip; <input type="file" accept="image/*" name="slip_gaji_wali2" style="display: none;" multiple="true"/>
+									Browse&hellip; <input type="file" accept="image/*" name="slip_gaji_wali2" style="display: none;" multiple="true" />
 								</span>
 							</label>
 						</div>
 					</div>
 					
 					<div class="form-group">
-						<label class="control-label col-sm-4" for="nilai_tagihan_air">Tagihan Air (rupiah/bulan)* : </label>
+						<label class="control-label col-sm-4" for="nilai_tagihan_air">Tagihan Air (rupiah/bulan) : </label>
 						<div class="input-group">
-							<input type="number" min="0" class="form-control" id="nilai_tagihan_air" name="nilai_tagihan_air" placeholder="Contoh: 1000000"  />
+							<input type="number" min="0" class="form-control" id="nilai_tagihan_air" name="nilai_tagihan_air" placeholder="Contoh: 1000000"/>
 						</div>
 					</div>
 					
 					<div class="form-group">
-						<label class="control-label col-sm-4" name="label_tagihan_air" for="tagihan_air">Scan Tagihan Air* : </label>
+						<label class="control-label col-sm-4" for="tagihan_air">Scan Tagihan Air : </label>
 						<div class="input-group">
 							<input type="text" class="form-control" readonly="true" id="tagihan_air" />
 							<label class="input-group-btn">
 								<span class="btn btn-default">
-									Browse&hellip; <input type="file" accept="image/*" name="tagihan_air" style="display: none;" multiple="true"  />
+									Browse&hellip; <input type="file" accept="image/*" name="tagihan_air" style="display: none;" multiple="true" />
 								</span>
 							</label>
 						</div>
 					</div>
 					
 					<div class="form-group">
-						<label class="control-label col-sm-4" for="nilai_tagihan_listrik">Tagihan Listrik (rupiah/bulan)* : </label>
+						<label class="control-label col-sm-4" for="nilai_tagihan_listrik">Tagihan Listrik (rupiah/bulan) : </label>
 						<div class="input-group">
-							<input type="number" min="0" class="form-control" id="nilai_tagihan_listrik" name="nilai_tagihan_listrik" placeholder="Contoh: 1000000"  />
+							<input type="number" min="0" class="form-control" id="nilai_tagihan_listrik" name="nilai_tagihan_listrik" placeholder="Contoh: 1000000"/>
 						</div>
 					</div>
 					
 					<div class="form-group">
-						<label class="control-label col-sm-4" name="label_tagihan_listrik" for="tagihan_listrik">Scan Tagihan Listrik* : </label>
+						<label class="control-label col-sm-4" for="tagihan_listrik">Scan Tagihan Listrik : </label>
 						<div class="input-group">
 							<input type="text" class="form-control" readonly="true" id="tagihan_listrik" />
 							<label class="input-group-btn">
 								<span class="btn btn-default">
-									Browse&hellip; <input type="file" accept="image/*" name="tagihan_listrik" style="display: none;" multiple="true"  />
+									Browse&hellip; <input type="file" accept="image/*" name="tagihan_listrik" style="display: none;" multiple="true" />
 								</span>
 							</label>
 						</div>
 					</div>
 					
 					<div class="form-group">
-						<label class="control-label col-sm-4" for="nilai_tagihan_telepon">Tagihan Telepon* (rupiah/bulan) : </label>
+						<label class="control-label col-sm-4" for="nilai_tagihan_telepon">Tagihan Telepon (rupiah/bulan) : </label>
 						<div class="input-group">
-							<input type="number" min="0" class="form-control" id="nilai_tagihan_telepon" name="nilai_tagihan_telepon" placeholder="Contoh: 1000000"  />
+							<input type="number" min="0" class="form-control" id="nilai_tagihan_telepon" name="nilai_tagihan_telepon" placeholder="Contoh: 1000000"/>
 						</div>
 					</div>
 					
 					<div class="form-group">
-						<label class="control-label col-sm-4" name="label_tagihan_telepon" for="tagihan_telepon">Scan Tagihan Telepon* : </label>
+						<label class="control-label col-sm-4" for="tagihan_telepon">Scan Tagihan Telepon : </label>
 						<div class="input-group">
 							<input type="text" class="form-control" readonly="true" id="tagihan_telepon" />
 							<label class="input-group-btn">
 								<span class="btn btn-default">
-									Browse&hellip; <input type="file" accept="image/*" name="tagihan_telepon" style="display: none;" multiple="true"  />
+									Browse&hellip; <input type="file" accept="image/*" name="tagihan_telepon" style="display: none;" multiple="true" />
 								</span>
 							</label>
 						</div>
 					</div>
-					<div>* wajib diisi, untuk foto dan hasil scan menggunakan format gambar .jpg atau .png</div>
+					
+					<div>
+						<h4>*wajib diisi, untuk gambar mohon upload gambar dengan format .jpg atau .png</h4>
+					</div>
+					
 					<hr/>
 					
 					<div class="btn-group" role="group" aria-label="...">
@@ -210,22 +241,13 @@
 				});
 			});
 			
-			function validateForm()
-		    {
-			    var a = document.forms["skemaForm"]["surat_keterangan_rtrw"].value;
-			    var b = document.forms["skemaForm"]["foto_rumah"].value;
-			    var c1 = document.forms["skemaForm"]["tagihan_air"].value;
-			    var c2 = document.forms["skemaForm"]["nilai_tagihan_air"].value;
-			    var d1 = document.forms["skemaForm"]["tagihan_listrik"].value;
-			    var d2 = document.forms["skemaForm"]["nilai_tagihan_listrik"].value;
-			    var e1 = document.forms["skemaForm"]["tagihan_telepon"].value;
-			    var e2 = document.forms["skemaForm"]["nilai_tagihan_telepon"].value;
-			    if (a==null || a=="" || a=0, b==null || b=="" || b=0, c1==null || c1=="" c1=0, c2==null || c2=="" || c2=0, d1==null || d1=="" || d1=0, d2==null || d2=="" || d2=0, e1==null || e1=="" || e1=0, e2==null || e2=="" || e2=0)
-			      {
-				      alert("Please Fill All Required Field");
-				      return false;				
-			      }
-		    }
+/* 			function validateForm() {
+			    var x = document.forms["skemaForm"]["foto_rumah"].value;
+			    if (x == "") {
+			        alert("Nilai gaji pribadi perlu dimasukkan");
+			        return false;
+			    }
+			} */
 		</script>
     </body>
 </html>

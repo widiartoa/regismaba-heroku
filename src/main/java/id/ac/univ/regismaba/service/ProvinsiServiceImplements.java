@@ -25,4 +25,10 @@ public class ProvinsiServiceImplements implements ProvinsiService{
 		// TODO Auto-generated method stub
 		return provinsiMapper.selectAllProvinsi();
 	}
+
+	@Override
+	public ProvinsiModel selectProvinsi(int provinsi_id) {
+		// TODO Auto-generated method stub
+		return provinsiMapper.selectProvinsi(provinsi_id);
+	}
 }

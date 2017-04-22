@@ -25,4 +25,8 @@ public class BiodataModel {
 	String status_verifikasi;
 	String flag_aktif;
 	String ukuran_jaket;
+	String created_by;
+	String updated_by;
+	String updated_at;
+	int agama_id;
 }
