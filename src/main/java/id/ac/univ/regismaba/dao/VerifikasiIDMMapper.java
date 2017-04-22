@@ -11,17 +11,26 @@ import org.apache.ibatis.annotations.Update;
 public interface VerifikasiIDMMapper
 {
     @Select("select status_verifikasi from biodata where username = #{username}")
-    @Results (value = {
-                        @Result(property="status_verifikasi", column="status_verifikasi")
+    @Results(value = {
+            @Result(property = "status_verifikasi", column = "status_verifikasi")
     })
-    String selectStatusVerifikasi(@Param("username") String username);
-    
+    String selectStatusVerifikasi (@Param("username") String username);
+
+    @Select("select komentar from biodata where username = #{username}")
+    @Results(value = {
+            @Result(property = "komentar", column = "komentar")
+    })
+    String selectKomentar (@Param("username") String username);
+
     @Update("update biodata set status_verifikasi = 'Verified' where username = #{username}")
-    void updateStatusVerify(@Param("username") String username);
-    
+    void updateStatusVerify (@Param("username") String username);
+
+
     @Update("update biodata set status_verifikasi = 'Unverified' where username = #{username}")
-    void updateStatusUnverify(@Param("username") String username);
-    
+    void updateStatusUnverify (@Param("username") String username);
+
+
     @Update("update biodata set komentar = #{komentar} where username = #{username}")
-    void updateComment(@Param("username") String username, @Param("komentar") String komentar);
+    void updateComment (@Param("username") String username,
+            @Param("komentar") String komentar);
 }
