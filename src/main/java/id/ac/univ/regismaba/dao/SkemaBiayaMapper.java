@@ -19,11 +19,14 @@ public interface SkemaBiayaMapper {
 	@Select("select * from skema_pembayaran")
 	List<SkemaBiayaModel> selectAllSBM();
 	
-	@Insert("insert into skema_pembayaran (jumlah_biaya, uang_pangkal) values "
-			+ "(#{jumlah_biaya}, #{uang_pangkal})")
+	@Insert("insert into skema_pembayaran (jumlah_biaya_ipa, uang_pangkal_ipa, jumlah_biaya_ips, uang_pangkal_ips, "
+			+ "jumlah_biaya_ik, uang_pangkal_ik, created_by, created_at, updated_by, updated_at) values (#{jumlah_biaya_ipa}, #{uang_pangkal_ipa}, #{jumlah_biaya_ips}, "
+			+ "#{uang_pangkal_ips}, #{jumlah_biaya_ik}, #{uang_pangkal_ik}, #{created_by}, current_timestamp, #{created_by}, current_timestamp)")
 	void insertSBM(SkemaBiayaModel sbm);
 	
-	@Update("update skema_pembayaran set jumlah_biaya=#{jumlah_biaya}, uang_pangkal=#{uang_pangkal} "
+	@Update("update skema_pembayaran set jumlah_biaya_ipa=#{jumlah_biaya_ipa}, uang_pangkal_ipa=#{uang_pangkal_ipa}, "
+			+ "jumlah_biaya_ips=#{jumlah_biaya_ips}, uang_pangkal_ips=#{uang_pangkal_ips}, "
+			+ "jumlah_biaya_ik=#{jumlah_biaya_ik}, uang_pangkal_ik=#{uang_pangkal_ik} "
 			+ "where golongan_id=#{golongan_id}")
 	void updateSBM(SkemaBiayaModel sbm);
 	

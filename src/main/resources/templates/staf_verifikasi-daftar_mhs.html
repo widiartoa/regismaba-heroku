@@ -6,7 +6,7 @@
 </head>
 
 <body>
-	<div th:include="staf-navbar"></div>
+	<div th:include="staf_verifikasi-navbar"></div>
 
 	<div class="container">
 		<div class="content">
@@ -42,9 +42,9 @@
 				<tbody>
 					<tr th:each="mahasiswa,iterationStatus: ${mahasiswas}" th:if="${mahasiswa.biodata!=null}">
 						<td th:text="${mahasiswa.username}" class="center">username</td>
-						<td th:text="'nunggu update database'" class="center">nama lengkap</td>
+						<td th:text="${mahasiswa.nama_lengkap}" class="center">nama lengkap</td>
 						<td th:text="${mahasiswa.npm}">npm</td>
-						<td th:text="'nunggu update database'" class="center">jurusan</td>
+						<td th:text="${mahasiswa.program_studi.nama_program_studi}" class="center">jurusan</td>
 						<td th:text="${mahasiswa.biodata.status_verifikasi}">status_verifikasi </td>
 						<td><a th:href="'/staf/' + ${mahasiswa.npm} + '/verifikasi'"
 							class="btn btn-warning"> <i class="glyphicon glyphicon-pencil"></i>

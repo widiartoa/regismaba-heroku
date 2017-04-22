@@ -12,6 +12,7 @@ import org.apache.ibatis.annotations.Update;
 
 import id.ac.univ.regismaba.model.BiodataModel;
 import id.ac.univ.regismaba.model.MahasiswaModel;
+import id.ac.univ.regismaba.model.ProgramStudiModel;
 
 @Mapper
 public interface MahasiswaMapper {
@@ -67,8 +68,23 @@ public interface MahasiswaMapper {
 	})
 	List<MahasiswaModel> selectAllMahasiswa();
 	
+	@Select("select nama_lengkap from user where username=#{username}")
+	String selectNamaLengkap(@Param("username") String username);
+	
 	@Select("select * from biodata where username=#{username}")
 	BiodataModel selectBiodataMahasiswa(@Param("username") String username);
+	
+	@Select("select * from program_studi where program_studi_id=#{program_studi_id}")
+	ProgramStudiModel selectProgramStudiMahasiswa(@Param("program_studi_id") int program_studi_id);
+	
+	@Select("select nama_program from program where program_id=#{program_id}")
+	String selectProgramMahasiswa(@Param("program_id") int program_id);
+	
+	@Select("select nama_fakultas from fakultas where fakultas_id=#{fakultas_id}")
+	String selectFakultasMahasiswa(@Param("fakultas_id") int fakultas_id);
+	
+	@Select("select nama_jenjang from jenjang where jenjang_id=#{jenjang_id}")
+	String selectJenjangMahasiswa(@Param("jenjang_id") int jenjang_id);
 	
 	@Insert("insert into mahasiswa (biodata_id) values (#{biodata_id}) where npm = #{npm}")
 	void insertBiodataMahasiswa(@Param("npm") String npm, @Param("biodata_id") String biodata_id);
@@ -89,4 +105,3 @@ public interface MahasiswaMapper {
 	void updatePengajuanMahasiswa(@Param("npm") String npm, @Param("pengajuan_id") String pengajuan_id);	
 	
 }
-

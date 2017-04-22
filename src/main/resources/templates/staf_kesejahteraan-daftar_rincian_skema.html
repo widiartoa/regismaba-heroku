@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<div th:replace="resources"></div>
+<title>Staf Kesejahteraan - Melihat Daftar Rincian Skema Pembayaran</title>
+</head>
+
+<body>
+	<div th:include="staf_kesejahteraan-navbar"></div>
+
+	<div class="container">
+		<div class="content">
+			<div class="row">
+				<div class="col-sm-12">
+					<h3>Daftar Rincian Skema Pembayaran</h3>
+				</div>
+			</div>
+
+			<table class="table">
+				<thead>
+					<tr>
+						<td>Golongan</td>
+						<td>Jumlah Biaya Semester (Saintek)</td>
+						<td>Uang pangkal (Saintek)</td>
+						<td>Jumlah Biaya Semester (Soshum)</td>
+						<td>Uang pangkal (Soshum)</td>
+						<td>Jumlah Biaya Semester (Kesehatan)</td>
+						<td>Uang pangkal (Kesehatan)</td>
+						<td>Ubah</td>
+					</tr>
+				</thead>
+				<tbody>
+					<div th:each="schema,iterationStatus: ${schemas}">
+						<tr>
+							<td th:text="${schema.golongan_id}">Golongan</td>
+							<td th:text="${schema.jumlah_biaya_ipa}">Jumlah Biaya IPA</td>
+							<td th:text="${schema.uang_pangkal_ipa}">Uang Pangkal IPA</td>
+							<td th:text="${schema.jumlah_biaya_ips}">Jumlah Biaya IPS</td>
+							<td th:text="${schema.uang_pangkal_ips}">Uang Pangkal IPS</td>
+							<td th:text="${schema.jumlah_biaya_ik}">Jumlah Biaya IK</td>
+							<td th:text="${schema.uang_pangkal_ik}">Uang Pangkal IK</td>
+							<td>
+								<a th:href="'/staf-kesejahteraan/skema-pembayaran/update/' + ${schema.golongan_id}">
+									<button type="button" class="btn btn-warning">Ubah</button>
+								</a>
+							</td>
+						</tr>
+					</div>
+				</tbody>
+			</table>
+			
+			<div class="btn-group" role="group" aria-label="...">
+			  <a th:href="'/staf-kesejahteraan/skema-pembayaran/insert'"><button type="button" class="btn btn-warning">Buat Skema Pembayaran</button></a>
+			</div>
+		</div>
+	</div>
+
+	<div class="footer">Modul Registrasi Mahasiswa Baru</div>
+
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$('.table').dataTable();
+		});
+	</script>
+</body>
+</html>
