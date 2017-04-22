@@ -17,10 +17,10 @@ public class RekapitulasiJaketServiceImpl implements RekapitulasiJaketService {
 	RekapitulasiJaketMapper rjm;
 
 	@Override
-	public RekapitulasiJaketModel selectRekapJaket(String ukuran_jaket) {
+	public RekapitulasiJaketModel selectRekapUkuran(String ukuran_jaket) {
 		// TODO Auto-generated method stub
 		log.info ("select ukuran_jaket with size {}", ukuran_jaket);
-		return rjm.selectRekapJaket(ukuran_jaket);
+		return rjm.selectRekapUkuran(ukuran_jaket);
 	}
 
 	@Override
