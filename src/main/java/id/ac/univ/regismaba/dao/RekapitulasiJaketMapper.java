@@ -15,7 +15,7 @@ public interface RekapitulasiJaketMapper {
 	RekapitulasiJaketModel selectRekapUkuran(@Param("ukuran_jaket") String ukuran_jaket);
 	
 	@Select("select f.nama_fakultas as jenis_rekap, count(*) as jumlah from fakultas f, program_studi p, "
-			+ "mahasiswa m where f.fakultas_id=p.fakultas_id and p.program_studi_id=m.program_studi_id and"
+			+ "mahasiswa m where f.fakultas_id=p.fakultas_id and p.program_studi_id=m.program_studi_id and "
 			+ "f.nama_fakultas=#{nama_fakultas}")
 	RekapitulasiJaketModel selectRekapFakultas(@Param("nama_fakultas") String nama_fakultas);
 	
