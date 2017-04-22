@@ -4,6 +4,8 @@ public interface VerifikasiIDMService
 {
     String selectStatusVerifikasi (String username);
     
+    String selectKomentar(String username);
+    
     void updateStatusVerify (String username);
     
     void updateStatusUnverify (String username);

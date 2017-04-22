@@ -21,6 +21,13 @@ public class VerifikasiIDMServiceImplement implements VerifikasiIDMService
     }
     
     @Override
+    public String selectKomentar(String username)
+    {
+       log.info ("select komentar of " + username);
+       return verifikasiIDMMapper.selectKomentar (username);
+    }
+    
+    @Override
     public void updateStatusVerify (String username)
     {
         log.info ("update " + username);
