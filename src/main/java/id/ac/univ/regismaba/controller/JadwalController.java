@@ -1,5 +1,6 @@
 package id.ac.univ.regismaba.controller;
 
+import java.text.ParseException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,7 +8,9 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import id.ac.univ.regismaba.model.JadwalEptModel;
 import id.ac.univ.regismaba.model.JadwalKesehatanModel;
@@ -78,4 +81,15 @@ public class JadwalController {
 		return "staf_registrasi-daftar_jadwal";
 	}
 	
+	@PostMapping("/staf-registrasi/membuat-jadwal/submit")
+	public String insertJadwal(
+			@RequestParam(value = "hari", required = false) String hari,
+			@RequestParam(value = "waktu_awal", required = false) String waktu_awal,
+			@RequestParam(value = "waktu_akhir", required = false) String waktu_akhir,
+			@RequestParam(value = "kapasitas", required = false) int kapasitas)
+			throws ParseException {
+		jadwalService.insertJadwalRegis(hari, waktu_awal, waktu_akhir, kapasitas);
+		
+		return "redirect:/staf-registrasi/daftar-jadwal";
+	}
 }

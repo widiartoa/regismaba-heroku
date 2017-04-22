@@ -1,6 +1,7 @@
 package id.ac.univ.regismaba.service;
 
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -74,9 +75,31 @@ public class JadwalServiceImplement implements JadwalService {
 			if (!(jadwalRegis.getFakultas_id()>0)){
 				jadwalRegis.setFakultas("fakultas belum ditentukan");
 			}
+			log.info("created_at {}", jadwalRegis.getCreated_at());
 		}
 
 		return jadwalRegisList;
+	}
+	
+	@Override
+	public void insertJadwalRegis(String hari, String waktu_awal, String waktu_akhir, int kapasitas) throws ParseException{
+		// TODO Auto-generated method stub
+		DateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+		Date timestamp_awal = format.parse(hari + " " + waktu_awal);
+		Date timestamp_akhir = format.parse(hari + " " + waktu_akhir);		
+		log.info("insert jadwal registrasi dengan waktu awal {} dan waktu akhir {}", timestamp_awal, timestamp_akhir);
+		
+		JadwalRegisModel jadwalRegis = new JadwalRegisModel();
+		jadwalRegis.setKapasitas(kapasitas);
+		jadwalRegis.setTanggal(hari);
+		jadwalRegis.setWaktu_awal(waktu_awal);
+		jadwalRegis.setWaktu_akhir(waktu_akhir);
+		jadwalRegis.setTimestamp_awal(timestamp_awal);
+		jadwalRegis.setTimestamp_akhir(timestamp_akhir);
+		jadwalRegis.setCreated_by("redita.arifin");
+		jadwalRegis.setUpdated_by("redita.arifin");
+		
+		jadwalMapper.insertJadwalRegis(jadwalRegis);
 	}
 
 	/**
