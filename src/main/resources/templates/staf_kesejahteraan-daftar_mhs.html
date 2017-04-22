@@ -49,7 +49,7 @@
 				<tbody>
 					<span th:each="pengajuan,iterationStatus: ${pengajuans}">
 						<tr th:each="mahasiswa,iterationStatus: ${mahasiswas}"
-							th:if="${pengajuan.username=mahasiswa.username}">
+							th:if="${pengajuan.username.equals(mahasiswa.username)}">
 							<td th:text="${mahasiswa.username}">username</td>
 							<td th:text="${mahasiswa.nama_lengkap}">nama lengkap</td>
 							<td th:text="${mahasiswa.npm}">npm</td>
