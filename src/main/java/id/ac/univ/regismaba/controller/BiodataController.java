@@ -269,8 +269,8 @@ public class BiodataController {
 //	}
     
 	
-	@RequestMapping("/biodata/view/")
-	public String view(Model model, @RequestParam(value = "username", required = false) String username) {
+	@RequestMapping("/biodata/view/{username}")
+	public String view(Model model, @PathVariable(value = "username") String username) {
 		BiodataModel biodata = biodataDAO.selectBiodata(username);
 		if (biodata != null) {
 			model.addAttribute("biodata", biodata);

@@ -34,6 +34,6 @@ public class BiodataServiceImplement implements BiodataService{
 
 	@Override
 	public BiodataModel selectBiodata(String username) {
-		return biodataMapper.selectBiodata(username);
+		return biodataMapper.selectBiodataByUsername(username);
 	}
 }

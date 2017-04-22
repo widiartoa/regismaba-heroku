@@ -42,7 +42,7 @@ public interface BiodataMapper {
 			@Result(property="updated_at", column="updated_at"),
 			@Result(property="agama_id", column="agama_id"),			
 		})
-		BiodataModel selectBiodata(String username);
+		BiodataModel selectBiodataByUsername(String username);
 		
 		
 }
