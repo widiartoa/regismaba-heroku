@@ -872,15 +872,17 @@ CREATE TABLE `pengajuan_skema_pembayaran` (
   `created_by` varchar(30) NOT NULL,
   `created_at` timestamp NOT NULL,
   `updated_by` varchar(30) NOT NULL,
-  `updated_at` timestamp NOT NULL
+  `updated_at` timestamp NOT NULL,
+  `status_pengajuan` varchar(255) NOT NULL,
+  `komentar` varchar(255)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `pengajuan_skema_pembayaran`
 --
 
-INSERT INTO `pengajuan_skema_pembayaran` (`pengajuan_id`, `golongan_id`, `username`, `gaji_pribadi`, `gaji_wali1`, `gaji_wali2`, `nilai_tagihan_air`, `nilai_tagihan_listrik`, `nilai_tagihan_telepon`, `surat_keterangan_rtrw`, `foto_rumah`, `slip_gaji_pribadi`, `slip_gaji_wali1`, `slip_gaji_wali2`, `tagihan_air`, `tagihan_listrik`, `tagihan_telepon`, `created_by`, `created_at`, `updated_by`, `updated_at`) VALUES
-(1, 2, 'benathavia.saladdin', 5000000, 3000000, 1000000, 400000, 100000, 0, 'fr1.jpg', 'sgp1.jpg', 'sgw11.jpg', 'sgw21.jpg', NULL, 'ta1.jpg', 'tl1.jpg', 'tt1.jpg', 'benathavia.saladdin', '2017-05-10 08:00:00', 'benathavia.saladdin', '2017-05-10 08:00:00');
+INSERT INTO `pengajuan_skema_pembayaran` (`pengajuan_id`, `golongan_id`, `username`, `gaji_pribadi`, `gaji_wali1`, `gaji_wali2`, `nilai_tagihan_air`, `nilai_tagihan_listrik`, `nilai_tagihan_telepon`, `surat_keterangan_rtrw`, `foto_rumah`, `slip_gaji_pribadi`, `slip_gaji_wali1`, `slip_gaji_wali2`, `tagihan_air`, `tagihan_listrik`, `tagihan_telepon`, `created_by`, `created_at`, `updated_by`, `updated_at`, `status_pengajuan`) VALUES
+(1, 2, 'benathavia.saladdin', 5000000, 3000000, 1000000, 400000, 100000, 0, 'fr1.jpg', 'sgp1.jpg', 'sgw11.jpg', 'sgw21.jpg', NULL, 'ta1.jpg', 'tl1.jpg', 'tt1.jpg', 'benathavia.saladdin', '2017-05-10 08:00:00', 'benathavia.saladdin', '2017-05-10 08:00:00', 'Unverified');
 
 -- --------------------------------------------------------
 
