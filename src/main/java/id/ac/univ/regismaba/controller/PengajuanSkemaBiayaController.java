@@ -297,7 +297,7 @@ public class PengajuanSkemaBiayaController {
     		String fileContentType = file.getContentType();
     		
     		if(contentTypes.contains(fileContentType)) {
-    			storageService.store(file, num + "-1");
+    			storageService.store(file, num + "-" + type);
     			
     			String path = storageService.load(file.getOriginalFilename()).toString();
     			
@@ -335,14 +335,14 @@ public class PengajuanSkemaBiayaController {
     			
     			System.out.println("update pengajuan");
     			
-    			if(type == 1) {skema.setSurat_keterangan_rtrw("no_data");}
-    			if(type == 2) {skema.setFoto_rumah("no_data");}
-    			if(type == 3) {skema.setSlip_gaji_pribadi("no_data");}
-    			if(type == 4) {skema.setSlip_gaji_wali1("no_data");}
-    			if(type == 5) {skema.setSlip_gaji_wali2("no_data");}
-    			if(type == 6) {skema.setTagihan_air("no_data");}
-    			if(type == 7) {skema.setTagihan_listrik("no_data");}
-    			if(type == 8) {skema.setTagihan_telepon("no_data");}
+    			if(type == 1) {skema.setSurat_keterangan_rtrw("-");} //cannot be null
+    			if(type == 2) {skema.setFoto_rumah("-");} //cannot be null
+    			if(type == 3) {skema.setSlip_gaji_pribadi("-");}
+    			if(type == 4) {skema.setSlip_gaji_wali1("-");}
+    			if(type == 5) {skema.setSlip_gaji_wali2("-");}
+    			if(type == 6) {skema.setTagihan_air("-");} //cannot be null
+    			if(type == 7) {skema.setTagihan_listrik("-");}
+    			if(type == 8) {skema.setTagihan_telepon("-");}
     		}
     		//for insert
     		else{
