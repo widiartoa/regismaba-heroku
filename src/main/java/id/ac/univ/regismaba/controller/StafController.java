@@ -7,10 +7,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import id.ac.univ.regismaba.model.BiodataModel;
 import id.ac.univ.regismaba.model.MahasiswaModel;
 import id.ac.univ.regismaba.model.PengajuanSkemaBiayaModel;
+import id.ac.univ.regismaba.service.BiodataService;
 import id.ac.univ.regismaba.service.MahasiswaService;
 import id.ac.univ.regismaba.service.PengajuanSkemaBiayaService;
+import id.ac.univ.regismaba.service.VerifikasiIDMService;
 
 @Controller
 public class StafController {
@@ -21,6 +24,9 @@ public class StafController {
 	@Autowired
 	PengajuanSkemaBiayaService pengajuanSkemaBiayaDAO;
 
+	@Autowired
+	VerifikasiIDMService verifikasiIdmDAO;
+	
 	// TODO: Tambahkan @RequestMapping("/") setelah bisa ambil session
 	// untuk Verifikator redirect:/staf_verifikasi/daftar_mhs
 	// untuk Staf Registrasi redirect:/staf_registrasi/daftar_mhs
@@ -31,6 +37,8 @@ public class StafController {
 	public String daftarMhsVerifikator(Model model) {
 		List<MahasiswaModel> mahasiswas = mahasiswaDAO.selectAllMahasiswa();
 		model.addAttribute("mahasiswas", mahasiswas);
+		List<BiodataModel> biodatas = verifikasiIdmDAO.selectAllBiodata ();
+		model.addAttribute ("biodatas", biodatas);
 		// TODO: BiodataModel harus memiliki atribut username
 		return "staf_verifikasi-daftar_mhs";
 	}
