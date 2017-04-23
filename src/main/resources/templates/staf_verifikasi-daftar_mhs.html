@@ -59,6 +59,7 @@
 
 	<div th:each="mahasiswa,iterationStatus:${mahasiswas}">
 	<div th:each="biodata,iterationStatus:${biodatas}" th:if="${biodata.username.equals(mahasiswa.username)}">
+	<div th:each="alamat,iterationStatus:${alamats}" th:if="${alamat.created_by.equals(biodata.username)}">
 		<div th:id="'mahasiswaModel'+${mahasiswa.npm}" class="modal fade" role="dialog">
 			<div class="modal-dialog">
 				<div class="modal-content">
@@ -98,10 +99,22 @@
 								</tr>
 								<tr>
 									<td>
+										<div class="col-sm-12"><h4 th:text="'Tanggal Lahir'">tanggal lahir</h4></div>
+									</td>
+									<td>
+										<div class="col-sm-12"><h4 th:text="${biodata.tanggal_lahir}">tanggal lahir</h4></div>
+									</td>
+								</tr>
+								<tr>
+									<td>
 										<div class="col-sm-12"><h4 th:text="'Alamat'">alamat</h4></div>
 									</td>
 									<td>
-										<div class="col-sm-12"><h4 th:text="'alamat'">INI BELOM</h4></div>
+										<div th:each="kotakab,iterationStatus:${kotakabs}" th:if="${kotakab.kota_kabupaten_id == alamat.kota_kabupaten_id}">
+											<div th:each="provinsi,iterationStatus:${provinsis}" th:if="${provinsi.provinsi_id == kotakab.provinsi_id}" class="col-sm-12">
+												<h4 th:text="${alamat.jalan} + ', ' + ${alamat.kecamatan} + ', ' + ${alamat.kelurahan} + ', ' + ${kotakab.nama_kota_kabupaten} + ', ' + ${provinsi.nama_provinsi} + ', ' + ${alamat.kode_pos}">alamat</h4>
+											</div>
+										</div>
 									</td>
 								</tr>
 								<tr>
@@ -109,7 +122,8 @@
 										<div class="col-sm-12"><h4 th:text="'Jenis Kelamin'">jenis kelamin</h4></div>
 									</td>
 									<td>
-										<div class="col-sm-12"><h4 th:text="'jk'">jenis kelamin</h4></div>
+										<div th:if="${biodata.jenis_kelamin.equals('L')}" class="col-sm-12"><h4 th:text="'Laki-laki'">jenis kelamin</h4></div>
+										<div th:if="${biodata.jenis_kelamin.equals('P')}" class="col-sm-12"><h4 th:text="'Perempuan'">jenis kelamin</h4></div>
 									</td>
 								</tr>
 								<tr>
@@ -117,7 +131,7 @@
 										<div class="col-sm-12"><h4 th:text="'Nomor Telepon'">nomor telepon</h4></div>
 									</td>
 									<td>
-										<div class="col-sm-12"><h4 th:text="'no telp'">nomor telepon</h4></div>
+										<div class="col-sm-12"><h4 th:text="${biodata.nomor_telepon}">nomor telepon</h4></div>
 									</td>
 								</tr>
 								<tr>
@@ -125,7 +139,7 @@
 										<div class="col-sm-12"><h4 th:text="'Kewaganegaraan'">Kewaganegaraan</h4></div>
 									</td>
 									<td>
-										<div class="col-sm-12"><h4 th:text="'Kewaganegaraan'">Kewaganegaraan</h4></div>
+										<div class="col-sm-12"><h4 th:text="${biodata.kewarganegaraan}">Kewaganegaraan</h4></div>
 									</td>
 								</tr>
 								<tr>
@@ -133,31 +147,31 @@
 										<div class="col-sm-12"><h4 th:text="'Sidik Jari'">sidik jari </h4></div>
 									</td>
 									<td>
-										<div class="col-sm-12"><h4 th:text="'sidik'">sidik jari</h4></div>
+										<div class="col-sm-12"><a th:href="${biodata.sidik_jari}"><h4>(unduh scan sidik jari)</h4></a></div>
 									</td>
 								</tr>
 								<tr>
 									<td>
-										<div class="col-sm-12"><h4 th:text="'scan ktp'">scan ktp</h4></div>
+										<div class="col-sm-12"><h4 th:text="'Scan Kartu Tanda Penduduk'">scan ktp</h4></div>
 									</td>
 									<td>
-										<div class="col-sm-12"><h4 th:text="'scan ktp'">scan ktp</h4></div>
-									</td>
-								</tr>
-								<tr>
-									<td>
-										<div class="col-sm-12"><h4 th:text="'scan kk'">scan kk</h4></div>
-									</td>
-									<td>
-										<div class="col-sm-12"><h4 th:text="'scan kk'">scan kk</h4></div>
+										<div class="col-sm-12"><a th:href="${biodata.scan_ktp}"><h4>(unduh scan KTP)</h4></a></div>
 									</td>
 								</tr>
 								<tr>
 									<td>
-										<div class="col-sm-12"><h4 th:text="'scan surat pernyataan'">scan surat pernyataan</h4></div>
+										<div class="col-sm-12"><h4 th:text="'Scan Kartu Keluarga'">scan kk</h4></div>
 									</td>
 									<td>
-										<div class="col-sm-12"><h4 th:text="'scan surat pernyataan'">scan surat pernyataan</h4></div>
+										<div class="col-sm-12"><a th:href="${biodata.scan_kk}"><h4>(unduh scan kartu keluarga)</h4></a></div>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<div class="col-sm-12"><h4 th:text="'Scan Surat Pernyataan Mahasiswa'">scan surat pernyataan</h4></div>
+									</td>
+									<td>
+										<div class="col-sm-12"><a th:href="${biodata.scan_surat_pernyataan_mahasiswa}"><h4>(unduh scan surat pernyataan mahasiswa)</h4></a></div>
 									</td>
 								</tr>
 							</tbody>
@@ -167,6 +181,8 @@
 										<div class="col-sm-12"><h3></h3></div>
 									</td>
 								</tr>
+								<div th:each="ijazah,iterationStatus:${ijazahs}" th:if="${ijazah.username.equals(biodata.username)}">
+									<div th:each="institusi,iterationStatus:${institusis}" th:if="${ijazah.institusi_id == institusi.institusi_id}" class="col-sm-12">
 								<tr>
 									<td>
 										<div class="col-sm-12"><h3 th:text="'Ijazah'">Ijazah</h3></div>
@@ -177,7 +193,7 @@
 										<div class="col-sm-12"><h4 th:text="'Nomor Ijazah'">nomor ijazah</h4></div>
 									</td>
 									<td>
-										<div class="col-sm-12"><h4 th:text="'Nomor Ijazah'">nomor ijazah</h4></div>
+										<div class="col-sm-12"><h4 th:text="${ijazah.nomor_ijazah}">nomor ijazah</h4></div>
 									</td>
 								</tr>
 								<tr>
@@ -185,7 +201,7 @@
 										<div class="col-sm-12"><h4 th:text="'Nama Institusi'">nama institusi</h4></div>
 									</td>
 									<td>
-										<div class="col-sm-12"><h4 th:text="'Nama Institusi'">nama institusi</h4></div>
+										<div class="col-sm-12"><h4 th:text="${institusi.nama_institusi}">nama institusi</h4></div>
 									</td>
 								</tr>
 								<tr>
@@ -193,7 +209,7 @@
 										<div class="col-sm-12"><h4 th:text="'Jenjang'">jenjang</h4></div>
 									</td>
 									<td>
-										<div class="col-sm-12"><h4 th:text="'Jenjang'">jenjang</h4></div>
+										<div class="col-sm-12"><h4 th:text="${ijazah.jenjang}">jenjang</h4></div>
 									</td>
 								</tr>
 								<tr>
@@ -201,7 +217,7 @@
 										<div class="col-sm-12"><h4 th:text="'Scan Ijazah'">scan ijazah</h4></div>
 									</td>
 									<td>
-										<div class="col-sm-12"><h4 th:text="'Scan Ijazah'">scan ijazah</h4></div>
+										<div class="col-sm-12"><a th:href="${ijazah.scan_ijazah}"><h4>(unduh scan ijazah)</h4></a></div>
 									</td>
 								</tr>
 								<tr>
@@ -209,9 +225,11 @@
 										<div class="col-sm-12"><h4 th:text="'Scan Pernyataan Ijazah'">scan pernyataan ijazah</h4></div>
 									</td>
 									<td>
-										<div class="col-sm-12"><h4 th:text="'Scan Pernyataan Ijazah'">scan pernyataan ijazah</h4></div>
+										<div class="col-sm-12"><a th:href="${ijazah.scan_pernyataan_ijazah}"><h4>(unduh scan pernyataan_ijazah)</h4></a></div>
 									</td>
 								</tr>
+								</div>
+								</div>
 							</tbody>
 							<tbody>
 								<tr>
@@ -219,6 +237,7 @@
 										<div class="col-sm-12"><h3></h3></div>
 									</td>
 								</tr>
+								<div th:each="dataKes,iterationStatus:${dataKess}" th:if="${dataKes.username.equals(biodata.username)}" class="col-sm-12">
 								<tr>
 									<td>
 										<div class="col-sm-12"><h3 th:text="'Data Kesehatan'">Data Kesehatan</h3></div>
@@ -226,20 +245,21 @@
 								</tr>
 								<tr>
 									<td>
-										<div class="col-sm-12"><h4 th:text="'Nomor Ijazah'">nomor ijazah</h4></div>
+										<div class="col-sm-12"><h4 th:text="'Form Survey Kesehatan'">form survey</h4></div>
 									</td>
 									<td>
-										<div class="col-sm-12"><h4 th:text="'Nomor Ijazah'">nomor ijazah</h4></div>
+										<div class="col-sm-12"><a th:href="${dataKes.form_survey_kesehatan}"><h4>(unduh form survey kesehatan)</h4></a></div>
 									</td>
 								</tr>
 								<tr>
 									<td>
-										<div class="col-sm-12"><h4 th:text="'Nama Institusi'">nama institusi</h4></div>
+										<div class="col-sm-12"><h4 th:text="'Hasil Tes Kesehatan'">hasil tes</h4></div>
 									</td>
 									<td>
-										<div class="col-sm-12"><h4 th:text="'Nama Institusi'">nama institusi</h4></div>
+										<div class="col-sm-12"><a th:href="${dataKes.hasil_tes_kesehatan}"><h4>(unduh scan hasil tes kesehatan)</h4></a></div>
 									</td>
 								</tr>
+								</div>
 							</tbody>
 						</table>
 					</div>
@@ -278,6 +298,7 @@
 				</div>
 			</div>
 		</div>
+	</div>
 	</div>
 	</div>		
 					
