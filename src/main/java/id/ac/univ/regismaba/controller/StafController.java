@@ -5,7 +5,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import id.ac.univ.regismaba.model.MahasiswaModel;
 import id.ac.univ.regismaba.model.PengajuanSkemaBiayaModel;
@@ -84,5 +86,16 @@ public class StafController {
 		model.addAttribute("skemaList", skemaList);
 		
 		return "staf_kesejahteraan-daftar_mhs";
+	}
+	
+	@RequestMapping("/staf-kesejahteraan/daftar-mhs/submit{npm}")
+	public String daftarMhsKesejahteraanSubmitVerifikasiPembayaran(Model model,
+																	@PathVariable(value = "npm") String npm,
+																	@RequestParam(value = "status-verifikasi", required = true) String status_verifikasi,
+																	@RequestParam(value = "ubah-golongan", required = true) int golongan_id,
+																	@RequestParam(value = "komentar", required = true) String komentar
+	) {
+		System.out.println(npm);
+		return "redirect:/staf-kesehatan/daftar-mhs";
 	}
 }

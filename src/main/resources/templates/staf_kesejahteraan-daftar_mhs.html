@@ -170,7 +170,7 @@
 							<hr/>
 							
 							<h4 class="modal-title">Verifikasi</h4>
-							<form th:action="@{/staf-kesejahteraan/daftar-mhs/{npm}(npm=${mahasiswa.npm})/submit}" method="post">
+							<form th:action="@{/staf-kesejahteraan/daftar-mhs/submit(npm=${mahasiswa.npm})}" method="post">
 								<table class="tg">
 									<tr>
 										<td style="width:25%">Status Verifikasi</td>
