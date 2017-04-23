@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import id.ac.univ.regismaba.model.MahasiswaModel;
@@ -88,10 +89,10 @@ public class StafController {
 		return "staf_kesejahteraan-daftar_mhs";
 	}
 	
-	@RequestMapping("/staf-kesejahteraan/daftar-mhs/submit{npm}")
+	@PostMapping("/staf-kesejahteraan/daftar-mhs/submit{npm}")
 	public String daftarMhsKesejahteraanSubmitVerifikasiPembayaran(Model model,
 																	@PathVariable(value = "npm") String npm,
-																	@RequestParam(value = "status-verifikasi", required = true) String status_verifikasi,
+																	@RequestParam(value = "status-verifikasi", required = true) int status_verifikasi_id,
 																	@RequestParam(value = "ubah-golongan", required = true) int golongan_id,
 																	@RequestParam(value = "komentar", required = true) String komentar
 	) {
