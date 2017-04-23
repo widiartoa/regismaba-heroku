@@ -6,16 +6,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import id.ac.univ.regismaba.model.BiodataModel;
 import id.ac.univ.regismaba.model.MahasiswaModel;
 import id.ac.univ.regismaba.model.PengajuanSkemaBiayaModel;
-import id.ac.univ.regismaba.service.BiodataService;
+import id.ac.univ.regismaba.model.RumpunModel;
+import id.ac.univ.regismaba.model.SkemaBiayaModel;
 import id.ac.univ.regismaba.service.MahasiswaService;
 import id.ac.univ.regismaba.service.PengajuanSkemaBiayaService;
+import id.ac.univ.regismaba.service.RumpunService;
+import id.ac.univ.regismaba.service.SkemaBiayaService;
 import id.ac.univ.regismaba.service.VerifikasiIDMService;
 
 @Controller
