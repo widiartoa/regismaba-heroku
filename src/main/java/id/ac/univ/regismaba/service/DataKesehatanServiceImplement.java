@@ -25,4 +25,10 @@ public class DataKesehatanServiceImplement implements DataKesehatanService {
 		return id;
 	}
 
+	@Override
+	public DataKesehatanModel selectDataKesehatanByUsername(String username) {
+		// TODO Auto-generated method stub
+		return dataKesehatanMapper.selectDataKesehatanByUsername(username);
+	}
+
 }

@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+		<div th:replace="resources"></div>
+        <title>Calon Mahasiswa - Melihat Isian Data Mahasiswa</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+ 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    </head>
+	
+    <body>
+    	<div th:include="calon_mahasiswa-navbar"></div>
+		
+    	<div class="container">
+			<div class="content">
+				<div class="row">
+					<div class="col-sm-12"><h3>Isian Data Mahasiswa</h3></div>
+				</div>
+				<hr/>
+				<div class="col-xs-6 col-md-3">
+				    <a href="#" class="thumbnail">
+				      <img src="/img/logo.png" alt="profpic"/>
+					</a>
+				</div>
+				
+				<table class="table">
+					<tbody>
+						<tr><h4 th:text="${mahasiswa.username}">Pilihan Golongan</h4></tr>
+						<tr><h4 th:text="${mahasiswa.npm}">Pilihan Golongan</h4></tr>
+						
+					</tbody>
+				</table>
+				<div class="panel panel-warning" align="center">
+							<div class="panel-heading"><h4>Belum Diverifikasi</h4></div>
+						</div>
+				<table class="table">
+					<tbody>
+						<tr>
+							<td>
+								<div class="col-sm-12"><h3 th:text="'Biodata'">Biodata</h3></div>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<div class="col-sm-12"><h4 th:text="'Alamat'">alamat</h4></div>
+							</td>
+							<td>
+								<div class="col-sm-12"><h4 th:text="'alamat'">INI BELOM</h4></div>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<div class="col-sm-12"><h4 th:text="'Jenis Kelamin'">jenis kelamin</h4></div>
+							</td>
+							<td>
+								<div class="col-sm-12"><h4 th:text="'jk'">jenis kelamin</h4></div>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<div class="col-sm-12"><h4 th:text="'Nomor Telepon'">nomor telepon</h4></div>
+							</td>
+							<td>
+								<div class="col-sm-12"><h4 th:text="'no telp'">nomor telepon</h4></div>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<div class="col-sm-12"><h4 th:text="'Kewaganegaraan'">Kewaganegaraan</h4></div>
+							</td>
+							<td>
+								<div class="col-sm-12"><h4 th:text="'Kewaganegaraan'">Kewaganegaraan</h4></div>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<div class="col-sm-12"><h4 th:text="'Sidik Jari'">sidik jari </h4></div>
+							</td>
+							<td>
+								<div class="col-sm-12"><h4 th:text="'sidik'">sidik jari</h4></div>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<div class="col-sm-12"><h4 th:text="'scan ktp'">scan ktp</h4></div>
+							</td>
+							<td>
+								<div class="col-sm-12"><h4 th:text="'scan ktp'">scan ktp</h4></div>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<div class="col-sm-12"><h4 th:text="'scan kk'">scan kk</h4></div>
+							</td>
+							<td>
+								<div class="col-sm-12"><h4 th:text="'scan kk'">scan kk</h4></div>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<div class="col-sm-12"><h4 th:text="'scan surat pernyataan'">scan surat pernyataan</h4></div>
+							</td>
+							<td>
+								<div class="col-sm-12"><h4 th:text="'scan surat pernyataan'">scan surat pernyataan</h4></div>
+							</td>
+						</tr>
+					</tbody>
+					<tbody>
+						<tr>
+							<td>
+								<div class="col-sm-12"><h3></h3></div>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<div class="col-sm-12"><h3 th:text="'Ijazah'">Ijazah</h3></div>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<div class="col-sm-12"><h4 th:text="'Nomor Ijazah'">nomor ijazah</h4></div>
+							</td>
+							<td>
+								<div class="col-sm-12"><h4 th:text="'Nomor Ijazah'">nomor ijazah</h4></div>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<div class="col-sm-12"><h4 th:text="'Nama Institusi'">nama institusi</h4></div>
+							</td>
+							<td>
+								<div class="col-sm-12"><h4 th:text="'Nama Institusi'">nama institusi</h4></div>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<div class="col-sm-12"><h4 th:text="'Jenjang'">jenjang</h4></div>
+							</td>
+							<td>
+								<div class="col-sm-12"><h4 th:text="'Jenjang'">jenjang</h4></div>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<div class="col-sm-12"><h4 th:text="'Scan Ijazah'">scan ijazah</h4></div>
+							</td>
+							<td>
+								<div class="col-sm-12"><h4 th:text="'Scan Ijazah'">scan ijazah</h4></div>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<div class="col-sm-12"><h4 th:text="'Scan Pernyataan Ijazah'">scan pernyataan ijazah</h4></div>
+							</td>
+							<td>
+								<div class="col-sm-12"><h4 th:text="'Scan Pernyataan Ijazah'">scan pernyataan ijazah</h4></div>
+							</td>
+						</tr>
+					</tbody>
+					<tbody>
+						<tr>
+							<td>
+								<div class="col-sm-12"><h3></h3></div>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<div class="col-sm-12"><h3 th:text="'Data Kesehatan'">Data Kesehatan</h3></div>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<div class="col-sm-12"><h4 th:text="'Nomor Ijazah'">nomor ijazah</h4></div>
+							</td>
+							<td>
+								<div class="col-sm-12"><h4 th:text="'Nomor Ijazah'">nomor ijazah</h4></div>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<div class="col-sm-12"><h4 th:text="'Nama Institusi'">nama institusi</h4></div>
+							</td>
+							<td>
+								<div class="col-sm-12"><h4 th:text="'Nama Institusi'">nama institusi</h4></div>
+							</td>
+						</tr>
+					</tbody>
+  				</table>
+  				<hr/>
+				
+				<div class="btn-pull-right" role="group" aria-label="..." align="right">
+				  <a th:href="'/staf-verifikasi/detailIDM/verified/' + ${mahasiswa.npm}"><button id="verify" type="button" class="btn btn-success">Verifikasi</button></a>
+				  <a><button id="unverify" type="button" class="btn btn-warning" data-toggle="collapse" data-target="#commentForm">Belum Sesuai</button></a>
+				</div>
+				
+				<form id="commentForm" name="commentForm" method="POST" th:action="@{/staf-verifikasi/detailIDM/unverified/{npm}(npm=${mahasiswa.npm})}">
+					<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+					<div class="form-group">
+						<label class="control-label col-sm-4" for="komentar">Komentar</label>
+						<textarea rows="5" class="form-control" name="komentar" id="komentar"></textarea>
+					</div>
+					<div class="btn-pull-right" role="group" aria-label="..." align="right">
+				  		<button id="submitComment" type="submit" class="btn btn-success" value="Upload">Simpan</button>
+				  		<a th:href="'/staf-verifikasi/detailIDM/' + ${mahasiswa.npm}"><button id="cancel" type="button" class="btn btn-warning">Batal</button></a>
+				  	</div>
+				</form>
+			</div>
+       	</div>
+		
+		<div class="footer">Modul Registrasi Mahasiswa Baru</div>
+		
+		<script type="text/javascript">
+			$(document).ready(function(){
+				$('#myTable').dataTable();
+			});
+			
+			var button = document.getElementById("unverify");
+			var showTheForm = document.getElementById("commentForm");
+			var verifyButton = document.getElementById("verify");
+			function toggle() {
+				showTheForm.style.visibility = showTheForm.style.visibility === "hidden" ? "visible" : "hidden";
+				verifyButton.style.visibility = verifyButton.style.visibility === "visible" ? "hidden" : "visible";
+				button.style.visibility = button.style.visibility === "visible" ? "hidden" : "visible";
+			}
+			toggle();
+			button.addEventListener("click", toggle, false);
+		</script>
+    </body>
+</html>

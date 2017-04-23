@@ -1,14 +1,13 @@
-<<<<<<< HEAD
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <div th:replace="resources"></div>
-<title>Staf Registrasi - Daftar Mahasiswa</title>
+<title>Staf Registrasi - Daftar Jadwal</title>
 </head>
 
 <body>
 
-	<div th:include="staf-navbar"></div>
+	<div th:include="staf_registrasi-navbar"></div>
 	<div class="container">
 		<!-- Test Tab -->
 		<div class="tab">
@@ -26,21 +25,96 @@
 					<div class="col-sm-6">
 						<h4>Daftar Jadwal Registrasi</h4>
 					</div>
+					<!-- Trigger the modal with a button -->
 					<div class="col-sm-6">
-						<a th:href="'/staf/' + '' + '/idm'" title="Buat Jadwal Baru"
-							class="btn btn-info pull-right"> <i
-							class="glyphicon glyphicon-plus"></i>
-						</a>
+						<button type="button" class="btn btn-info pull-right"
+							data-toggle="modal" data-target="#myModal"
+							title="Buat Jadwal Baru">
+							<i class="glyphicon glyphicon-plus"></i>
+						</button>
+					</div>
+
+					<!-- Modal -->
+					<div class="modal fade" id="myModal" role="dialog">
+						<div class="modal-dialog modal-lg">
+
+							<!-- Modal content-->
+							<div class="modal-content">
+								<div class="content-table">
+									<div class="modal-header">
+										<button type="button" class="close" data-dismiss="modal">&times;</button>
+										<h4 class="modal-title">Membuat Jadwal Baru</h4>
+									</div>
+									<div class="modal-body">
+
+										<!-- FORM MEMBUAT JADWAL BARU -->
+										<form action="/staf-registrasi/membuat-jadwal/submit"
+											method="post" enctype="multipart/form-data">
+											<input type="hidden" th:name="${_csrf.parameterName}"
+												th:value="${_csrf.token}" />
+											<div class="row">
+												<div class="col-md-6">
+													<div class="form-group">
+														<label for="hari">Hari</label> <input type="date"
+															name="hari" class="form-control" placeholder="YYYY-MM-DD"
+															required="true" />
+													</div>
+												</div>
+											</div>
+											<div class="row">
+												<div class="col-md-6">
+													<div class="form-group">
+														<label for="waktu_awal">Waktu Mulai</label> <input
+															type="time" name="waktu_awal" class="form-control"
+															placeholder="HH:MM AM/PM" required="true" />
+													</div>
+												</div>
+											</div>
+											<div class="row">
+												<div class="col-md-6">
+													<div class="form-group">
+														<label for="waktu_akhir">Waktu Akhir</label> <input
+															type="time" name="waktu_akhir" class="form-control"
+															placeholder="HH:MM AM/PM" required="true" />
+													</div>
+												</div>
+											</div>
+											<div class="row">
+												<div class="col-md-6">
+													<div class="form-group">
+														<label for="kapasitas">Kapasitas</label> <input
+															type="number" min="0" name="kapasitas"
+															class="form-control" placeholder="Kapasitas peserta"
+															required="true" />
+													</div>
+												</div>
+											</div>
+											<div class="form-group" style="text-align: center">
+												<button class="btn btn-default">Submit</button>
+											</div>
+										</form>
+									</div>
+								</div>
+								<!--
+								<div class="modal-footer">
+									<button type="button" class="btn btn-default"
+										data-dismiss="modal">Submit</button>
+								</div>
+								-->
+							</div>
+
+						</div>
+
 					</div>
 				</div>
 				<table class="table">
 					<thead>
 						<tr>
 							<td>
-								<h4 th:text="'Hari'">Hari</h4>
+								<h4 th:text="'Tanggal'">Tanggal</h4>
 							</td>
 							<td>
-								<h4 th:text="'Tanggal'">Tanggal</h4>
+								<h4 th:text="'Hari'">Hari</h4>
 							</td>
 							<td>
 								<h4 th:text="'Rentang Waktu'">Waktu Awal</h4>
@@ -61,14 +135,13 @@
 					</thead>
 					<tbody>
 						<tr th:each="jadwalRegis,iterationStatus: ${jadwalRegisList}">
-							<td th:text="${jadwalRegis.hari}">Hari</td>
 							<td th:text="${jadwalRegis.tanggal}">Tanggal</td>
+							<td th:text="${jadwalRegis.hari}">Hari</td>
 							<td th:text="${jadwalRegis.waktu_awal}">Waktu Awal</td>
 							<td th:text="${jadwalRegis.waktu_akhir}">Waktu Akhir</td>
 							<td th:text="${jadwalRegis.kapasitas}">Kapasitas</td>
 							<td th:text="${jadwalRegis.fakultas}">Fakultas</td>
-							<td><a th:href="'/staf/' + '' + '/idm'"
-								class="btn btn-danger"> <i
+							<td><a th:href="'#'" class="btn btn-danger"> <i
 									class="glyphicon glyphicon-remove"></i>
 							</a></td>
 						</tr>
@@ -78,17 +151,23 @@
 		</div>
 
 		<div id="tes-kesehatan" class="tabcontent">
-			<span onclick="this.parentElement.style.display='none'"
-				class="topright">x</span>
-			<h4>Daftar Jadwal Tes Kesehatan</h4>
-			<p>table</p>
+			<div class="content-table">
+				<div class="row">
+					<div class="col-sm-6">
+						<h4>Daftar Jadwal Tes Kesehatan</h4>
+					</div>
+				</div>
+			</div>
 		</div>
 
 		<div id="ept" class="tabcontent">
-			<span onclick="this.parentElement.style.display='none'"
-				class="topright">x</span>
-			<h4>Daftar Jadwal EPT</h4>
-			<p>table</p>
+			<div class="content-table">
+				<div class="row">
+					<div class="col-sm-6">
+						<h4>Daftar Jadwal EPT</h4>
+					</div>
+				</div>
+			</div>
 		</div>
 	</div>
 
@@ -139,146 +218,4 @@
 		}
 	</script>
 </body>
-=======
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-<div th:replace="resources"></div>
-<title>Staf Registrasi - Daftar Mahasiswa</title>
-</head>
-
-<body>
-
-	<div th:include="staf-navbar"></div>
-	<div class="container">
-		<!-- Test Tab -->
-		<div class="tab">
-			<button class="tablinks" onclick="openJadwal(event, 'registrasi')"
-				id="defaultOpen">Jadwal Registrasi</button>
-			<button class="tablinks" onclick="openJadwal(event, 'tes-kesehatan')">Jadwal
-				Tes Kesehatan</button>
-			<button class="tablinks" onclick="openJadwal(event, 'ept')">Jadwal
-				EPT</button>
-		</div>
-
-		<div id="registrasi" class="tabcontent">
-			<div class="content-table">
-				<div class="row">
-					<div class="col-sm-6">
-						<h4>Daftar Jadwal Registrasi</h4>
-					</div>
-					<div class="col-sm-6">
-						<a th:href="'/staf/' + '' + '/idm'" title="Buat Jadwal Baru"
-							class="btn btn-info pull-right"> <i
-							class="glyphicon glyphicon-plus"></i>
-						</a>
-					</div>
-				</div>
-				<table class="table">
-					<thead>
-						<tr>
-							<td>
-								<h4 th:text="'Hari'">Hari</h4>
-							</td>
-							<td>
-								<h4 th:text="'Tanggal'">Tanggal</h4>
-							</td>
-							<td>
-								<h4 th:text="'Rentang Waktu'">Waktu Awal</h4>
-							</td>
-							<td>
-								<h4 th:text="'Rentang Waktu'">Waktu Akhir</h4>
-							</td>
-							<td>
-								<h4 th:text="'Kapasitas'">Kapasitas</h4>
-							</td>
-							<td>
-								<h4 th:text="'Fakultas'">Fakultas</h4>
-							</td>
-							<td>
-								<h4 th:text="'Hapus Jadwal'">Hapus Jadwal</h4>
-							</td>
-						</tr>
-					</thead>
-					<tbody>
-						<tr th:each="jadwalRegis,iterationStatus: ${jadwalRegisList}">
-							<td th:text="${jadwalRegis.hari}">Hari</td>
-							<td th:text="${jadwalRegis.tanggal}">Tanggal</td>
-							<td th:text="${jadwalRegis.waktu_awal}">Waktu Awal</td>
-							<td th:text="${jadwalRegis.waktu_akhir}">Waktu Akhir</td>
-							<td th:text="${jadwalRegis.kapasitas}">Kapasitas</td>
-							<td th:text="${jadwalRegis.fakultas}">Fakultas</td>
-							<td><a th:href="'/staf/' + '' + '/idm'"
-								class="btn btn-danger"> <i
-									class="glyphicon glyphicon-remove"></i>
-							</a></td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-		</div>
-
-		<div id="tes-kesehatan" class="tabcontent">
-			<span onclick="this.parentElement.style.display='none'"
-				class="topright">x</span>
-			<h4>Daftar Jadwal Tes Kesehatan</h4>
-			<p>table</p>
-		</div>
-
-		<div id="ept" class="tabcontent">
-			<span onclick="this.parentElement.style.display='none'"
-				class="topright">x</span>
-			<h4>Daftar Jadwal EPT</h4>
-			<p>table</p>
-		</div>
-	</div>
-
-	<div class="footer navbar navbar-fixed-bottom">Modul Registrasi
-		Mahasiswa Baru</div>
-
-	<script type="text/javascript">
-		$(document)
-				.ready(
-						function() {
-							$('.table').dataTable();
-							var i, tabcontent, tablinks;
-							tabcontent = document
-									.getElementsByClassName("tabcontent");
-							i = 0;
-							while (i != tabcontent.length) {
-								tabcontent[i].style.display = "none";
-								i++;
-							}
-							tablinks = document
-									.getElementsByClassName("tablinks");
-							i = 0;
-							while (i != tablinks.length) {
-								tablinks[i].className = tablinks[i].className
-										.replace(" active", "");
-								i++;
-							}
-							document.getElementById('registrasi').style.display = "block";
-							evt.currentTarget.className += " active";
-						});
-		function openJadwal(evt, jadwalName) {
-			var i, tabcontent, tablinks;
-			tabcontent = document.getElementsByClassName("tabcontent");
-			i = 0;
-			while (i != tabcontent.length) {
-				tabcontent[i].style.display = "none";
-				i++;
-			}
-			tablinks = document.getElementsByClassName("tablinks");
-			i = 0;
-			while (i != tablinks.length) {
-				tablinks[i].className = tablinks[i].className.replace(
-						" active", "");
-				i++;
-			}
-			document.getElementById(jadwalName).style.display = "block";
-			evt.currentTarget.className += " active";
-		}
-	</script>
-</body>
->>>>>>> e5a90e5cf757426172b3736d00e5f0ce36f4e017
 </html>
