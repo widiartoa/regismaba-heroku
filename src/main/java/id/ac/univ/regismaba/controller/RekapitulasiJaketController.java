@@ -26,7 +26,7 @@ public class RekapitulasiJaketController {
 		
 //		List<RekapitulasiJaketModel> sizeAnalytics = new ArrayList<RekapitulasiJaketModel>();
 //		List<RekapitulasiJaketModel> facultyAnalytics = new ArrayList<RekapitulasiJaketModel>();
-		List<RekapitulasiJaketModel> crossAnalytics = new ArrayList<RekapitulasiJaketModel>();
+		ArrayList<ArrayList<RekapitulasiJaketModel>> crossAnalytics = new ArrayList<ArrayList<RekapitulasiJaketModel>>();
 		
 		List<String> modelSizeTypes = new ArrayList<String>();
 		List<Integer> modelSizeTotal = new ArrayList<Integer>();
@@ -45,15 +45,17 @@ public class RekapitulasiJaketController {
 		for(int i = 0; i < faculties.size(); i++)
 		{
 			RekapitulasiJaketModel faculty = rjs.selectRekapFakultas(faculties.get(i).getFakultas_id());
-			RekapitulasiJaketModel faculti = rjs.selectUkuranOfFakultas(faculties.get(i).getFakultas_id());
+			ArrayList<RekapitulasiJaketModel> faculti = rjs.selectUkuranOfFakultas(faculties.get(i).getFakultas_id());
 //			facultyAnalytics.add(faculty);
 			
 			modelJacketTypes.add(faculty.getJenis_rekap());
 			modelJacketTotal.add(faculty.getJumlah());
+			crossAnalytics.add(faculti);
 		}
 		
 //		model.addAttribute("sizeAnalytics", sizeAnalytics);
 //		model.addAttribute("facultyAnalytics", facultyAnalytics);
+		model.addAttribute("crossAnalytics", crossAnalytics);
 		
 		model.addAttribute("mstypes", modelSizeTypes);
 		model.addAttribute("mstotal", modelSizeTotal);

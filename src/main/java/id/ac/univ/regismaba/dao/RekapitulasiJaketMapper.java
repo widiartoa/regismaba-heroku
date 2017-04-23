@@ -1,5 +1,6 @@
 package id.ac.univ.regismaba.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
@@ -31,5 +32,5 @@ public interface RekapitulasiJaketMapper {
 			+ "as jenis_rekap, count(*) as jumlah from biodata b, mahasiswa m, program_studi p, "
 			+ "fakultas f where b.username=m.username and m.program_studi_id=p.program_studi_id and "
 			+ "p.fakultas_id=f.fakultas_id and f.fakultas_id=#{fakultas_id} group by b.ukuran_jaket")
-	RekapitulasiJaketModel selectUkuranOfFakultas(@Param("fakultas_id") int fakultas_id);
+	ArrayList<RekapitulasiJaketModel> selectUkuranOfFakultas(@Param("fakultas_id") int fakultas_id);
 }

@@ -65,6 +65,35 @@
 			      var chart = new google.visualization.BarChart(document.getElementById('chart_div_2'));
 			      chart.draw(data, options);
 			    }
+		    
+		    var d = [[${crossAnalytics}]];
+		    for(var i = 0; i < d.length; i++)
+	    	{
+		    	google.charts.setOnLoadCallback(drawCrossChart(i));
+	    	}
+		    
+		    function drawCrossChart(i) {
+		    	  
+		    	
+			      // Create the data table.
+			      var data = new google.visualization.DataTable();
+			      data.addColumn('string', 'Fakultas');
+			      data.addColumn('number', 'Jumlah');
+			      
+			      for(var i = 0; i < x.length; i++)
+		    	  {
+		    	  	data.addRow([x[i], y[i]]);
+		    	  }
+			 	
+			      // Set chart options
+			      var options = {'title':'Data Pemesanan per Fakultas',
+			                     'width':500,
+			                     'height':300};
+			
+			      // Instantiate and draw our chart, passing in some options.
+			      var chart = new google.visualization.BarChart(document.getElementById(''));
+			      chart.draw(data, options);
+			    }
 	    /*]]>*/
     </script>
 </head>
@@ -85,6 +114,12 @@
 			<!--Div that will hold the pie chart-->
     		<div id="chart_div_1"></div>
     		<div id="chart_div_2"></div>
+    		
+    		<div th:each="crossAnalytic,iterationStatus: ${crossAnalytics}">
+    			<div th:each="cross,iterationStatus: ${crossAnalytic}">
+    				<div th:text="${cross.fakultas_id} + '-' + ${cross.jenis_rekap}"></div>
+    			</div>
+    		</div>
 		</div>
 	</div>
 

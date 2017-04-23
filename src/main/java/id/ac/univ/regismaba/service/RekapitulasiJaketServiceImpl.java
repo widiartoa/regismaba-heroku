@@ -1,5 +1,6 @@
 package id.ac.univ.regismaba.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,7 +47,7 @@ public class RekapitulasiJaketServiceImpl implements RekapitulasiJaketService {
 	}
 
 	@Override
-	public RekapitulasiJaketModel selectUkuranOfFakultas(int fakultas_id) {
+	public ArrayList<RekapitulasiJaketModel> selectUkuranOfFakultas(int fakultas_id) {
 		// TODO Auto-generated method stub
 		log.info ("select fakultas_id with id {}", fakultas_id);
 		return rjm.selectUkuranOfFakultas(fakultas_id);
