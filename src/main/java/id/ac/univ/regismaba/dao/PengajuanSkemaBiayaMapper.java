@@ -59,16 +59,22 @@ public interface PengajuanSkemaBiayaMapper {
 			+ "updated_by=#{username} where username=#{username}")
 	void updatePSBM(PengajuanSkemaBiayaModel psbm);
 	
-	@Insert("insert into pengajuan_skema_pembayaran (golongan_id, surat_keterangan_rtrw, "
-			+ "foto_rumah, slip_gaji_pribadi, slip_gaji_wali1, slip_gaji_wali2, tagihan_air, "
-			+ "tagihan_listrik, tagihan_telepon, gaji_pribadi, gaji_wali1, gaji_wali2, "
-			+ "nilai_tagihan_air, nilai_tagihan_listrik, nilai_tagihan_telepon, username, "
-			+ "status_pengajuan, created_at, created_by, updated_at, updated_by) "
-			+ "values (#{golongan_id}, '-', "
-			+ "'-', '-', '-', '-', "
-			+ "'-', '-', '-', '0', '0', "
-			+ "'0', '0', '0', '0', "
-			+ "#{username}, 'Unverified', current_timestamp, #{username}, current_timestamp, #{username})")
+//	@Insert("insert into pengajuan_skema_pembayaran (golongan_id, surat_keterangan_rtrw, "
+//			+ "foto_rumah, slip_gaji_pribadi, slip_gaji_wali1, slip_gaji_wali2, tagihan_air, "
+//			+ "tagihan_listrik, tagihan_telepon, gaji_pribadi, gaji_wali1, gaji_wali2, "
+//			+ "nilai_tagihan_air, nilai_tagihan_listrik, nilai_tagihan_telepon, username, "
+//			+ "status_pengajuan, created_at, created_by, updated_at, updated_by) "
+//			+ "values (#{golongan_id}, '-', "
+//			+ "'-', '-', '-', '-', "
+//			+ "'-', '-', '-', '0', '0', "
+//			+ "'0', '0', '0', '0', "
+//			+ "#{username}, 'Unverified', current_timestamp, #{username}, current_timestamp, #{username})")
+//	void insertGolongan(PengajuanSkemaBiayaModel psbm);
+	
+	@Insert("insert into pengajuan_skema_pembayaran (golongan_id, foto_rumah, status_pengajuan, "
+			+ "created_at, created_by, updated_at, updated_by, username) values (#{golongan_id}, '-', "
+			+ "'Unverified', current_timestamp, #{username}, current_timestamp, #{username}, "
+			+ "#{username})")
 	void insertGolongan(PengajuanSkemaBiayaModel psbm);
 	
 	@Update("update pengajuan_skema_pembayaran set golongan_id=#{golongan_id}, updated_at=current_timestamp, "

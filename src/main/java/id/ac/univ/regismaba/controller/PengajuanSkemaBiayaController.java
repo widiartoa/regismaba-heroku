@@ -74,10 +74,6 @@ public class PengajuanSkemaBiayaController {
 			RumpunModel rumpun = rm.getRumpun(mahasiswa.getUsername());
 			SkemaBiayaModel sbm = sbs.selectSBM(psbm.getGolongan_id());
 			
-			boolean show = true;
-			if(psbm.getGolongan_id() == 1){ show = false;}
-			model.addAttribute("show", show);
-			
 			model.addAttribute("psbm", psbm);
 			model.addAttribute("sbm", sbm);
 			model.addAttribute("rumpun", rumpun);
@@ -253,10 +249,6 @@ public class PengajuanSkemaBiayaController {
 		RumpunModel rumpun = rm.getRumpun(mahasiswa.getUsername());
 		SkemaBiayaModel sbm = sbs.selectSBM(psbm.getGolongan_id());
 		
-		boolean show = true;
-		if(psbm.getGolongan_id() == 1){ show = false;}
-		model.addAttribute("show", show);
-		
 		model.addAttribute("mahasiswa", mahasiswa);	
 		model.addAttribute("psbm", psbm);
 		model.addAttribute("sbm", sbm);
@@ -335,14 +327,14 @@ public class PengajuanSkemaBiayaController {
     			
     			System.out.println("update pengajuan");
     			
-    			if(type == 1) {skema.setSurat_keterangan_rtrw("-");} //cannot be null
+    			if(type == 1) {skema.setSurat_keterangan_rtrw(null);}
     			if(type == 2) {skema.setFoto_rumah("-");} //cannot be null
-    			if(type == 3) {skema.setSlip_gaji_pribadi("-");}
-    			if(type == 4) {skema.setSlip_gaji_wali1("-");}
-    			if(type == 5) {skema.setSlip_gaji_wali2("-");}
-    			if(type == 6) {skema.setTagihan_air("-");} //cannot be null
-    			if(type == 7) {skema.setTagihan_listrik("-");}
-    			if(type == 8) {skema.setTagihan_telepon("-");}
+    			if(type == 3) {skema.setSlip_gaji_pribadi(null);}
+    			if(type == 4) {skema.setSlip_gaji_wali1(null);}
+    			if(type == 5) {skema.setSlip_gaji_wali2(null);}
+    			if(type == 6) {skema.setTagihan_air(null);}
+    			if(type == 7) {skema.setTagihan_listrik(null);}
+    			if(type == 8) {skema.setTagihan_telepon(null);}
     		}
     		//for insert
     		else{
