@@ -80,7 +80,6 @@ public class BiodataController {
 	
 	@Autowired
 	AgamaService agamaDAO;
-	
 
 	@RequestMapping("calon-mahasiswa/idm")
 	public String idmMahasiswa()
