@@ -1,9 +1,12 @@
 package id.ac.univ.regismaba.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import id.ac.univ.regismaba.dao.VerifikasiIDMMapper;
+import id.ac.univ.regismaba.model.BiodataModel;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -25,6 +28,13 @@ public class VerifikasiIDMServiceImplement implements VerifikasiIDMService
     {
        log.info ("select komentar of " + username);
        return verifikasiIDMMapper.selectKomentar (username);
+    }
+    
+    @Override
+    public List<BiodataModel> selectAllBiodata ()
+    {
+        log.info ("select all biodata");
+        return verifikasiIDMMapper.selectAllBiodata ();
     }
     
     @Override
