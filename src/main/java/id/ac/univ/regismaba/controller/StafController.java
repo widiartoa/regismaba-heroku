@@ -10,11 +10,18 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import id.ac.univ.regismaba.model.AlamatModel;
 import id.ac.univ.regismaba.model.BiodataModel;
+import id.ac.univ.regismaba.model.DataKesehatanModel;
+import id.ac.univ.regismaba.model.IjazahModel;
+import id.ac.univ.regismaba.model.InstitusiModel;
+import id.ac.univ.regismaba.model.KotaKabupatenModel;
 import id.ac.univ.regismaba.model.MahasiswaModel;
 import id.ac.univ.regismaba.model.PengajuanSkemaBiayaModel;
+import id.ac.univ.regismaba.model.ProvinsiModel;
 import id.ac.univ.regismaba.model.RumpunModel;
 import id.ac.univ.regismaba.model.SkemaBiayaModel;
+import id.ac.univ.regismaba.service.AlamatService;
 import id.ac.univ.regismaba.service.MahasiswaService;
 import id.ac.univ.regismaba.service.PengajuanSkemaBiayaService;
 import id.ac.univ.regismaba.service.RumpunService;
@@ -39,6 +46,9 @@ public class StafController
 
     @Autowired
     VerifikasiIDMService verifikasiIdmDAO;
+    
+    @Autowired
+    AlamatService alamatDAO;
 
 
     // TODO: Tambahkan @RequestMapping("/") setelah bisa ambil session
@@ -54,7 +64,18 @@ public class StafController
         model.addAttribute ("mahasiswas", mahasiswas);
         List<BiodataModel> biodatas = verifikasiIdmDAO.selectAllBiodata ();
         model.addAttribute ("biodatas", biodatas);
-        // TODO: BiodataModel harus memiliki atribut username
+        List<AlamatModel> alamats = verifikasiIdmDAO.selectAllAlamat ();
+        model.addAttribute ("alamats", alamats);
+        List<KotaKabupatenModel> kotakabs = verifikasiIdmDAO.selectAllKotaKab ();
+        model.addAttribute ("kotakabs", kotakabs);
+        List<ProvinsiModel> provinsis = verifikasiIdmDAO.selectAllProvinsi ();
+        model.addAttribute ("provinsis", provinsis);
+        List<IjazahModel> ijazahs = verifikasiIdmDAO.selectAllIjazah ();
+        model.addAttribute ("ijazahs", ijazahs);
+        List<InstitusiModel> institusis = verifikasiIdmDAO.selectAllInstitusi ();
+        model.addAttribute ("institusis", institusis);
+        List<DataKesehatanModel> dataKess = verifikasiIdmDAO.selectAllDataKesehatan ();
+        model.addAttribute ("dataKess", dataKess);
         return "staf_verifikasi-daftar_mhs";
     }
 
