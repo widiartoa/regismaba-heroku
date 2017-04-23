@@ -29,29 +29,32 @@ public class RekapitulasiJaketController {
 		List<String> modelSizeTypes = new ArrayList<String>();
 		List<Integer> modelSizeTotal = new ArrayList<Integer>();
 		
+		List<String> modelJacketTypes = new ArrayList<String>();
+		List<Integer> modelJacketTotal = new ArrayList<Integer>();
 		
 		for(int i = 0; i < sizes.size(); i++)
 		{
 			RekapitulasiJaketModel size = rjs.selectRekapUkuran(sizes.get(i));
-			//sizeAnalytics.add(size);
+//			sizeAnalytics.add(size);
 			modelSizeTypes.add(size.getJenis_rekap());
 			modelSizeTotal.add(size.getJumlah());
 		}
 		
-//		for(int i = 0; i < faculties.size(); i++)
-//		{
-//			RekapitulasiJaketModel faculty = rjs.selectRekapFakultas(sizes.get(i));
+		for(int i = 0; i < faculties.size(); i++)
+		{
+			RekapitulasiJaketModel faculty = rjs.selectRekapFakultas(faculties.get(i));
 //			facultyAnalytics.add(faculty);
-//		}
-//		
+			modelJacketTypes.add(faculty.getJenis_rekap());
+			modelJacketTotal.add(faculty.getJumlah());
+		}
+		
 //		model.addAttribute("sizeAnalytics", sizeAnalytics);
 //		model.addAttribute("facultyAnalytics", facultyAnalytics);
 		
-//		String modelSizeTypes = "lalala";
-//		Integer modelSizeTotal = 1;
-		
 		model.addAttribute("mstypes", modelSizeTypes);
 		model.addAttribute("mstotal", modelSizeTotal);
+		model.addAttribute("mjtypes", modelJacketTypes);
+		model.addAttribute("mjtotal", modelJacketTotal);
 		
 		return "staf_registrasi-rekapitulasi_jaket";
 	}
