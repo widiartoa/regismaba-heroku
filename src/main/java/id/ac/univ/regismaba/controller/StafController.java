@@ -22,88 +22,125 @@ import id.ac.univ.regismaba.service.SkemaBiayaService;
 import id.ac.univ.regismaba.service.VerifikasiIDMService;
 
 @Controller
-public class StafController {
+public class StafController
+{
 
-	@Autowired
-	MahasiswaService mahasiswaDAO;
-	
-	@Autowired
-	PengajuanSkemaBiayaService pengajuanSkemaBiayaDAO;
+    @Autowired
+    MahasiswaService mahasiswaDAO;
 
-	@Autowired
-	SkemaBiayaService sbs;
-	
-	@Autowired
-	RumpunService rm;
-	
-	@Autowired
-	VerifikasiIDMService verifikasiIdmDAO;
-	
-	// TODO: Tambahkan @RequestMapping("/") setelah bisa ambil session
-	// untuk Verifikator redirect:/staf_verifikasi/daftar_mhs
-	// untuk Staf Registrasi redirect:/staf_registrasi/daftar_mhs
-	// untuk Staf Kesehatan redirect:/staf_kesehatan/daftar_mhs
-	// untuk Staf Kesejahteraan redirect:/staf_kesejahteraan/daftar_mhs
+    @Autowired
+    PengajuanSkemaBiayaService pengajuanSkemaBiayaDAO;
 
-	@RequestMapping("/staf-verifikasi/daftar-mhs")
-	public String daftarMhsVerifikator(Model model) {
-		List<MahasiswaModel> mahasiswas = mahasiswaDAO.selectAllMahasiswa();
-		model.addAttribute("mahasiswas", mahasiswas);
-		List<BiodataModel> biodatas = verifikasiIdmDAO.selectAllBiodata ();
-		model.addAttribute ("biodatas", biodatas);
-		// TODO: BiodataModel harus memiliki atribut username
-		return "staf_verifikasi-daftar_mhs";
-	}
+    @Autowired
+    SkemaBiayaService sbs;
 
-	@RequestMapping("/staf-registrasi/daftar-mhs")
-	public String daftarMhsRegistrasi(Model model) {
-		List<MahasiswaModel> mahasiswas = mahasiswaDAO.selectAllMahasiswa();
-		model.addAttribute("mahasiswas", mahasiswas);
-		return "staf_registrasi-daftar_mhs";
-	}
+    @Autowired
+    RumpunService rm;
 
-	@RequestMapping("/staf-kesehatan/daftar-mhs")
-	public String daftarMhsKesehatan(Model model) {
-		List<MahasiswaModel> mahasiswas = mahasiswaDAO.selectAllMahasiswa();
-		model.addAttribute("mahasiswas", mahasiswas);
-		return "staf_kesehatan-daftar_mhs";
-	}
+    @Autowired
+    VerifikasiIDMService verifikasiIdmDAO;
 
-	@RequestMapping("/staf-kesejahteraan/daftar-mhs")
-	public String daftarMhsKesejahteraan(Model model) {
-		List<MahasiswaModel> mahasiswas = mahasiswaDAO.selectAllMahasiswa();
-		model.addAttribute("mahasiswas", mahasiswas);
-		List<PengajuanSkemaBiayaModel> pengajuans = pengajuanSkemaBiayaDAO.selectAllPSBM();
-		model.addAttribute("pengajuans", pengajuans);
-		if(mahasiswas.size() > 0) {
-			RumpunModel[] rumpuns = new RumpunModel[pengajuans.size()];
-			for(int i=0; i<rumpuns.length; i++) {
-				rumpuns[i] = rm.getRumpun(pengajuans.get(i).getUsername());
-			}
-			model.addAttribute("rumpuns", rumpuns);
-		}
-		if(pengajuans.size() > 0) {
-			SkemaBiayaModel[] skemas = new SkemaBiayaModel[pengajuans.size()];
-			for(int i=0; i<skemas.length; i++) {
-				skemas[i] = sbs.selectSBM(pengajuans.get(i).getGolongan_id());
-			}
-			model.addAttribute("skemas", skemas);
-		}
-		
-		List<SkemaBiayaModel> skemaList = sbs.selectAllSBM();
-		model.addAttribute("skemaList", skemaList);
-		
-		return "staf_kesejahteraan-daftar_mhs";
-	}
-	
-	@PostMapping("/staf-kesejahteraan/daftar-mhs/submit{npm}")
-	public String daftarMhsKesejahteraanSubmitVerifikasiPembayaran(Model model,
-																	@PathVariable(value = "npm") String npm,
-																	@RequestParam(value = "status-verifikasi", required = true) int status_verifikasi_id,
-																	@RequestParam(value = "ubah-golongan", required = true) int golongan_id,
-																	@RequestParam(value = "komentar", required = true) String komentar
-	) {
-		System.out.println(npm);
-		return "redirect:/staf-kesehatan/daftar-mhs";
-	}
+
+    // TODO: Tambahkan @RequestMapping("/") setelah bisa ambil session
+    // untuk Verifikator redirect:/staf_verifikasi/daftar_mhs
+    // untuk Staf Registrasi redirect:/staf_registrasi/daftar_mhs
+    // untuk Staf Kesehatan redirect:/staf_kesehatan/daftar_mhs
+    // untuk Staf Kesejahteraan redirect:/staf_kesejahteraan/daftar_mhs
+
+    @RequestMapping("/staf-verifikasi/daftar-mhs")
+    public String daftarMhsVerifikator (Model model)
+    {
+        List<MahasiswaModel> mahasiswas = mahasiswaDAO.selectAllMahasiswa ();
+        model.addAttribute ("mahasiswas", mahasiswas);
+        List<BiodataModel> biodatas = verifikasiIdmDAO.selectAllBiodata ();
+        model.addAttribute ("biodatas", biodatas);
+        // TODO: BiodataModel harus memiliki atribut username
+        return "staf_verifikasi-daftar_mhs";
+    }
+
+
+    @RequestMapping("/staf-registrasi/daftar-mhs")
+    public String daftarMhsRegistrasi (Model model)
+    {
+        List<MahasiswaModel> mahasiswas = mahasiswaDAO.selectAllMahasiswa ();
+        model.addAttribute ("mahasiswas", mahasiswas);
+        return "staf_registrasi-daftar_mhs";
+    }
+
+
+    @RequestMapping("/staf-kesehatan/daftar-mhs")
+    public String daftarMhsKesehatan (Model model)
+    {
+        List<MahasiswaModel> mahasiswas = mahasiswaDAO.selectAllMahasiswa ();
+        model.addAttribute ("mahasiswas", mahasiswas);
+        return "staf_kesehatan-daftar_mhs";
+    }
+
+
+    @RequestMapping("/staf-kesejahteraan/daftar-mhs")
+    public String daftarMhsKesejahteraan (Model model)
+    {
+        List<MahasiswaModel> mahasiswas = mahasiswaDAO.selectAllMahasiswa ();
+        model.addAttribute ("mahasiswas", mahasiswas);
+        List<PengajuanSkemaBiayaModel> pengajuans = pengajuanSkemaBiayaDAO
+                .selectAllPSBM ();
+        model.addAttribute ("pengajuans", pengajuans);
+        if (mahasiswas.size () > 0) {
+            RumpunModel[] rumpuns = new RumpunModel[pengajuans.size ()];
+            for (int i = 0; i < rumpuns.length; i++) {
+                rumpuns[i] = rm.getRumpun (pengajuans.get (i).getUsername ());
+            }
+            model.addAttribute ("rumpuns", rumpuns);
+        }
+        if (pengajuans.size () > 0) {
+            SkemaBiayaModel[] skemas = new SkemaBiayaModel[pengajuans.size ()];
+            for (int i = 0; i < skemas.length; i++) {
+                skemas[i] = sbs
+                        .selectSBM (pengajuans.get (i).getGolongan_id ());
+            }
+            model.addAttribute ("skemas", skemas);
+        }
+
+        List<SkemaBiayaModel> skemaList = sbs.selectAllSBM ();
+        model.addAttribute ("skemaList", skemaList);
+
+        return "staf_kesejahteraan-daftar_mhs";
+    }
+
+    
+    @PostMapping("/staf-kesejahteraan/daftar-mhs/submit{npm}")
+    public String daftarMhsKesejahteraanSubmitVerifikasiPembayaran (Model model,
+            @PathVariable(value = "npm") String npm,
+            @RequestParam(value = "status-verifikasi", required = true) int status_verifikasi_id,
+            @RequestParam(value = "ubah-golongan", required = true) int golongan_id,
+            @RequestParam(value = "komentar", required = true) String komentar)
+    {
+        System.out.println (npm);
+        return "redirect:/staf-kesehatan/daftar-mhs";
+    }
+    
+    @RequestMapping("/staf-verifikasi/daftar-mhs/verified/{npm}")
+    public String VerifyIDMModal (Model model,
+            @PathVariable(value = "npm") String npm)
+    {
+        // status = "Verified";
+        MahasiswaModel mahasiswa = mahasiswaDAO.selectMahasiswa (npm);
+        verifikasiIdmDAO.updateStatusVerify (mahasiswa.getUsername ());
+        model.addAttribute ("mahasiswa", mahasiswa);
+        return "redirect:/staf-verifikasi/daftar-mhs";
+    }
+    
+    @RequestMapping("/staf-verifikasi/daftar-mhs/unverified/{npm}")
+    public String unverifyDetailIDM (Model model,
+            @PathVariable(value = "npm") String npm,
+            @RequestParam("komentar") String komentar)
+    {
+        MahasiswaModel mahasiswa = mahasiswaDAO.selectMahasiswa (npm);
+        verifikasiIdmDAO.updateComment (mahasiswa.getUsername (), komentar);
+        verifikasiIdmDAO.updateStatusUnverify (mahasiswa.getUsername ());
+        String komentarAdded = verifikasiIdmDAO.selectKomentar (mahasiswa.getUsername ());
+        model.addAttribute ("mahasiswa", mahasiswa);
+        model.addAttribute ("komentarAdded", komentarAdded);
+        return "redirect:/staf-verifikasi/daftar-mhs";
+    }
 }
