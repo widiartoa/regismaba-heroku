@@ -116,8 +116,9 @@
     		<div id="chart_div_2"></div>
     		
     		<div th:each="crossAnalytic,iterationStatus: ${crossAnalytics}">
-    			<div th:each="cross,iterationStatus: ${crossAnalytic}">
-    				<div th:text="${cross.fakultas_id} + '-' + ${cross.jenis_rekap}"></div>
+    			<div th:text="${crossAnalytic.nama_fakultas}"></div>
+    			<div th:each="cross,iterationStatus: ${crossAnalytic.rjm}">
+    				<div th:text="${cross.jenis_rekap} + '-' + ${cross.jumlah}"></div>
     			</div>
     		</div>
 		</div>

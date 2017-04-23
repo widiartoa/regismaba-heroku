@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import id.ac.univ.regismaba.model.CrossRekapJaketModel;
 import id.ac.univ.regismaba.model.FakultasModel;
 import id.ac.univ.regismaba.model.RekapitulasiJaketModel;
 import id.ac.univ.regismaba.service.RekapitulasiJaketService;
@@ -26,7 +27,7 @@ public class RekapitulasiJaketController {
 		
 //		List<RekapitulasiJaketModel> sizeAnalytics = new ArrayList<RekapitulasiJaketModel>();
 //		List<RekapitulasiJaketModel> facultyAnalytics = new ArrayList<RekapitulasiJaketModel>();
-		ArrayList<ArrayList<RekapitulasiJaketModel>> crossAnalytics = new ArrayList<ArrayList<RekapitulasiJaketModel>>();
+		ArrayList<CrossRekapJaketModel> crossAnalytics = new ArrayList<CrossRekapJaketModel>();
 		
 		List<String> modelSizeTypes = new ArrayList<String>();
 		List<Integer> modelSizeTotal = new ArrayList<Integer>();
@@ -42,15 +43,21 @@ public class RekapitulasiJaketController {
 			modelSizeTotal.add(size.getJumlah());
 		}
 		
+		
 		for(int i = 0; i < faculties.size(); i++)
 		{
 			RekapitulasiJaketModel faculty = rjs.selectRekapFakultas(faculties.get(i).getFakultas_id());
-			ArrayList<RekapitulasiJaketModel> faculti = rjs.selectUkuranOfFakultas(faculties.get(i).getFakultas_id());
 //			facultyAnalytics.add(faculty);
 			
 			modelJacketTypes.add(faculty.getJenis_rekap());
 			modelJacketTotal.add(faculty.getJumlah());
-			crossAnalytics.add(faculti);
+			
+			ArrayList<RekapitulasiJaketModel> faculti = rjs.selectUkuranOfFakultas(faculties.get(i).getFakultas_id());
+			CrossRekapJaketModel crjm = new CrossRekapJaketModel();
+			crjm.setFakultas_id(faculties.get(i).getFakultas_id());
+			crjm.setNama_fakultas(faculties.get(i).getNama_fakultas());
+			crjm.setRjm(faculti);
+			crossAnalytics.add(crjm);
 		}
 		
 //		model.addAttribute("sizeAnalytics", sizeAnalytics);
