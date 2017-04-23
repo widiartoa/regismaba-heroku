@@ -29,8 +29,7 @@ public class JadwalController {
 	public String getJadwal(Model model) {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		String user = auth.getName();
-		System.out.println(user);
-		MahasiswaModel mahasiswa = mahasiswaService.selectMahasiswa("1234567890");
+		MahasiswaModel mahasiswa = mahasiswaService.selectMahasiswaByUsername(user);
 
 		model.addAttribute("mahasiswa", mahasiswa);
 
