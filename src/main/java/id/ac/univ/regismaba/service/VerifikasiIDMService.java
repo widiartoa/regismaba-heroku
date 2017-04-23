@@ -2,7 +2,13 @@ package id.ac.univ.regismaba.service;
 
 import java.util.List;
 
+import id.ac.univ.regismaba.model.AlamatModel;
 import id.ac.univ.regismaba.model.BiodataModel;
+import id.ac.univ.regismaba.model.DataKesehatanModel;
+import id.ac.univ.regismaba.model.IjazahModel;
+import id.ac.univ.regismaba.model.InstitusiModel;
+import id.ac.univ.regismaba.model.KotaKabupatenModel;
+import id.ac.univ.regismaba.model.ProvinsiModel;
 
 public interface VerifikasiIDMService
 {
@@ -11,6 +17,18 @@ public interface VerifikasiIDMService
     String selectKomentar(String username);
     
     List<BiodataModel> selectAllBiodata ();
+    
+    List<AlamatModel> selectAllAlamat ();
+    
+    List<KotaKabupatenModel> selectAllKotaKab ();
+    
+    List<ProvinsiModel> selectAllProvinsi ();
+    
+    List<IjazahModel> selectAllIjazah ();
+    
+    List<InstitusiModel> selectAllInstitusi ();
+    
+    List<DataKesehatanModel> selectAllDataKesehatan ();
     
     void updateStatusVerify (String username);
     
