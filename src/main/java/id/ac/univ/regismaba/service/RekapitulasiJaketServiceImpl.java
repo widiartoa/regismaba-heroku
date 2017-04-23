@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import id.ac.univ.regismaba.dao.RekapitulasiJaketMapper;
+import id.ac.univ.regismaba.model.FakultasModel;
 import id.ac.univ.regismaba.model.RekapitulasiJaketModel;
 import lombok.extern.slf4j.Slf4j;
 
@@ -24,10 +25,10 @@ public class RekapitulasiJaketServiceImpl implements RekapitulasiJaketService {
 	}
 
 	@Override
-	public RekapitulasiJaketModel selectRekapFakultas(String nama_fakultas) {
+	public RekapitulasiJaketModel selectRekapFakultas(int fakultas_id) {
 		// TODO Auto-generated method stub
-		log.info ("select nama_fakultas with name {}", nama_fakultas);
-		return rjm.selectRekapFakultas(nama_fakultas);
+		log.info ("select fakultas_id with id {}", fakultas_id);
+		return rjm.selectRekapFakultas(fakultas_id);
 	}
 
 	@Override
@@ -38,7 +39,7 @@ public class RekapitulasiJaketServiceImpl implements RekapitulasiJaketService {
 	}
 
 	@Override
-	public List<String> getFaculties() {
+	public List<FakultasModel> getFaculties() {
 		// TODO Auto-generated method stub
 		log.info ("get list of faculty names");
 		return rjm.getFaculties();

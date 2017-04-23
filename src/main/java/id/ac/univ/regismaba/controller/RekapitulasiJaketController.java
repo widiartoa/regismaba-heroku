@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import id.ac.univ.regismaba.model.FakultasModel;
 import id.ac.univ.regismaba.model.RekapitulasiJaketModel;
 import id.ac.univ.regismaba.service.RekapitulasiJaketService;
 
@@ -21,7 +22,7 @@ public class RekapitulasiJaketController {
 	public String rekapJaket(Model model)
 	{
 		List<String> sizes = rjs.getSizes();
-		List<String> faculties = rjs.getFaculties();
+		List<FakultasModel> faculties = rjs.getFaculties();
 		
 //		List<RekapitulasiJaketModel> sizeAnalytics = new ArrayList<RekapitulasiJaketModel>();
 //		List<RekapitulasiJaketModel> facultyAnalytics = new ArrayList<RekapitulasiJaketModel>();
@@ -42,7 +43,7 @@ public class RekapitulasiJaketController {
 		
 		for(int i = 0; i < faculties.size(); i++)
 		{
-			RekapitulasiJaketModel faculty = rjs.selectRekapFakultas(faculties.get(i));
+			RekapitulasiJaketModel faculty = rjs.selectRekapFakultas(faculties.get(i).getFakultas_id());
 //			facultyAnalytics.add(faculty);
 			modelJacketTypes.add(faculty.getJenis_rekap());
 			modelJacketTotal.add(faculty.getJumlah());
