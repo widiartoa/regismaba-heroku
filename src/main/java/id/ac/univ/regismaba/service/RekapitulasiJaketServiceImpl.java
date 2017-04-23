@@ -44,4 +44,11 @@ public class RekapitulasiJaketServiceImpl implements RekapitulasiJaketService {
 		log.info ("get list of faculty names");
 		return rjm.getFaculties();
 	}
+
+	@Override
+	public RekapitulasiJaketModel selectUkuranOfFakultas(int fakultas_id) {
+		// TODO Auto-generated method stub
+		log.info ("select fakultas_id with id {}", fakultas_id);
+		return rjm.selectUkuranOfFakultas(fakultas_id);
+	}
 }
