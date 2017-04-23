@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class ProgramModel {
-	int program_id;
-	String nama_program;
+public class AgamaModel {
+	int agama_id;
+	String nama_agama;
 }

@@ -43,6 +43,4 @@ public interface BiodataMapper {
 			@Result(property="agama_id", column="agama_id"),			
 		})
 		BiodataModel selectBiodataByUsername(String username);
-		
-		
 }
