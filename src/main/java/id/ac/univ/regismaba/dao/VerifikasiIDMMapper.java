@@ -1,11 +1,15 @@
 package id.ac.univ.regismaba.dao;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Result;
 import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
+
+import id.ac.univ.regismaba.model.BiodataModel;
 
 @Mapper
 public interface VerifikasiIDMMapper
@@ -21,6 +25,9 @@ public interface VerifikasiIDMMapper
             @Result(property = "komentar", column = "komentar")
     })
     String selectKomentar (@Param("username") String username);
+    
+    @Select("select * from biodata")
+    List<BiodataModel> selectAllBiodata ();
 
     @Update("update biodata set status_verifikasi = 'Verified' where username = #{username}")
     void updateStatusVerify (@Param("username") String username);
