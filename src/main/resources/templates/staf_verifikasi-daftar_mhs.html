@@ -77,12 +77,13 @@
 						<div th:if="${biodata.status_verifikasi.equals('Verified')}">
 							<div class="panel panel-success" align="center">
 								<div class="panel-heading"><h4>Sudah Terverifikasi</h4></div>
+								<div class="panel-body"><h4 th:text="'Diverifikasi pada hari ' + ${biodata.hari_update} + ', tanggal ' + ${biodata.tanggal_update} + ', pukul ' + ${biodata.waktu_update}">updated at</h4></div>
 							</div>
 						</div>
 						<div th:if="${biodata.status_verifikasi.equals('Unverified')}">
 							<div class="panel panel-danger" align="center">
 								<div class="panel-heading"><h4>Tidak Diverifikasi<hr/>(Masih ada kesalahan)</h4></div>
-								<div class="panel-body"><h4 th:text="${biodata.komentar}"></h4></div>
+								<div class="panel-body"><h4 th:text="${biodata.komentar}"></h4><hr/><h4 th:text="'Ditambahkan pada hari ' + ${biodata.hari_update} + ', tanggal ' + ${biodata.tanggal_update} + ', pukul ' + ${biodata.waktu_update}">updated at</h4></div>
 							</div>
 						</div>
 						<div th:if="${biodata.status_verifikasi.equals('Not verified yet')}">
@@ -102,7 +103,7 @@
 										<div class="col-sm-12"><h4 th:text="'Tanggal Lahir'">tanggal lahir</h4></div>
 									</td>
 									<td>
-										<div class="col-sm-12"><h4 th:text="${biodata.tanggal_lahir}">tanggal lahir</h4></div>
+										<div class="col-sm-12"><h4 th:text="${biodata.tanggal_lahirr}">tanggal lahir</h4></div>
 									</td>
 								</tr>
 								<tr>
@@ -317,6 +318,7 @@
 		}
 		toggle();
 		button.addEventListener("click", toggle, false);
+		
 	</script>
 </body>
 </html>
