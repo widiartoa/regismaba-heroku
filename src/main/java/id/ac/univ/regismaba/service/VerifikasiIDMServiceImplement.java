@@ -1,5 +1,8 @@
 package id.ac.univ.regismaba.service;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,7 +43,22 @@ public class VerifikasiIDMServiceImplement implements VerifikasiIDMService
     public List<BiodataModel> selectAllBiodata ()
     {
         log.info ("select all biodata");
-        return verifikasiIDMMapper.selectAllBiodata ();
+        List<BiodataModel> biodataList = verifikasiIDMMapper.selectAllBiodata ();
+
+        for (BiodataModel biodata : biodataList) {
+                String hariUpdate = this.parseHariUpdateBiodata (biodata);
+                String tanggalUpdate = this.parseTanggalUpdateBiodata (biodata);
+                String waktuUpdate = this.parseWaktuUpdateBiodata (biodata);
+                String tanggalLahir = this.parseTanggalLahirBiodata (biodata);
+
+                biodata.setHari_update (hariUpdate);
+                biodata.setTanggal_update (tanggalUpdate);
+                biodata.setWaktu_update (waktuUpdate);
+                biodata.setTanggal_lahirr (tanggalLahir);
+               
+                log.info("updated_at {}", biodata.getCreated_by ());
+        }
+        return biodataList;
     }
     
     @Override
@@ -104,5 +122,41 @@ public class VerifikasiIDMServiceImplement implements VerifikasiIDMService
     {
         log.info ("update comment " + username);
         verifikasiIDMMapper.updateComment (username, komentar);
+    }
+    
+    @Override
+    public String parseHariUpdateBiodata(BiodataModel biodata) {
+            // TODO Auto-generated method stub
+            Date date = biodata.getUpdated_at ();
+            DateFormat dateFormat = new SimpleDateFormat("EEEEEE");
+            String hari = dateFormat.format(date);
+            return hari;
+    }
+
+    @Override
+    public String parseTanggalUpdateBiodata(BiodataModel biodata) {
+            // TODO Auto-generated method stub
+            Date date = biodata.getUpdated_at ();
+            DateFormat dateFormat = new SimpleDateFormat("dd-MM-YYYY");
+            String tanggal = dateFormat.format(date);
+            return tanggal;
+    }
+
+    @Override
+    public String parseWaktuUpdateBiodata(BiodataModel biodata) {
+            // TODO Auto-generated method stub
+            Date date = biodata.getUpdated_at ();
+            DateFormat dateFormat = new SimpleDateFormat("HH:mm");
+            String waktu = dateFormat.format(date);
+            return waktu;
+    }
+
+    @Override
+    public String parseTanggalLahirBiodata(BiodataModel biodata) {
+            // TODO Auto-generated method stub
+            Date date = biodata.getTanggal_lahir ();
+            DateFormat dateFormat = new SimpleDateFormat("dd-MM-YYYY");
+            String tanggalLahir = dateFormat.format(date);
+            return tanggalLahir;
     }
 }

@@ -35,4 +35,12 @@ public interface VerifikasiIDMService
     void updateStatusUnverify (String username);
     
     void updateComment(String username, String komentar);
+    
+    String parseHariUpdateBiodata(BiodataModel biodata);
+    
+    String parseTanggalUpdateBiodata(BiodataModel biodata);
+    
+    String parseWaktuUpdateBiodata(BiodataModel biodata);
+    
+    String parseTanggalLahirBiodata(BiodataModel biodata);
 }
