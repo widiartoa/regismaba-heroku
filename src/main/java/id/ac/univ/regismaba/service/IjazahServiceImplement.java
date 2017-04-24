@@ -22,9 +22,10 @@ public class IjazahServiceImplement implements IjazahService
     }
     
     @Override
-    public void addIjazah(IjazahModel nomor_ijazah)
+    public void addIjazah(IjazahModel ijazah)
     {
-        log.info ("add ijazah with nomor_ijazah {}", nomor_ijazah);
+        log.info ("add ijazah with nomor_ijazah {}", ijazah);
+        ijazahMapper.addIjazah(ijazah);
     }
     
     @Override

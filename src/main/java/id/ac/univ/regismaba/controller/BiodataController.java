@@ -27,6 +27,7 @@ import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBui
 
 import id.ac.univ.regismaba.model.AgamaModel;
 import id.ac.univ.regismaba.model.AlamatModel;
+import id.ac.univ.regismaba.model.AsuransiKesehatanModel;
 import id.ac.univ.regismaba.model.BiodataModel;
 import id.ac.univ.regismaba.model.DataKesehatanModel;
 import id.ac.univ.regismaba.model.IjazahModel;
@@ -36,6 +37,7 @@ import id.ac.univ.regismaba.model.MahasiswaModel;
 import id.ac.univ.regismaba.model.ProvinsiModel;
 import id.ac.univ.regismaba.service.AgamaService;
 import id.ac.univ.regismaba.service.AlamatService;
+import id.ac.univ.regismaba.service.AsuransiKesehatanService;
 import id.ac.univ.regismaba.service.BiodataService;
 import id.ac.univ.regismaba.service.DataKesehatanService;
 import id.ac.univ.regismaba.service.IjazahService;
@@ -82,6 +84,13 @@ public class BiodataController {
 	@Autowired
 	AgamaService agamaDAO;
 	
+	@Autowired
+	AsuransiKesehatanService asuransiKesehatanDAO;
+	
+	
+//	@Autowired
+//	PengajuanSkemaBiayaController pengajuanSkemaBiaya;
+	
 
 	@RequestMapping("calon-mahasiswa/idm")
 	public String idmMahasiswa()
@@ -109,7 +118,7 @@ public class BiodataController {
 			@RequestParam(value = "scan_kk", required = false) MultipartFile scan_kk,
 			@RequestParam(value = "scan_surat_pernyataan_mahasiswa", required = false) MultipartFile scan_surat_pernyataan_mahasiswa,
 			@RequestParam(value = "form_survey_kesehatan", required = false) MultipartFile form_survey_kesehatan,
-			@RequestParam(value = "hasil_tes_kesehatan", required = false) String hasil_tes_kesehatan,
+			//@RequestParam(value = "hasil_tes_kesehatan", required = false) String hasil_tes_kesehatan,
 			@RequestParam(value = "jalan", required = false) String jalan,
 			@RequestParam(value = "kota_kabupaten_id", required = false) int kota_kabupaten_id,
 			@RequestParam(value = "kecamatan", required = false) String kecamatan,
@@ -118,20 +127,26 @@ public class BiodataController {
 			@RequestParam(value = "kode_pos", required = false) String kode_pos,
 			@RequestParam(value = "ukuran_jaket", required = false) String ukuran_jaket,
 			@RequestParam(value = "nomor_ijazah", required = false) String nomor_ijazah,
+			@RequestParam(value = "institusi_id", required = false) String institusi_id,
+			@RequestParam(value = "tingkat_pendidikan_id", required = false) String tingkat_pendidikan_id,
 			@RequestParam(value = "nama_institusi", required = false) String nama_institusi,
 	        @RequestParam(value = "jenjang", required = false) String jenjang,
 	        @RequestParam("scan_ijazah") MultipartFile scan_ijazah,
-	        @RequestParam("scan_pernyataan_ijazah") MultipartFile scan_pernyataan_ijazah)
+	        @RequestParam("scan_pernyataan_ijazah") MultipartFile scan_pernyataan_ijazah,
 	        //@RequestParam("agama_id") int agama_id)
+			@RequestParam(value = "nomor_penerbit_asuransi", required = false) String nomor_penerbit_asuransi,
+			@RequestParam(value = "expired_date", required = false) String expired_date)
 			throws ParseException {
-		DateFormat format = new SimpleDateFormat("yyyy-mm-dd");
+		DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 		Date tanggalLahir = format.parse(tanggal_lahir);
 		System.out.println(tanggalLahir);
+		
+		DateFormat format2 = new SimpleDateFormat("yyyy-MM-dd");
+		Date expiredDate = format2.parse(expired_date);
 		
 		//========================
         IjazahModel ijazah = new IjazahModel();
         ijazah.setNomor_ijazah (nomor_ijazah);
-        //ijazahDAO.addIjazah (ijazah);
         
         Random rand = new Random();
         
@@ -195,18 +210,23 @@ public class BiodataController {
         bio.setScan_surat_pernyataan_mahasiswa(pdb6);
         
         
-//        //SCAN FORM SURVEY KESEHATAN UPLOAD//
-//        Path data7 = storageService.load(form_survey_kesehatan.getOriginalFilename());
-//        String pdb7 = MvcUriComponentsBuilder
-//                .fromMethodName(BiodataController.class, "serveFile", data7.getFileName().toString())
-//                .build().toString();
-//        
-//        bio.setScan_surat_pernyataan_mahasiswa(pdb7);
-//        
+        //SCAN FORM SURVEY KESEHATAN UPLOAD//
+        DataKesehatanModel dataKesehatan = new DataKesehatanModel();
+        
+        Path data7 = storageService.load(form_survey_kesehatan.getOriginalFilename());
+        String pdb7 = MvcUriComponentsBuilder
+                .fromMethodName(DataKesehatanController.class, "serveFile", data7.getFileName().toString())
+                .build().toString();
+        
+        dataKesehatan.setForm_survey_kesehatan(pdb7);
+       
+        //INSTITUSI
+        
+        
         User user = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         String name = user.getUsername(); //get logged in username
         
-        bio.setUsername(name);
+        bio.setUsername(name);	
         bio.setBiodata_id(0);
         bio.setFlag_aktif("1");
         bio.setJenis_kelamin(jenis_kelamin);
@@ -221,6 +241,19 @@ public class BiodataController {
         bio.setUpdated_by(name);
         bio.setAgama_id(1);
         
+        ijazah.setUsername(name);
+        ijazah.setInstitusi_id(Integer.parseInt(institusi_id));
+        ijazah.setJenjang(jenjang);
+        ijazah.setCreated_by(name);
+		ijazah.setUpdated_by(name);
+		ijazah.setUpdated_at(null);
+        
+        dataKesehatan.setHasil_tes_kesehatan(null);
+        dataKesehatan.setUsername(name);
+        dataKesehatan.setCreated_by(name);
+		dataKesehatan.setUpdated_by(name);
+		dataKesehatan.setUpdated_at(null);
+        
         //===================================
 
         AlamatModel alamat = new AlamatModel(0, kota_kabupaten_id, jalan, kecamatan, kelurahan, kode_pos, null, null, null, null);
@@ -233,17 +266,26 @@ public class BiodataController {
 		}
 		alamat.setJalan_id(alamatDAO.selectJalanId(alamat));
 		bio.setJalan_id(alamatDAO.selectJalanId(alamat));
+
 		
-
+		AsuransiKesehatanModel asuransiKesehatan = new AsuransiKesehatanModel();
+		asuransiKesehatan.setNomor_asuransi(nomor_asuransi);
+		asuransiKesehatan.setUsername(name);
+		asuransiKesehatan.setNomor_penerbit_asuransi(nomor_penerbit_asuransi);
+		asuransiKesehatan.setExpired_date(expiredDate);
+		asuransiKesehatan.setCreated_by(name);
+		asuransiKesehatan.setUpdated_by(name);
+		asuransiKesehatan.setUpdated_at(null);
+		
 		biodataDAO.insertBiodata(bio);
-
+		ijazahDAO.addIjazah(ijazah);
+		dataKesehatanDAO.insertDataKesehatan(dataKesehatan);
+		asuransiKesehatanDAO.insertAsuransiKesehatan(asuransiKesehatan);
+		
 		return "success-biodata-insert";
            
         
 		//==============================
-//		DataKesehatanModel dataKesehatan = new DataKesehatanModel(0, form_survey_kesehatan, hasil_tes_kesehatan);
-//		dataKesehatanDAO.insertDataKesehatan(dataKesehatan);
-//		dataKesehatan.setData_kesehatan_id(dataKesehatanDAO.selectDataKesehatanId(dataKesehatan));
 
 		
 	}
@@ -258,16 +300,6 @@ public class BiodataController {
                 .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\""+file.getFilename()+"\"")
                 .body(file);
     }
-
-//	@RequestMapping("/biodata/view/{username}")
-//	public String view(Model model, @PathVariable(value = "username") String username) {
-//		BiodataModel biodata = biodataDAO.selectBiodata(username);
-//		if (biodata != null) {
-//			model.addAttribute("biodata", biodata);
-//			return "biodata-view";
-//		}
-//		return "not-found";
-//	}
     
 	
 	@RequestMapping("/biodata/view/{npm}")
