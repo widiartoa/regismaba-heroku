@@ -89,14 +89,24 @@ public class StafController {
 		return "staf_kesejahteraan-daftar_mhs";
 	}
 	
-	@PostMapping("/staf-kesejahteraan/daftar-mhs/submit{npm}")
+	@PostMapping("/staf-kesejahteraan/daftar-mhs/{npm}")
 	public String daftarMhsKesejahteraanSubmitVerifikasiPembayaran(Model model,
 																	@PathVariable(value = "npm") String npm,
-																	@RequestParam(value = "status-verifikasi", required = true) int status_verifikasi_id,
+																	@RequestParam(value = "status-pengajuan", required = true) String status_pengajuan,
 																	@RequestParam(value = "ubah-golongan", required = true) int golongan_id,
 																	@RequestParam(value = "komentar", required = true) String komentar
 	) {
-		System.out.println(npm);
-		return "redirect:/staf-kesehatan/daftar-mhs";
+		MahasiswaModel mahasiswa = mahasiswaDAO.selectMahasiswa(npm);
+		PengajuanSkemaBiayaModel psbm = pengajuanSkemaBiayaDAO.selectPSBMFromUsername(mahasiswa.getUsername());
+		if(psbm != null) {			
+			psbm.setGolongan_id(golongan_id);
+			psbm.setStatus_pengajuan(status_pengajuan);
+			psbm.setKomentar(komentar);
+			psbm.setUpdated_by(mahasiswa.getUsername()); // ntar update ke staff
+			pengajuanSkemaBiayaDAO.updatePengajuan(psbm);	
+			return "redirect:/staf-kesejahteraan/daftar-mhs";
+		} else {
+			return "error";
+		}
 	}
 }

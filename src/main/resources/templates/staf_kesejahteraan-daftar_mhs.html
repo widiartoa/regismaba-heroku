@@ -170,30 +170,40 @@
 							<hr/>
 							
 							<h4 class="modal-title">Verifikasi</h4>
-							<form th:action="@{/staf-kesejahteraan/daftar-mhs/submit(npm=${mahasiswa.npm})}" method="post">
+							<form th:action="@{/staf-kesejahteraan/daftar-mhs/{npm}(npm=${mahasiswa.npm})}" method="post">
+								<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
 								<table class="tg">
 									<tr>
-										<td style="width:25%">Status Verifikasi</td>
+										<td style="width:25%">Status Pengajuan</td>
 										<td>
-											<select class="form-control" id="status-verifikasi">
-												<option>Unverified</option>
-												<option>Verified</option>
+											<select class="form-control" name="status-pengajuan" id="status-pengajuan">
+												<div th:if="${pengajuan.status_pengajuan == 'Unverified'}">
+													<option value="Unverified" selected="selected">Unverified</option>
+													<option value="Verified">Verified</option>
+												</div>
+												<div th:if="${pengajuan.status_pengajuan != 'Unverified'}">
+													<option value="Unverified">Unverified</option>
+													<option value="Verified" selected="selected">Verified</option>
+												</div>
 											</select>
 										</td>
 									</tr>
 									<tr>
 										<td style="width:25%">Ubah Golongan Mahasiswa</td>
 										<td>
-											<select class="form-control" id="ubah-golongan">
+											<select class="form-control" name="ubah-golongan" id="ubah-golongan">
 												<div th:each="skema,skemaListItr: ${skemaList}">
-													<option th:text="${skema.golongan_id}">1</option>
+													<option th:if="${pengajuan.golongan_id != skema.golongan_id}" th:value="${skema.golongan_id}" th:text="${skema.golongan_id}">1</option>
+													<option th:if="${pengajuan.golongan_id == skema.golongan_id}" th:value="${skema.golongan_id}" th:text="${skema.golongan_id}" selected="selected">1</option>
 												</div>
 											</select>
 										</td>
 									</tr>
 									<tr>
 										<td style="width:25%">Komentar</td>
-										<td><textarea class="form-control" rows="5" id="komentar"></textarea></td>
+										<td>
+											<textarea class="form-control" rows="5" name="komentar" id="komentar" th:text="${pengajuan.komentar}"></textarea>
+										</td>
 									</tr>
 								</table>
 								
