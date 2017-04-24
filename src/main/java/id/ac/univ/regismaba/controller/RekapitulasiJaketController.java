@@ -25,32 +25,20 @@ public class RekapitulasiJaketController {
 		List<String> sizes = rjs.getSizes();
 		List<FakultasModel> faculties = rjs.getFaculties();
 		
-//		List<RekapitulasiJaketModel> sizeAnalytics = new ArrayList<RekapitulasiJaketModel>();
-//		List<RekapitulasiJaketModel> facultyAnalytics = new ArrayList<RekapitulasiJaketModel>();
+		List<RekapitulasiJaketModel> sizeAnalytics = new ArrayList<RekapitulasiJaketModel>();
+		List<RekapitulasiJaketModel> facultyAnalytics = new ArrayList<RekapitulasiJaketModel>();
 		ArrayList<CrossRekapJaketModel> crossAnalytics = new ArrayList<CrossRekapJaketModel>();
-		
-		List<String> modelSizeTypes = new ArrayList<String>();
-		List<Integer> modelSizeTotal = new ArrayList<Integer>();
-		
-		List<String> modelJacketTypes = new ArrayList<String>();
-		List<Integer> modelJacketTotal = new ArrayList<Integer>();
 		
 		for(int i = 0; i < sizes.size(); i++)
 		{
 			RekapitulasiJaketModel size = rjs.selectRekapUkuran(sizes.get(i));
-//			sizeAnalytics.add(size);
-			modelSizeTypes.add(size.getJenis_rekap());
-			modelSizeTotal.add(size.getJumlah());
+			sizeAnalytics.add(size);
 		}
-		
 		
 		for(int i = 0; i < faculties.size(); i++)
 		{
 			RekapitulasiJaketModel faculty = rjs.selectRekapFakultas(faculties.get(i).getFakultas_id());
-//			facultyAnalytics.add(faculty);
-			
-			modelJacketTypes.add(faculty.getJenis_rekap());
-			modelJacketTotal.add(faculty.getJumlah());
+			facultyAnalytics.add(faculty);
 			
 			ArrayList<RekapitulasiJaketModel> faculti = rjs.selectUkuranOfFakultas(faculties.get(i).getFakultas_id());
 			CrossRekapJaketModel crjm = new CrossRekapJaketModel();
@@ -60,14 +48,9 @@ public class RekapitulasiJaketController {
 			crossAnalytics.add(crjm);
 		}
 		
-//		model.addAttribute("sizeAnalytics", sizeAnalytics);
-//		model.addAttribute("facultyAnalytics", facultyAnalytics);
+		model.addAttribute("sizeAnalytics", sizeAnalytics);
+		model.addAttribute("facultyAnalytics", facultyAnalytics);
 		model.addAttribute("crossAnalytics", crossAnalytics);
-		
-		model.addAttribute("mstypes", modelSizeTypes);
-		model.addAttribute("mstotal", modelSizeTotal);
-		model.addAttribute("mjtypes", modelJacketTypes);
-		model.addAttribute("mjtotal", modelJacketTotal);
 		
 		return "staf_registrasi-rekapitulasi_jaket";
 	}
