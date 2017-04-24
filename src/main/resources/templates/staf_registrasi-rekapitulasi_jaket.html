@@ -14,11 +14,6 @@
 		    google.charts.setOnLoadCallback(drawFacultyChart);
 		    google.charts.setOnLoadCallback(drawCrossChart);
 		    var d = [[${crossAnalytics}]];
-		   /*  for(var i = 0; i < d.length; i++)
-	    	{
-		    	console.log("loop_" + i);
-			    google.charts.setOnLoadCallback(drawCrossChart(i, d[i].fakultas_id));
-	    	} */
 		
 		    // Callback that creates and populates a data table,
 		    // instantiates the pie chart, passes in the data and
@@ -51,46 +46,43 @@
 		    }
 		    
 		    function drawFacultyChart() {
-		    	  var x = [[${mjtypes}]];
-			      var y = [[${mjtotal}]];
-		    	
-			      // Create the data table.
-			      var data = new google.visualization.DataTable();
-			      data.addColumn('string', 'Fakultas');
-			      data.addColumn('number', 'Jumlah');
-			      
-			      for(var i = 0; i < x.length; i++)
-		    	  {
-		    	  	data.addRow([x[i], y[i]]);
-		    	  }
-			 	
-			      // Set chart options
-			      var options = {'title':'Data Pemesanan per Fakultas',
-			                     'width':400,
-			                     'height':300};
-			
-			      // Instantiate and draw our chart, passing in some options.
-			      var chart = new google.visualization.PieChart(document.getElementById('chart_div_2'));
-			      chart.draw(data, options);
-			      console.log("chart");
-			    }
+	    	  var x = [[${mjtypes}]];
+		      var y = [[${mjtotal}]];
+	    	
+		      // Create the data table.
+		      var data = new google.visualization.DataTable();
+		      data.addColumn('string', 'Fakultas');
+		      data.addColumn('number', 'Jumlah');
+		      
+		      for(var i = 0; i < x.length; i++)
+	    	  {
+	    	  	data.addRow([x[i], y[i]]);
+	    	  }
+		 	
+		      // Set chart options
+		      var options = {'title':'Data Pemesanan per Fakultas',
+		                     'width':400,
+		                     'height':300};
+		
+		      // Instantiate and draw our chart, passing in some options.
+		      var chart = new google.visualization.PieChart(document.getElementById('chart_div_2'));
+		      chart.draw(data, options);
+		      console.log("chart");
+		    }
 		    
 		    function drawCrossChart() {
-		    	  
 	    	  for(var index=0; index < d.length; index++)
     		  {
-		    	  var x = [[${mjtypes}]];
-			      var y = [[${mjtotal}]];
+			      var cross = d[index].rjm;
 		    	
-			      console.log(d.length);
 			      // Create the data table.
 			      var data = new google.visualization.DataTable();
-			      data.addColumn('string', 'Fakultas');
+			      data.addColumn('string', 'Ukuran Jaket');
 			      data.addColumn('number', 'Jumlah');
 	
-			      for(var i = 0; i < x.length; i++)
+			      for(var i = 0; i < cross.length; i++)
 		    	  {
-		    	  	data.addRow([x[i], y[i]]);
+		    	  	data.addRow([cross[i].jenis_rekap, cross[i].jumlah])
 		    	  }
 			 	
 			      // Set chart options
@@ -102,7 +94,6 @@
 			      var chart = new google.visualization.BarChart(document.getElementById('cross_' + d[index].fakultas_id));
 			      chart.draw(data, options);
     		  }
-	    	  
 		    }
 	    /*]]>*/
     </script>
