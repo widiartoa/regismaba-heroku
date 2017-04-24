@@ -12,6 +12,13 @@
 		    // Set a callback to run when the Google Visualization API is loaded.
 		    google.charts.setOnLoadCallback(drawSizeChart);
 		    google.charts.setOnLoadCallback(drawFacultyChart);
+		    google.charts.setOnLoadCallback(drawCrossChart);
+		    var d = [[${crossAnalytics}]];
+		   /*  for(var i = 0; i < d.length; i++)
+	    	{
+		    	console.log("loop_" + i);
+			    google.charts.setOnLoadCallback(drawCrossChart(i, d[i].fakultas_id));
+	    	} */
 		
 		    // Callback that creates and populates a data table,
 		    // instantiates the pie chart, passes in the data and
@@ -21,6 +28,7 @@
 		      // Retrieve from backend
 		      var x = [[${mstypes}]];
 		      var y = [[${mstotal}]];
+		      var z = [[${crossAnalytics}]];
 		      
 		      // Create the data table.
 		      var data = new google.visualization.DataTable();
@@ -64,33 +72,38 @@
 			      // Instantiate and draw our chart, passing in some options.
 			      var chart = new google.visualization.PieChart(document.getElementById('chart_div_2'));
 			      chart.draw(data, options);
+			      console.log("chart");
 			    }
 		    
-		    var d = [[${crossAnalytics}]];
-		    for(var i = 0; i < d.length; i++)
-	    	{
-		    	google.charts.setOnLoadCallback(drawCrossChart(i));
-	    	}
-		    
-		    function drawCrossChart(i) {
+		    function drawCrossChart() {
 		    	  
+	    	  for(var index=0; index < d.length; index++)
+    		  {
+		    	  var x = [[${mjtypes}]];
+			      var y = [[${mjtotal}]];
 		    	
+			      console.log(d.length);
 			      // Create the data table.
 			      var data = new google.visualization.DataTable();
 			      data.addColumn('string', 'Fakultas');
 			      data.addColumn('number', 'Jumlah');
-			      
-			      var cross = [[${crossAnalytics}]].[i]
+	
+			      for(var i = 0; i < x.length; i++)
+		    	  {
+		    	  	data.addRow([x[i], y[i]]);
+		    	  }
 			 	
 			      // Set chart options
-			      var options = {'title':'Data Pemesanan per Fakultas',
+			      var options = {'title':'Data Pemesanan Ukuran di Fakultas ' + d[index].nama_fakultas,
 			                     'width':500,
 			                     'height':300};
 			
 			      // Instantiate and draw our chart, passing in some options.
-			      var chart = new google.visualization.BarChart(document.getElementById(''));
+			      var chart = new google.visualization.BarChart(document.getElementById('cross_' + d[index].fakultas_id));
 			      chart.draw(data, options);
-			    }
+    		  }
+	    	  
+		    }
 	    /*]]>*/
     </script>
 </head>
@@ -113,10 +126,7 @@
     		<div id="chart_div_2"></div>
     		
     		<div th:each="crossAnalytic,iterationStatus: ${crossAnalytics}">
-    			<div th:text="${crossAnalytic.nama_fakultas}"></div>
-    			<div th:each="cross,iterationStatus: ${crossAnalytic.rjm}">
-    				<div th:text="${cross.jenis_rekap} + '-' + ${cross.jumlah}"></div>
-    			</div>
+    			<div th:id="'cross_' + ${crossAnalytic.fakultas_id}" th:text="${crossAnalytic.fakultas_id}"></div>
     		</div>
 		</div>
 	</div>
