@@ -58,11 +58,11 @@
 			 	
 			      // Set chart options
 			      var options = {'title':'Data Pemesanan per Fakultas',
-			                     'width':500,
+			                     'width':400,
 			                     'height':300};
 			
 			      // Instantiate and draw our chart, passing in some options.
-			      var chart = new google.visualization.BarChart(document.getElementById('chart_div_2'));
+			      var chart = new google.visualization.PieChart(document.getElementById('chart_div_2'));
 			      chart.draw(data, options);
 			    }
 		    
@@ -80,10 +80,7 @@
 			      data.addColumn('string', 'Fakultas');
 			      data.addColumn('number', 'Jumlah');
 			      
-			      for(var i = 0; i < x.length; i++)
-		    	  {
-		    	  	data.addRow([x[i], y[i]]);
-		    	  }
+			      var cross = [[${crossAnalytics}]].[i]
 			 	
 			      // Set chart options
 			      var options = {'title':'Data Pemesanan per Fakultas',

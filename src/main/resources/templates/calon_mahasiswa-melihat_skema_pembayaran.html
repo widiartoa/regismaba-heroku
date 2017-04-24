@@ -197,18 +197,23 @@
 									</td>
 								</tr>
 							</div>
-							
-							<tr>
-								<td>
-									<div class="col-sm-12"><h4 th:text="'Komentar'">Komentar</h4></div>
-								</td>
-								<td>
-									<div class="col-sm-12"><h4 th:text="${psbm.komentar}">Komentar</h4></div>
-								</td>
-							</tr>
 						</tbody>
 	  				</table>
 				</div>
+				
+				<h3>Komentar Staf Kesejahteraan Mahasiswa</h3>
+				<table class="table">
+					<tbody>
+							<tr>
+								<td th:if="${psbm.komentar != null}">
+									<div class="col-sm-12"><h4 th:text="${psbm.komentar}">Komentar</h4></div>
+								</td>
+								<td th:if="${psbm.komentar == null}">
+									<div class="col-sm-12"><h4 th:text="'Belum ada komentar'">Komentar</h4></div>
+								</td>
+							</tr>
+					</tbody>
+				</table>
 				
   				
   				<div><h5 th:text="'Terakhir diubah pada ' + ${psbm.updated_at}"></h5></div>
