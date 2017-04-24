@@ -78,6 +78,10 @@ public interface PengajuanSkemaBiayaMapper {
 	void insertGolongan(PengajuanSkemaBiayaModel psbm);
 	
 	@Update("update pengajuan_skema_pembayaran set golongan_id=#{golongan_id}, updated_at=current_timestamp, "
-			+ "updated_by=#{updated_by} where username=#{username}")
+			+ "updated_by=#{updated_by}, gaji_pribadi=null, gaji_wali1=null, gaji_wali2=null, "
+			+ "nilai_tagihan_air=null, nilai_tagihan_listrik=null, nilai_tagihan_telepon=null, "
+			+ "surat_keterangan_rtrw=null, foto_rumah='-', slip_gaji_pribadi=null, slip_gaji_wali1=null, "
+			+ "slip_gaji_wali2=null, tagihan_air=null, tagihan_listrik=null, tagihan_telepon=null, "
+			+ "status_pengajuan='Unverified', komentar=null where username=#{username}")
 	void updateGolongan(PengajuanSkemaBiayaModel psbm);
 }
