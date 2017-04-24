@@ -151,10 +151,10 @@ public class StafController
         return "redirect:/staf-verifikasi/daftar-mhs";
     }
     
-    @RequestMapping("/staf-verifikasi/daftar-mhs/unverified/{npm}")
+    @PostMapping("/staf-verifikasi/daftar-mhs/unverified/{npm}")
     public String unverifyDetailIDM (Model model,
             @PathVariable(value = "npm") String npm,
-            @RequestParam("komentar") String komentar)
+            @RequestParam(value = "komentar", required = true) String komentar)
     {
         MahasiswaModel mahasiswa = mahasiswaDAO.selectMahasiswa (npm);
         verifikasiIdmDAO.updateComment (mahasiswa.getUsername (), komentar);
