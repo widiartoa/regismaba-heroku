@@ -172,6 +172,7 @@
 							<label for="nama_provinsi">Provinsi</label> 
 							<select id="nama_provinsi_select"
 								class="form-control">
+								<option value="null">[Pilih Provinsi]</option>
 								<option th:each="provinsi : ${provinsis}" th:value="${provinsi.provinsi_id}" th:text="${provinsi.nama_provinsi}"></option>							
 							</select>
 						</div>
@@ -246,6 +247,7 @@
 							<label for="nama_tingkat_pendidikan">Tingkat Pendidikan Terakhir</label> 
 							<select id="nama_tingkat_pendidikan_select"
 								class="form-control">
+								<option value="null">[Pilih Tingkat Pendidikan Terakhir]</option>
 								<option th:each="tingkatPendidikan : ${tingkatPendidikans}" th:value="${tingkatPendidikan.tingkat_pendidikan_id}" th:text="${tingkatPendidikan.nama_tingkat_pendidikan}"></option>							
 							</select>
 						</div>
@@ -411,7 +413,7 @@
 			            $('#kota_kabupaten_select').html(options);
 			        },
 			        error: function (data) {
-			        	alert('cek koneksi internet Anda');
+			        	alert('Pilih salah satu');
 			        }
 			    });
 			});
