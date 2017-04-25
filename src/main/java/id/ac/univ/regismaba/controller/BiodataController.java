@@ -37,6 +37,7 @@ import id.ac.univ.regismaba.model.KotaKabupatenModel;
 import id.ac.univ.regismaba.model.MahasiswaModel;
 import id.ac.univ.regismaba.model.ProvinsiModel;
 import id.ac.univ.regismaba.model.TingkatPendidikanModel;
+import id.ac.univ.regismaba.model.UserModel;
 import id.ac.univ.regismaba.service.AgamaService;
 import id.ac.univ.regismaba.service.AlamatService;
 import id.ac.univ.regismaba.service.AsuransiKesehatanService;
@@ -49,6 +50,7 @@ import id.ac.univ.regismaba.service.KotaKabupatenService;
 import id.ac.univ.regismaba.service.MahasiswaService;
 import id.ac.univ.regismaba.service.ProvinsiService;
 import id.ac.univ.regismaba.service.TingkatPendidikanService;
+import id.ac.univ.regismaba.service.UserService;
 import id.ac.univ.regismaba.service.VerifikasiIDMService;
 import id.ac.univ.regismaba.storage.StorageService;
 
@@ -102,6 +104,9 @@ public class BiodataController {
 	@Autowired
 	VerifikasiIDMService verifIDMDAO;
 	
+	@Autowired
+	UserService userDAO;
+	
 
 	@RequestMapping("calon-mahasiswa/idm")
 	public String idmMahasiswa()
@@ -121,6 +126,15 @@ public class BiodataController {
 		List<TingkatPendidikanModel> tingkatPendidikans = tingkatPendidikanDAO.selectAllTingkatPendidikan();
 		model.addAttribute("tingkatPendidikans", tingkatPendidikans);
 		
+		User user = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+	    String name = user.getUsername(); //get logged in username
+		
+		UserModel userNowLoggedIn = userDAO.selectUser(name);
+		System.out.println(user);
+		if (userNowLoggedIn != null) {
+			model.addAttribute("user", userNowLoggedIn);
+				System.out.println("user ke add ke model");
+		}
 		return "calon_mahasiswa-mengisi_idm";
 	}
 
