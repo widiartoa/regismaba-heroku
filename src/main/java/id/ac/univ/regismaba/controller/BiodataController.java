@@ -49,6 +49,7 @@ import id.ac.univ.regismaba.service.KotaKabupatenService;
 import id.ac.univ.regismaba.service.MahasiswaService;
 import id.ac.univ.regismaba.service.ProvinsiService;
 import id.ac.univ.regismaba.service.TingkatPendidikanService;
+import id.ac.univ.regismaba.service.VerifikasiIDMService;
 import id.ac.univ.regismaba.storage.StorageService;
 
 @Controller
@@ -97,6 +98,9 @@ public class BiodataController {
 	
 	@Autowired
 	TingkatPendidikanService tingkatPendidikanDAO;
+	
+	@Autowired
+	VerifikasiIDMService verifIDMDAO;
 	
 
 	@RequestMapping("calon-mahasiswa/idm")
@@ -359,8 +363,16 @@ public class BiodataController {
 		System.out.println(biodata);
 		if (biodata != null) {
 			System.out.println("biodata gak null");
+//			String tanggalLahir = verifIDMDAO.parseTanggalLahirBiodata(biodata);
+			
+			Date date = biodata.getTanggal_lahir ();
+            DateFormat dateFormat = new SimpleDateFormat("dd-MM-YYYY");
+            String tanggalLahir = dateFormat.format(date);
+			biodata.setTanggal_lahirr(tanggalLahir);
 			model.addAttribute("biodata", biodata);
 			System.out.println("biodata ke add ke model");
+			
+			
 			//ALAMAT
 			int jalan_id = biodata.getJalan_id();
 			System.out.println("jalan id = " + jalan_id);
