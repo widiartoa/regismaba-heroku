@@ -365,7 +365,7 @@ public class BiodataController {
 			AlamatModel alamat = alamatDAO.selectAlamat(jalan_id);
 			System.out.println(alamat);
 			if (alamat != null) {
-				model.addAttribute("alamat, alamat");
+				model.addAttribute("alamat", alamat);
 					System.out.println("alamat ke add ke model");
 				//KOTA KABUPATEN
 				int kota_kabupaten_id = alamat.getKota_kabupaten_id();
@@ -408,7 +408,16 @@ public class BiodataController {
 								System.out.println(provinsi);
 								model.addAttribute("institusi", institusi);
 									System.out.println("institusi ke add ke model");
-								return "calon_mahasiswa-melihat_idm";
+								AsuransiKesehatanModel asuransiKesehatan = asuransiKesehatanDAO.selectAsuransiKesehatanByUsername(username);
+									System.out.println(asuransiKesehatan);
+								if(asuransiKesehatan != null) {
+									model.addAttribute("asuransiKesehatan", asuransiKesehatan);
+									System.out.println("asuransi ke add ke model");
+									int tingkat_pendidikan_id = institusi.getTingkat_pendidikan_id();
+									TingkatPendidikanModel tingkatPendidikan = tingkatPendidikanDAO.selectTingkatPendidikan(tingkat_pendidikan_id);
+									model.addAttribute("tingkatPendidikan", tingkatPendidikan);
+									return "calon_mahasiswa-melihat_idm";
+								}
 							} else {
 								return "error";
 							}

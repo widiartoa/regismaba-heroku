@@ -87,6 +87,38 @@
 						</tr>
 						<tr>
 							<td>
+								<div class="col-sm-12"><h4 th:text="'Kecamatan'">Kecamatan</h4></div>
+							</td>
+							<td>
+								<div class="col-sm-12"><h4 th:text="${alamat.kecamatan}">Kecamatan</h4></div>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<div class="col-sm-12"><h4 th:text="'Kelurahan'">Kelurahan</h4></div>
+							</td>
+							<td>
+								<div class="col-sm-12"><h4 th:text="${alamat.kelurahan}">Kelurahan</h4></div>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<div class="col-sm-12"><h4 th:text="'Nama Jalan'">Nama Jalan</h4></div>
+							</td>
+							<td>
+								<div class="col-sm-12"><h4 th:text="${alamat.jalan}">Nama Jalan</h4></div>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<div class="col-sm-12"><h4 th:text="'Kode pos'">Kode Pos</h4></div>
+							</td>
+							<td>
+								<div class="col-sm-12"><h4 th:text="${alamat.kode_pos}">Kode Pos</h4></div>
+							</td>
+						</tr>
+						<tr>
+							<td>
 								<div class="col-sm-12"><h4 th:text="'Nomor KTP'">nomor ktp</h4></div>
 							</td>
 							<td>
@@ -143,10 +175,18 @@
 						</tr>
 						<tr>
 							<td>
-								<div class="col-sm-12"><h4 th:text="'Nomor Ijazah'">nomor ijazah</h4></div>
+								<div class="col-sm-12"><h4 th:text="'Tingkat Pendidikan Terakhir'">tingkat pendidikan</h4></div>
 							</td>
 							<td>
-								<div class="col-sm-12"><h4 th:text="${ijazah.nomor_ijazah}">nomor ijazah</h4></div>
+								<div class="col-sm-12"><h4 th:text="${tingkatPendidikan.nama_tingkat_pendidikan}">tingkat pendidikan</h4></div>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<div class="col-sm-12"><h4 th:text="'Jenjang Pendidikan Terakhir'">jenjang</h4></div>
+							</td>
+							<td>
+								<div class="col-sm-12"><h4 th:text="${ijazah.jenjang}">jenjang</h4></div>
 							</td>
 						</tr>
 						<tr>
@@ -157,14 +197,14 @@
 								<div class="col-sm-12"><h4 th:text="${institusi.nama_institusi}">nama institusi</h4></div>
 							</td>
 						</tr>
-<!-- 						<tr>
+						<tr>
 							<td>
-								<div class="col-sm-12"><h4 th:text="'Jenjang'">jenjang</h4></div>
+								<div class="col-sm-12"><h4 th:text="'Nomor Ijazah'">nomor ijazah</h4></div>
 							</td>
 							<td>
-								<div class="col-sm-12"><h4 th:text="${jenjang.nama_jenjang}">jenjang</h4></div>
+								<div class="col-sm-12"><h4 th:text="${ijazah.nomor_ijazah}">nomor ijazah</h4></div>
 							</td>
-						</tr> -->
+						</tr>
 						<tr>
 							<td>
 								<div class="col-sm-12"><h4 th:text="'Scan Ijazah'">scan ijazah</h4></div>
@@ -179,6 +219,40 @@
 							</td>
 							<td>
 								<div class="col-sm-12"><h4> <a th:href="${ijazah.scan_pernyataan_ijazah}">Unduh Scan Pernyataan Ijazah </a></h4></div>
+							</td>
+						</tr>
+						
+						<!-- DATA KESEHATAN -->
+						<tr>
+							<td>
+								<div class="col-sm-12"><h4 th:text="'Nomor Asuransi'">Nomor Asuransi</h4></div>
+							</td>
+							<td>
+								<div class="col-sm-12"><h4 th:text="${asuransiKesehatan.nomor_asuransi}">Nomor Asuransi</h4></div>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<div class="col-sm-12"><h4 th:text="'Nomor Penerbit Asuransi'">Nomor Penerbit Asuransi</h4></div>
+							</td>
+							<td>
+								<div class="col-sm-12"><h4 th:text="${asuransiKesehatan.nomor_penerbit_asuransi}">Nomor Penerbit Asuransi</h4></div>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<div class="col-sm-12"><h4 th:text="'Expired Date'">Expired Date</h4></div>
+							</td>
+							<td>
+								<div class="col-sm-12"><h4 th:text="${asuransiKesehatan.expired_date}">Expired Date</h4></div>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<div class="col-sm-12"><h4 th:text="'Scan Kartu'">Scan Kartu Asuransi</h4></div>
+							</td>
+							<td>
+								<div class="col-sm-12"><h4><a th:href="${asuransiKesehatan.scan_kartu}">Unduh Scan Kartu Asuransi</a></h4></div>
 							</td>
 						</tr>
 						<tr>
