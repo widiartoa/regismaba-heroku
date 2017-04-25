@@ -263,6 +263,7 @@ public class BiodataController {
         bio.setBiodata_id(0);
         bio.setFlag_aktif("1");
         bio.setSidik_jari("Belum scan sidik jari");
+        
         bio.setJenis_kelamin(jenis_kelamin);
         bio.setKewarganegaraan(kewarganegaraan);
         bio.setNomor_ktp(nomor_ktp);
@@ -346,7 +347,7 @@ public class BiodataController {
     }
     
 	
-	@RequestMapping("/biodata/view/{npm}")
+	@RequestMapping("/calon-mahasiswa/biodata/view/{npm}")
 	public String view(Model model, @PathVariable(value = "npm") String npm) {
 		System.out.println(npm);
 		System.out.println("masuk atas");
