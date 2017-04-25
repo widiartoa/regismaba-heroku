@@ -439,6 +439,12 @@ public class BiodataController {
 								AsuransiKesehatanModel asuransiKesehatan = asuransiKesehatanDAO.selectAsuransiKesehatanByUsername(username);
 									System.out.println(asuransiKesehatan);
 								if(asuransiKesehatan != null) {
+									
+									Date expiredDate = asuransiKesehatan.getExpired_date();
+						            DateFormat expiredDateFormat = new SimpleDateFormat("dd-MM-YYYY");
+						            String expired_date = expiredDateFormat.format(expiredDate);
+									asuransiKesehatan.setExpired_date_format(expired_date);
+						            
 									model.addAttribute("asuransiKesehatan", asuransiKesehatan);
 									System.out.println("asuransi ke add ke model");
 									int tingkat_pendidikan_id = institusi.getTingkat_pendidikan_id();

@@ -15,6 +15,7 @@ public class AsuransiKesehatanModel {
 	String username;
 	String nomor_penerbit_asuransi;
 	Date expired_date;
+	String expired_date_format;
 	String scan_kartu;
 	String created_at;
 	String created_by;
