@@ -29,11 +29,19 @@
 						</tr>
 						<tr>
 							<td>Fakultas</td>
-							<td th:text="${fakultasMahasiswa}">Fakultas</td>
+							<td th:text="${mahasiswa.fakultas}">Fakultas</td>
 						</tr>
 						<tr>
-							<td>Jurusan</td>
-							<td th:text="${jurusanMahasiswa}">Jurusan</td>
+							<td>Program Studi</td>
+							<td th:text="${mahasiswa.program_studi.nama_program_studi}">ProgramStudi</td>
+						</tr>
+						<tr>
+							<td>Status Pengajuan Pembayaran</td>
+							<td th:text="${psbm.status_pengajuan}">Unverified Ceritanya</td>
+						</tr>
+						<tr>
+							<td>Status Verifikasi IDM</td>
+							<td th:text="${mahasiswa.biodata.status_verifikasi}">Unverified Ceritanya</td>
 						</tr>
 					</table>
 				</div>
