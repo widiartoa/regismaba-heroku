@@ -1,6 +1,5 @@
 package id.ac.univ.regismaba.model;
 
-import java.security.Timestamp;
 import java.util.Date;
 
 import lombok.AllArgsConstructor;

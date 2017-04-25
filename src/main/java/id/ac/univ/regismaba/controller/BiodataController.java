@@ -32,9 +32,11 @@ import id.ac.univ.regismaba.model.BiodataModel;
 import id.ac.univ.regismaba.model.DataKesehatanModel;
 import id.ac.univ.regismaba.model.IjazahModel;
 import id.ac.univ.regismaba.model.InstitusiModel;
+import id.ac.univ.regismaba.model.JenjangModel;
 import id.ac.univ.regismaba.model.KotaKabupatenModel;
 import id.ac.univ.regismaba.model.MahasiswaModel;
 import id.ac.univ.regismaba.model.ProvinsiModel;
+import id.ac.univ.regismaba.model.TingkatPendidikanModel;
 import id.ac.univ.regismaba.service.AgamaService;
 import id.ac.univ.regismaba.service.AlamatService;
 import id.ac.univ.regismaba.service.AsuransiKesehatanService;
@@ -42,9 +44,11 @@ import id.ac.univ.regismaba.service.BiodataService;
 import id.ac.univ.regismaba.service.DataKesehatanService;
 import id.ac.univ.regismaba.service.IjazahService;
 import id.ac.univ.regismaba.service.InstitusiService;
+import id.ac.univ.regismaba.service.JenjangService;
 import id.ac.univ.regismaba.service.KotaKabupatenService;
 import id.ac.univ.regismaba.service.MahasiswaService;
 import id.ac.univ.regismaba.service.ProvinsiService;
+import id.ac.univ.regismaba.service.TingkatPendidikanService;
 import id.ac.univ.regismaba.storage.StorageService;
 
 @Controller
@@ -87,9 +91,11 @@ public class BiodataController {
 	@Autowired
 	AsuransiKesehatanService asuransiKesehatanDAO;
 	
+	@Autowired
+	JenjangService jenjangDAO;
 	
-//	@Autowired
-//	PengajuanSkemaBiayaController pengajuanSkemaBiaya;
+	@Autowired
+	TingkatPendidikanService tingkatPendidikanDAO;
 	
 
 	@RequestMapping("calon-mahasiswa/idm")
@@ -101,13 +107,20 @@ public class BiodataController {
 
 	@RequestMapping("calon-mahasiswa/biodata/fill")
 	public String insert(Model model) {
-		 List<ProvinsiModel> provinsis = provinsiDAO.selectAllProvinsi();
-		 model.addAttribute("provinsis", provinsis);
+		List<ProvinsiModel> provinsis = provinsiDAO.selectAllProvinsi();
+		model.addAttribute("provinsis", provinsis);
+		List<AgamaModel> agamas = agamaDAO.selectAllAgama();
+		model.addAttribute("agamas", agamas);
+		List<JenjangModel> jenjangs = jenjangDAO.selectAllJenjang();
+		model.addAttribute("jenjangs", jenjangs);
+		List<TingkatPendidikanModel> tingkatPendidikans = tingkatPendidikanDAO.selectAllTingkatPendidikan();
+		model.addAttribute("tingkatPendidikans", tingkatPendidikans);
+		
 		return "calon_mahasiswa-mengisi_idm";
 	}
 
 	@PostMapping("calon-mahasiswa/biodata/fill/submit")
-	public String insertBiodata(@RequestParam(value = "nomor_asuransi", required = false) String nomor_asuransi,
+	public String insertBiodata(Model model, @RequestParam(value = "nomor_asuransi", required = false) String nomor_asuransi,
 			@RequestParam(value = "tanggal_lahir", required = false) String tanggal_lahir,
 			@RequestParam(value = "jenis_kelamin", required = false) String jenis_kelamin,
 			@RequestParam(value = "nomor_telepon", required = false) String nomor_telepon,
@@ -118,6 +131,7 @@ public class BiodataController {
 			@RequestParam(value = "scan_kk", required = false) MultipartFile scan_kk,
 			@RequestParam(value = "scan_surat_pernyataan_mahasiswa", required = false) MultipartFile scan_surat_pernyataan_mahasiswa,
 			@RequestParam(value = "form_survey_kesehatan", required = false) MultipartFile form_survey_kesehatan,
+			@RequestParam(value = "scan_kartu", required = false) MultipartFile scan_kartu,
 			//@RequestParam(value = "hasil_tes_kesehatan", required = false) String hasil_tes_kesehatan,
 			@RequestParam(value = "jalan", required = false) String jalan,
 			@RequestParam(value = "kota_kabupaten_id", required = false) int kota_kabupaten_id,
@@ -129,20 +143,41 @@ public class BiodataController {
 			@RequestParam(value = "nomor_ijazah", required = false) String nomor_ijazah,
 			@RequestParam(value = "institusi_id", required = false) String institusi_id,
 			@RequestParam(value = "tingkat_pendidikan_id", required = false) String tingkat_pendidikan_id,
-			@RequestParam(value = "nama_institusi", required = false) String nama_institusi,
+//			@RequestParam(value = "nama_institusi", required = false) String nama_institusi,
 	        @RequestParam(value = "jenjang", required = false) String jenjang,
 	        @RequestParam("scan_ijazah") MultipartFile scan_ijazah,
 	        @RequestParam("scan_pernyataan_ijazah") MultipartFile scan_pernyataan_ijazah,
 	        //@RequestParam("agama_id") int agama_id)
 			@RequestParam(value = "nomor_penerbit_asuransi", required = false) String nomor_penerbit_asuransi,
-			@RequestParam(value = "expired_date", required = false) String expired_date)
+			@RequestParam(value = "expired_date", required = false) String expired_date,
+			@RequestParam(value = "agama_id", required = false) String agama_id)
 			throws ParseException {
+		
+		List<AgamaModel> agamas = agamaDAO.selectAllAgama();
+		model.addAttribute("agamas", agamas);
+		List<JenjangModel> jenjangs = jenjangDAO.selectAllJenjang();
+		model.addAttribute("jenjangs", jenjangs);
+		List<TingkatPendidikanModel> tingkatPendidikans = tingkatPendidikanDAO.selectAllTingkatPendidikan();
+		model.addAttribute("tingkatPendidikans", tingkatPendidikans);
+		
 		DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 		Date tanggalLahir = format.parse(tanggal_lahir);
 		System.out.println(tanggalLahir);
 		
 		DateFormat format2 = new SimpleDateFormat("yyyy-MM-dd");
 		Date expiredDate = format2.parse(expired_date);
+		
+		System.out.println(agama_id);
+		int agamaId = 0;
+		System.out.println(agamaId);
+		if (agama_id != null) {
+			agamaId = Integer.parseInt(agama_id);
+			System.out.println(agamaId);
+		} else {
+			agamaId = 1;
+			System.out.println(agamaId);
+		}
+
 		
 		//========================
         IjazahModel ijazah = new IjazahModel();
@@ -175,12 +210,12 @@ public class BiodataController {
         BiodataModel bio = new BiodataModel();
         
         //SCAN SIDIK JARI UPLOAD//        
-        Path data3 = storageService.load(sidik_jari.getOriginalFilename());
+        /*Path data3 = storageService.load(sidik_jari.getOriginalFilename());
         String pdb3 = MvcUriComponentsBuilder
                 .fromMethodName(BiodataController.class, "serveFile", data3.getFileName().toString())
                 .build().toString();
         
-        bio.setSidik_jari(pdb3);
+        bio.setSidik_jari(pdb3);*/
 
         
         //SCAN SCAN KTP UPLOAD//
@@ -215,13 +250,11 @@ public class BiodataController {
         
         Path data7 = storageService.load(form_survey_kesehatan.getOriginalFilename());
         String pdb7 = MvcUriComponentsBuilder
-                .fromMethodName(DataKesehatanController.class, "serveFile", data7.getFileName().toString())
+                .fromMethodName(BiodataController.class, "serveFile", data7.getFileName().toString())
                 .build().toString();
         
         dataKesehatan.setForm_survey_kesehatan(pdb7);
-       
-        //INSTITUSI
-        
+              
         
         User user = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         String name = user.getUsername(); //get logged in username
@@ -229,6 +262,7 @@ public class BiodataController {
         bio.setUsername(name);	
         bio.setBiodata_id(0);
         bio.setFlag_aktif("1");
+        bio.setSidik_jari("Belum scan sidik jari");
         bio.setJenis_kelamin(jenis_kelamin);
         bio.setKewarganegaraan(kewarganegaraan);
         bio.setNomor_ktp(nomor_ktp);
@@ -239,7 +273,7 @@ public class BiodataController {
         bio.setCreated_by(name);
         bio.setUpdated_at(null);
         bio.setUpdated_by(name);
-        bio.setAgama_id(1);
+        bio.setAgama_id(agamaId);
         
         ijazah.setUsername(name);
         ijazah.setInstitusi_id(Integer.parseInt(institusi_id));
@@ -248,7 +282,8 @@ public class BiodataController {
 		ijazah.setUpdated_by(name);
 		ijazah.setUpdated_at(null);
         
-        dataKesehatan.setHasil_tes_kesehatan(null);
+		dataKesehatan.setData_kesehatan_id(0);
+        dataKesehatan.setHasil_tes_kesehatan("Belum cek kesehatan");
         dataKesehatan.setUsername(name);
         dataKesehatan.setCreated_by(name);
 		dataKesehatan.setUpdated_by(name);
@@ -269,6 +304,15 @@ public class BiodataController {
 
 		
 		AsuransiKesehatanModel asuransiKesehatan = new AsuransiKesehatanModel();
+		
+		//SCAN KARTU ASURANSI
+        Path data8 = storageService.load(scan_kartu.getOriginalFilename());
+        String pdb8 = MvcUriComponentsBuilder
+                .fromMethodName(BiodataController.class, "serveFile", data8.getFileName().toString())
+                .build().toString();
+        
+        asuransiKesehatan.setScan_kartu(pdb8);
+		
 		asuransiKesehatan.setNomor_asuransi(nomor_asuransi);
 		asuransiKesehatan.setUsername(name);
 		asuransiKesehatan.setNomor_penerbit_asuransi(nomor_penerbit_asuransi);
