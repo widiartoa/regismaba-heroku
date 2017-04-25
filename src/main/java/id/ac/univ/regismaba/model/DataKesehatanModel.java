@@ -1,3 +1,4 @@
+
 package id.ac.univ.regismaba.model;
 
 import lombok.AllArgsConstructor;

@@ -1,5 +1,6 @@
 package id.ac.univ.regismaba.service;
 
+import java.text.ParseException;
 import java.util.List;
 
 import id.ac.univ.regismaba.model.JadwalEptModel;
@@ -13,6 +14,8 @@ public interface JadwalService {
 	JadwalKesehatanModel selectJadwalKesehatan(int jadwal_tes_kesehatan_id);
 
 	JadwalRegisModel selectJadwalRegis(int jadwal_registrasi_id);
+	
+	void insertJadwalRegis(String hari, String waktu_awal, String waktu_akhir, int kapasitas) throws ParseException;
 	
 	List<JadwalRegisModel> selectAllJadwalRegis();
 

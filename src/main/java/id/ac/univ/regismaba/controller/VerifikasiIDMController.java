@@ -32,14 +32,10 @@ public class VerifikasiIDMController
             @PathVariable(value = "npm") String npm)
     {
         MahasiswaModel mahasiswa = mahasiswaService.selectMahasiswa (npm);
-        // BiodataModel biodata = biodataService.selectBiodata
-        // (mahasiswa.getBiodata ().getBiodata_id ());
 
         if (mahasiswa != null) {
-            // if(biodata.get status verif == not yet) masuk sini
             String status_verifikasi = verifikasiIdmService.selectStatusVerifikasi (mahasiswa.getUsername ());
             model.addAttribute ("mahasiswa", mahasiswa);
-            // model.addAttribute ("biodata", biodata);
             if (status_verifikasi.equals ("Unverified")) {
                 String komentarAdded = verifikasiIdmService.selectKomentar (mahasiswa.getUsername ());
                 model.addAttribute ("komentarAdded", komentarAdded);

@@ -1,3 +1,4 @@
+
 package id.ac.univ.regismaba.service;
 
 import java.util.List;
@@ -29,3 +30,4 @@ public class AgamaServiceImplement implements AgamaService {
 	}
 	
 }
+

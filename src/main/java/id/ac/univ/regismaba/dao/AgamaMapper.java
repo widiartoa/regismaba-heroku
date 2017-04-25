@@ -1,3 +1,4 @@
+
 package id.ac.univ.regismaba.dao;
 
 import java.util.List;
@@ -20,3 +21,4 @@ public interface AgamaMapper {
 	@Select("select agama_id, nama_agama from agama")
 	List<AgamaModel> selectAllAgama();
 }
+

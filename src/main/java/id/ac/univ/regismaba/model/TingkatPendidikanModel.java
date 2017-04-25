@@ -11,6 +11,3 @@ public class TingkatPendidikanModel {
 	int tingkat_pendidikan_id;
 	String nama_tingkat_pendidikan;
 }
-
-
-

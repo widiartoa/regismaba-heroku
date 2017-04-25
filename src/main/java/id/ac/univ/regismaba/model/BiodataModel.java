@@ -1,3 +1,4 @@
+
 package id.ac.univ.regismaba.model;
 
 import java.util.Date;
@@ -25,9 +26,13 @@ public class BiodataModel {
 	String status_verifikasi;
 	String flag_aktif;
 	String ukuran_jaket;
-	String created_at;
+	String komentar;
 	String created_by;
 	String updated_by;
-	String updated_at;
+	Date updated_at;
 	int agama_id;
+	String hari_update;
+	String tanggal_update;
+	String waktu_update;
+	String tanggal_lahirr;
 }

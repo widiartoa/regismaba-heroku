@@ -87,6 +87,7 @@ public class BiodataController {
 	
 	@Autowired
 	AgamaService agamaDAO;
+
 	
 	@Autowired
 	AsuransiKesehatanService asuransiKesehatanDAO;
