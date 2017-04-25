@@ -8,4 +8,6 @@ public interface ProvinsiService {
 //	int selectProvinsiId(ProvinsiModel provinsi);
 //
 	List<ProvinsiModel> selectAllProvinsi();
+	
+	ProvinsiModel selectProvinsi(int provinsi_id);
 }

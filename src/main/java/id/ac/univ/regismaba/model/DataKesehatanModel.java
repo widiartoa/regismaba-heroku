@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 
 public class DataKesehatanModel {
 	int data_kesehatan_id;
+	public String username;
 	public String form_survey_kesehatan;
 	public String hasil_tes_kesehatan;
 }

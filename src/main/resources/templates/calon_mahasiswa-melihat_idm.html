@@ -31,10 +31,107 @@
 					<tbody>
 						<tr>
 							<td>
+								<div class="col-sm-12"><h4 th:text="'Tanggal Lahir'">tanggal lahir</h4></div>
+							</td>
+							<td>
+								<div class="col-sm-12"><h4 th:text="${Biodata.tanggal_lahir}">tanggal lahir</h4></div>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<div class="col-sm-12"><h4 th:text="'Jenis Kelamin'">jenis kelamin</h4></div>
+							</td>
+							<td>
+								<div class="col-sm-12"><h4 th:text="${Biodata.jenis_kelamin}">jenis kelamin</h4></div>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<div class="col-sm-12"><h4 th:text="'Nomor Telepon'">nomor telepon</h4></div>
+							</td>
+							<td>
+								<div class="col-sm-12"><h4 th:text="${Biodata.nomor_telepon}">nomor telepon</h4></div>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<div class="col-sm-12"><h4 th:text="'Kewarganegaraan'">kewarganegaraan</h4></div>
+							</td>
+							<td>
+								<div class="col-sm-12"><h4 th:text="${Biodata.kewarganegaraan}">kewarganegaraan</h4></div>
+							</td>
+						</tr>
+						<tr>
+						<tr>
+							<td>
+								<div class="col-sm-12"><h4 th:text="'Agama'">agama</h4></div>
+							</td>
+							<td>
+								<div class="col-sm-12"><h4 th:text="${Agama.nama_agama}">agama</h4></div>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<div class="col-sm-12"><h4 th:text="'Nomor KTP'">nomor ktp</h4></div>
+							</td>
+							<td>
+								<div class="col-sm-12"><h4 th:text="${Biodata.nomor_ktp}">nomor ktp</h4></div>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<div class="col-sm-12"><h4 th:text="'Sidik Jari'">sidik jari</h4></div>
+							</td>
+							<td>
+								<div class="col-sm-12"><h4 th:text="${Biodata.sidik_jari}">sidik jari</h4></div>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<div class="col-sm-12"><h4 th:text="'Scan KTP'">scan ktp</h4></div>
+							</td>
+							<td>
+								<div class="col-sm-12"><h4 th:text="${Biodata.scan_ktp}">scan ktp</h4></div>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<div class="col-sm-12"><h4 th:text="'Scan KK'">scan kk</h4></div>
+							</td>
+							<td>
+								<div class="col-sm-12"><h4 th:text="${Biodata.scan_kk}">scan kk</h4></div>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<div class="col-sm-12"><h4 th:text="'Scan Surat Pernyataan Mahasiswa'">scan surat pernyataan mahasiswa</h4></div>
+							</td>
+							<td>
+								<div class="col-sm-12"><h4 th:text="${Biodata.scan_surat_pernyataan_mahasiswa}">scan surat pernyataan mahasiswa</h4></div>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<div class="col-sm-12"><h4 th:text="'Status Verifikasi'">status verifikasi</h4></div>
+							</td>
+							<td>
+								<div class="col-sm-12"><h4 th:text="${Biodata.status_verifikasi}">status verifikasi</h4></div>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<div class="col-sm-12"><h4 th:text="'Ukuran Jaket'">ukuran jaket</h4></div>
+							</td>
+							<td>
+								<div class="col-sm-12"><h4 th:text="${Biodata.ukuran_jaket}">ukuran jaket</h4></div>
+							</td>
+						</tr>
+						<tr>
+							<td>
 								<div class="col-sm-12"><h4 th:text="'Nomor Ijazah'">nomor ijazah</h4></div>
 							</td>
 							<td>
-								<div class="col-sm-12"><h4 th:text="${SESUATU.nomor_ijazah}">nomor ijazah</h4></div>
+								<div class="col-sm-12"><h4 th:text="${Ijazah.nomor_ijazah}">nomor ijazah</h4></div>
 							</td>
 						</tr>
 						<tr>
@@ -42,7 +139,7 @@
 								<div class="col-sm-12"><h4 th:text="'Nama Institusi'">nama institusi</h4></div>
 							</td>
 							<td>
-								<div class="col-sm-12"><h4 th:text="${SESUATU.nama_institusi}">nama institusi</h4></div>
+								<div class="col-sm-12"><h4 th:text="${Institusi.nama_institusi}">nama institusi</h4></div>
 							</td>
 						</tr>
 						<tr>
@@ -50,7 +147,7 @@
 								<div class="col-sm-12"><h4 th:text="'Jenjang'">jenjang</h4></div>
 							</td>
 							<td>
-								<div class="col-sm-12"><h4 th:text="${SESUATU.jenjang}">jenjang</h4></div>
+								<div class="col-sm-12"><h4 th:text="${Jenjang.nama_jenjang}">jenjang</h4></div>
 							</td>
 						</tr>
 						<tr>
@@ -58,7 +155,7 @@
 								<div class="col-sm-12"><h4 th:text="'Scan Ijazah'">scan ijazah</h4></div>
 							</td>
 							<td>
-								<div class="col-sm-12"><h4 th:text="${SESUATU.scan_ijazah}">scan ijazah</h4></div>
+								<div class="col-sm-12"><h4 th:text="${Ijazah.scan_ijazah}">scan ijazah</h4></div>
 							</td>
 						</tr>
 						<tr>
@@ -66,9 +163,42 @@
 								<div class="col-sm-12"><h4 th:text="'Scan Pernyataan Ijazah'">scan pernyataan ijazah</h4></div>
 							</td>
 							<td>
-								<div class="col-sm-12"><h4 th:text="${SESUATU.scan_pernyataan_ijazah}">scan pernyataan ijazah</h4></div>
+								<div class="col-sm-12"><h4 th:text="${Ijazah.scan_pernyataan_ijazah}">scan pernyataan ijazah</h4></div>
 							</td>
 						</tr>
+						<tr>
+							<td>
+								<div class="col-sm-12"><h4 th:text="'Created by'">created by</h4></div>
+							</td>
+							<td>
+								<div class="col-sm-12"><h4 th:text="${Biodata.created_by}">created by</h4></div>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<div class="col-sm-12"><h4 th:text="'Created at'">created at</h4></div>
+							</td>
+							<td>
+								<div class="col-sm-12"><h4 th:text="${Biodata.created_at}">created at</h4></div>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<div class="col-sm-12"><h4 th:text="'Updated by'">updated by</h4></div>
+							</td>
+							<td>
+								<div class="col-sm-12"><h4 th:text="${Biodata.updated_by}">updated by</h4></div>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<div class="col-sm-12"><h4 th:text="'Updated at'">updated at</h4></div>
+							</td>
+							<td>
+								<div class="col-sm-12"><h4 th:text="${Biodata.updated_at}">updated at</h4></div>
+							</td>
+						</tr>
+						
 					</tbody>
   				</table>
   				<hr/>

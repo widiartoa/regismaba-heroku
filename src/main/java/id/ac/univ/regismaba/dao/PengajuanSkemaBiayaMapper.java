@@ -84,4 +84,9 @@ public interface PengajuanSkemaBiayaMapper {
 			+ "slip_gaji_wali2=null, tagihan_air=null, tagihan_listrik=null, tagihan_telepon=null, "
 			+ "status_pengajuan='Unverified', komentar=null where username=#{username}")
 	void updateGolongan(PengajuanSkemaBiayaModel psbm);
+	
+	@Update("update pengajuan_skema_pembayaran set golongan_id=#{golongan_id}, updated_at=current_timestamp, "
+			+ "status_pengajuan=#{status_pengajuan}, komentar=#{komentar}, "
+			+ "updated_by=#{updated_by} where username=#{username}")
+	void updatePengajuan(PengajuanSkemaBiayaModel psbm);
 }

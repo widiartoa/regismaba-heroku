@@ -8,4 +8,5 @@ public interface DataKesehatanService {
 	
 	void insertDataKesehatan(DataKesehatanModel dataKesehatan);
 	
+	DataKesehatanModel selectDataKesehatanByUsername(String username);
 }

@@ -51,7 +51,7 @@
 				<tbody>
 					<span th:each="pengajuan,iterationStatus: ${pengajuans}">
 						<tr th:each="mahasiswa,iterationStatus: ${mahasiswas}"
-							th:if="${pengajuan.username=mahasiswa.username}">
+							th:if="${pengajuan.username.equals(mahasiswa.username)}">
 							<td th:text="${mahasiswa.username}">username</td>
 							<td th:text="${mahasiswa.nama_lengkap}">nama lengkap</td>
 							<td th:text="${mahasiswa.npm}">npm</td>
@@ -73,82 +73,146 @@
 
 	<div class="footer">Modul Registrasi Mahasiswa Baru</div>
 	
-	<div th:each="mahasiswa,iterationStatus:${mahasiswas}">
-		<div th:id="'mahasiswaModel'+${mahasiswa.npm}" class="modal fade" role="dialog">
-			<div class="modal-dialog">
-				<div class="modal-content">
-					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal">&times;</button>
-						<h4 class="modal-title" th:text="${mahasiswa.username}">benathavia.saladdin</h4>
-						<span th:text="${mahasiswa.username}+' | '+${mahasiswa.npm}">Benathavia Saladdin | 1234567890 | Sistem Informasi | Sarjana | Reguler</span>
-					</div>
-					<div class="modal-body">
-						<table class="tg">
-							<tr>
-								<td>Golongan - Jumlah biaya semester - Uang pangkal</td>
-								<td>1 - Rp 8000000 - Rp 0</td>
-								<td></td>
-								<td></td>
-							</tr>
-							<tr>
-								<td>Surat Keterangan RT RW</td>
-								<td>(unduh scan surat keterangan RT RW)</td>
-								<td></td>
-								<td></td>
-							</tr>
-							<tr>
-								<td>Foto rumah</td>
-								<td>(unduh foto rumah)</td>
-								<td></td>
-								<td></td>
-							</tr>
-							<tr>
-								<td style="width:25%">Gaji Pribadi</td>
-								<td style="width:25%">-</td>
-								<td style="width:25%">Tagihan air</td>
-								<td style="width:25%">Rp 500.000,- (unduh scan tagihan air)</td>
-							</tr>
-							<tr>
-								<td style="width:25%">Gaji Wali 1</td>
-								<td style="width:25%">Rp 10.000.000,- (unduh slip gaji wali 1)</td>
-								<td style="width:25%">Tagihan Listrik</td>
-								<td style="width:25%">Rp 2.000.000,- (unduh scan tagihan listrik)</td>
-							</tr>
-							<tr>
-								<td style="width:25%">Gaji Wali 2</td>
-								<td style="width:25%">-</td>
-								<td style="width:25%">Tagihan telepon</td>
-								<td style="width:25%">Rp 50.000,- (unduh scan tagihan telepon)</td>
-							</tr>
-						</table>
-					
-						<hr/>
-						
-						<h4 class="modal-title">Verifikasi</h4>
-						<form th:action="@{/}" method="post">
+	<div th:each="pengajuan,pengajuanItr: ${pengajuans}">
+		<div th:each="mahasiswa,mahasiswaItr: ${mahasiswas}" th:if="${pengajuan.username.equals(mahasiswa.username)}">
+			<div th:id="'mahasiswaModel'+${mahasiswa.npm}" class="modal fade" role="dialog">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal">&times;</button>
+							<h4 class="modal-title" th:text="${mahasiswa.username}">benathavia.saladdin</h4>
+							<span th:text="${mahasiswa.username}+' | '+${mahasiswa.npm}">Benathavia Saladdin | 1234567890 | Sistem Informasi | Sarjana | Reguler</span>
+						</div>
+						<div class="modal-body">
 							<table class="tg">
 								<tr>
-									<td style="width:25%">Golongan</td>
-									<td>
-										<select class="form-control" id="sel1">
-											<option>1</option>
-											<option>2</option>
-											<option>3</option>
-											<option>4</option>
-										</select>
+									<div th:switch="${rumpuns[pengajuanItr.index].rumpun_id}">
+										<div th:case="'1'">
+											<td>Golongan - Jumlah biaya semester - Uang pangkal (SAINTEK)</td>
+											<td colspan="3">
+												<span th:text="${pengajuan.golongan_id}+' - '">1 - </span>
+												<span th:text="'Rp '+${skemas[pengajuanItr.index].jumlah_biaya_ipa}+',- - '">8000000 - </span>
+												<span th:text="'Rp '+${skemas[pengajuanItr.index].uang_pangkal_ipa}+',-'">Rp 0</span>
+											</td>
+										</div>
+										<div th:case="'2'">
+											<td>Golongan - Jumlah biaya semester - Uang pangkal (SOSHUM)</td>
+											<td colspan="3">
+												<span th:text="${pengajuan.golongan_id}+' - '">2 - </span>
+												<span th:text="'Rp '+${skemas[pengajuanItr.index].jumlah_biaya_ips}+',- - '">8000000 - </span>
+												<span th:text="'Rp '+${skemas[pengajuanItr.index].uang_pangkal_ips}+',-'">Rp 0</span>
+											</td>
+										</div>
+										<div th:case="'3'">
+											<td>Golongan - Jumlah biaya semester - Uang pangkal (Kesehatan)</td>
+											<td colspan="3">
+												<span th:text="${pengajuan.golongan_id}+' - '">3 - </span>
+												<span th:text="'Rp '+${skemas[pengajuanItr.index].jumlah_biaya_ik}+',- - '">8000000 - </span>
+												<span th:text="'Rp '+${skemas[pengajuanItr.index].uang_pangkal_ik}+',-'">Rp 0</span>
+											</td>
+										</div>
+									</div>
+								</tr>
+								<tr>
+									<td>Surat Keterangan RT RW</td>
+									<td colspan="3">
+										<a th:if="${pengajuan.surat_keterangan_rtrw != null}" th:href="${pengajuan.surat_keterangan_rtrw}">(unduh scan surat keterangan RT RW)</a>
+										<span th:if="${pengajuan.surat_keterangan_rtrw == null}">-</span>
 									</td>
 								</tr>
 								<tr>
-									<td style="width:25%">Komentar</td>
-									<td><textarea class="form-control" rows="5" id="comment"></textarea></td>
+									<td>Foto rumah</td>
+									<td>
+										<a th:if="${pengajuan.foto_rumah != null}" th:href="${pengajuan.foto_rumah}">(unduh foto rumah)</a>
+										<span th:if="${pengajuan.foto_rumah == null}">-</span>
+									</td>
+									<td></td>
+									<td></td>
+								</tr>
+								<tr>
+									<td style="width:25%">Gaji Pribadi</td>
+									<td style="width:25%">
+										<span th:text="'Rp '+${pengajuan.gaji_pribadi}+',- '">-</span>
+										<a th:if="${pengajuan.slip_gaji_pribadi != null}" th:href="${pengajuan.slip_gaji_pribadi}">(unduh slip gaji pribadi)</a>
+									</td>
+									<td style="width:25%">Tagihan air</td>
+									<td style="width:25%">
+										<span th:text="'Rp '+${pengajuan.nilai_tagihan_air}+',- '">Rp 500.000,- </span>
+										<a th:if="${pengajuan.tagihan_air != null}" th:href="${pengajuan.tagihan_air}">(unduh scan tagihan air)</a>
+									</td>
+								</tr>
+								<tr>
+									<td style="width:25%">Gaji Wali 1</td>
+									<td style="width:25%">
+										<span th:text="'Rp '+${pengajuan.gaji_wali1}+',- '">Rp 10.000.000,- </span>
+										<a th:if="${pengajuan.slip_gaji_wali1 != null}" th:href="${pengajuan.slip_gaji_wali1}">(unduh slip gaji wali 1)</a>
+									</td>
+									<td style="width:25%">Tagihan Listrik</td>
+									<td style="width:25%">
+										<span th:text="'Rp '+${pengajuan.nilai_tagihan_listrik}+',- '">Rp 2.000.000,- </span>
+										<a th:if="${pengajuan.tagihan_listrik != null}" th:href="${pengajuan.tagihan_listrik}">(unduh scan tagihan listrik)</a>
+									</td>
+								</tr>
+								<tr>
+									<td style="width:25%">Gaji Wali 2</td>
+									<td style="width:25%">
+										<span th:text="'Rp '+${pengajuan.gaji_wali2}+',- '">-</span>
+										<a th:if="${pengajuan.slip_gaji_wali2 != null}" th:href="${pengajuan.slip_gaji_wali2}">(unduh slip gaji wali 2)</a>
+									</td>
+									<td style="width:25%">Tagihan telepon</td>
+									<td style="width:25%">
+										<span th:text="'Rp '+${pengajuan.nilai_tagihan_telepon}+',- '">Rp 50.000,- </span>
+										<a th:if="${pengajuan.tagihan_telepon != null}" th:href="${pengajuan.tagihan_telepon}">(unduh scan tagihan telepon)</a>
+									</td>
 								</tr>
 							</table>
+						
+							<hr/>
 							
-							<div class="modal-footer">
-								<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-								<button type="submit" class="btn btn-default">Submit</button>
-							</div>
-						</form>
+							<h4 class="modal-title">Verifikasi</h4>
+							<form th:action="@{/staf-kesejahteraan/daftar-mhs/{npm}(npm=${mahasiswa.npm})}" method="post">
+								<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+								<table class="tg">
+									<tr>
+										<td style="width:25%">Status Pengajuan</td>
+										<td>
+											<select class="form-control" name="status-pengajuan" id="status-pengajuan">
+												<div th:if="${pengajuan.status_pengajuan == 'Unverified'}">
+													<option value="Unverified" selected="selected">Unverified</option>
+													<option value="Verified">Verified</option>
+												</div>
+												<div th:if="${pengajuan.status_pengajuan != 'Unverified'}">
+													<option value="Unverified">Unverified</option>
+													<option value="Verified" selected="selected">Verified</option>
+												</div>
+											</select>
+										</td>
+									</tr>
+									<tr>
+										<td style="width:25%">Ubah Golongan Mahasiswa</td>
+										<td>
+											<select class="form-control" name="ubah-golongan" id="ubah-golongan">
+												<div th:each="skema,skemaListItr: ${skemaList}">
+													<option th:if="${pengajuan.golongan_id != skema.golongan_id}" th:value="${skema.golongan_id}" th:text="${skema.golongan_id}">1</option>
+													<option th:if="${pengajuan.golongan_id == skema.golongan_id}" th:value="${skema.golongan_id}" th:text="${skema.golongan_id}" selected="selected">1</option>
+												</div>
+											</select>
+										</td>
+									</tr>
+									<tr>
+										<td style="width:25%">Komentar</td>
+										<td>
+											<textarea class="form-control" rows="5" name="komentar" id="komentar" th:text="${pengajuan.komentar}"></textarea>
+										</td>
+									</tr>
+								</table>
+								
+								<div class="modal-footer">
+									<button type="button" class="btn btn-default" data-dismiss="modal">Kembali</button>
+									<button type="submit" class="btn btn-default">Simpan</button>
+								</div>
+							</form>
+						</div>
 					</div>
 				</div>
 			</div>
