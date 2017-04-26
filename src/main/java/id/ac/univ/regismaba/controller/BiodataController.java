@@ -4,6 +4,7 @@ import java.nio.file.Path;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.Random;
@@ -12,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
@@ -58,6 +60,12 @@ import id.ac.univ.regismaba.storage.StorageService;
 public class BiodataController {
 
     private final StorageService storageService;
+    private static final List<String> contentTypes = Arrays.asList("image/png", "image/jpeg", "application/pdf");
+	private boolean fileError = false;
+	private BiodataModel bio = new BiodataModel();
+	private IjazahModel ijazah = new IjazahModel();
+	private DataKesehatanModel dkm = new DataKesehatanModel();
+	private AsuransiKesehatanModel akm = new AsuransiKesehatanModel();
     
     @Autowired
     public BiodataController(StorageService storageService) {
@@ -211,21 +219,37 @@ public class BiodataController {
 
 		
 		//========================
-        IjazahModel ijazah = new IjazahModel();
+//        IjazahModel ijazah = new IjazahModel();
         ijazah.setNomor_ijazah (nomor_ijazah);
         
-        Random rand = new Random();
+//        Random rand = new Random();
+//        
+//        int num = rand.nextInt(1000000) + 1;
         
-        int num = rand.nextInt(1000000) + 1;
+//        storageService.store (scan_ijazah, num+"");
+//        storageService.store (scan_pernyataan_ijazah, num+"");
+//        storageService.store (scan_ktp, num+"");
+//        storageService.store (scan_kk, num+"");
+//        storageService.store (scan_surat_pernyataan_mahasiswa, num+"");
+//        storageService.store (form_survey_kesehatan, num+"");
+//        storageService.store (scan_kartu, num+"");
+       
         
-        storageService.store (scan_ijazah, num+"");
-        storageService.store (scan_pernyataan_ijazah, num+"");
-        storageService.store (scan_ktp, num+"");
-        storageService.store (scan_kk, num+"");
-        storageService.store (scan_surat_pernyataan_mahasiswa, num+"");
-        storageService.store (form_survey_kesehatan, num+"");
-        storageService.store (scan_kartu, num+"");
         
+        storeFile(scan_kartu, 1);
+    	storeFile(scan_ktp, 2);
+    	storeFile(scan_kk, 3);
+    	storeFile(scan_surat_pernyataan_mahasiswa, 4);
+    	storeFile(form_survey_kesehatan, 5);
+    	storeFile(scan_ijazah, 6);
+    	storeFile(scan_pernyataan_ijazah, 7);
+    	
+    	if(fileError == true)
+		{
+			fileError = false;
+			return "calon_mahasiswa-salah_file_pengajuan";
+		}
+    	
         //================================IJAZAH=====================================
         Path data1 = storageService.load(scan_ijazah.getOriginalFilename());
         String pdb1 = MvcUriComponentsBuilder
@@ -378,6 +402,86 @@ public class BiodataController {
 
 		
 	}
+	
+	public void storeFile(MultipartFile file, int type)
+    {
+    	Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		String user = auth.getName();
+		MahasiswaModel mahasiswa = mahasiswaDAO.selectMahasiswaByUsername(user);
+    	Random rand = new Random();
+		int num = rand.nextInt(1000000) + 1;
+		
+    	if(file.isEmpty() == false){	
+    		String fileContentType = file.getContentType();
+    		
+    		if(contentTypes.contains(fileContentType)) {
+    			storageService.store(file, num + "-" + type);
+    			
+    			String path = storageService.load(file.getOriginalFilename()).toString();
+    			
+    			Path data = storageService.load(file.getOriginalFilename());
+    			String dbURL = MvcUriComponentsBuilder
+    					.fromMethodName(BiodataController.class, "serveFile", num + "-" + type + "-" + data.getFileName().toString())
+    					.build().toString();
+				
+				//sidik_jari
+				if(type == 1) {akm.setScan_kartu(dbURL);}
+				
+				//scan_ktp
+				if(type == 2) {bio.setScan_ktp(dbURL);}
+				
+				//scan_kk
+				if(type == 3) {bio.setScan_kk(dbURL);}
+				
+				//scan_surat_pernyataan_mahasiswa
+				if(type == 4) {bio.setScan_surat_pernyataan_mahasiswa(dbURL);}
+							
+				//form_survey_kesehatan
+				if(type == 5) {dkm.setForm_survey_kesehatan(dbURL);}
+				
+				//scan_ijazah
+				if(type == 6) {ijazah.setScan_ijazah(dbURL);}
+				
+				//scan_pernyataan_ijazah
+    			if(type == 7) {ijazah.setScan_pernyataan_ijazah(dbURL);}
+				
+    			
+    		} else {
+    			//triggering return "calon_mahasiswa-salah_file_pengajuan";
+    			fileError = true;
+    		}
+    	}
+    	else{
+    		//for update
+    		if(biodataDAO.selectBiodataByUsername(mahasiswa.getUsername()) != null){
+    			//sidik_jari
+				if(type == 1) {akm.setScan_kartu("-");}
+				
+				//scan_ktp
+				if(type == 2) {bio.setScan_ktp("-");}
+				
+				//scan_kk
+				if(type == 3) {bio.setScan_kk("-");}
+				
+				//scan_surat_pernyataan_mahasiswa
+				if(type == 4) {bio.setScan_surat_pernyataan_mahasiswa("-");}
+							
+				//form_survey_kesehatan
+				if(type == 5) {dkm.setForm_survey_kesehatan("-");}
+				
+				//scan_ijazah
+				if(type == 6) {ijazah.setScan_ijazah("-");}
+				
+				//scan_pernyataan_ijazah
+    			if(type == 7) {ijazah.setScan_pernyataan_ijazah("-");}
+    		}
+    		//for insert
+    		else{
+    			fileError = true;
+//    			return "calon_mahasiswa-salah_file_pengajuan";
+    		}
+    	}
+    }
 	
     @GetMapping("/files2/{filename:.+}")
     @ResponseBody
