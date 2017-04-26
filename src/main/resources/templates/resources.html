@@ -25,9 +25,15 @@ Di head setiap page musti ditambahin div replace
 /* 
 CSS buat isi page secara umum 
 */
+html {
+    position: relative;
+    min-height: 100%;
+}
+
 body {
 	font-family: 'Dosis', sans-serif;
 	min-height: 100%;
+    margin-bottom: 100px;
 }
 
 .containers{
@@ -125,7 +131,7 @@ body {
 
 .footer {
 	width: 100%;
-	position: relative;
+	position: absolute;
 	bottom: 0;
 	background-color: #1c1c1c;
 	color: #6b6b6b;
@@ -161,6 +167,7 @@ CSS khusus buat page index
 	background-image: url("/img/background.png");
 	background-size: cover;
 	background-repeat: no-repeat;
+    margin-bottom: 0px;
 }
 
 .index-header{
