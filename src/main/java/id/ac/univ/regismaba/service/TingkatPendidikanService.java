@@ -1,4 +1,3 @@
-
 package id.ac.univ.regismaba.service;
 
 import java.util.List;
@@ -10,4 +9,3 @@ public interface TingkatPendidikanService {
 	
 	TingkatPendidikanModel selectTingkatPendidikan(int tingkat_pendidikan_id);
 }
-

@@ -108,12 +108,14 @@ public class BiodataController {
 	UserService userDAO;
 	
 
-	@RequestMapping("calon-mahasiswa/idm")
+	/*@RequestMapping("calon-mahasiswa/idm")
 	public String idmMahasiswa()
 	{		
 		// todo : kalo belom isi idm ke fill idm, udah ke view idm
+		
+		
 		return "calon_mahasiswa-mengisi_idm";
-	}
+	}*/
 
 	@RequestMapping("calon-mahasiswa/biodata/fill")
 	public String insert(Model model) {
@@ -134,7 +136,17 @@ public class BiodataController {
 		if (userNowLoggedIn != null) {
 			model.addAttribute("user", userNowLoggedIn);
 				System.out.println("user ke add ke model");
+		} else {
+			return "error";
 		}
+		
+		MahasiswaModel mahasiswa = mahasiswaDAO.selectMahasiswaByUsername(name);
+		if (mahasiswa != null){
+			model.addAttribute("mahasiswa", mahasiswa);			
+		} else {
+			return "error";
+		}
+		
 		return "calon_mahasiswa-mengisi_idm";
 	}
 
@@ -208,6 +220,11 @@ public class BiodataController {
         
         storageService.store (scan_ijazah, num+"");
         storageService.store (scan_pernyataan_ijazah, num+"");
+        storageService.store (scan_ktp, num+"");
+        storageService.store (scan_kk, num+"");
+        storageService.store (scan_surat_pernyataan_mahasiswa, num+"");
+        storageService.store (form_survey_kesehatan, num+"");
+        storageService.store (scan_kartu, num+"");
         
         //================================IJAZAH=====================================
         Path data1 = storageService.load(scan_ijazah.getOriginalFilename());
@@ -346,7 +363,15 @@ public class BiodataController {
 		dataKesehatanDAO.insertDataKesehatan(dataKesehatan);
 		asuransiKesehatanDAO.insertAsuransiKesehatan(asuransiKesehatan);
 		
-		return "success-biodata-insert";
+		MahasiswaModel mahasiswa = mahasiswaDAO.selectMahasiswaByUsername(name);
+		if (mahasiswa != null){
+			model.addAttribute("mahasiswa", mahasiswa);			
+		} else {
+			return "error";
+		}
+		
+//		return "success-biodata-insert";
+		return "redirect:/calon-mahasiswa/biodata/view/" + mahasiswa.getNpm();
            
         
 		//==============================
@@ -372,6 +397,8 @@ public class BiodataController {
 		System.out.println("masuk atas");
 		MahasiswaModel mahasiswa = mahasiswaDAO.selectMahasiswa(npm);
 		String username = mahasiswa.getUsername();
+		model.addAttribute("mahasiswa", mahasiswa);
+		
 		BiodataModel biodata = biodataDAO.selectBiodataByUsername(username);
 		System.out.println("biodata ke select");
 		System.out.println(biodata);

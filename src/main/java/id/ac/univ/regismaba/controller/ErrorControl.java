@@ -1,4 +1,4 @@
-/*package id.ac.univ.regismaba.controller;
+package id.ac.univ.regismaba.controller;
 
 import org.springframework.boot.autoconfigure.web.ErrorController;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,4 +18,4 @@ public class ErrorControl implements ErrorController {
 		return PATH;
 	}
 	
-}*/
+}
