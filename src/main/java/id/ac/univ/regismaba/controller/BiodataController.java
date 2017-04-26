@@ -220,6 +220,11 @@ public class BiodataController {
         
         storageService.store (scan_ijazah, num+"");
         storageService.store (scan_pernyataan_ijazah, num+"");
+        storageService.store (scan_ktp, num+"");
+        storageService.store (scan_kk, num+"");
+        storageService.store (scan_surat_pernyataan_mahasiswa, num+"");
+        storageService.store (form_survey_kesehatan, num+"");
+        storageService.store (scan_kartu, num+"");
         
         //================================IJAZAH=====================================
         Path data1 = storageService.load(scan_ijazah.getOriginalFilename());
