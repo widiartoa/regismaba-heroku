@@ -1,4 +1,3 @@
-
 package id.ac.univ.regismaba.model;
 
 import java.util.Date;

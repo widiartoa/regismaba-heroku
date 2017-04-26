@@ -1,4 +1,3 @@
-
 package id.ac.univ.regismaba.dao;
 
 import java.util.List;
