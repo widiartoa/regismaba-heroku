@@ -98,6 +98,7 @@ body {
 	background-color: #fca300;
 	border-color: transparent;
 }
+
 .dropbtn {
 	background-color: #1c1c1c;
 	color: #6b6b6b;
@@ -111,12 +112,17 @@ body {
     position: relative;
     display: inline-block;
 }
-.dropdown:hover {
-    display: block;
+
+.dropdown-toggle{
+	color: #6b6b6b;
 }
-.dropdown:hover .dropbtn {
+
+.dropdown:hover .dropbtn, 
+.dropdown-toggle:focus, 
+.dropdown-toggle:hover {
 	color: #ffffff;
 }
+
 .footer {
 	background-color: #1c1c1c;
 	color: #6b6b6b;
@@ -137,6 +143,10 @@ body {
 @media screen and (min-width: 768px) {
 	.modal-dialog {
 		width:75%;
+	}
+	
+	.navbar-inverse .navbar-nav .open .dropdown-menu>li>a {
+		color: #6b6b6b;
 	}
 }
 
