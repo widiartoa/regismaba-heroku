@@ -33,7 +33,7 @@ public class BiodataServiceImplement implements BiodataService{
 	}
 
 	@Override
-	public BiodataModel selectBiodata(String username) {
+	public BiodataModel selectBiodataByUsername(String username) {
 		return biodataMapper.selectBiodataByUsername(username);
 	}
 }

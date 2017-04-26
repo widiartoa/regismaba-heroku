@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<div th:replace="resources"></div>
+	<title>Staf Registrasi - Daftar Mahasiswa</title>
+	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript" th:inline="javascript">
+	    /*<![CDATA[*/
+			// Load the Visualization API and the corechart package.
+		    google.charts.load('current', {'packages':['corechart']});
+		
+		    // Set a callback to run when the Google Visualization API is loaded.
+		    google.charts.setOnLoadCallback(drawSizeChart);
+		    google.charts.setOnLoadCallback(drawFacultyChart);
+		    google.charts.setOnLoadCallback(drawCrossChart);
+		    var d = [[${crossAnalytics}]];
+		    var s = [[${sizeAnalytics}]];
+		    var f = [[${facultyAnalytics}]];
+		
+		    // Callback that creates and populates a data table,
+		    // instantiates the pie chart, passes in the data and
+		    // draws it.
+		    function drawSizeChart() {
+		      // Create the data table.
+		      var data = new google.visualization.DataTable();
+		      data.addColumn('string', 'Ukuran Jaket');
+		      data.addColumn('number', 'Jumlah');
+		      
+		      var total = 0;
+		      for(var i = 0; i < s.length; i++)
+	    	  {
+	    	  	data.addRow([s[i].jenis_rekap, s[i].jumlah]);
+	    	  	total = total+s[i].jumlah;
+	    	  }
+		 	
+		      // Set chart options
+		      var options = {'title':'Data Pemesenan Ukuran Jaket (Total : ' + total + ')',
+		                     'width':500,
+		                     'height':300};
+		
+		      // Instantiate and draw our chart, passing in some options.
+		      var chart = new google.visualization.PieChart(document.getElementById('chart_div_1'));
+		      chart.draw(data, options);
+		    }
+		    
+		    function drawFacultyChart() {
+		      // Create the data table.
+		      var data = new google.visualization.DataTable();
+		      data.addColumn('string', 'Fakultas');
+		      data.addColumn('number', 'Jumlah');
+		      
+		      var total = 0;
+		      for(var i = 0; i < f.length; i++)
+	    	  {
+		    	  data.addRow([f[i].jenis_rekap, f[i].jumlah]);
+		    	  total = total+f[i].jumlah;
+	    	  }
+		 	
+		      // Set chart options
+		      var options = {'title':'Data Pemesanan per Fakultas (Total : ' + total + ')',
+		                     'width':500,
+		                     'height':300};
+		
+		      // Instantiate and draw our chart, passing in some options.
+		      var chart = new google.visualization.PieChart(document.getElementById('chart_div_2'));
+		      chart.draw(data, options);
+		      console.log("chart");
+		    }
+		    
+		    function drawCrossChart() {
+	    	  for(var index=0; index < d.length; index++)
+    		  {
+			      var cross = d[index].rjm;
+		    	
+			      // Create the data table.
+			      var data = new google.visualization.DataTable();
+			      data.addColumn('string', 'Ukuran Jaket');
+			      data.addColumn('number', 'Jumlah');
+	
+			      var total = 0;
+			      for(var i = 0; i < cross.length; i++)
+		    	  {
+		    	  	data.addRow([cross[i].jenis_rekap, cross[i].jumlah])
+		    	  	total = total+cross[i].jumlah;
+		    	  }
+			 	
+			      // Set chart options
+			      var options = {'title':'Data Pemesanan Ukuran di Fakultas ' + d[index].nama_fakultas + ' (Total : ' + total + ')',
+			                     'width':500,
+			                     'height':300};
+			
+			      // Instantiate and draw our chart, passing in some options.
+			      var chart = new google.visualization.PieChart(document.getElementById('cross_' + d[index].fakultas_id));
+			      chart.draw(data, options);
+    		  }
+		    }
+	    /*]]>*/
+    </script>
+</head>
+
+<body>
+	<div th:include="staf_registrasi-navbar"></div>
+
+	<div class="container">
+		<div class="content">
+			<div class="row">
+				<div class="col-sm-12">
+					<h3>Rekapitulasi Data Jaket</h3>
+				</div>
+			</div>
+			
+			<hr/>
+			
+			<!--Div that will hold the pie chart-->
+    		<div id="chart_div_1"></div>
+    		<div id="chart_div_2"></div>
+    		
+    		<div th:each="crossAnalytic,iterationStatus: ${crossAnalytics}">
+    			<div th:id="'cross_' + ${crossAnalytic.fakultas_id}"></div>
+    		</div>
+		</div>
+	</div>
+
+	<div class="footer">Modul Registrasi Mahasiswa Baru</div>
+
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$('.table').dataTable();
+		});
+	</script>
+</body>
+</html>

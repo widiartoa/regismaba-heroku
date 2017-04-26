@@ -1,5 +1,7 @@
 package id.ac.univ.regismaba.model;
 
+import java.util.Date;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -7,14 +9,14 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class IjazahModel
-{
-    String nomor_ijazah;
-    String username;
-    int institusi_id;
-    String jenjang;
-    String scan_ijazah;
-    String scan_pernyataan_ijazah;
+
+public class AsuransiKesehatanModel {
+	String nomor_asuransi;
+	String username;
+	String nomor_penerbit_asuransi;
+	Date expired_date;
+	String expired_date_format;
+	String scan_kartu;
 	String created_at;
 	String created_by;
 	String updated_by;

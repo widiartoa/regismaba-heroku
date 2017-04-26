@@ -29,11 +29,19 @@
 						</tr>
 						<tr>
 							<td>Fakultas</td>
-							<td th:text="${fakultasMahasiswa}">Fakultas</td>
+							<td th:text="${mahasiswa.fakultas}">Fakultas</td>
 						</tr>
 						<tr>
-							<td>Jurusan</td>
-							<td th:text="${jurusanMahasiswa}">Jurusan</td>
+							<td>Program Studi</td>
+							<td th:text="${mahasiswa.program_studi.nama_program_studi}">ProgramStudi</td>
+						</tr>
+						<tr>
+							<td>Status Pengajuan Pembayaran</td>
+							<td th:text="${psbm.status_pengajuan}">Unverified Ceritanya</td>
+						</tr>
+						<tr>
+							<td>Status Verifikasi IDM</td>
+							<td th:text="${mahasiswa.biodata.status_verifikasi}">Unverified Ceritanya</td>
 						</tr>
 					</table>
 				</div>
@@ -45,43 +53,51 @@
 					</div>
 				</div>
 			</div>
+			
+			<br/>
+			
+			<div class="row">
+				<div class="col-sm-12"><h3>Jadwal</h3></div>
+			</div>
 
 			<hr/>
 			
-			<table class="table">
-				<thead>
-					<tr>
-						<td>Jenis Jadwal</td>
-						<td>Day</td>
-						<td>Date</td>
-						<td>Timespan</td>
-					</tr>
-				</thead>
-				<tbody>
-					<tr>
-						<td th:text="'Jadwal Registrasi'">Jenis Jadwal</td>
-						<td th:text="${jadwalRegis.hari}">Hari</td>
-						<td th:text="${jadwalRegis.tanggal}">Tanggal</td>
-						<td th:text="${jadwalRegis.waktu_awal}+'-'+${jadwalRegis.waktu_akhir}">Waktu
-							Awal-Waktu Akhir</td>
-					</tr>
-					<tr>
-						<td th:text="'Jadwal Tes Kesehatan'">Jenis Jadwal</td>
-						<td th:text="${hariTesKes}">Hari</td>
-						<td th:text="${waktuTesKes}">Tanggal</td>
-						<td th:text="${timestampAwalTesKes}+'-'+${timestampAkhirTesKes}">Waktu
-							Awal-Waktu Akhir</td>
-					</tr>
-					<tr>
-						<td th:text="'Jadwal English Profiency Test (EPT)'">Jenis
-							Jadwal</td>
-						<td th:text="${hariEpt}">Hari</td>
-						<td th:text="${waktuEpt}">Tanggal</td>
-						<td th:text="${timestampAwalEpt}+'-'+${timestampAkhirEpt}">Waktu
-							Awal-Waktu Akhir</td>
-					</tr>
-				</tbody>
-			</table>
+			<div class="table-responsive">
+				<table class="table">
+					<thead>
+						<tr>
+							<th>Jenis Jadwal</th>
+							<th style="text-align:center;">Day</th>
+							<th style="text-align:center;">Date</th>
+							<th style="text-align:center;">Timespan</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td th:text="'Jadwal Registrasi'">Jenis Jadwal</td>
+							<td th:text="${jadwalRegis.hari}" style="text-align:center;">Hari</td>
+							<td th:text="${jadwalRegis.tanggal}" style="text-align:center;">Tanggal</td>
+							<td th:text="${jadwalRegis.waktu_awal}+'-'+${jadwalRegis.waktu_akhir}" style="text-align:center;">Waktu
+								Awal-Waktu Akhir</td>
+						</tr>
+						<tr>
+							<td th:text="'Jadwal Tes Kesehatan'">Jenis Jadwal</td>
+							<td th:text="${hariTesKes}" style="text-align:center;">Hari</td>
+							<td th:text="${waktuTesKes}" style="text-align:center;">Tanggal</td>
+							<td th:text="${timestampAwalTesKes}+'-'+${timestampAkhirTesKes}" style="text-align:center;">Waktu
+								Awal-Waktu Akhir</td>
+						</tr>
+						<tr>
+							<td th:text="'Jadwal English Profiency Test (EPT)'">Jenis
+								Jadwal</td>
+							<td th:text="${hariEpt}" style="text-align:center;">Hari</td>
+							<td th:text="${waktuEpt}" style="text-align:center;">Tanggal</td>
+							<td th:text="${timestampAwalEpt}+'-'+${timestampAkhirEpt}" style="text-align:center;">Waktu
+								Awal-Waktu Akhir</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
 					
 			<div class="row" style="text-align:center; padding:3%;" >
 				<div class="col-sm-12">
@@ -94,9 +110,6 @@
 	<div class="footer">Modul Registrasi Mahasiswa Baru</div>
 
 	<script type="text/javascript">
-		$(document).ready(function() {
-			$('.table').dataTable();
-		});
 	</script>
 </body>
 </html>

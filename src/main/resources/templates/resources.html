@@ -25,9 +25,15 @@ Di head setiap page musti ditambahin div replace
 /* 
 CSS buat isi page secara umum 
 */
+html {
+    position: relative;
+    min-height: 100%;
+}
+
 body {
 	font-family: 'Dosis', sans-serif;
 	min-height: 100%;
+    margin-bottom: 100px;
 }
 
 .containers{
@@ -98,6 +104,7 @@ body {
 	background-color: #fca300;
 	border-color: transparent;
 }
+
 .dropbtn {
 	background-color: #1c1c1c;
 	color: #6b6b6b;
@@ -111,13 +118,21 @@ body {
     position: relative;
     display: inline-block;
 }
-.dropdown:hover {
-    display: block;
+
+.dropdown-toggle{
+	color: #6b6b6b;
 }
-.dropdown:hover .dropbtn {
+
+.dropdown:hover .dropbtn, 
+.dropdown-toggle:focus, 
+.dropdown-toggle:hover {
 	color: #ffffff;
 }
+
 .footer {
+	width: 100%;
+	position: absolute;
+	bottom: 0;
 	background-color: #1c1c1c;
 	color: #6b6b6b;
 	font-size: 16px;
@@ -138,6 +153,10 @@ body {
 	.modal-dialog {
 		width:75%;
 	}
+	
+	.navbar-inverse .navbar-nav .open .dropdown-menu>li>a {
+		color: #6b6b6b;
+	}
 }
 
 /*
@@ -148,6 +167,7 @@ CSS khusus buat page index
 	background-image: url("/img/background.png");
 	background-size: cover;
 	background-repeat: no-repeat;
+    margin-bottom: 0px;
 }
 
 .index-header{

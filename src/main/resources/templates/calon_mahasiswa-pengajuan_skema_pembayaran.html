@@ -45,7 +45,7 @@
 							<input type="text" class="form-control" readonly="true" id="foto_rumah" required="true"/>
 							<label class="input-group-btn">
 								<span class="btn btn-default">
-									Browse&hellip; <input type="file" accept="image/*" name="foto_rumah" style="display: none;" multiple="true" />
+									Browse&hellip; <input type="file" accept="image/*" id="file_foto_rumah" name="foto_rumah" style="display: none;" multiple="true" />
 								</span>
 							</label>
 						</div>
@@ -180,10 +180,6 @@
 		<div class="footer">Modul Registrasi Mahasiswa Baru</div>
 		
 		<script type="text/javascript">
-			$(document).ready(function(){
-				$('#myTable').dataTable();
-			});
-			
 			$(function() {
 				// We can attach the `fileselect` event to all file inputs on the page
 				$(document).on('change', ':file', function() {
@@ -208,14 +204,14 @@
 					});
 				});
 			});
-			
-/* 			function validateForm() {
-			    var x = document.forms["skemaForm"]["foto_rumah"].value;
-			    if (x == "") {
-			        alert("Nilai gaji pribadi perlu dimasukkan");
+
+			function validateForm(){
+			    if($('#file_foto_rumah')[0].files.length === 0){
+			        alert("Mohon unggah foto rumah terlebih dahulu");
+			        $('#file_foto_rumah').focus();
 			        return false;
 			    }
-			} */
+			}
 		</script>
     </body>
 </html>

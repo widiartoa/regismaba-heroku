@@ -1,4 +1,7 @@
+
 package id.ac.univ.regismaba.service;
+
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,5 +21,10 @@ public class InstitusiServiceImplement implements InstitusiService {
 	public InstitusiModel selectInstitusi(int institusi_id) {
 		// TODO Auto-generated method stub
 		return institusiMapper.selectInstitusi(institusi_id);
+	}
+	
+	@Override
+	public List<InstitusiModel> selectInstitusiByTingkatPendidikanId(int tingkat_pendidikan_id) {
+		return institusiMapper.selectInstitusiByTingkatPendidikanId(tingkat_pendidikan_id);
 	}
 }

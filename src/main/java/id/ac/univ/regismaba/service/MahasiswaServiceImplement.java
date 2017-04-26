@@ -22,7 +22,16 @@ public class MahasiswaServiceImplement implements MahasiswaService{
 	public MahasiswaModel selectMahasiswa(String npm) {
 		// TODO Auto-generated method stub
 		log.info ("select mahasiswa with npm {}", npm);
-		return mahasiswaMapper.selectMahasiswa(npm);
+		MahasiswaModel mahasiswa = mahasiswaMapper.selectMahasiswa(npm);
+		mahasiswa.setNama_lengkap(mahasiswaMapper.selectNamaLengkap(mahasiswa.getUsername()));
+		BiodataModel biodataMhs = mahasiswaMapper.selectBiodataMahasiswa(mahasiswa.getUsername());
+		mahasiswa.setBiodata(biodataMhs);
+		ProgramStudiModel program_studi = mahasiswaMapper.selectProgramStudiMahasiswa(mahasiswa.getProgram_studi_id());
+		mahasiswa.setProgram_studi(program_studi);
+		mahasiswa.setProgram(mahasiswaMapper.selectProgramMahasiswa(program_studi.getProgram_id()));
+		mahasiswa.setFakultas(mahasiswaMapper.selectFakultasMahasiswa(program_studi.getFakultas_id()));
+		mahasiswa.setJenjang(mahasiswaMapper.selectJenjangMahasiswa(program_studi.getJenjang_id()));
+		return mahasiswa;
 	}
 
 	@Override
@@ -95,6 +104,15 @@ public class MahasiswaServiceImplement implements MahasiswaService{
 	public MahasiswaModel selectMahasiswaByUsername(String username) {
 		// TODO Auto-generated method stub
 		log.info ("select mahasiswa with username {}", username);
-		return mahasiswaMapper.selectMahasiswaByUsername(username);
+		MahasiswaModel mahasiswa = mahasiswaMapper.selectMahasiswaByUsername(username);
+		mahasiswa.setNama_lengkap(mahasiswaMapper.selectNamaLengkap(mahasiswa.getUsername()));
+		BiodataModel biodataMhs = mahasiswaMapper.selectBiodataMahasiswa(mahasiswa.getUsername());
+		mahasiswa.setBiodata(biodataMhs);
+		ProgramStudiModel program_studi = mahasiswaMapper.selectProgramStudiMahasiswa(mahasiswa.getProgram_studi_id());
+		mahasiswa.setProgram_studi(program_studi);
+		mahasiswa.setProgram(mahasiswaMapper.selectProgramMahasiswa(program_studi.getProgram_id()));
+		mahasiswa.setFakultas(mahasiswaMapper.selectFakultasMahasiswa(program_studi.getFakultas_id()));
+		mahasiswa.setJenjang(mahasiswaMapper.selectJenjangMahasiswa(program_studi.getJenjang_id()));
+		return mahasiswa;
 	}
 }

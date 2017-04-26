@@ -1,3 +1,4 @@
+
 package id.ac.univ.regismaba.model;
 
 import lombok.AllArgsConstructor;
@@ -14,6 +15,7 @@ public class AlamatModel {
 	String kecamatan;
 	String kelurahan;
 	String kode_pos;
+	String created_at;
 	String created_by;
 	String updated_by;
 	String updated_at;
