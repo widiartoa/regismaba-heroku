@@ -9,6 +9,6 @@ public interface BiodataService {
 		
 	String updateBiodata(String biodata_id);
 	
-	BiodataModel selectBiodata(String username);
+	BiodataModel selectBiodataByUsername(String username);
 		
 }

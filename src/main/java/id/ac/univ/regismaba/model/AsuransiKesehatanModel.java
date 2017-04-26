@@ -1,5 +1,6 @@
-
 package id.ac.univ.regismaba.model;
+
+import java.util.Date;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -8,13 +9,14 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class AlamatModel {
-	int jalan_id;
-	int kota_kabupaten_id;
-	String jalan;
-	String kecamatan;
-	String kelurahan;
-	String kode_pos;
+
+public class AsuransiKesehatanModel {
+	String nomor_asuransi;
+	String username;
+	String nomor_penerbit_asuransi;
+	Date expired_date;
+	String expired_date_format;
+	String scan_kartu;
 	String created_at;
 	String created_by;
 	String updated_by;

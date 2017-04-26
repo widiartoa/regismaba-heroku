@@ -1,4 +1,7 @@
+
 package id.ac.univ.regismaba.dao;
+
+import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Result;
@@ -15,4 +18,7 @@ public interface AgamaMapper {
 	})
 	AgamaModel selectAgama(int agama_id);
 	
+	@Select("select agama_id, nama_agama from agama")
+	List<AgamaModel> selectAllAgama();
 }
+

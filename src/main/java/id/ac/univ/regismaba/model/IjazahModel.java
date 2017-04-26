@@ -15,6 +15,7 @@ public class IjazahModel
     String jenjang;
     String scan_ijazah;
     String scan_pernyataan_ijazah;
+	String created_at;
 	String created_by;
 	String updated_by;
 	String updated_at;

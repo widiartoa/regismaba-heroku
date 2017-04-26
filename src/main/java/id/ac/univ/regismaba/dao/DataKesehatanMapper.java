@@ -7,7 +7,6 @@ import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
 
 import id.ac.univ.regismaba.model.DataKesehatanModel;
-import id.ac.univ.regismaba.model.ProvinsiModel;
 
 @Mapper
 public interface DataKesehatanMapper {
@@ -18,7 +17,9 @@ public interface DataKesehatanMapper {
 	})
 	int selectDataKesehatanId(DataKesehatanModel dataKesehatan);
 	
-	@Insert("insert into data_kesehatan(form_survey_kesehatan, hasil_tes_kesehatan) values (#{form_survey_kesehatan}, #{hasil_tes_kesehatan})")
+	@Insert("insert into data_kesehatan(data_kesehatan_id, username, form_survey_kesehatan, hasil_tes_kesehatan,"
+			+ "created_by, updated_by, updated_at) values (#{data_kesehatan_id}, #{username}, #{form_survey_kesehatan},"
+			+ "#{hasil_tes_kesehatan}, #{created_by}, #{updated_by}, #{updated_at})")
 	void insertDataKesehatan(DataKesehatanModel dataKesehatan);
 	
 	

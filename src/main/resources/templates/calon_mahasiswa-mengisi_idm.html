@@ -2,7 +2,21 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <div th:replace="resources"></div>
+
 <title>Calon Mahasiswa - Mengisi IDM</title>
+
+<!--  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"> </link>
+  <link rel="stylesheet" href="/resources/demos/style.css"> </link>
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script>
+  $( function() {
+    $( "#datepicker" ).datepicker({
+    	 dateFormat: "yy-mm-dd"
+    });
+  } );
+  </script> -->
+
 </head>
 
 <body>
@@ -27,8 +41,8 @@
 				<div class="row">
 					<div class="col-md-6">
 						<div class="form-group">
-							<label for="name">Nama</label> <input type="text" name="name"
-								class="form-control" placeholder="Nama" />
+							<label for="name">Nama Lengkap</label> <input type="text" name="name"
+								class="form-control" th:placeholder="${user.nama_lengkap}" disabled="true"/>
 						</div>
 					</div>
 				</div>
@@ -36,17 +50,18 @@
 					<div class="col-md-6">
 						<div class="form-group">
 							<label for="tanggal_lahir">Tanggal Lahir</label> <input
-								type="text" name="tanggal_lahir" class="form-control"
-								placeholder="YYYY-MM-DD" />
+								type="text" id="datepicker" name="tanggal_lahir" class="form-control"
+								placeholder="YYYY-MM-DD" data-validation="required"
+								data-validation-error-msg="Tanggal lahir harus diisi"/>
 						</div>
 					</div>
 				</div>
 				<div class="row">
 					<div class="col-md-6">
 						<div class="form-group">
-							<label for="jenis_kelamin">Jenis Kelamin</label> <br></br> <input
-								type="radio" name="jenis_kelamin" value="L">L</input> <input
-								type="radio" name="jenis_kelamin" value="P">P</input>
+							<label for="jenis_kelamin">Jenis Kelamin</label> <br></br>
+							<input type="radio" name="jenis_kelamin" value="L">L</input>
+							<input type="radio" name="jenis_kelamin" value="P">P</input>
 						</div>
 					</div>
 				</div>
@@ -54,8 +69,9 @@
 					<div class="col-md-6">
 						<div class="form-group">
 							<label for="nomor_telepon">Nomor Telepon</label> <input
-								type="text" name="nomor_telepon" class="form-control"
-								placeholder="Nomor Telepon" />
+								type="number" name="nomor_telepon" class="form-control"
+								placeholder="Nomor Telepon" data-validation="required"
+								data-validation-error-msg="Nomor telepon harus diisi"/>
 						</div>
 					</div>
 				</div>
@@ -64,7 +80,19 @@
 						<div class="form-group">
 							<label for="kewarganegaraan">Kewarganegaraan</label> <input
 								type="text" name="kewarganegaraan" class="form-control"
-								placeholder="Kewarganegaraan" />
+								placeholder="Kewarganegaraan" data-validation="required"
+								data-validation-error-msg="Kewarganegaraan harus diisi"/>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-6">
+						<div class="form-group">
+							<label for="agama_id">Agama</label> 
+							<select id="agama_id_select" name="agama_id"
+								class="form-control">
+								<option th:each="agama : ${agamas}" th:value="${agama.agama_id}" th:text="${agama.nama_agama}"></option>							
+							</select>
 						</div>
 					</div>
 				</div>
@@ -72,7 +100,8 @@
 					<div class="col-md-6">
 						<div class="form-group">
 							<label for="nomor_ktp">Nomor KTP</label> <input type="text"
-								name="nomor_ktp" class="form-control" placeholder="Nomor KTP" />
+								name="nomor_ktp" class="form-control" placeholder="Nomor KTP" data-validation="required"
+								data-validation-error-msg="Nomor KTP harus diisi"/>
 						</div>
 					</div>
 <!-- 					<div class="col-md-6">
@@ -88,7 +117,9 @@
 							<div class="input-group">
 								<span class="input-group-addon" id="basic-addon1">Scan KTP</span>
 								<span class="input-group-btn">
-									<input class="btn btn-warning" type="file" name="scan_ktp" placeholder="Scan KTP">Browse</input>
+									<input class="btn btn-warning" type="file" name="scan_ktp"
+									placeholder="Scan KTP" data-validation="required"
+									data-validation-error-msg="Scan KTP harus diisi">Browse</input>
 								</span>
 							</div>
 						</div>
@@ -100,7 +131,7 @@
 						</div>
 					</div> -->
 				</div>
-				<div class="row">
+				<!-- <div class="row">
 					<div class="col-md-6">
 						<div class="form-group">
 							<div class="input-group">
@@ -112,7 +143,7 @@
 							</div>
 						</div>
 					</div>
-				</div>
+				</div> -->
 				<div class="row">
 					<div class="col-md-6">
 						<div class="form-group">
@@ -120,7 +151,8 @@
 								<span class="input-group-addon" id="basic-addon1">Scan KK</span>
 								<span class="input-group-btn">
 									<input class="btn btn-warning" type="file" name="scan_kk"
-								placeholder="Scan KK">Browse</input>
+								placeholder="Scan KK" data-validation="required"
+								data-validation-error-msg="Scan KK harus diisi">Browse</input>
 								</span>
 							</div>
 						</div>
@@ -132,7 +164,9 @@
 							<div class="input-group">
 								<span class="input-group-addon" id="basic-addon1">Scan Surat Pernyataan Mahasiswa</span>
 								<span class="input-group-btn">
-									<input class="btn btn-warning" type="file" name="scan_surat_pernyataan_mahasiswa" placeholder="Surat Pernyataan Mahasiswa">Browse</input>
+									<input class="btn btn-warning" type="file" name="scan_surat_pernyataan_mahasiswa"
+									placeholder="Surat Pernyataan Mahasiswa" data-validation="required"
+								data-validation-error-msg="Scan Surat Pernyataan Mahasiswa harus diisi">Browse</input>
 								</span>
 							</div>
 						</div>
@@ -147,6 +181,7 @@
 							<label for="nama_provinsi">Provinsi</label> 
 							<select id="nama_provinsi_select"
 								class="form-control">
+								<option value="null">[Pilih Provinsi]</option>
 								<option th:each="provinsi : ${provinsis}" th:value="${provinsi.provinsi_id}" th:text="${provinsi.nama_provinsi}"></option>							
 							</select>
 						</div>
@@ -158,9 +193,6 @@
 							<label for="kota_kabupaten_id">Kabupaten/Kota</label>
 							<select id="kota_kabupaten_select"
 								name="kota_kabupaten_id" class="form-control">
-								<!-- <option value="3204">Bandung</option>
-								<option value="3216">Kabupaten Bekasi</option>
-								<option value="3275">Kota Bekasi</option>  -->
 							</select>
 						</div>
 					</div>
@@ -170,7 +202,8 @@
 						<div class="form-group">
 							<label for="kecamatan">Nama Kecamatan</label> <input type="text"
 								name="kecamatan" class="form-control"
-								placeholder="Nama Kecamatan" />
+								placeholder="Nama Kecamatan" data-validation="required"
+								data-validation-error-msg="Nama kecamatan harus diisi" />
 						</div>
 					</div>
 				</div>
@@ -179,7 +212,8 @@
 						<div class="form-group">
 							<label for="kelurahan">Nama Kelurahan</label> <input type="text"
 								name="kelurahan" class="form-control"
-								placeholder="Nama Kelurahan" />
+								placeholder="Nama Kelurahan" data-validation="required"
+								data-validation-error-msg="Nama kelurahan harus diisi" />
 						</div>
 					</div>
 				</div>
@@ -187,7 +221,8 @@
 					<div class="col-md-6">
 						<div class="form-group">
 							<label for="jalan">Nama Jalan</label> <input type="text"
-								name="jalan" class="form-control" placeholder="Nama Jalan" />
+								name="jalan" class="form-control" placeholder="Nama Jalan" data-validation="required"
+								data-validation-error-msg="Nama jalan harus diisi" />
 						</div>
 					</div>
 				</div>
@@ -195,14 +230,15 @@
 					<div class="col-md-6">
 						<div class="form-group">
 							<label for="kode_pos">Kode Pos</label> <input type="text"
-								name="kode_pos" class="form-control" placeholder="Kode Pos" />
+								name="kode_pos" class="form-control" placeholder="Kode Pos" data-validation="required"
+								data-validation-error-msg="Kode pos harus diisi"/>
 						</div>
 					</div>
 				</div>
 				<hr></hr>
 				<span><h4>Pendidikan terakhir</h4></span>
 				<br />
-				<div class="row">
+				<!-- <div class="row">
 					<div class="col-md-6">
 						<div class="form-group">
 							<label for="jenjang">Jenjang</label> <input type="text" name="jenjang"
@@ -217,13 +253,48 @@
 								class="form-control" placeholder="Nama Institusi" />
 						</div>
 					</div>
+				</div> -->
+				<div class="row">
+					<div class="col-md-6">
+						<div class="form-group">
+							<label for="nama_tingkat_pendidikan">Tingkat Pendidikan Terakhir</label> 
+							<select id="nama_tingkat_pendidikan_select"
+								class="form-control">
+								<option value="null">[Pilih Tingkat Pendidikan Terakhir]</option>
+								<option th:each="tingkatPendidikan : ${tingkatPendidikans}" th:value="${tingkatPendidikan.tingkat_pendidikan_id}" th:text="${tingkatPendidikan.nama_tingkat_pendidikan}"></option>							
+							</select>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-6">
+						<div class="form-group">
+							<label for="jenjang">Jenjang</label> 
+							<select id="nama_jenjang_select" name="jenjang"
+								class="form-control">
+								<option value="null">[Pilih Jenjang Terakhir]</option>
+								<option th:each="jenjang : ${jenjangs}" th:value="${jenjang.jenjang_id}" th:text="${jenjang.nama_jenjang}"></option>							
+							</select>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-6">
+						<div class="form-group">
+							<label for="institusi_id">Nama Institusi</label>
+							<select id="institusi_select"
+								name="institusi_id" class="form-control">
+							</select>
+						</div>
+					</div>
 				</div>
 				<div class="row">
 					<div class="col-md-6">
 						<div class="form-group">
 							<label for="nomor_ijazah">Nomor Ijazah</label> <input type="text"
 								name="nomor_ijazah" class="form-control"
-								placeholder="Nomor Ijazah" />
+								placeholder="Nomor Ijazah" data-validation="required"
+								data-validation-error-msg="Nomor ijazah harus diisi"/>
 						</div>
 					</div>
 				</div>
@@ -233,7 +304,9 @@
 							<div class="input-group">
 								<span class="input-group-addon" id="basic-addon1">Scan Ijazah</span>
 								<span class="input-group-btn">
-									<input class="btn btn-warning" type="file" name="scan_ijazah" placeholder="Scan Ijazah">Browse</input>
+									<input class="btn btn-warning" type="file" name="scan_ijazah" 
+									placeholder="Scan Ijazah" data-validation="required"
+								data-validation-error-msg="Scan Ijazah harus diisi"  >Browse</input>
 								</span>
 							</div>
 						</div>
@@ -245,13 +318,28 @@
 							<div class="input-group">
 								<span class="input-group-addon" id="basic-addon1">Scan Pernyataan Ijazah</span>
 								<span class="input-group-btn">
-									<input class="btn btn-warning" type="file" name="scan_pernyataan_ijazah" placeholder="Scan Pernyataan Ijazah">Browse</input>
+									<input class="btn btn-warning" type="file" name="scan_pernyataan_ijazah"
+									placeholder="Scan Pernyataan Ijazah" data-validation="required"
+									data-validation-error-msg="Scan pernyataan ijazah harus diisi" >Browse</input>
 								</span>
 							</div>
 						</div>
 					</div>					
 				</div>
 				<hr></hr>
+				<span><h4>Ukuran Jaket Almamater</h4></span>
+				<div class="row">
+					<div class="col-md-6">
+						<div class="form-group">
+							<label for="ukuran_jaket"></label> <br></br>
+								<input type="radio" name="ukuran_jaket" value="S">S</input>
+								<input type="radio" name="ukuran_jaket" value="M">M</input>
+								<input type="radio" name="ukuran_jaket" value="L">L</input>
+								<input type="radio" name="ukuran_jaket" value="XL">XL</input>
+								<input type="radio" name="ukuran_jaket" value="XXL">XXL</input>
+						</div>
+					</div>
+				</div>
 				<span><h4>Data Kesehatan</h4></span>
 				<br />
 				<div class="row">
@@ -266,13 +354,48 @@
 				<div class="row">
 					<div class="col-md-6">
 						<div class="form-group">
-							<label for="form_survey_kesehatan">Form Survey Kesehatan</label>
-							<input type="text" name="form_survey_kesehatan"
-								class="form-control" placeholder="Formulir Survey Kesehatan" />
+							<label for="nomor_asuransi">Nomor Penerbit Asuransi</label> <input
+								type="text" name="nomor_penerbit_asuransi" class="form-control"
+								placeholder="Nomor Penerbit Asuransi" />
 						</div>
 					</div>
-				</div>	
+				</div>
 				<div class="row">
+					<div class="col-md-6">
+						<div class="form-group">
+							<label for="nomor_asuransi">Tanggal Kadaluarsa Asuransi</label> <input
+								type="text" name="expired_date" class="form-control"
+								placeholder="YYYY-MM-DD" />
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-6">
+						<div class="form-group">
+							<div class="input-group">
+								<span class="input-group-addon" id="basic-addon1">Scan Kartu Asuransi</span>
+								<span class="input-group-btn">
+									<input class="btn btn-warning" type="file" name="scan_kartu" placeholder="Scan Kartu Asuransi">Browse</input>
+								</span>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-6">
+						<div class="form-group">
+							<div class="input-group">
+								<span class="input-group-addon" id="basic-addon1">Form Survey Kesehatan</span>
+								<span class="input-group-btn">
+									<input class="btn btn-warning" type="file" name="form_survey_kesehatan"
+									placeholder="Upload Form Survey Kesehatan" data-validation="required"
+									data-validation-error-msg="Form survey kesehatan harus diisi" >Browse</input>
+								</span>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- <div class="row">
 					<div class="col-md-6">
 						<div class="form-group">
 							<label for="hasil_tes_kesehatan">Hasil Tes Kesehatan</label> <input
@@ -280,7 +403,7 @@
 								placeholder="Hasil Tes Kesehatan" />
 						</div>
 					</div>
-				</div>				
+				</div> -->				
 				<div class="form-group" style="text-align: center">
 					<button class="btn btn-default">Simpan</button>
 				</div>
@@ -295,7 +418,7 @@
 		$(document).ready(function() {
 			$('#myTable').dataTable();
 			$('#nama_provinsi_select').on('change', function() {
-				alert($(this).find(':selected').text() + " dipilih");
+				/* alert($(this).find(':selected').text() + " dipilih"); */
 				var nama_provinsi_id = $(this).find(':selected').val();
 				
 				$.ajax("/api/provinsi/" + nama_provinsi_id, {
@@ -310,12 +433,49 @@
 			            $('#kota_kabupaten_select').html(options);
 			        },
 			        error: function (data) {
-			        	alert('cek koneksi internet Anda');
+			        	alert('Pilih salah satu!');
+			        }
+			    });
+			});
+			$('#agama_id_select').on('change', function() {
+				/* alert($(this).find(':selected').text() + " dipilih"); */
+				var nama_agama_id = $(this).find(':selected').val();
+			});
+			$('#nama_jenjang_select').on('change', function() {
+				/* alert($(this).find(':selected').text() + " dipilih"); */
+				var nama_jenjang_id = $(this).find(':selected').val();
+			});
+			$('#nama_tingkat_pendidikan_select').on('change', function() {
+				/* alert($(this).find(':selected').text() + " dipilih"); */
+				var nama_tingkat_pendidikan_id = $(this).find(':selected').val();
+				
+				$.ajax("/api/tingkat_pendidikan/" + nama_tingkat_pendidikan_id, {
+			        success: function(data) {
+			        	var listOfInstitusi = JSON.parse(data);
+			            
+			            var options = "";
+			            listOfInstitusi.forEach(function(element) {
+			                options += '<option value="' + element.id + '">' + element.nama + '</option>';
+			            });
+			            console.log(options);
+			            $('#institusi_select').html(options);
+			        },
+			        error: function (data) {
+			        	alert('Pilih salah satu!');
 			        }
 			    });
 			});
 		});
 	</script>
-
+	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery-form-validator/2.3.26/jquery.form-validator.min.js">		
+	</script>
+	<script>
+		$.validate({
+			modules : 'security',
+			onModulesLoaded : function(){
+				
+			}
+		});
+	</script>
 </body>
 </html>
