@@ -91,6 +91,7 @@ public class PengajuanSkemaBiayaController {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		String user = auth.getName();
 		MahasiswaModel mahasiswa = mahasiswaService.selectMahasiswaByUsername(user);
+		model.addAttribute("mahasiswa", mahasiswa);
 		
 		RumpunModel rumpun = rm.getRumpun(mahasiswa.getUsername());
 		model.addAttribute("rumpun", rumpun);
@@ -147,6 +148,7 @@ public class PengajuanSkemaBiayaController {
 			
 			RumpunModel rumpun = rm.getRumpun(mahasiswa.getUsername());
 			model.addAttribute("rumpun", rumpun);
+			model.addAttribute("mahasiswa", mahasiswa);
 			return "calon_mahasiswa-pengajuan_skema_pembayaran";
 			
 //			if(psbs.selectPSBMFromUsername(mahasiswa.getUsername()) != null)
@@ -257,7 +259,11 @@ public class PengajuanSkemaBiayaController {
 	}
 	
 	@RequestMapping("/skema-pembayaran/no_data")
-	public String noData(){
+	public String noData(Model model){
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		String user = auth.getName();
+		MahasiswaModel mahasiswa = mahasiswaService.selectMahasiswaByUsername(user);
+		model.addAttribute("mahasiswa", mahasiswa);
 		return "error";
 	}
 	
