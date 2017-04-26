@@ -264,10 +264,14 @@
 					</div>
 					<div th:if="${biodata.status_verifikasi.equals('Not verified yet')}">
 						<div class="modal-footer">
-						  	<a th:href="'/staf-verifikasi/daftar-mhs/verified/' + ${mahasiswa.npm}"><button id="verify" type="button" class="btn btn-success">Verifikasi</button></a>
-						 	<a><button id="unverify" type="button" class="btn btn-warning" data-toggle="collapse" data-target="#commentForm">Belum Sesuai</button></a>
+						  	<a  th:href="'/staf-verifikasi/daftar-mhs/verified/' + ${mahasiswa.npm}">
+						  		<button style="display:inline-block;" th:id="'verify'+${mahasiswa.npm}" type="button" class="btn btn-success">Verifikasi</button>
+						  	</a>
+						 	<a>
+						 		<button style="display:inline-block;" th:id="'unverify'+${mahasiswa.npm}" type="button" class="btn btn-warning" data-toggle="collapse" data-target="#commentForm" th:onclick="'toggle(' + ${mahasiswa.npm}  + ')'">Belum Sesuai</button>
+						 	</a>
 						
-							<form id="commentForm" name="commentForm" method="POST" th:action="@{/staf-verifikasi/daftar-mhs/unverified/{npm}(npm=${mahasiswa.npm})}">
+							<form style="display:none;" th:id="'commentForm'+${mahasiswa.npm}" name="commentForm" method="POST" th:action="@{/staf-verifikasi/daftar-mhs/unverified/{npm}(npm=${mahasiswa.npm})}">
 							<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
 							<div class="form-group">
 								<label class="control-label col-sm-4" for="komentar" align="left"><h3>Tambah Komentar</h3></label>
@@ -307,16 +311,17 @@
 			$('.table').dataTable();
 		});
 
-		var button = document.getElementById("unverify");
-		var showTheForm = document.getElementById("commentForm");
-		var verifyButton = document.getElementById("verify");
-		function toggle() {
-			showTheForm.style.visibility = showTheForm.style.visibility === "hidden" ? "visible" : "hidden";
-			verifyButton.style.visibility = verifyButton.style.visibility === "visible" ? "hidden" : "visible";
-			button.style.visibility = button.style.visibility === "visible" ? "hidden" : "visible";
+		
+		function toggle(npm) {
+			var button = document.getElementById("unverify" + npm);
+			var showTheForm = document.getElementById("commentForm" + npm);
+			var verifyButton = document.getElementById("verify" + npm);
+			showTheForm.style.display = showTheForm.style.display === "none" ? "block" : "none";
+			verifyButton.style.display = verifyButton.style.display === "inline-block" ? "none" : "inline-block";
+			button.style.display = button.style.display === "inline-block" ? "none" : "inline-block";
+			
+			
 		}
-		toggle();
-		button.addEventListener("click", toggle, false);
 		
 	</script>
 </body>
