@@ -1,5 +1,7 @@
 package id.ac.univ.regismaba.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,4 +21,11 @@ public class AgamaServiceImplement implements AgamaService {
 		// TODO Auto-generated method stub
 		return agamaMapper.selectAgama(agama_id);
 	}
+	
+	@Override
+	public List<AgamaModel> selectAllAgama() {
+		// TODO Auto-generated method stub
+		return agamaMapper.selectAllAgama();
+	}
+	
 }

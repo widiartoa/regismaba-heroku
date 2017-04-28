@@ -29,6 +29,7 @@ public class BiodataModel {
 	String created_by;
 	String updated_by;
 	Date updated_at;
+	String created_at;
 	int agama_id;
 	String hari_update;
 	String tanggal_update;

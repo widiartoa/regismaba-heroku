@@ -14,17 +14,18 @@ public class IjazahServiceImplement implements IjazahService
     @Autowired
     IjazahMapper ijazahMapper;
     
-    @Override
-    public IjazahModel selectIjazahByNomor(String nomor_ijazah)
-    {
-        log.info ("select ijazah with nomor_ijazah {}", nomor_ijazah);
-        return ijazahMapper.selectIjazah (nomor_ijazah);
-    }
+//    @Override
+//    public IjazahModel selectIjazahByNomor(String nomor_ijazah)
+//    {
+//        log.info ("select ijazah with nomor_ijazah {}", nomor_ijazah);
+//        return ijazahMapper.selectIjazah (nomor_ijazah);
+//    }
     
     @Override
-    public void addIjazah(IjazahModel nomor_ijazah)
+    public void addIjazah(IjazahModel ijazah)
     {
-        log.info ("add ijazah with nomor_ijazah {}", nomor_ijazah);
+        log.info ("add ijazah with nomor_ijazah {}", ijazah);
+        ijazahMapper.addIjazah(ijazah);
     }
     
     @Override

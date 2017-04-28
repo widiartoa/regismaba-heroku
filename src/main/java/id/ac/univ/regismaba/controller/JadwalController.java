@@ -16,8 +16,12 @@ import id.ac.univ.regismaba.model.JadwalEptModel;
 import id.ac.univ.regismaba.model.JadwalKesehatanModel;
 import id.ac.univ.regismaba.model.JadwalRegisModel;
 import id.ac.univ.regismaba.model.MahasiswaModel;
+import id.ac.univ.regismaba.model.ProgramStudiModel;
+import id.ac.univ.regismaba.model.PengajuanSkemaBiayaModel;
 import id.ac.univ.regismaba.service.JadwalService;
 import id.ac.univ.regismaba.service.MahasiswaService;
+import id.ac.univ.regismaba.service.PengajuanSkemaBiayaService;
+import id.ac.univ.regismaba.service.VerifikasiIDMService;
 
 @Controller
 public class JadwalController {
@@ -27,6 +31,12 @@ public class JadwalController {
 
 	@Autowired
 	JadwalService jadwalService;
+	
+	@Autowired
+	PengajuanSkemaBiayaService psbmService;
+	
+	@Autowired
+	VerifikasiIDMService verifikasiIDMService;
 
 	@RequestMapping("/calon-mahasiswa/")
 	public String getJadwal(Model model) {
@@ -69,7 +79,10 @@ public class JadwalController {
 		JadwalRegisModel jadwalRegis = jadwalService.selectJadwalRegis(jadwalRegisId);
 
 		model.addAttribute("jadwalRegis", jadwalRegis);
-
+		
+		PengajuanSkemaBiayaModel psbm = psbmService.selectPSBMFromUsername(mahasiswa.getUsername());
+		model.addAttribute("psbm", psbm);
+		
 		return "calon_mahasiswa-melihat_jadwal";
 	}
 	

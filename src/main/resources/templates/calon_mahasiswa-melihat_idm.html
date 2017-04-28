@@ -22,8 +22,8 @@
 				
 				<table class="table">
 					<tbody>
-						<tr><h4 th:text="${mahasiswa.username}">Pilihan Golongan</h4></tr>
-						<tr><h4 th:text="${mahasiswa.npm}">Pilihan Golongan</h4></tr>
+						<!-- <tr><h4 th:text="${biodata.username}">Pilihan Golongan</h4></tr>
+						<tr><h4 th:text="${mahasiswa.npm}">Pilihan Golongan</h4></tr> -->
 					</tbody>
 				</table>
 				
@@ -34,7 +34,7 @@
 								<div class="col-sm-12"><h4 th:text="'Tanggal Lahir'">tanggal lahir</h4></div>
 							</td>
 							<td>
-								<div class="col-sm-12"><h4 th:text="${Biodata.tanggal_lahir}">tanggal lahir</h4></div>
+								<div class="col-sm-12"><h4 th:text="${biodata.tanggal_lahirr}">tanggal lahir</h4></div>
 							</td>
 						</tr>
 						<tr>
@@ -42,7 +42,10 @@
 								<div class="col-sm-12"><h4 th:text="'Jenis Kelamin'">jenis kelamin</h4></div>
 							</td>
 							<td>
-								<div class="col-sm-12"><h4 th:text="${Biodata.jenis_kelamin}">jenis kelamin</h4></div>
+								<div class="col-sm-12">
+									<h4 th:if="${biodata.jenis_kelamin == 'L'}">Laki-Laki</h4>
+									<h4 th:if="${biodata.jenis_kelamin != 'L'}">Perempuan</h4>
+								</div>
 							</td>
 						</tr>
 						<tr>
@@ -50,7 +53,7 @@
 								<div class="col-sm-12"><h4 th:text="'Nomor Telepon'">nomor telepon</h4></div>
 							</td>
 							<td>
-								<div class="col-sm-12"><h4 th:text="${Biodata.nomor_telepon}">nomor telepon</h4></div>
+								<div class="col-sm-12"><h4 th:text="${biodata.nomor_telepon}">nomor telepon</h4></div>
 							</td>
 						</tr>
 						<tr>
@@ -58,16 +61,63 @@
 								<div class="col-sm-12"><h4 th:text="'Kewarganegaraan'">kewarganegaraan</h4></div>
 							</td>
 							<td>
-								<div class="col-sm-12"><h4 th:text="${Biodata.kewarganegaraan}">kewarganegaraan</h4></div>
+								<div class="col-sm-12"><h4 th:text="${biodata.kewarganegaraan}">kewarganegaraan</h4></div>
 							</td>
 						</tr>
-						<tr>
 						<tr>
 							<td>
 								<div class="col-sm-12"><h4 th:text="'Agama'">agama</h4></div>
 							</td>
 							<td>
-								<div class="col-sm-12"><h4 th:text="${Agama.nama_agama}">agama</h4></div>
+								<div class="col-sm-12"><h4 th:text="${agama.nama_agama}">agama</h4></div>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<div class="col-sm-12"><h4 th:text="'Provinsi'">provinsi</h4></div>
+							</td>
+							<td>
+								<div class="col-sm-12"><h4 th:text="${provinsi.nama_provinsi}">Provinsi</h4></div>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<div class="col-sm-12"><h4 th:text="'Kota Kabupaten'">Kota Kabupaten</h4></div>
+							</td>
+							<td>
+								<div class="col-sm-12"><h4 th:text="${kotaKabupaten.nama_kota_kabupaten}">Kota Kabupaten</h4></div>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<div class="col-sm-12"><h4 th:text="'Kecamatan'">Kecamatan</h4></div>
+							</td>
+							<td>
+								<div class="col-sm-12"><h4 th:text="${alamat.kecamatan}">Kecamatan</h4></div>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<div class="col-sm-12"><h4 th:text="'Kelurahan'">Kelurahan</h4></div>
+							</td>
+							<td>
+								<div class="col-sm-12"><h4 th:text="${alamat.kelurahan}">Kelurahan</h4></div>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<div class="col-sm-12"><h4 th:text="'Nama Jalan'">Nama Jalan</h4></div>
+							</td>
+							<td>
+								<div class="col-sm-12"><h4 th:text="${alamat.jalan}">Nama Jalan</h4></div>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<div class="col-sm-12"><h4 th:text="'Kode pos'">Kode Pos</h4></div>
+							</td>
+							<td>
+								<div class="col-sm-12"><h4 th:text="${alamat.kode_pos}">Kode Pos</h4></div>
 							</td>
 						</tr>
 						<tr>
@@ -75,23 +125,23 @@
 								<div class="col-sm-12"><h4 th:text="'Nomor KTP'">nomor ktp</h4></div>
 							</td>
 							<td>
-								<div class="col-sm-12"><h4 th:text="${Biodata.nomor_ktp}">nomor ktp</h4></div>
+								<div class="col-sm-12"><h4 th:text="${biodata.nomor_ktp}">nomor ktp</h4></div>
 							</td>
 						</tr>
-						<tr>
+<!-- 						<tr>
 							<td>
 								<div class="col-sm-12"><h4 th:text="'Sidik Jari'">sidik jari</h4></div>
 							</td>
 							<td>
-								<div class="col-sm-12"><h4 th:text="${Biodata.sidik_jari}">sidik jari</h4></div>
+								<div class="col-sm-12"><h4 th:text="${biodata.sidik_jari}">sidik jari</h4></div>
 							</td>
-						</tr>
+						</tr> -->
 						<tr>
 							<td>
 								<div class="col-sm-12"><h4 th:text="'Scan KTP'">scan ktp</h4></div>
 							</td>
 							<td>
-								<div class="col-sm-12"><h4 th:text="${Biodata.scan_ktp}">scan ktp</h4></div>
+								<div class="col-sm-12"><h4><a th:href="${biodata.scan_ktp}">Unduh Scan KTP</a></h4></div>
 							</td>
 						</tr>
 						<tr>
@@ -99,7 +149,7 @@
 								<div class="col-sm-12"><h4 th:text="'Scan KK'">scan kk</h4></div>
 							</td>
 							<td>
-								<div class="col-sm-12"><h4 th:text="${Biodata.scan_kk}">scan kk</h4></div>
+								<div class="col-sm-12"><h4><a th:href="${biodata.scan_kk}"> Unduh Scan KK</a> </h4></div>
 							</td>
 						</tr>
 						<tr>
@@ -107,7 +157,7 @@
 								<div class="col-sm-12"><h4 th:text="'Scan Surat Pernyataan Mahasiswa'">scan surat pernyataan mahasiswa</h4></div>
 							</td>
 							<td>
-								<div class="col-sm-12"><h4 th:text="${Biodata.scan_surat_pernyataan_mahasiswa}">scan surat pernyataan mahasiswa</h4></div>
+								<div class="col-sm-12"><h4> <a th:href="${biodata.scan_surat_pernyataan_mahasiswa}">Unduh Scan Surat Pernyataan Mahasiswa </a></h4></div>
 							</td>
 						</tr>
 						<tr>
@@ -115,7 +165,7 @@
 								<div class="col-sm-12"><h4 th:text="'Status Verifikasi'">status verifikasi</h4></div>
 							</td>
 							<td>
-								<div class="col-sm-12"><h4 th:text="${Biodata.status_verifikasi}">status verifikasi</h4></div>
+								<div class="col-sm-12"><h4 th:text="${biodata.status_verifikasi}">status verifikasi</h4></div>
 							</td>
 						</tr>
 						<tr>
@@ -123,15 +173,23 @@
 								<div class="col-sm-12"><h4 th:text="'Ukuran Jaket'">ukuran jaket</h4></div>
 							</td>
 							<td>
-								<div class="col-sm-12"><h4 th:text="${Biodata.ukuran_jaket}">ukuran jaket</h4></div>
+								<div class="col-sm-12"><h4 th:text="${biodata.ukuran_jaket}">ukuran jaket</h4></div>
 							</td>
 						</tr>
 						<tr>
 							<td>
-								<div class="col-sm-12"><h4 th:text="'Nomor Ijazah'">nomor ijazah</h4></div>
+								<div class="col-sm-12"><h4 th:text="'Tingkat Pendidikan Terakhir'">tingkat pendidikan</h4></div>
 							</td>
 							<td>
-								<div class="col-sm-12"><h4 th:text="${Ijazah.nomor_ijazah}">nomor ijazah</h4></div>
+								<div class="col-sm-12"><h4 th:text="${tingkatPendidikan.nama_tingkat_pendidikan}">tingkat pendidikan</h4></div>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<div class="col-sm-12"><h4 th:text="'Jenjang Pendidikan Terakhir'">jenjang</h4></div>
+							</td>
+							<td>
+								<div class="col-sm-12"><h4 th:text="${ijazah.jenjang}">jenjang</h4></div>
 							</td>
 						</tr>
 						<tr>
@@ -139,15 +197,15 @@
 								<div class="col-sm-12"><h4 th:text="'Nama Institusi'">nama institusi</h4></div>
 							</td>
 							<td>
-								<div class="col-sm-12"><h4 th:text="${Institusi.nama_institusi}">nama institusi</h4></div>
+								<div class="col-sm-12"><h4 th:text="${institusi.nama_institusi}">nama institusi</h4></div>
 							</td>
 						</tr>
 						<tr>
 							<td>
-								<div class="col-sm-12"><h4 th:text="'Jenjang'">jenjang</h4></div>
+								<div class="col-sm-12"><h4 th:text="'Nomor Ijazah'">nomor ijazah</h4></div>
 							</td>
 							<td>
-								<div class="col-sm-12"><h4 th:text="${Jenjang.nama_jenjang}">jenjang</h4></div>
+								<div class="col-sm-12"><h4 th:text="${ijazah.nomor_ijazah}">nomor ijazah</h4></div>
 							</td>
 						</tr>
 						<tr>
@@ -155,7 +213,7 @@
 								<div class="col-sm-12"><h4 th:text="'Scan Ijazah'">scan ijazah</h4></div>
 							</td>
 							<td>
-								<div class="col-sm-12"><h4 th:text="${Ijazah.scan_ijazah}">scan ijazah</h4></div>
+								<div class="col-sm-12"><h4> <a th:href="${ijazah.scan_ijazah}">Unduh Scan Ijazah</a></h4></div>
 							</td>
 						</tr>
 						<tr>
@@ -163,15 +221,49 @@
 								<div class="col-sm-12"><h4 th:text="'Scan Pernyataan Ijazah'">scan pernyataan ijazah</h4></div>
 							</td>
 							<td>
-								<div class="col-sm-12"><h4 th:text="${Ijazah.scan_pernyataan_ijazah}">scan pernyataan ijazah</h4></div>
+								<div class="col-sm-12"><h4> <a th:href="${ijazah.scan_pernyataan_ijazah}">Unduh Scan Pernyataan Ijazah </a></h4></div>
+							</td>
+						</tr>
+						
+						<!-- DATA KESEHATAN -->
+						<tr>
+							<td>
+								<div class="col-sm-12"><h4 th:text="'Nomor Asuransi'">Nomor Asuransi</h4></div>
+							</td>
+							<td>
+								<div class="col-sm-12"><h4 th:text="${asuransiKesehatan.nomor_asuransi}">Nomor Asuransi</h4></div>
 							</td>
 						</tr>
 						<tr>
 							<td>
+								<div class="col-sm-12"><h4 th:text="'Nomor Penerbit Asuransi'">Nomor Penerbit Asuransi</h4></div>
+							</td>
+							<td>
+								<div class="col-sm-12"><h4 th:text="${asuransiKesehatan.nomor_penerbit_asuransi}">Nomor Penerbit Asuransi</h4></div>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<div class="col-sm-12"><h4 th:text="'Expired Date'">Expired Date</h4></div>
+							</td>
+							<td>
+								<div class="col-sm-12"><h4 th:text="${asuransiKesehatan.expired_date_format}">Expired Date</h4></div>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<div class="col-sm-12"><h4 th:text="'Scan Kartu'">Scan Kartu Asuransi</h4></div>
+							</td>
+							<td>
+								<div class="col-sm-12"><h4><a th:href="${asuransiKesehatan.scan_kartu}">Unduh Scan Kartu Asuransi</a></h4></div>
+							</td>
+						</tr>
+						<!-- <tr>
+							<td>
 								<div class="col-sm-12"><h4 th:text="'Created by'">created by</h4></div>
 							</td>
 							<td>
-								<div class="col-sm-12"><h4 th:text="${Biodata.created_by}">created by</h4></div>
+								<div class="col-sm-12"><h4 th:text="${biodata.created_by}">created by</h4></div>
 							</td>
 						</tr>
 						<tr>
@@ -179,7 +271,7 @@
 								<div class="col-sm-12"><h4 th:text="'Created at'">created at</h4></div>
 							</td>
 							<td>
-								<div class="col-sm-12"><h4 th:text="${Biodata.created_at}">created at</h4></div>
+								<div class="col-sm-12"><h4 th:text="${biodata.created_at}">created at</h4></div>
 							</td>
 						</tr>
 						<tr>
@@ -187,7 +279,7 @@
 								<div class="col-sm-12"><h4 th:text="'Updated by'">updated by</h4></div>
 							</td>
 							<td>
-								<div class="col-sm-12"><h4 th:text="${Biodata.updated_by}">updated by</h4></div>
+								<div class="col-sm-12"><h4 th:text="${biodata.updated_by}">updated by</h4></div>
 							</td>
 						</tr>
 						<tr>
@@ -195,16 +287,16 @@
 								<div class="col-sm-12"><h4 th:text="'Updated at'">updated at</h4></div>
 							</td>
 							<td>
-								<div class="col-sm-12"><h4 th:text="${Biodata.updated_at}">updated at</h4></div>
+								<div class="col-sm-12"><h4 th:text="${biodata.updated_at}">updated at</h4></div>
 							</td>
-						</tr>
+						</tr> -->
 						
 					</tbody>
   				</table>
   				<hr/>
 				
 				<div class="btn-group" role="group" aria-label="...">
-				  <a th:href="'/calon-mahasiswa/pengajuan-skema'"><button type="button" class="btn btn-warning">Simpan</button></a>
+				  <a href="#"><button type="button" class="btn btn-warning">Ubah IDM</button></a>
 				</div>
 			</div>
        	</div>
