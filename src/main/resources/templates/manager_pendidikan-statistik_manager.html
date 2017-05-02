@@ -16,6 +16,9 @@
 			    google.charts.setOnLoadCallback(drawProgramChart);
 			    
 			    google.charts.setOnLoadCallback(drawRegFacultyChart);
+			    google.charts.setOnLoadCallback(drawRegMajorChart);
+			    google.charts.setOnLoadCallback(drawRegLevelChart);
+			    google.charts.setOnLoadCallback(drawRegProgramChart);
 			    
 			    var f = [[${faculties}]];
 			    var m = [[${majors}]];
@@ -23,6 +26,9 @@
 			    var p = [[${programs}]];
 			    
 			    var rf = [[${regFaculties}]];
+			    var rm = [[${regMajors}]];
+			    var rl = [[${regLevels}]];
+			    var rp = [[${regPrograms}]];
 			
 			    // Callback that creates and populates a data table,
 			    // instantiates the pie chart, passes in the data and
@@ -52,28 +58,28 @@
 			    }
 			    
 			    function drawRegFacultyChart() {
-				      // Create the data table.
-				      var data = new google.visualization.DataTable();
-				      data.addColumn('string', 'Fakultas');
-				      data.addColumn('number', 'Jumlah');
-				      
-				      var total = 0;
-				      for(var i = 0; i < f.length; i++)
-			    	  {
-				    	  data.addRow([rf[i].jenis_rekap, rf[i].jumlah]);
-				    	  total = total+rf[i].jumlah;
-			    	  }
-				 	
-				      // Set chart options
-				      var options = {'title':'Registran Fakultas (Total : ' + total + ')',
-				                     'width':500,
-				                     'height':300};
-				
-				      // Instantiate and draw our chart, passing in some options.
-					  var chart = new google.visualization.PieChart(document.getElementById('regFaculty'));
-				      chart.draw(data, options);
-				      console.log("chart");
-				    }
+			      // Create the data table.
+			      var data = new google.visualization.DataTable();
+			      data.addColumn('string', 'Fakultas');
+			      data.addColumn('number', 'Jumlah');
+			      
+			      var total = 0;
+			      for(var i = 0; i < rf.length; i++)
+		    	  {
+			    	  data.addRow([rf[i].jenis_rekap, rf[i].jumlah]);
+			    	  total = total+rf[i].jumlah;
+		    	  }
+			 	
+			      // Set chart options
+			      var options = {'title':'Registran Fakultas (Total : ' + total + ')',
+			                     'width':500,
+			                     'height':300};
+			
+			      // Instantiate and draw our chart, passing in some options.
+				  var chart = new google.visualization.PieChart(document.getElementById('regFaculty'));
+			      chart.draw(data, options);
+			      console.log("chart");
+			    }
 
 			    function drawMajorChart() {
 			      // Create the data table.
@@ -95,6 +101,30 @@
 			
 			      // Instantiate and draw our chart, passing in some options.
 				  var chart = new google.visualization.PieChart(document.getElementById('major'));
+			      chart.draw(data, options);
+			      console.log("chart");
+			    }
+			    
+			    function drawRegMajorChart() {
+			      // Create the data table.
+			      var data = new google.visualization.DataTable();
+			      data.addColumn('string', 'Program Studi');
+			      data.addColumn('number', 'Jumlah');
+			      
+			      var total = 0;
+			      for(var i = 0; i < rm.length; i++)
+		    	  {
+			    	  data.addRow([rm[i].jenis_rekap, rm[i].jumlah]);
+			    	  total = total+rm[i].jumlah;
+		    	  }
+			 	
+			      // Set chart options
+			      var options = {'title':'Registran Program Studi (Total : ' + total + ')',
+			                     'width':500,
+			                     'height':300};
+			
+			      // Instantiate and draw our chart, passing in some options.
+				  var chart = new google.visualization.PieChart(document.getElementById('regMajor'));
 			      chart.draw(data, options);
 			      console.log("chart");
 			    }
@@ -123,6 +153,30 @@
 			      console.log("chart");
 			    }
 			    
+			    function drawRegLevelChart() {
+			      // Create the data table.
+			      var data = new google.visualization.DataTable();
+			      data.addColumn('string', 'Jenjang');
+			      data.addColumn('number', 'Jumlah');
+			      
+			      var total = 0;
+			      for(var i = 0; i < rl.length; i++)
+		    	  {
+			    	  data.addRow([rl[i].jenis_rekap, rl[i].jumlah]);
+			    	  total = total+rl[i].jumlah;
+		    	  }
+			 	
+			      // Set chart options
+			      var options = {'title':'Registran Jenjang (Total : ' + total + ')',
+			                     'width':500,
+			                     'height':300};
+			
+			      // Instantiate and draw our chart, passing in some options.
+				  var chart = new google.visualization.PieChart(document.getElementById('regLevel'));
+			      chart.draw(data, options);
+			      console.log("chart");
+			    }
+			    
 			    function drawProgramChart() {
 			      // Create the data table.
 			      var data = new google.visualization.DataTable();
@@ -143,6 +197,30 @@
 			
 			      // Instantiate and draw our chart, passing in some options.
 				  var chart = new google.visualization.PieChart(document.getElementById('program'));
+			      chart.draw(data, options);
+			      console.log("chart");
+			    }
+			    
+			    function drawRegProgramChart() {
+			      // Create the data table.
+			      var data = new google.visualization.DataTable();
+			      data.addColumn('string', 'Program');
+			      data.addColumn('number', 'Jumlah');
+			      
+			      var total = 0;
+			      for(var i = 0; i < rp.length; i++)
+		    	  {
+			    	  data.addRow([rp[i].jenis_rekap, rp[i].jumlah]);
+			    	  total = total+rp[i].jumlah;
+		    	  }
+			 	
+			      // Set chart options
+			      var options = {'title':'Registran Program (Total : ' + total + ')',
+			                     'width':500,
+			                     'height':300};
+			
+			      // Instantiate and draw our chart, passing in some options.
+				  var chart = new google.visualization.PieChart(document.getElementById('regProgram'));
 			      chart.draw(data, options);
 			      console.log("chart");
 			    }
@@ -181,6 +259,18 @@
 	    		
 	    		<div>
 	    			<div th:id="'regFaculty'"></div>
+	    		</div>
+	    		
+	    		<div>
+	    			<div th:id="'regMajor'"></div>
+	    		</div>
+	    		
+	    		<div>
+	    			<div th:id="'regLevel'"></div>
+	    		</div>
+	    		
+	    		<div>
+	    			<div th:id="'regProgram'"></div>
 	    		</div>
 			</div>
 		</div>
