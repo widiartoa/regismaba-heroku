@@ -10,39 +10,18 @@
 			    google.charts.load('current', {'packages':['corechart']});
 			
 			    // Set a callback to run when the Google Visualization API is loaded.
-			    google.charts.setOnLoadCallback(drawSizeChart);
 			    google.charts.setOnLoadCallback(drawFacultyChart);
-			    google.charts.setOnLoadCallback(drawCrossChart);
-			    var d = [[${crossAnalytics}]];
-			    var s = [[${sizeAnalytics}]];
-			    var f = [[${facultyAnalytics}]];
+			    google.charts.setOnLoadCallback(drawMajorChart);
+			    google.charts.setOnLoadCallback(drawLevelChart);
+			    google.charts.setOnLoadCallback(drawProgramChart);
+			    var f = [[${faculties}]];
+			    var m = [[${majors}]];
+			    var l = [[${levels}]];
+			    var p = [[${programs}]];
 			
 			    // Callback that creates and populates a data table,
 			    // instantiates the pie chart, passes in the data and
-			    // draws it.
-			    function drawSizeChart() {
-			      // Create the data table.
-			      var data = new google.visualization.DataTable();
-			      data.addColumn('string', 'Ukuran Jaket');
-			      data.addColumn('number', 'Jumlah');
-			      
-			      var total = 0;
-			      for(var i = 0; i < s.length; i++)
-		    	  {
-		    	  	data.addRow([s[i].jenis_rekap, s[i].jumlah]);
-		    	  	total = total+s[i].jumlah;
-		    	  }
-			 	
-			      // Set chart options
-			      var options = {'title':'Data Pemesenan Ukuran Jaket (Total : ' + total + ')',
-			                     'width':500,
-			                     'height':300};
-			
-			      // Instantiate and draw our chart, passing in some options.
-			      var chart = new google.visualization.PieChart(document.getElementById('chart_div_1'));
-			      chart.draw(data, options);
-			    }
-			    
+			    // draws it. 
 			    function drawFacultyChart() {
 			      // Create the data table.
 			      var data = new google.visualization.DataTable();
@@ -57,42 +36,86 @@
 		    	  }
 			 	
 			      // Set chart options
-			      var options = {'title':'Data Pemesanan per Fakultas (Total : ' + total + ')',
+			      var options = {'title':'Pendaftar Fakultas (Total : ' + total + ')',
 			                     'width':500,
 			                     'height':300};
 			
 			      // Instantiate and draw our chart, passing in some options.
-			      var chart = new google.visualization.PieChart(document.getElementById('chart_div_2'));
+				  var chart = new google.visualization.PieChart(document.getElementById('faculty'));
+			      chart.draw(data, options);
+			      console.log("chart");
+			    }
+
+			    function drawMajorChart() {
+			      // Create the data table.
+			      var data = new google.visualization.DataTable();
+			      data.addColumn('string', 'Program Studi');
+			      data.addColumn('number', 'Jumlah');
+			      
+			      var total = 0;
+			      for(var i = 0; i < m.length; i++)
+		    	  {
+			    	  data.addRow([m[i].jenis_rekap, m[i].jumlah]);
+			    	  total = total+m[i].jumlah;
+		    	  }
+			 	
+			      // Set chart options
+			      var options = {'title':'Pendaftar Program Studi (Total : ' + total + ')',
+			                     'width':500,
+			                     'height':300};
+			
+			      // Instantiate and draw our chart, passing in some options.
+				  var chart = new google.visualization.PieChart(document.getElementById('major'));
 			      chart.draw(data, options);
 			      console.log("chart");
 			    }
 			    
-			    function drawCrossChart() {
-		    	  for(var index=0; index < d.length; index++)
-	    		  {
-				      var cross = d[index].rjm;
-			    	
-				      // Create the data table.
-				      var data = new google.visualization.DataTable();
-				      data.addColumn('string', 'Ukuran Jaket');
-				      data.addColumn('number', 'Jumlah');
-		
-				      var total = 0;
-				      for(var i = 0; i < cross.length; i++)
-			    	  {
-			    	  	data.addRow([cross[i].jenis_rekap, cross[i].jumlah])
-			    	  	total = total+cross[i].jumlah;
-			    	  }
-				 	
-				      // Set chart options
-				      var options = {'title':'Data Pemesanan Ukuran di Fakultas ' + d[index].nama_fakultas + ' (Total : ' + total + ')',
-				                     'width':500,
-				                     'height':300};
-				
-				      // Instantiate and draw our chart, passing in some options.
-				      var chart = new google.visualization.PieChart(document.getElementById('cross_' + d[index].fakultas_id));
-				      chart.draw(data, options);
-	    		  }
+			    function drawLevelChart() {
+			      // Create the data table.
+			      var data = new google.visualization.DataTable();
+			      data.addColumn('string', 'Jenjang');
+			      data.addColumn('number', 'Jumlah');
+			      
+			      var total = 0;
+			      for(var i = 0; i < l.length; i++)
+		    	  {
+			    	  data.addRow([l[i].jenis_rekap, l[i].jumlah]);
+			    	  total = total+l[i].jumlah;
+		    	  }
+			 	
+			      // Set chart options
+			      var options = {'title':'Pendaftar Jenjang (Total : ' + total + ')',
+			                     'width':500,
+			                     'height':300};
+			
+			      // Instantiate and draw our chart, passing in some options.
+				  var chart = new google.visualization.PieChart(document.getElementById('level'));
+			      chart.draw(data, options);
+			      console.log("chart");
+			    }
+			    
+			    function drawProgramChart() {
+			      // Create the data table.
+			      var data = new google.visualization.DataTable();
+			      data.addColumn('string', 'Program');
+			      data.addColumn('number', 'Jumlah');
+			      
+			      var total = 0;
+			      for(var i = 0; i < p.length; i++)
+		    	  {
+			    	  data.addRow([p[i].jenis_rekap, p[i].jumlah]);
+			    	  total = total+p[i].jumlah;
+		    	  }
+			 	
+			      // Set chart options
+			      var options = {'title':'Pendaftar Program (Total : ' + total + ')',
+			                     'width':500,
+			                     'height':300};
+			
+			      // Instantiate and draw our chart, passing in some options.
+				  var chart = new google.visualization.PieChart(document.getElementById('program'));
+			      chart.draw(data, options);
+			      console.log("chart");
 			    }
 		    /*]]>*/
 	    </script>
@@ -111,20 +134,20 @@
 				<hr/>
 				
 				<!--Div that will hold the pie chart-->
-	    		<div th:each="faculty,iterationStatus: ${faculties}">
-	    			<div th:id="'faculty_' + ${faculty.fakultas_id}"></div>
+	    		<div>
+	    			<div th:id="'faculty'"></div>
 	    		</div>
 	    		
-	    		<div th:each="major,iterationStatus: ${majors}">
-	    			<div th:id="'major_' + ${major.program_studi_id}"></div>
+	    		<div>
+	    			<div th:id="'major'"></div>
 	    		</div>
 	    		
-	    		<div th:each="level,iterationStatus: ${levels}">
-	    			<div th:id="'level_' + ${level.jenjang_id}"></div>
+	    		<div>
+	    			<div th:id="'level'"></div>
 	    		</div>
 	    		
-	    		<div th:each="program,iterationStatus: ${programs}">
-	    			<div th:id="'program_' + ${program_program_id}"></div>
+	    		<div>
+	    			<div th:id="'program'"></div>
 	    		</div>
 			</div>
 		</div>
