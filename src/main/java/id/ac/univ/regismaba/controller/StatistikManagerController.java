@@ -52,18 +52,27 @@ public class StatistikManagerController {
 		{
 			StatistikManagerModel major = sms.selectPemilihProdi(m.get(i).getProgram_studi_id());
 			majors.add(major);
+			
+			StatistikManagerModel major2 = sms.selectRegistranProdi(m.get(i).getProgram_studi_id());
+			regMajors.add(major2);
 		}
 		
 		for(int i=0; i < l.size(); i++)
 		{
 			StatistikManagerModel level = sms.selectJenjang(l.get(i).getJenjang_id());
 			levels.add(level);
+			
+			StatistikManagerModel level2 = sms.selectRegistranJenjang(l.get(i).getJenjang_id());
+			regLevels.add(level2);
 		}
 		
 		for(int i=0; i < p.size(); i++)
 		{
-			StatistikManagerModel program= sms.selectProgram(p.get(i).getProgram_id());
+			StatistikManagerModel program = sms.selectProgram(p.get(i).getProgram_id());
 			programs.add(program);
+			
+			StatistikManagerModel program2 = sms.selectRegistranProgram(p.get(i).getProgram_id());
+			regPrograms.add(program2);
 		}
 		
 		model.addAttribute("faculties", faculties);
@@ -72,6 +81,9 @@ public class StatistikManagerController {
 		model.addAttribute("programs", programs);
 		
 		model.addAttribute("regFaculties", regFaculties);
+		model.addAttribute("regMajors", regMajors);
+		model.addAttribute("regLevels", regLevels);
+		model.addAttribute("regPrograms", regPrograms);
 		
 		return "manager_pendidikan-statistik_manager";
 	}
