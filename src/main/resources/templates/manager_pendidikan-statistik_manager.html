@@ -224,6 +224,34 @@
 			      chart.draw(data, options);
 			      console.log("chart");
 			    }
+			    
+			    $('#modalCalon').on('show.bs.modal', function(e) {
+
+			        setTimeout(
+			        function() 
+			        {
+			        	drawFacultyChart();
+			        }, 500);
+			        
+			        setTimeout(
+			        function() 
+			        {
+			        	drawMajorChart();
+			        }, 500);
+			        
+			        setTimeout(
+			        function() 
+			        {
+			        	drawLevelChart();
+			        }, 500);
+			        
+			        setTimeout(
+			        function() 
+			        {
+			        	drawProgramChart();
+			        }, 500);		        
+
+			    })
 		    /*]]>*/
 	    </script>
 	</head>
@@ -241,46 +269,81 @@
 				<hr/>
 				
 				<!--Div that will hold the pie chart-->
-	    		<div>
-	    			<div th:id="'faculty'"></div>
-	    		</div>
+	 			<a type="button" data-toggle="modal" th:attr="data-target='#modalCalon'" class="btn btn-warning">Statistik Calon Pendaftar Keseluruhan</a>
+	 			<a type="button" data-toggle="modal" th:attr="data-target='#modalCalon'" class="btn btn-warning">Statistik Pendaftar</a>
 	    		
-	    		<div>
-	    			<div th:id="'major'"></div>
-	    		</div>
-	    		
-	    		<div>
-	    			<div th:id="'level'"></div>
-	    		</div>
-	    		
-	    		<div>
-	    			<div th:id="'program'"></div>
-	    		</div>
-	    		
-	    		<div>
-	    			<div th:id="'regFaculty'"></div>
-	    		</div>
-	    		
-	    		<div>
-	    			<div th:id="'regMajor'"></div>
-	    		</div>
-	    		
-	    		<div>
-	    			<div th:id="'regLevel'"></div>
-	    		</div>
-	    		
-	    		<div>
-	    			<div th:id="'regProgram'"></div>
-	    		</div>
+	    		<table>
+					<tbody>
+						<tr>
+							<td>	
+								<div>
+					    			<div th:id="'regFaculty'"></div>
+					    		</div>
+							</td>
+							<td>		
+					    		<div>
+					    			<div th:id="'regMajor'"></div>
+					    		</div>
+							</td>
+						</tr>
+						<tr>
+							<td>	
+					    		<div>
+					    			<div th:id="'regLevel'"></div>
+					    		</div>
+							</td>
+							<td>		
+					    		<div>
+					    			<div th:id="'regProgram'"></div>
+					    		</div>
+							</td>
+						</tr>
+					</tbody>
+				</table>
 			</div>
 		</div>
 	
 		<div class="footer">Modul Registrasi Mahasiswa Baru</div>
-	
-		<script type="text/javascript">
-			$(document).ready(function() {
-				$('.table').dataTable();
-			});
-		</script>
+		
+		<div th:id="'modalCalon'" class="modal fade" role="dialog">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+						<h4 class="modal-title" th:text="'Statistik Calon Pendaftar Keseluruhan'"></h4>
+					</div>
+					<div class="modal-body">
+						<table>
+							<tbody>
+								<tr>
+									<td>	
+										<div>
+							    			<div th:id="'faculty'"></div>
+							    		</div>
+									</td>
+									<td>		
+							    		<div>
+							    			<div th:id="'major'"></div>
+							    		</div>
+									</td>
+								</tr>
+								<tr>
+									<td>	
+							    		<div>
+							    			<div th:id="'level'"></div>
+							    		</div>
+									</td>
+									<td>		
+							    		<div>
+							    			<div th:id="'program'"></div>
+							    		</div>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
 	</body>
 </html>
