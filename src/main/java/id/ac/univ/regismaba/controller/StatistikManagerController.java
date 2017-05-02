@@ -35,6 +35,9 @@ public class StatistikManagerController {
 		ArrayList<StatistikManagerModel> programs = new ArrayList<StatistikManagerModel>();
 		
 		ArrayList<StatistikManagerModel> regFaculties = new ArrayList<StatistikManagerModel>();
+		ArrayList<StatistikManagerModel> regMajors = new ArrayList<StatistikManagerModel>();
+		ArrayList<StatistikManagerModel> regLevels = new ArrayList<StatistikManagerModel>();
+		ArrayList<StatistikManagerModel> regPrograms = new ArrayList<StatistikManagerModel>();
 		
 		for(int i=0; i < f.size(); i++)
 		{

@@ -28,4 +28,10 @@ public interface StatistikManagerService {
 	
 	StatistikManagerModel selectRegistranFakultas(int fakultas_id);
 	
+	StatistikManagerModel selectRegistranProdi(int program_studi_id);
+	
+	StatistikManagerModel selectRegistranJenjang(int jenjang_id);
+	
+	StatistikManagerModel selectRegistranProgram(int program_id);
+
 }

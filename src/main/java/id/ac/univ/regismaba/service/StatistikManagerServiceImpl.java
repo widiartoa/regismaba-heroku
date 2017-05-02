@@ -83,4 +83,25 @@ public class StatistikManagerServiceImpl implements StatistikManagerService{
 		return smm.selectRegistranFakultas(fakultas_id);
 	}
 
+	@Override
+	public StatistikManagerModel selectRegistranProdi(int program_studi_id) {
+		// TODO Auto-generated method stub
+		log.info ("select registran prodi with id {}", program_studi_id);
+		return smm.selectRegistranProdi(program_studi_id);
+	}
+
+	@Override
+	public StatistikManagerModel selectRegistranJenjang(int jenjang_id) {
+		// TODO Auto-generated method stub
+		log.info ("select registran jenjang with id {}", jenjang_id);
+		return smm.selectRegistranJenjang(jenjang_id);
+	}
+
+	@Override
+	public StatistikManagerModel selectRegistranProgram(int program_id) {
+		// TODO Auto-generated method stub
+		log.info ("select registran program with id {}", program_id);
+		return smm.selectRegistranProgram(program_id);
+	}
+
 }
