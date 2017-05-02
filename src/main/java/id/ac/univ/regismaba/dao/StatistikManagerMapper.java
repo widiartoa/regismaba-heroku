@@ -49,4 +49,28 @@ public interface StatistikManagerMapper {
 	@Select("select distinct p.program_id, p.nama_program from program p, program_studi s, mahasiswa m where p.program_id=s.program_id and "
 			+ "s.program_studi_id=m.program_studi_id")
 	List<ProgramModel> getPrograms();
+	
+	@Select("select f.nama_fakultas as jenis_rekap, count(*) as jumlah from fakultas f, program_studi p, "
+			+ "mahasiswa m, biodata b, pengajuan_skema_pembayaran s where f.fakultas_id=p.fakultas_id and "
+			+ "p.program_studi_id=m.program_studi_id and m.username=b.username and m.username=s.username and "
+			+ "b.sidik_jari is not null and f.fakultas_id=#{fakultas_id} group by f.nama_fakultas")
+	StatistikManagerModel selectRegistranFakultas(@Param("fakultas_id") int fakultas_id);
+	
+	@Select("select p.nama_program_studi as jenis_rekap, count(*) as jumlah from program_studi p, mahasiswa m, "
+			+ "biodata b, pengajuan_skema_pembayaran s where p.program_studi_id=m.program_studi_id and "
+			+ "m.username=b.username and m.username=s.username and b.sidik_jari is not null and "
+			+ "p.program_studi_id=#{program_studi_id} group by p.nama_program_studi")
+	StatistikManagerModel selectRegistranProdi(@Param("program_studi_id") int program_studi_id);
+	
+	@Select("select j.nama_jenjang as jenis_rekap, count(*) as jumlah from jenjang j, program_studi p, "
+			+ "mahasiswa m, biodata b, pengajuan_skema_pembayaran s where j.jenjang_id=p.jenjang_id and "
+			+ "p.program_studi_id=m.program_studi_id and m.username=b.username and m.username=s.username and "
+			+ "b.sidik_jari is not null and j.jenjang_id=#{jenjang_id} group by j.nama_jenjang")
+	StatistikManagerModel selectRegistranJenjang(@Param("jenjang_id") int jenjang_id);
+	
+	@Select("select p.nama_program as jenis_rekap, count(*) as jumlah from program p, program_studi s, "
+			+ "mahasiswa m, biodata b, pengajuan_skema_pembayaran psp where p.program_id=s.program_id and "
+			+ "s.program_studi_id=m.program_studi_id and m.username=b.username and m.username=psp.username and "
+			+ "b.sidik_jari is not null and p.program_id=#{program_id} group by p.nama_program")
+	StatistikManagerModel selectRegistranProgram(@Param("program_id") int program_id);
 }

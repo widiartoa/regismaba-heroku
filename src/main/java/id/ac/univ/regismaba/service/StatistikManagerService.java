@@ -1,6 +1,7 @@
 package id.ac.univ.regismaba.service;
 
 import java.util.List;
+
 import id.ac.univ.regismaba.model.FakultasModel;
 import id.ac.univ.regismaba.model.JenjangModel;
 import id.ac.univ.regismaba.model.ProgramModel;
@@ -24,5 +25,7 @@ public interface StatistikManagerService {
 	List<JenjangModel> getLevels();
 	
 	List<ProgramModel> getPrograms();
+	
+	StatistikManagerModel selectRegistranFakultas(int fakultas_id);
 	
 }

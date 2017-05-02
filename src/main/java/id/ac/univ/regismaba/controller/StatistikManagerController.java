@@ -34,10 +34,15 @@ public class StatistikManagerController {
 		ArrayList<StatistikManagerModel> levels = new ArrayList<StatistikManagerModel>();
 		ArrayList<StatistikManagerModel> programs = new ArrayList<StatistikManagerModel>();
 		
+		ArrayList<StatistikManagerModel> regFaculties = new ArrayList<StatistikManagerModel>();
+		
 		for(int i=0; i < f.size(); i++)
 		{
 			StatistikManagerModel faculty = sms.selectPemilihFakultas(f.get(i).getFakultas_id());
 			faculties.add(faculty);
+			
+			StatistikManagerModel faculty2 = sms.selectRegistranFakultas(f.get(i).getFakultas_id());
+			regFaculties.add(faculty2);
 		}
 		
 		for(int i=0; i < m.size(); i++)
@@ -62,6 +67,8 @@ public class StatistikManagerController {
 		model.addAttribute("majors", majors);
 		model.addAttribute("levels", levels);
 		model.addAttribute("programs", programs);
+		
+		model.addAttribute("regFaculties", regFaculties);
 		
 		return "manager_pendidikan-statistik_manager";
 	}
