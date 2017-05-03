@@ -112,21 +112,46 @@
 			<hr/>
 			
 			<!--Div that will hold the pie chart-->
-    		<div id="chart_div_1"></div>
-    		<div id="chart_div_2"></div>
-    		
-    		<div th:each="crossAnalytic,iterationStatus: ${crossAnalytics}">
-    			<div th:id="'cross_' + ${crossAnalytic.fakultas_id}"></div>
-    		</div>
+			<a type="button" data-toggle="modal" th:attr="data-target='#modalOrder'" class="btn btn-warning">Statistik Pemesanan Jaket per Fakultas</a>
+			<br/>
+			<br/>
+			<table>
+				<tbody>
+					<tr>
+						<td>	
+    						<div id="chart_div_1"></div>
+						</td>
+						<td>	
+    						<div id="chart_div_2"></div>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+			
+			<div class="modal-body">
+				<div th:each="crossAnalytic,iterationStatus: ${crossAnalytics}" align="center">
+	    			<div th:id="'cross_' + ${crossAnalytic.fakultas_id}"></div>
+	    		</div>
+			</div>
 		</div>
 	</div>
 
 	<div class="footer">Modul Registrasi Mahasiswa Baru</div>
-
-	<script type="text/javascript">
-		$(document).ready(function() {
-			$('.table').dataTable();
-		});
-	</script>
+	
+	<div th:id="'modalOrder'" class="modal fade" role="dialog">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+						<h4 class="modal-title" th:text="'Statistik Pemesanan Jaket per Fakultas'"></h4>
+					</div>
+					<div class="modal-body">
+						<div th:each="crossAnalytic,iterationStatus: ${crossAnalytics}" align="center">
+			    			<div th:id="'cross_' + ${crossAnalytic.fakultas_id}"></div>
+			    		</div>
+					</div>
+				</div>
+			</div>
+		</div>
 </body>
 </html>
