@@ -11,8 +11,8 @@ import id.ac.univ.regismaba.model.RoleModel;
 @Mapper
 public interface RoleMapper {
 
-	@Select("select * from role where role_id=#{role_id}")
-	RoleModel selectRole(@Param("role_id") int role_id);
+	@Select("select * from role where id_role=#{id_role}")
+	RoleModel selectRole(@Param("id_role") int id_role);
 	
 	@Select("select * from role")
 	List<RoleModel> selectAllRoles();

@@ -83,6 +83,12 @@ public interface MahasiswaMapper {
 	})
 	List<MahasiswaModel> selectAllMahasiswabyTahunAjaran(@Param("tahun_ajaran_id") int tahun_ajaran_id);
 	
+	@Select("select * from mahasiswa where fakultas_id = #{fakultas_id}")
+	List<MahasiswaModel> selectAllMahasiswabyFakultas(@Param("fakultas_id") int fakultas_id);
+	
+	@Select("select * from program_studi P LEFT JOIN mahasiswa M ON P.program_studi_id=M.program_studi_id where fakultas_id = #{fakultas_id} and tahun_ajaran_id = #{tahun_ajaran_id}")
+	List<MahasiswaModel> selectAllMahasiswabyFakultasatTahunAjaran(@Param("fakultas_id") int fakultas_id, @Param("tahun_ajaran_id") int tahun_ajaran_id);
+	
 	@Select("select nama_lengkap from user where username=#{username}")
 	String selectNamaLengkap(@Param("username") String username);
 	
