@@ -9,6 +9,7 @@ import id.ac.univ.regismaba.dao.MahasiswaMapper;
 import id.ac.univ.regismaba.model.BiodataModel;
 import id.ac.univ.regismaba.model.MahasiswaModel;
 import id.ac.univ.regismaba.model.ProgramStudiModel;
+import id.ac.univ.regismaba.model.TahunAjaranModel;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -17,6 +18,9 @@ public class MahasiswaServiceImplement implements MahasiswaService{
 	
 	@Autowired
 	MahasiswaMapper mahasiswaMapper;
+	
+	@Autowired
+	TahunAjaranService tahunAjaranService;
 	
 	@Override
 	public MahasiswaModel selectMahasiswa(String npm) {
@@ -35,10 +39,10 @@ public class MahasiswaServiceImplement implements MahasiswaService{
 	}
 
 	@Override
-	public List<MahasiswaModel> selectAllMahasiswa() {
-		// TODO Auto-generated method stub
-		log.info ("select all mahasiswa");
-		List<MahasiswaModel> mahasiswas = mahasiswaMapper.selectAllMahasiswa();
+	public List<MahasiswaModel> selectAllMahasiswa() {		
+		TahunAjaranModel tahunAjaranSaatIni = tahunAjaranService.selectTahunAjaranSaatIni();
+		log.info ("select all mahasiswa pada tahun ajaran {}", tahunAjaranSaatIni.getTahun_ajaran_id());
+		List<MahasiswaModel> mahasiswas = mahasiswaMapper.selectAllMahasiswabyTahunAjaran(tahunAjaranSaatIni.getTahun_ajaran_id());
 		for (MahasiswaModel mahasiswa : mahasiswas){
 			mahasiswa.setNama_lengkap(mahasiswaMapper.selectNamaLengkap(mahasiswa.getUsername()));
 			BiodataModel biodataMhs = mahasiswaMapper.selectBiodataMahasiswa(mahasiswa.getUsername());
