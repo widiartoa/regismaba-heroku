@@ -23,10 +23,13 @@ public interface JadwalMapper {
 	@Select("select * from jadwal_registrasi where jadwal_registrasi_id = #{jadwal_registrasi_id}")
 	JadwalRegisModel selectJadwalRegis(@Param("jadwal_registrasi_id") int jadwal_registrasi_id);
 	
-	@Select("select timestamp_awal, timestamp_akhir, kapasitas, created_by, created_at, updated_by, updated_at from jadwal_registrasi ORDER BY created_at DESC")
+	@Select("select timestamp_awal, timestamp_akhir, kapasitas, created_by, created_at, updated_by, updated_at from jadwal_registrasi WHERE status_aktif = 1 ORDER BY created_at DESC")
 	List<JadwalRegisModel> selectAllJadwalRegis();
 	
-	@Insert("insert into jadwal_registrasi (timestamp_awal, timestamp_akhir, kapasitas, created_by, created_at, updated_by, updated_at) "
-			+ "values (#{timestamp_awal}, #{timestamp_akhir}, #{kapasitas}, #{created_by}, current_timestamp, #{updated_by}, current_timestamp)")
+	@Select("select timestamp_awal, timestamp_akhir, kapasitas, created_by, created_at, updated_by, updated_at from jadwal_registrasi WHERE tahun_ajaran_id = #{tahun_ajaran_id} and status_aktif = 1 ORDER BY created_at DESC")
+	List<JadwalRegisModel> selectAllJadwalRegisbyTahunAjaran(@Param("tahun_ajaran_id") int tahun_ajaran_id);
+	
+	@Insert("insert into jadwal_registrasi (timestamp_awal, timestamp_akhir, kapasitas, created_by, created_at, updated_by, updated_at, tahun_ajaran_id, status_aktif) "
+			+ "values (#{timestamp_awal}, #{timestamp_akhir}, #{kapasitas}, #{created_by}, current_timestamp, #{updated_by}, current_timestamp, #{tahun_ajaran_id}, 1)")
 	void insertJadwalRegis(JadwalRegisModel jadwalRegis);
 }

@@ -19,5 +19,7 @@ public class JadwalRegisModel {
 	Date created_at;
 	String updated_by;
 	Date updated_at;
+	int tahun_ajaran_id;
+	int status_aktif;
 }
 

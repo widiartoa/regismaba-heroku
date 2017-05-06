@@ -13,6 +13,7 @@ import id.ac.univ.regismaba.dao.JadwalMapper;
 import id.ac.univ.regismaba.model.JadwalEptModel;
 import id.ac.univ.regismaba.model.JadwalKesehatanModel;
 import id.ac.univ.regismaba.model.JadwalRegisModel;
+import id.ac.univ.regismaba.model.TahunAjaranModel;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -21,6 +22,9 @@ public class JadwalServiceImplement implements JadwalService {
 
 	@Autowired
 	JadwalMapper jadwalMapper;
+
+	@Autowired
+	TahunAjaranService tahunAjaranService;
 
 	@Override
 	public JadwalEptModel selectJadwalEpt(int jadwal_ept_id) {
@@ -58,8 +62,12 @@ public class JadwalServiceImplement implements JadwalService {
 	@Override
 	public List<JadwalRegisModel> selectAllJadwalRegis() {
 		// TODO Auto-generated method stub
-		log.info("select all jadwal registrasi");
-		List<JadwalRegisModel> jadwalRegisList = jadwalMapper.selectAllJadwalRegis();
+
+		TahunAjaranModel tahunAjaranSaatIni = tahunAjaranService.selectTahunAjaranSaatIni();
+		log.info("select all jadwal registrasi on tahun ajaran {} term {}", tahunAjaranSaatIni.getTahun_ajaran(),
+				tahunAjaranSaatIni.getTerm_id());
+		List<JadwalRegisModel> jadwalRegisList = jadwalMapper
+				.selectAllJadwalRegisbyTahunAjaran(tahunAjaranSaatIni.getTahun_ajaran_id());
 
 		for (JadwalRegisModel jadwalRegis : jadwalRegisList) {
 			String hariRegis = this.parseHariRegis(jadwalRegis);
@@ -71,24 +79,27 @@ public class JadwalServiceImplement implements JadwalService {
 			jadwalRegis.setTanggal(waktuRegis);
 			jadwalRegis.setWaktu_awal(timestampAwalRegis);
 			jadwalRegis.setWaktu_akhir(timestampAkhirRegis);
-			
-			if (!(jadwalRegis.getFakultas_id()>0)){
+
+			if (!(jadwalRegis.getFakultas_id() > 0)) {
 				jadwalRegis.setFakultas("fakultas belum ditentukan");
 			}
-			log.info("created_at {}", jadwalRegis.getCreated_at());
 		}
 
 		return jadwalRegisList;
 	}
-	
+
 	@Override
-	public void insertJadwalRegis(String hari, String waktu_awal, String waktu_akhir, int kapasitas) throws ParseException{
+	public void insertJadwalRegis(String hari, String waktu_awal, String waktu_akhir, int kapasitas)
+			throws ParseException {
 		// TODO Auto-generated method stub
+
+		TahunAjaranModel tahunAjaranSaatIni = tahunAjaranService.selectTahunAjaranSaatIni();
+
 		DateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 		Date timestamp_awal = format.parse(hari + " " + waktu_awal);
-		Date timestamp_akhir = format.parse(hari + " " + waktu_akhir);		
+		Date timestamp_akhir = format.parse(hari + " " + waktu_akhir);
 		log.info("insert jadwal registrasi dengan waktu awal {} dan waktu akhir {}", timestamp_awal, timestamp_akhir);
-		
+
 		JadwalRegisModel jadwalRegis = new JadwalRegisModel();
 		jadwalRegis.setKapasitas(kapasitas);
 		jadwalRegis.setTanggal(hari);
@@ -98,7 +109,8 @@ public class JadwalServiceImplement implements JadwalService {
 		jadwalRegis.setTimestamp_akhir(timestamp_akhir);
 		jadwalRegis.setCreated_by("redita.arifin");
 		jadwalRegis.setUpdated_by("redita.arifin");
-		
+		jadwalRegis.setTahun_ajaran_id(tahunAjaranSaatIni.getTahun_ajaran_id());
+
 		jadwalMapper.insertJadwalRegis(jadwalRegis);
 	}
 

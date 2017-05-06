@@ -8,6 +8,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -16,7 +17,6 @@ import id.ac.univ.regismaba.model.JadwalEptModel;
 import id.ac.univ.regismaba.model.JadwalKesehatanModel;
 import id.ac.univ.regismaba.model.JadwalRegisModel;
 import id.ac.univ.regismaba.model.MahasiswaModel;
-import id.ac.univ.regismaba.model.ProgramStudiModel;
 import id.ac.univ.regismaba.model.PengajuanSkemaBiayaModel;
 import id.ac.univ.regismaba.service.JadwalService;
 import id.ac.univ.regismaba.service.MahasiswaService;
@@ -102,6 +102,14 @@ public class JadwalController {
 			throws ParseException {
 		jadwalService.insertJadwalRegis(hari, waktu_awal, waktu_akhir, kapasitas);
 		
+		return "redirect:/staf-registrasi/daftar-jadwal";
+	}
+	
+	@RequestMapping("/staf-registrasi/daftar-jadwal/{jadwal_id}/hapus")
+    public String deleteJadwal (Model model,
+            @PathVariable(value = "jadwal_id") int jadwal_id)
+    {
+		//TODO:hapus jadwal regis
 		return "redirect:/staf-registrasi/daftar-jadwal";
 	}
 }
