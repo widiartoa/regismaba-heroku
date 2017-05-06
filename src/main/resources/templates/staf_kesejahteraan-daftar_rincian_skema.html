@@ -36,6 +36,7 @@
 										<td>Jumlah Biaya Semester Maksimal</td>
 										<td>Uang Pangkal Minimal</td>
 										<td>Uang Pangkal Maksimal</td>
+										<td>Tingkat Staf</td>
 										<td>Ubah</td>
 									</tr>
 								</thead>
@@ -47,6 +48,7 @@
 											<td th:text="${schema.jumlah_biaya_ipa_max}">Jumlah Biaya IPA</td>
 											<td th:text="${schema.uang_pangkal_ipa_min}">Uang Pangkal IPA</td>
 											<td th:text="${schema.uang_pangkal_ipa_max}">Uang Pangkal IPA</td>
+											<td th:text="${schema.tingkat_role.nama_tingkat}">Tingkat Staf</td>
 											<td>
 												<a th:href="'/staf-kesejahteraan/skema-pembayaran/update/' + ${schema.golongan_id}">
 													<button type="button" class="btn btn-warning">Ubah</button>
@@ -75,6 +77,7 @@
 										<td>Jumlah Biaya Semester Maksimal</td>
 										<td>Uang Pangkal Minimal</td>
 										<td>Uang Pangkal Maksimal</td>
+										<td>Tingkat Staf</td>
 										<td>Ubah</td>
 									</tr>
 								</thead>
@@ -86,6 +89,7 @@
 											<td th:text="${schema.jumlah_biaya_ips_max}">Jumlah Biaya IPS</td>
 											<td th:text="${schema.uang_pangkal_ips_min}">Uang Pangkal IPS</td>
 											<td th:text="${schema.uang_pangkal_ips_max}">Uang Pangkal IPS</td>
+											<td th:text="${schema.tingkat_role.nama_tingkat}">Tingkat Staf</td>
 											<td>
 												<a th:href="'/staf-kesejahteraan/skema-pembayaran/update/' + ${schema.golongan_id}">
 													<button type="button" class="btn btn-warning">Ubah</button>
@@ -114,6 +118,7 @@
 										<td>Jumlah Biaya Semester Maksimal</td>
 										<td>Uang Pangkal Minimal</td>
 										<td>Uang Pangkal Maksimal</td>
+										<td>Tingkat Staf</td>
 										<td>Ubah</td>
 									</tr>
 								</thead>
@@ -125,6 +130,7 @@
 											<td th:text="${schema.jumlah_biaya_ik_max}">Jumlah Biaya IK</td>
 											<td th:text="${schema.uang_pangkal_ik_min}">Uang Pangkal IK</td>
 											<td th:text="${schema.uang_pangkal_ik_max}">Uang Pangkal IK</td>
+											<td th:text="${schema.tingkat_role.nama_tingkat}">Tingkat Staf</td>
 											<td>
 												<a th:href="'/staf-kesejahteraan/skema-pembayaran/update/' + ${schema.golongan_id}">
 													<button type="button" class="btn btn-warning">Ubah</button>

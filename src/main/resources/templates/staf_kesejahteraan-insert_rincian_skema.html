@@ -117,6 +117,19 @@
 						</div>
 					</div>
 					
+					<hr/>
+					<h4>Otoritas Staf</h4>
+					<br/>
+					
+					<div class="form-group">
+						<label class="control-label col-sm-4" for="tingkat_role_id">Uang pangkal maksimal* : </label>
+						<div class="input-group">
+							<select id="tingkat_role_id" name="tingkat_role_id">
+								<option th:each="role, iterationStatus: ${roles}" th:value="${role.tingkat_role_id}" th:text="${role.nama_tingkat}"></option>
+							</select>
+						</div>
+					</div>
+					
 					<div>*wajib diisi</div>
 					<hr/>
 					
