@@ -88,27 +88,27 @@
 								<tr>
 									<div th:switch="${rumpuns[pengajuanItr.index].rumpun_id}">
 										<div th:case="'1'">
-											<td>Golongan - Jumlah biaya semester - Uang pangkal (SAINTEK)</td>
+											<td>Golongan - Jumlah biaya semester Min/Max - Uang pangkal Min/Max (SAINTEK)</td>
 											<td colspan="3">
 												<span th:text="${pengajuan.golongan_id}+' - '">1 - </span>
-												<span th:text="'Rp '+${skemas[pengajuanItr.index].jumlah_biaya_ipa}+',- - '">8000000 - </span>
-												<span th:text="'Rp '+${skemas[pengajuanItr.index].uang_pangkal_ipa}+',-'">Rp 0</span>
+												<span th:text="'Rp '+${skemas[pengajuanItr.index].jumlah_biaya_ipa_min}+',- / '+${skemas[pengajuanItr.index].jumlah_biaya_ipa_max}+',- - '">8000000 - </span>
+												<span th:text="'Rp '+${skemas[pengajuanItr.index].uang_pangkal_ipa_min}+',- / '+${skemas[pengajuanItr.index].uang_pangkal_ipa_max}+',-'">Rp 0</span>
 											</td>
 										</div>
 										<div th:case="'2'">
 											<td>Golongan - Jumlah biaya semester - Uang pangkal (SOSHUM)</td>
 											<td colspan="3">
 												<span th:text="${pengajuan.golongan_id}+' - '">2 - </span>
-												<span th:text="'Rp '+${skemas[pengajuanItr.index].jumlah_biaya_ips}+',- - '">8000000 - </span>
-												<span th:text="'Rp '+${skemas[pengajuanItr.index].uang_pangkal_ips}+',-'">Rp 0</span>
+												<span th:text="'Rp '+${skemas[pengajuanItr.index].jumlah_biaya_ips_min}+',- / '+${skemas[pengajuanItr.index].jumlah_biaya_ips_max}+',- - '">8000000 - </span>
+												<span th:text="'Rp '+${skemas[pengajuanItr.index].uang_pangkal_ips_min}+',- / '+${skemas[pengajuanItr.index].uang_pangkal_ips_max}+',-'">Rp 0</span>
 											</td>
 										</div>
 										<div th:case="'3'">
 											<td>Golongan - Jumlah biaya semester - Uang pangkal (Kesehatan)</td>
 											<td colspan="3">
 												<span th:text="${pengajuan.golongan_id}+' - '">3 - </span>
-												<span th:text="'Rp '+${skemas[pengajuanItr.index].jumlah_biaya_ik}+',- - '">8000000 - </span>
-												<span th:text="'Rp '+${skemas[pengajuanItr.index].uang_pangkal_ik}+',-'">Rp 0</span>
+												<span th:text="'Rp '+${skemas[pengajuanItr.index].jumlah_biaya_ik_min}+',- / '+${skemas[pengajuanItr.index].jumlah_biaya_ik_max}+',- - '">8000000 - </span>
+												<span th:text="'Rp '+${skemas[pengajuanItr.index].uang_pangkal_ik_min}+',- / '+${skemas[pengajuanItr.index].uang_pangkal_ik_max}+',-'">Rp 0</span>
 											</td>
 										</div>
 									</div>
@@ -198,6 +198,10 @@
 												</div>
 											</select>
 										</td>
+									</tr>
+									<tr>
+										<td style="width:25%">Uang Pangkal</td>
+										<td style="width:25%">Ubah Golongan Mahasiswa</td>
 									</tr>
 									<tr>
 										<td style="width:25%">Komentar</td>
