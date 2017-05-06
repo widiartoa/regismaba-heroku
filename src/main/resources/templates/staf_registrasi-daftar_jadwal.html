@@ -56,7 +56,7 @@
 													<div class="form-group">
 														<label for="hari">Hari</label> 
 														<input type="date" name="hari" class="form-control" 
-															placeholder="YYYY-MM-DD" min="2017-01-01" required="true" />
+															placeholder="YYYY-MM-DD" th:min="${#dates.format(#dates.createNow(), 'YYYY-MM-dd')}" required="true" />
 													</div>
 												</div>
 											</div>
