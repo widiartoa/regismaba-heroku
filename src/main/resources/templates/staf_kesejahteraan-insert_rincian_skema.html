@@ -22,45 +22,98 @@
 						th:object="${sbm}">
 					<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
 					
+					<h4>Pembayaran Rumpun Sains dan Teknologi</h4>
+					<br/>
+					
 					<div class="form-group">
-						<label class="control-label col-sm-4" for="jumlah_biaya_ipa">Jumlah uang semester (Saintek)* : </label>
+						<label class="control-label col-sm-4" for="jumlah_biaya_ipa_min">Jumlah uang semester minimal* : </label>
 						<div class="input-group">
-							<input type="number" min="0" max="1000000000" class="form-control" name="jumlah_biaya_ipa" id="jumlah_biaya_ipa" placeholder="Contoh: 1000000"></input>						
+							<input type="number" min="0" max="1000000000" class="form-control" name="jumlah_biaya_ipa_min" id="jumlah_biaya_ipa_min" placeholder="Contoh: 1000000"></input>						
 						</div>
 					</div>
 					
 					<div class="form-group">
-						<label class="control-label col-sm-4" for="uang_pangkal_ipa">Uang pangkal (Saintek)* : </label>
+						<label class="control-label col-sm-4" for="jumlah_biaya_ipa_max">Jumlah uang semester maksimal* : </label>
 						<div class="input-group">
-							<input type="number" min="0" max="1000000000" class="form-control" name="uang_pangkal_ipa" id="uang_pangkal_ipa" placeholder="Contoh: 1000000"></input>
+							<input type="number" min="0" max="1000000000" class="form-control" name="jumlah_biaya_ipa_max" id="jumlah_biaya_ipa_max" placeholder="Contoh: 1000000"></input>						
 						</div>
 					</div>
 					
 					<div class="form-group">
-						<label class="control-label col-sm-4" for="jumlah_biaya_ips">Jumlah uang semester (Soshum)* : </label>
+						<label class="control-label col-sm-4" for="uang_pangkal_ipa_min">Uang pangkal minimal* : </label>
 						<div class="input-group">
-							<input type="number" min="0" max="1000000000" class="form-control" name="jumlah_biaya_ips" id="jumlah_biaya_ips" placeholder="Contoh: 1000000"></input>						
+							<input type="number" min="0" max="1000000000" class="form-control" name="uang_pangkal_ipa_min" id="uang_pangkal_ipa_min" placeholder="Contoh: 1000000"></input>
 						</div>
 					</div>
 					
 					<div class="form-group">
-						<label class="control-label col-sm-4" for="uang_pangkal_ips">Uang pangkal (Soshum)* : </label>
+						<label class="control-label col-sm-4" for="uang_pangkal_ipa_max">Uang pangkal maksimal* : </label>
 						<div class="input-group">
-							<input type="number" min="0" max="1000000000" class="form-control" name="uang_pangkal_ips" id="uang_pangkal_ips" placeholder="Contoh: 1000000"></input>
+							<input type="number" min="0" max="1000000000" class="form-control" name="uang_pangkal_ipa_max" id="uang_pangkal_ipa_max" placeholder="Contoh: 1000000"></input>
+						</div>
+					</div>
+					
+					<hr/>
+					<h4>Pembayaran Rumpun Sosial dan Humaniora</h4>
+					<br/>
+					
+					<div class="form-group">
+						<label class="control-label col-sm-4" for="jumlah_biaya_ips_min">Jumlah uang semester minimal* : </label>
+						<div class="input-group">
+							<input type="number" min="0" max="1000000000" class="form-control" name="jumlah_biaya_ips_min" id="jumlah_biaya_ips_min" placeholder="Contoh: 1000000"></input>						
 						</div>
 					</div>
 					
 					<div class="form-group">
-						<label class="control-label col-sm-4" for="jumlah_biaya_ik">Jumlah uang semester (Kesehatan)* : </label>
+						<label class="control-label col-sm-4" for="jumlah_biaya_ips_max">Jumlah uang semester maksimal* : </label>
 						<div class="input-group">
-							<input type="number" min="0" max="1000000000" class="form-control" name="jumlah_biaya_ik" id="jumlah_biaya_ik" placeholder="Contoh: 1000000"></input>						
+							<input type="number" min="0" max="1000000000" class="form-control" name="jumlah_biaya_ips_max" id="jumlah_biaya_ips_max" placeholder="Contoh: 1000000"></input>						
 						</div>
 					</div>
 					
 					<div class="form-group">
-						<label class="control-label col-sm-4" for="uang_pangkal_ik">Uang pangkal (Kesehatan)* : </label>
+						<label class="control-label col-sm-4" for="uang_pangkal_ips_min">Uang pangkal minimal* : </label>
 						<div class="input-group">
-							<input type="number" min="0" max="1000000000" class="form-control" name="uang_pangkal_ik" id="uang_pangkal_ik" placeholder="Contoh: 1000000"></input>
+							<input type="number" min="0" max="1000000000" class="form-control" name="uang_pangkal_ips_min" id="uang_pangkal_ips_min" placeholder="Contoh: 1000000"></input>
+						</div>
+					</div>
+					
+					<div class="form-group">
+						<label class="control-label col-sm-4" for="uang_pangkal_ips_max">Uang pangkal maksimal* : </label>
+						<div class="input-group">
+							<input type="number" min="0" max="1000000000" class="form-control" name="uang_pangkal_ips_max" id="uang_pangkal_ips_max" placeholder="Contoh: 1000000"></input>
+						</div>
+					</div>
+					
+					<hr/>
+					<h4>Pembayaran Rumpun Ilmu Kesehatan</h4>
+					<br/>
+					
+					<div class="form-group">
+						<label class="control-label col-sm-4" for="jumlah_biaya_ik_min">Jumlah uang semester minimal* : </label>
+						<div class="input-group">
+							<input type="number" min="0" max="1000000000" class="form-control" name="jumlah_biaya_ik_min" id="jumlah_biaya_ik_min" placeholder="Contoh: 1000000"></input>						
+						</div>
+					</div>
+					
+					<div class="form-group">
+						<label class="control-label col-sm-4" for="jumlah_biaya_ik_max">Jumlah uang semester maksimal* : </label>
+						<div class="input-group">
+							<input type="number" min="0" max="1000000000" class="form-control" name="jumlah_biaya_ik_max" id="jumlah_biaya_ik_max" placeholder="Contoh: 1000000"></input>						
+						</div>
+					</div>
+					
+					<div class="form-group">
+						<label class="control-label col-sm-4" for="uang_pangkal_ik_min">Uang pangkal minimal* : </label>
+						<div class="input-group">
+							<input type="number" min="0" max="1000000000" class="form-control" name="uang_pangkal_ik_min" id="uang_pangkal_ik_min" placeholder="Contoh: 1000000"></input>
+						</div>
+					</div>
+					
+					<div class="form-group">
+						<label class="control-label col-sm-4" for="uang_pangkal_ik_max">Uang pangkal maksimal* : </label>
+						<div class="input-group">
+							<input type="number" min="0" max="1000000000" class="form-control" name="uang_pangkal_ik_max" id="uang_pangkal_ik_max" placeholder="Contoh: 1000000"></input>
 						</div>
 					</div>
 					
@@ -83,13 +136,28 @@
 		<script type="text/javascript">
 			function validateForm()
 		    {
-			    var a = document.forms["skemaForm"]["jumlah_biaya_ipa"].value;
-			    var b = document.forms["skemaForm"]["uang_pangkal_ipa"].value;
-			    var c = document.forms["skemaForm"]["jumlah_biaya_ips"].value;
-			    var d = document.forms["skemaForm"]["uang_pangkal_ips"].value;
-			    var e = document.forms["skemaForm"]["jumlah_biaya_ik"].value;
-			    var f = document.forms["skemaForm"]["uang_pangkal_ik"].value;
-			    if (a==null || a=="", b==null || b=="", c==null || c=="", d==null || d=="", e==null || e=="", f==null || f=="")
+			    var a = document.forms["skemaForm"]["jumlah_biaya_ipa_min"].value;
+			    var ax = document.forms["skemaForm"]["jumlah_biaya_ipa_max"].value;
+			    var b = document.forms["skemaForm"]["uang_pangkal_ipa_min"].value;
+			    var bx = document.forms["skemaForm"]["uang_pangkal_ipa_max"].value;
+			    
+			    var c = document.forms["skemaForm"]["jumlah_biaya_ips_min"].value;
+			    var cx = document.forms["skemaForm"]["jumlah_biaya_ips_max"].value;
+			    var d = document.forms["skemaForm"]["uang_pangkal_ips_min"].value;
+			    var dx = document.forms["skemaForm"]["uang_pangkal_ips_max"].value;
+			    
+			    var e = document.forms["skemaForm"]["jumlah_biaya_ik_min"].value;
+			    var ex = document.forms["skemaForm"]["jumlah_biaya_ik_max"].value;
+			    var f = document.forms["skemaForm"]["uang_pangkal_ik_min"].value;
+			    var fx = document.forms["skemaForm"]["uang_pangkal_ik_max"].value;
+			    
+			    
+			    if (	a==null || a=="", ax==null || ax=="", 
+			    		b==null || b=="", bx==null || bx=="", 
+			    		c==null || c=="", cx==null || cx=="", 
+			    		d==null || d=="", dx==null || dx=="", 
+			    		e==null || e=="", ex==null || ex=="", 
+			    		f==null || f=="", fx==null || fx=="")
 			      {
 				      alert("Mohon mengisi seluruh kolom yang diperlukan");
 				      return false;				
