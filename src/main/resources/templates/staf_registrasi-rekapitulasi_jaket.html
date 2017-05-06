@@ -87,7 +87,8 @@
 			      // Set chart options
 			      var options = {'title':'Data Pemesanan Ukuran di Fakultas ' + d[index].nama_fakultas + ' (Total : ' + total + ')',
 			                     'width':500,
-			                     'height':300};
+			                     'height':300,
+			                     is3D: true};
 			
 			      // Instantiate and draw our chart, passing in some options.
 			      var chart = new google.visualization.PieChart(document.getElementById('cross_' + d[index].fakultas_id));
