@@ -928,13 +928,13 @@ CREATE TABLE `mahasiswa` (
 --
 
 INSERT INTO `mahasiswa` (`username`, `npm`, `uid_sso`, `program_studi_id`, `no_seleksi`, `jadwal_registrasi_id`, `jadwal_tes_kesehatan_id`, `jadwal_ept_id`, `created_by`, `created_at`, `updated_by`, `updated_at`, `tahun_ajaran_id`) VALUES
-('anindhita.yanti', '1234567896', 'anindhita.yanti', 7, '123456', 3, 1, 2, 'redita.arifin', '2017-04-26 00:38:51','redita.arifin', '2017-04-26 00:38:51', 3),
-('arief.nugraha', '1234567897', 'arief.nugraha', 15, '123457', 4, 1, 3, 'redita.arifin', '2017-04-26 00:38:51','redita.arifin', '2017-04-26 00:38:51', 3),
-('benathavia.saladdin', '1234567890', 'benathavia.saladdin', 3, '123450', 1, 2, 3, 'redita.arifin', '2017-05-10 08:00:00','redita.arifin', '2017-04-26 00:38:51', 3),
-('dwi.arief', '1234567892', 'dwi.arief', 3, '123452', 3, 2, 1, 'redita.arifin', '2017-05-10 08:00:00','redita.arifin', '2017-04-26 00:38:51', 3),
-('hardyn.adiyoso', '1234567891', 'hardyn.adiyoso', 4, '123451', 1, 2, 3, 'redita.arifin', '2017-05-10 08:00:00','redita.arifin', '2017-04-26 00:38:51', 3),
-('lia.julia', '1234567898', 'lia.julia', 6, '123458', 3, 1, 4, 'redita.arifin', '2017-04-26 00:38:51','redita.arifin', '2017-04-26 00:38:51', 1),
-('lia.naren', '1234567893', 'lia.naren', 4, '123453', 3, 2, 1, 'redita.arifin', '2017-05-10 08:00:00','redita.arifin', '2017-04-26 00:38:51', 1),
+('anindhita.yanti', '1234567896', 'anindhita.yanti', 7, '123456', 3, 1, 2, 'redita.arifin', '2017-04-26 00:38:51','redita.arifin', '2017-04-26 00:38:51', 4),
+('arief.nugraha', '1234567897', 'arief.nugraha', 15, '123457', 4, 1, 3, 'redita.arifin', '2017-04-26 00:38:51','redita.arifin', '2017-04-26 00:38:51', 4),
+('benathavia.saladdin', '1234567890', 'benathavia.saladdin', 3, '123450', 1, 2, 3, 'redita.arifin', '2017-05-10 08:00:00','redita.arifin', '2017-04-26 00:38:51', 4),
+('dwi.arief', '1234567892', 'dwi.arief', 3, '123452', 3, 2, 1, 'redita.arifin', '2017-05-10 08:00:00','redita.arifin', '2017-04-26 00:38:51', 4),
+('hardyn.adiyoso', '1234567891', 'hardyn.adiyoso', 4, '123451', 1, 2, 3, 'redita.arifin', '2017-05-10 08:00:00','redita.arifin', '2017-04-26 00:38:51', 4),
+('lia.julia', '1234567898', 'lia.julia', 6, '123458', 3, 1, 4, 'redita.arifin', '2017-04-26 00:38:51','redita.arifin', '2017-04-26 00:38:51', 3),
+('lia.naren', '1234567893', 'lia.naren', 4, '123453', 3, 2, 1, 'redita.arifin', '2017-05-10 08:00:00','redita.arifin', '2017-04-26 00:38:51', 3),
 ('liyanti.saraswati', '1234567899', 'liyanti.saraswati', 7, '123459', 1, 2, 3, 'redita.arifin', '2017-04-26 00:38:51','redita.arifin', '2017-04-26 00:38:51', 1),
 ('naren.jul', '1234567894', 'naren.jul', 5, '123454', 1, 2, 3, 'redita.arifin', '2017-05-10 08:00:00','redita.arifin', '2017-04-26 00:38:51', 2),
 ('widiarliyanti', '1234567895', 'widiarliyanti', 6, '123455', 3, 2, 1, 'redita.arifin', '2017-05-10 08:00:00','redita.arifin', '2017-04-26 00:38:51', 2);
