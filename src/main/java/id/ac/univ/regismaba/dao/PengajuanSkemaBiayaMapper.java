@@ -72,9 +72,9 @@ public interface PengajuanSkemaBiayaMapper {
 //	void insertGolongan(PengajuanSkemaBiayaModel psbm);
 	
 	@Insert("insert into pengajuan_skema_pembayaran (golongan_id, foto_rumah, status_pengajuan, "
-			+ "created_at, created_by, updated_at, updated_by, username) values (#{golongan_id}, '-', "
-			+ "'Unverified', current_timestamp, #{username}, current_timestamp, #{username}, "
-			+ "#{username})")
+			+ "created_at, created_by, updated_at, updated_by, username, status_pembayaran) values (#{golongan_id}, '-', "
+			+ "'Not verified yet', current_timestamp, #{username}, current_timestamp, #{username}, "
+			+ "#{username}, 'Not verified yet')")
 	void insertGolongan(PengajuanSkemaBiayaModel psbm);
 	
 	@Update("update pengajuan_skema_pembayaran set golongan_id=#{golongan_id}, updated_at=current_timestamp, "
@@ -82,7 +82,7 @@ public interface PengajuanSkemaBiayaMapper {
 			+ "nilai_tagihan_air=null, nilai_tagihan_listrik=null, nilai_tagihan_telepon=null, "
 			+ "surat_keterangan_rtrw=null, foto_rumah='-', slip_gaji_pribadi=null, slip_gaji_wali1=null, "
 			+ "slip_gaji_wali2=null, tagihan_air=null, tagihan_listrik=null, tagihan_telepon=null, "
-			+ "status_pengajuan='Unverified', komentar=null where username=#{username}")
+			+ "status_pengajuan='Not verified yet', komentar=null, status_pembayaran='Not verified yet' where username=#{username}")
 	void updateGolongan(PengajuanSkemaBiayaModel psbm);
 	
 	@Update("update pengajuan_skema_pembayaran set golongan_id=#{golongan_id}, updated_at=current_timestamp, "

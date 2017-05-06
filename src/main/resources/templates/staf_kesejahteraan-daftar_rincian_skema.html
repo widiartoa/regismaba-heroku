@@ -9,58 +9,186 @@
 		<div th:include="staf_kesejahteraan-navbar"></div>
 
 		<div class="container">
-			<div class="content">
-				<div class="row">
-					<div class="col-sm-12">
-						<h3>Daftar Rincian Skema Pembayaran</h3>
+				<div class="tab">
+					<button class="tablinks" onclick="openJadwal(event, 'saintek')" id="defaultOpen">
+						SAINTEK
+					</button>
+					<button class="tablinks" onclick="openJadwal(event, 'soshum')">
+						SOSHUM
+					</button>
+					<button class="tablinks" onclick="openJadwal(event, 'ik')">
+						IK
+					</button>
+				</div>
+				
+				<div id="saintek" class="tabcontent">
+					<div class="content-table">
+						<div class="row">
+							<h4>Rincian Skema Pembayaran Sains dan Teknologi</h4>
+							
+							<hr/>
+							
+							<table class="table">
+								<thead>
+									<tr>
+										<td>Golongan</td>
+										<td>Jumlah Biaya Semester Minimal</td>
+										<td>Jumlah Biaya Semester Maksimal</td>
+										<td>Uang Pangkal Minimal</td>
+										<td>Uang Pangkal Maksimal</td>
+										<td>Ubah</td>
+									</tr>
+								</thead>
+								<tbody>
+									<div th:each="schema,iterationStatus: ${schemas}">
+										<tr>
+											<td th:text="${schema.golongan_id}">Golongan</td>
+											<td th:text="${schema.jumlah_biaya_ipa_min}">Jumlah Biaya IPA</td>
+											<td th:text="${schema.jumlah_biaya_ipa_max}">Jumlah Biaya IPA</td>
+											<td th:text="${schema.uang_pangkal_ipa_min}">Uang Pangkal IPA</td>
+											<td th:text="${schema.uang_pangkal_ipa_max}">Uang Pangkal IPA</td>
+											<td>
+												<a th:href="'/staf-kesejahteraan/skema-pembayaran/update/' + ${schema.golongan_id}">
+													<button type="button" class="btn btn-warning">Ubah</button>
+												</a>
+											</td>
+										</tr>
+									</div>
+								</tbody>
+							</table>
+						</div>
 					</div>
 				</div>
-
-				<table class="table">
-					<thead>
-						<tr>
-							<td>Golongan</td>
-							<td>Jumlah Biaya Semester (Saintek)</td>
-							<td>Uang pangkal (Saintek)</td>
-							<td>Jumlah Biaya Semester (Soshum)</td>
-							<td>Uang pangkal (Soshum)</td>
-							<td>Jumlah Biaya Semester (Kesehatan)</td>
-							<td>Uang pangkal (Kesehatan)</td>
-							<td>Ubah</td>
-						</tr>
-					</thead>
-					<tbody>
-						<div th:each="schema,iterationStatus: ${schemas}">
-							<tr>
-								<td th:text="${schema.golongan_id}">Golongan</td>
-								<td th:text="${schema.jumlah_biaya_ipa}">Jumlah Biaya IPA</td>
-								<td th:text="${schema.uang_pangkal_ipa}">Uang Pangkal IPA</td>
-								<td th:text="${schema.jumlah_biaya_ips}">Jumlah Biaya IPS</td>
-								<td th:text="${schema.uang_pangkal_ips}">Uang Pangkal IPS</td>
-								<td th:text="${schema.jumlah_biaya_ik}">Jumlah Biaya IK</td>
-								<td th:text="${schema.uang_pangkal_ik}">Uang Pangkal IK</td>
-								<td>
-									<a th:href="'/staf-kesejahteraan/skema-pembayaran/update/' + ${schema.golongan_id}">
-										<button type="button" class="btn btn-warning">Ubah</button>
-									</a>
-								</td>
-							</tr>
+				
+				<div id="soshum" class="tabcontent">
+					<div class="content-table">
+						<div class="row">
+							<h4>Rincian Skema Pembayaran Sosial dan Humaniora</h4>
+							
+							<hr/>
+							
+							<table class="table">
+								<thead>
+									<tr>
+										<td>Golongan</td>
+										<td>Jumlah Biaya Semester Minimal</td>
+										<td>Jumlah Biaya Semester Maksimal</td>
+										<td>Uang Pangkal Minimal</td>
+										<td>Uang Pangkal Maksimal</td>
+										<td>Ubah</td>
+									</tr>
+								</thead>
+								<tbody>
+									<div th:each="schema,iterationStatus: ${schemas}">
+										<tr>
+											<td th:text="${schema.golongan_id}">Golongan</td>
+											<td th:text="${schema.jumlah_biaya_ips_min}">Jumlah Biaya IPS</td>
+											<td th:text="${schema.jumlah_biaya_ips_max}">Jumlah Biaya IPS</td>
+											<td th:text="${schema.uang_pangkal_ips_min}">Uang Pangkal IPS</td>
+											<td th:text="${schema.uang_pangkal_ips_max}">Uang Pangkal IPS</td>
+											<td>
+												<a th:href="'/staf-kesejahteraan/skema-pembayaran/update/' + ${schema.golongan_id}">
+													<button type="button" class="btn btn-warning">Ubah</button>
+												</a>
+											</td>
+										</tr>
+									</div>
+								</tbody>
+							</table>
 						</div>
-					</tbody>
-				</table>
+					</div>
+				</div>
+				
+				<div id="ik" class="tabcontent">
+					<div class="content-table">
+						<div class="row">
+							<h4>Rincian Skema Pembayaran Ilmu Kesehatan</h4>
+							
+							<hr/>
+							
+							<table class="table">
+								<thead>
+									<tr>
+										<td>Golongan</td>
+										<td>Jumlah Biaya Semester Minimal</td>
+										<td>Jumlah Biaya Semester Maksimal</td>
+										<td>Uang Pangkal Minimal</td>
+										<td>Uang Pangkal Maksimal</td>
+										<td>Ubah</td>
+									</tr>
+								</thead>
+								<tbody>
+									<div th:each="schema,iterationStatus: ${schemas}">
+										<tr>
+											<td th:text="${schema.golongan_id}">Golongan</td>
+											<td th:text="${schema.jumlah_biaya_ik_min}">Jumlah Biaya IK</td>
+											<td th:text="${schema.jumlah_biaya_ik_max}">Jumlah Biaya IK</td>
+											<td th:text="${schema.uang_pangkal_ik_min}">Uang Pangkal IK</td>
+											<td th:text="${schema.uang_pangkal_ik_max}">Uang Pangkal IK</td>
+											<td>
+												<a th:href="'/staf-kesejahteraan/skema-pembayaran/update/' + ${schema.golongan_id}">
+													<button type="button" class="btn btn-warning">Ubah</button>
+												</a>
+											</td>
+										</tr>
+									</div>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+				
+				<br/>
 				
 				<div class="btn-group" role="group" aria-label="...">
 				  <a th:href="'/staf-kesejahteraan/skema-pembayaran/insert'"><button type="button" class="btn btn-warning">Buat Rincian Skema Pembayaran</button></a>
 				</div>
-			</div>
 		</div>
 
 		<div class="footer">Modul Registrasi Mahasiswa Baru</div>
 
 		<script type="text/javascript">
-			$(document).ready(function() {
-				$('.table').dataTable();
-			});
+			$(document)
+			.ready(
+					function() {
+						$('.table').dataTable();
+						var i, tabcontent, tablinks;
+						tabcontent = document
+								.getElementsByClassName("tabcontent");
+						i = 0;
+						while (i != tabcontent.length) {
+							tabcontent[i].style.display = "none";
+							i++;
+						}
+						tablinks = document
+								.getElementsByClassName("tablinks");
+						i = 0;
+						while (i != tablinks.length) {
+							tablinks[i].className = tablinks[i].className
+									.replace(" active", "");
+							i++;
+						}
+						document.getElementById('saintek').style.display = "block";
+						evt.currentTarget.className += " active";
+					});
+			function openJadwal(evt, jadwalName) {
+				var i, tabcontent, tablinks;
+				tabcontent = document.getElementsByClassName("tabcontent");
+				i = 0;
+				while (i != tabcontent.length) {
+					tabcontent[i].style.display = "none";
+					i++;
+				}
+				tablinks = document.getElementsByClassName("tablinks");
+				i = 0;
+				while (i != tablinks.length) {
+					tablinks[i].className = tablinks[i].className.replace(
+							" active", "");
+					i++;
+				}
+				document.getElementById(jadwalName).style.display = "block";
+				evt.currentTarget.className += " active";
+			}
 		</script>
 	</body>
 </html>
