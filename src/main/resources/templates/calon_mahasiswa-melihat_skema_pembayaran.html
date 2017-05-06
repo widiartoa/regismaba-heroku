@@ -51,58 +51,137 @@
 							<div th:case="'1'">
 								<tr>
 									<td>
-										<div class="col-sm-12"><h4 th:text="'Jumlah Biaya Semester Rumpun Saintek'">Jumlah Biaya</h4></div>
+										<div class="col-sm-12"><h4 th:text="'Jumlah Biaya Semester Minimal Rumpun Saintek'">Jumlah Biaya</h4></div>
 									</td>
 									<td>
-										<div class="col-sm-12"><h4 th:text="'Rp ' + ${sbm.jumlah_biaya_ipa}">Jumlah Biaya</h4></div>
+										<div class="col-sm-12"><h4 th:text="'Rp ' + ${sbm.jumlah_biaya_ipa_min}">Jumlah Biaya</h4></div>
 									</td>
 								</tr>
 								<tr>
 									<td>
-										<div class="col-sm-12"><h4 th:text="'Uang Pangkal Rumpun Saintek'">Uang Pangkal</h4></div>
+										<div class="col-sm-12"><h4 th:text="'Uang Pangkal Minimal Rumpun Saintek'">Uang Pangkal</h4></div>
 									</td>
 									<td>
-										<div class="col-sm-12"><h4 th:text="'Rp ' + ${sbm.uang_pangkal_ipa}">Uang Pangkal</h4></div>
+										<div class="col-sm-12"><h4 th:text="'Rp ' + ${sbm.uang_pangkal_ipa_min}">Uang Pangkal</h4></div>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<div class="col-sm-12"><h4 th:text="'Jumlah Biaya Semester Maksimal Rumpun Saintek'">Jumlah Biaya</h4></div>
+									</td>
+									<td>
+										<div class="col-sm-12"><h4 th:text="'Rp ' + ${sbm.jumlah_biaya_ipa_max}">Jumlah Biaya</h4></div>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<div class="col-sm-12"><h4 th:text="'Uang Pangkal Maksimal Rumpun Saintek'">Uang Pangkal</h4></div>
+									</td>
+									<td>
+										<div class="col-sm-12"><h4 th:text="'Rp ' + ${sbm.uang_pangkal_ipa_max}">Uang Pangkal</h4></div>
 									</td>
 								</tr>
 							</div>
 							<div th:case="'2'">
 								<tr>
 									<td>
-										<div class="col-sm-12"><h4 th:text="'Jumlah Biaya Semester Rumpun Soshum'">Jumlah Biaya</h4></div>
+										<div class="col-sm-12"><h4 th:text="'Jumlah Biaya Semester Minimal Rumpun Soshum'">Jumlah Biaya</h4></div>
 									</td>
 									<td>
-										<div class="col-sm-12"><h4 th:text="'Rp ' + ${sbm.jumlah_biaya_ips}">Jumlah Biaya</h4></div>
+										<div class="col-sm-12"><h4 th:text="'Rp ' + ${sbm.jumlah_biaya_ips_min}">Jumlah Biaya</h4></div>
 									</td>
 								</tr>
 								<tr>
 									<td>
-										<div class="col-sm-12"><h4 th:text="'Uang Pangkal Rumpun Soshum'">Uang Pangkal</h4></div>
+										<div class="col-sm-12"><h4 th:text="'Uang Pangkal Minimal Rumpun Soshum'">Uang Pangkal</h4></div>
 									</td>
 									<td>
-										<div class="col-sm-12"><h4 th:text="'Rp ' + ${sbm.uang_pangkal_ips}">Uang Pangkal</h4></div>
+										<div class="col-sm-12"><h4 th:text="'Rp ' + ${sbm.uang_pangkal_ips_min}">Uang Pangkal</h4></div>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<div class="col-sm-12"><h4 th:text="'Jumlah Biaya Semester Maksimal Rumpun Soshum'">Jumlah Biaya</h4></div>
+									</td>
+									<td>
+										<div class="col-sm-12"><h4 th:text="'Rp ' + ${sbm.jumlah_biaya_ips_max}">Jumlah Biaya</h4></div>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<div class="col-sm-12"><h4 th:text="'Uang Pangkal Maksimal Rumpun Soshum'">Uang Pangkal</h4></div>
+									</td>
+									<td>
+										<div class="col-sm-12"><h4 th:text="'Rp ' + ${sbm.uang_pangkal_ips_max}">Uang Pangkal</h4></div>
 									</td>
 								</tr>
 							</div>
 							<div th:case="'3'">
 								<tr>
 									<td>
-										<div class="col-sm-12"><h4 th:text="'Jumlah Biaya Semester Rumpun Kesehatan'">Jumlah Biaya</h4></div>
+										<div class="col-sm-12"><h4 th:text="'Jumlah Biaya Semester Minimal Rumpun Kesehatan'">Jumlah Biaya</h4></div>
 									</td>
 									<td>
-										<div class="col-sm-12"><h4 th:text="'Rp ' + ${sbm.jumlah_biaya_ik}">Jumlah Biaya</h4></div>
+										<div class="col-sm-12"><h4 th:text="'Rp ' + ${sbm.jumlah_biaya_ik_min}">Jumlah Biaya</h4></div>
 									</td>
 								</tr>
 								<tr>
 									<td>
-										<div class="col-sm-12"><h4 th:text="'Uang Pangkal Rumpun Kesehatan'">Uang Pangkal</h4></div>
+										<div class="col-sm-12"><h4 th:text="'Uang Pangkal Rumpun Minimal Kesehatan'">Uang Pangkal</h4></div>
 									</td>
 									<td>
-										<div class="col-sm-12"><h4 th:text="'Rp ' + ${sbm.uang_pangkal_ik}">Uang Pangkal</h4></div>
+										<div class="col-sm-12"><h4 th:text="'Rp ' + ${sbm.uang_pangkal_ik_min}">Uang Pangkal</h4></div>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<div class="col-sm-12"><h4 th:text="'Jumlah Biaya Semester Maksimal Rumpun Kesehatan'">Jumlah Biaya</h4></div>
+									</td>
+									<td>
+										<div class="col-sm-12"><h4 th:text="'Rp ' + ${sbm.jumlah_biaya_ik_max}">Jumlah Biaya</h4></div>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<div class="col-sm-12"><h4 th:text="'Uang Pangkal Rumpun Maksimal Kesehatan'">Uang Pangkal</h4></div>
+									</td>
+									<td>
+										<div class="col-sm-12"><h4 th:text="'Rp ' + ${sbm.uang_pangkal_ik_max}">Uang Pangkal</h4></div>
 									</td>
 								</tr>
 							</div>
 						</div>
+					</tbody>
+				</table>
+				
+				<h3>Pembayaran Mahasiswa</h3>
+				
+				<table class="table">
+					<tbody>
+						<tr>
+							<td>
+								<div class="col-sm-12"><h4 th:text="'Status Pembayaran'">Status Pembayaran</h4></div>
+							</td>
+							<td>
+								<div class="col-sm-12"><h4 th:text="${psbm.status_pembayaran}">Status Pembayaran</h4></div>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<div class="col-sm-12"><h4 th:text="'Jumlah Biaya Semester Mahasiswa'">Jumlah Biaya</h4></div>
+							</td>
+							<td>
+								<div class="col-sm-12"><h4 th:text="'Rp ' + ${psbm.jumlah_biaya_semester}">Jumlah Biaya</h4></div>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<div class="col-sm-12"><h4 th:text="'Uang Pangkal Mahasiswa'">Uang Pangkal</h4></div>
+							</td>
+							<td>
+								<div class="col-sm-12"><h4 th:text="'Rp ' + ${psbm.uang_pangkal}">Uang Pangkal</h4></div>
+							</td>
+						</tr>
 					</tbody>
 				</table>
 				

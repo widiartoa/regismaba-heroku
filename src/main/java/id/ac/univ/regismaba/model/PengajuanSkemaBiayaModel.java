@@ -30,4 +30,7 @@ public class PengajuanSkemaBiayaModel
     String updated_by;
     String status_pengajuan;
     String komentar;
+    int uang_pangkal;
+    int jumlah_biaya_semester;
+    String status_pembayaran;
 }
