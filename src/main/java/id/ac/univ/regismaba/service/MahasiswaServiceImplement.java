@@ -9,6 +9,7 @@ import id.ac.univ.regismaba.dao.MahasiswaMapper;
 import id.ac.univ.regismaba.model.BiodataModel;
 import id.ac.univ.regismaba.model.MahasiswaModel;
 import id.ac.univ.regismaba.model.ProgramStudiModel;
+import id.ac.univ.regismaba.model.TahunAjaranModel;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -17,6 +18,9 @@ public class MahasiswaServiceImplement implements MahasiswaService{
 	
 	@Autowired
 	MahasiswaMapper mahasiswaMapper;
+	
+	@Autowired
+	TahunAjaranService tahunAjaranService;
 	
 	@Override
 	public MahasiswaModel selectMahasiswa(String npm) {
@@ -35,10 +39,46 @@ public class MahasiswaServiceImplement implements MahasiswaService{
 	}
 
 	@Override
-	public List<MahasiswaModel> selectAllMahasiswa() {
+	public List<MahasiswaModel> selectAllMahasiswa() {		
+		TahunAjaranModel tahunAjaranSaatIni = tahunAjaranService.selectTahunAjaranSaatIni();
+		log.info ("select all mahasiswa pada tahun ajaran {}", tahunAjaranSaatIni.getTahun_ajaran_id());
+		List<MahasiswaModel> mahasiswas = mahasiswaMapper.selectAllMahasiswabyTahunAjaran(tahunAjaranSaatIni.getTahun_ajaran_id());
+		for (MahasiswaModel mahasiswa : mahasiswas){
+			mahasiswa.setNama_lengkap(mahasiswaMapper.selectNamaLengkap(mahasiswa.getUsername()));
+			BiodataModel biodataMhs = mahasiswaMapper.selectBiodataMahasiswa(mahasiswa.getUsername());
+			mahasiswa.setBiodata(biodataMhs);
+			ProgramStudiModel program_studi = mahasiswaMapper.selectProgramStudiMahasiswa(mahasiswa.getProgram_studi_id());
+			mahasiswa.setProgram_studi(program_studi);
+			mahasiswa.setProgram(mahasiswaMapper.selectProgramMahasiswa(program_studi.getProgram_id()));
+			mahasiswa.setFakultas(mahasiswaMapper.selectFakultasMahasiswa(program_studi.getFakultas_id()));
+			mahasiswa.setJenjang(mahasiswaMapper.selectJenjangMahasiswa(program_studi.getJenjang_id()));
+		}
+		return mahasiswas;
+	}
+	
+	@Override
+	public List<MahasiswaModel> selectAllMahasiswabyFakultas(int fakultas_id) {
 		// TODO Auto-generated method stub
-		log.info ("select all mahasiswa");
-		List<MahasiswaModel> mahasiswas = mahasiswaMapper.selectAllMahasiswa();
+		List<MahasiswaModel> mahasiswas = mahasiswaMapper.selectAllMahasiswabyFakultas(fakultas_id);
+		for (MahasiswaModel mahasiswa : mahasiswas){
+			mahasiswa.setNama_lengkap(mahasiswaMapper.selectNamaLengkap(mahasiswa.getUsername()));
+			BiodataModel biodataMhs = mahasiswaMapper.selectBiodataMahasiswa(mahasiswa.getUsername());
+			mahasiswa.setBiodata(biodataMhs);
+			ProgramStudiModel program_studi = mahasiswaMapper.selectProgramStudiMahasiswa(mahasiswa.getProgram_studi_id());
+			mahasiswa.setProgram_studi(program_studi);
+			mahasiswa.setProgram(mahasiswaMapper.selectProgramMahasiswa(program_studi.getProgram_id()));
+			mahasiswa.setFakultas(mahasiswaMapper.selectFakultasMahasiswa(program_studi.getFakultas_id()));
+			mahasiswa.setJenjang(mahasiswaMapper.selectJenjangMahasiswa(program_studi.getJenjang_id()));
+		}
+		return mahasiswas;
+	}
+	
+	@Override
+	public List<MahasiswaModel> selectAllMahasiswabyFakultasatTahunAjaran(int fakultas_id) {
+		// TODO Auto-generated method stub
+		TahunAjaranModel tahunAjaranSaatIni = tahunAjaranService.selectTahunAjaranSaatIni();
+		log.info ("select all mahasiswa pada tahun ajaran {}", tahunAjaranSaatIni.getTahun_ajaran_id());
+		List<MahasiswaModel> mahasiswas = mahasiswaMapper.selectAllMahasiswabyFakultasatTahunAjaran(fakultas_id, tahunAjaranSaatIni.getTahun_ajaran_id());
 		for (MahasiswaModel mahasiswa : mahasiswas){
 			mahasiswa.setNama_lengkap(mahasiswaMapper.selectNamaLengkap(mahasiswa.getUsername()));
 			BiodataModel biodataMhs = mahasiswaMapper.selectBiodataMahasiswa(mahasiswa.getUsername());

@@ -31,10 +31,10 @@ public class JadwalController {
 
 	@Autowired
 	JadwalService jadwalService;
-	
+
 	@Autowired
 	PengajuanSkemaBiayaService psbmService;
-	
+
 	@Autowired
 	VerifikasiIDMService verifikasiIDMService;
 
@@ -49,12 +49,12 @@ public class JadwalController {
 		int jadwalEptId = mahasiswa.getJadwal_ept_id();
 
 		JadwalEptModel jadwalEpt = jadwalService.selectJadwalEpt(jadwalEptId);
-		
+
 		String hariEpt = jadwalService.parseHariEpt(jadwalEpt);
 		String waktuEpt = jadwalService.parseWaktuEpt(jadwalEpt);
 		String timestampAwalEpt = jadwalService.parseTimestampAwalEpt(jadwalEpt);
 		String timestampAkhirEpt = jadwalService.parseTimestampAkhirEpt(jadwalEpt);
-		
+
 		model.addAttribute("hariEpt", hariEpt);
 		model.addAttribute("waktuEpt", waktuEpt);
 		model.addAttribute("timestampAwalEpt", timestampAwalEpt);
@@ -68,48 +68,45 @@ public class JadwalController {
 		String waktuTesKes = jadwalService.parseWaktuTesKes(jadwalKesehatan);
 		String timestampAwalTesKes = jadwalService.parseTimestampAwalTesKes(jadwalKesehatan);
 		String timestampAkhirTesKes = jadwalService.parseTimestampAkhirTesKes(jadwalKesehatan);
-		
+
 		model.addAttribute("hariTesKes", hariTesKes);
 		model.addAttribute("waktuTesKes", waktuTesKes);
 		model.addAttribute("timestampAwalTesKes", timestampAwalTesKes);
 		model.addAttribute("timestampAkhirTesKes", timestampAkhirTesKes);
-		
+
 		int jadwalRegisId = mahasiswa.getJadwal_registrasi_id();
 
 		JadwalRegisModel jadwalRegis = jadwalService.selectJadwalRegis(jadwalRegisId);
 
 		model.addAttribute("jadwalRegis", jadwalRegis);
-		
+
 		PengajuanSkemaBiayaModel psbm = psbmService.selectPSBMFromUsername(mahasiswa.getUsername());
 		model.addAttribute("psbm", psbm);
-		
+
 		return "calon_mahasiswa-melihat_jadwal";
 	}
-	
+
 	@RequestMapping("/staf-registrasi/daftar-jadwal")
 	public String getAllJadwal(Model model) {
 		List<JadwalRegisModel> jadwalRegisList = jadwalService.selectAllJadwalRegis();
 		model.addAttribute("jadwalRegisList", jadwalRegisList);
 		return "staf_registrasi-daftar_jadwal";
 	}
-	
+
 	@PostMapping("/staf-registrasi/membuat-jadwal/submit")
-	public String insertJadwal(
-			@RequestParam(value = "hari", required = false) String hari,
+	public String insertJadwal(@RequestParam(value = "hari", required = false) String hari,
 			@RequestParam(value = "waktu_awal", required = false) String waktu_awal,
 			@RequestParam(value = "waktu_akhir", required = false) String waktu_akhir,
-			@RequestParam(value = "kapasitas", required = false) int kapasitas)
-			throws ParseException {
+			@RequestParam(value = "kapasitas", required = false) int kapasitas) throws ParseException {
 		jadwalService.insertJadwalRegis(hari, waktu_awal, waktu_akhir, kapasitas);
-		
+
 		return "redirect:/staf-registrasi/daftar-jadwal";
 	}
-	
-	@RequestMapping("/staf-registrasi/daftar-jadwal/{jadwal_id}/hapus")
-    public String deleteJadwal (Model model,
-            @PathVariable(value = "jadwal_id") int jadwal_id)
-    {
-		//TODO:hapus jadwal regis
+
+	@RequestMapping("/staf-registrasi/daftar-jadwal/{jadwal_registrasi_id}/hapus")
+	public String deleteJadwalRegis(Model model,
+			@PathVariable(value = "jadwal_registrasi_id") int jadwal_registrasi_id) {
+		jadwalService.deleteJadwalRegis(jadwal_registrasi_id);
 		return "redirect:/staf-registrasi/daftar-jadwal";
 	}
 }

@@ -12,5 +12,6 @@ public class UserModel {
 	String email;
 	int flag_aktif;
 	String profile_picture;
-	
+	RoleModel role;
+	TingkatRoleModel tingkat_role;
 }

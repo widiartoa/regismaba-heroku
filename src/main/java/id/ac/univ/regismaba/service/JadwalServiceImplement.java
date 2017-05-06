@@ -114,6 +114,19 @@ public class JadwalServiceImplement implements JadwalService {
 		jadwalMapper.insertJadwalRegis(jadwalRegis);
 	}
 
+
+	@Override
+	public void deleteJadwalRegis(int jadwal_registrasi_id) {
+		// TODO Auto-generated method stub
+		if (jadwalMapper.selectJadwalRegis(jadwal_registrasi_id) != null){
+			log.info("delete jadwal registrasi dengan id {}", jadwal_registrasi_id);
+			jadwalMapper.deleteJadwalRegis(jadwal_registrasi_id);
+		} else {
+			log.info("tidak ada jadwal registrasi dengan id {}", jadwal_registrasi_id);
+		}
+	}
+	
+	
 	/**
 	 * Parsing Methods
 	 *

@@ -68,6 +68,27 @@ public interface MahasiswaMapper {
 	})
 	List<MahasiswaModel> selectAllMahasiswa();
 	
+	@Select("select * from mahasiswa where tahun_ajaran_id = #{tahun_ajaran_id}")
+	@Results (value = {
+				@Result(property="username", column="username"),
+				@Result(property="npm", column="npm"),
+				@Result(property="uid_sso", column="uid_sso"),
+				@Result(property="biodata_id", column="biodata_id"),
+				@Result(property="jenjang_id", column="jenjang_id"),
+				@Result(property="pengajuan_id", column="pengajuan_id"),
+				@Result(property="no_seleksi", column="no_seleksi"),
+				@Result(property="jadwal_registrasi_id", column="jadwal_registrasi_id"),
+				@Result(property="jadwal_tes_kesehatan_id", column="jadwal_tes_kesehatan_id"),
+				@Result(property="jadwal_ept_id", column="jadwal_ept_id")
+	})
+	List<MahasiswaModel> selectAllMahasiswabyTahunAjaran(@Param("tahun_ajaran_id") int tahun_ajaran_id);
+	
+	@Select("select * from mahasiswa where fakultas_id = #{fakultas_id}")
+	List<MahasiswaModel> selectAllMahasiswabyFakultas(@Param("fakultas_id") int fakultas_id);
+	
+	@Select("select * from program_studi P LEFT JOIN mahasiswa M ON P.program_studi_id=M.program_studi_id where fakultas_id = #{fakultas_id} and tahun_ajaran_id = #{tahun_ajaran_id}")
+	List<MahasiswaModel> selectAllMahasiswabyFakultasatTahunAjaran(@Param("fakultas_id") int fakultas_id, @Param("tahun_ajaran_id") int tahun_ajaran_id);
+	
 	@Select("select nama_lengkap from user where username=#{username}")
 	String selectNamaLengkap(@Param("username") String username);
 	
