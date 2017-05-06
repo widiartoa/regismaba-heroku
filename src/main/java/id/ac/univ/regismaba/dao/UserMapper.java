@@ -16,4 +16,7 @@ public interface UserMapper {
 		@Result(property="email", column="email"),
 	})
 	UserModel selectUser(String username);
+	
+	@Select("SELECT * FROM staf S LEFT JOIN user U ON S.username=U.username WHERE nip=#{nip}")
+	UserModel selectUserStafbyNIP(String nip);
 }

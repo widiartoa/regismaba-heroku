@@ -18,4 +18,10 @@ public class UserServiceImplement implements UserService{
 		return userMapper.selectUser(username);
 	}
 
+	@Override
+	public UserModel selectUserStafbyNIP(String nip) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

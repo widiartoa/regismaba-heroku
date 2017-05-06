@@ -60,7 +60,11 @@ public class StafController
     @RequestMapping("/staf-verifikasi/daftar-mhs")
     public String daftarMhsVerifikator (Model model)
     {
+    	String usernameStaf = "anin.lia";
+    	String nipStaf = "0123456798";
+ 
     	//TODO: select mhs by fakultas
+    	
         List<MahasiswaModel> mahasiswas = mahasiswaDAO.selectAllMahasiswa ();
         model.addAttribute ("mahasiswas", mahasiswas);
         List<BiodataModel> biodatas = verifikasiIdmDAO.selectAllBiodata ();
@@ -102,7 +106,11 @@ public class StafController
     @RequestMapping("/staf-kesejahteraan/daftar-mhs")
     public String daftarMhsKesejahteraan (Model model)
     {
+    	String usernameStaf = "irsyadillah.nuralifa";
+    	String nipStaf = "0123546789";
+    
     	//TODO: select mhs by fakultas
+    	
         List<MahasiswaModel> mahasiswas = mahasiswaDAO.selectAllMahasiswa ();
         model.addAttribute ("mahasiswas", mahasiswas);
         List<PengajuanSkemaBiayaModel> pengajuans = pengajuanSkemaBiayaDAO
