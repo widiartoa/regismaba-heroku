@@ -25,9 +25,9 @@ public interface SkemaBiayaMapper {
 	@Results(@Result(property="tingkat_role", column="tingkat_role_id", javaType=TingkatRoleModel.class, one=@One(select="selectRole")))
 	List<SkemaBiayaModel> selectAllSBM();
 	
-	@Insert("insert into skema_pembayaran (jumlah_biaya_ipa, uang_pangkal_ipa, jumlah_biaya_ips, uang_pangkal_ips, "
-			+ "jumlah_biaya_ik, uang_pangkal_ik, created_by, created_at, updated_by, updated_at) values (#{jumlah_biaya_ipa}, #{uang_pangkal_ipa}, #{jumlah_biaya_ips}, "
-			+ "#{uang_pangkal_ips}, #{jumlah_biaya_ik}, #{uang_pangkal_ik}, #{created_by}, current_timestamp, #{created_by}, current_timestamp)")
+	@Insert("insert into skema_pembayaran (jumlah_biaya_ipa_min, jumlah_biaya_ipa_max, uang_pangkal_ipa_min, uang_pangkal_ipa_max, jumlah_biaya_ips_min, jumlah_biaya_ips_max, uang_pangkal_ips_min, uang_pangkal_ips_max, "
+			+ "jumlah_biaya_ik_min, jumlah_biaya_ik_max, uang_pangkal_ik_min, uang_pangkal_ik_max, created_by, created_at, updated_by, updated_at, tingkat_role_id) values (#{jumlah_biaya_ipa_min}, #{jumlah_biaya_ipa_max}, #{uang_pangkal_ipa_min}, #{uang_pangkal_ipa_max}, #{jumlah_biaya_ips_min}, #{jumlah_biaya_ips_max}, "
+			+ "#{uang_pangkal_ips_min}, #{uang_pangkal_ips_max}, #{jumlah_biaya_ik_min}, #{jumlah_biaya_ik_max}, #{uang_pangkal_ik_min}, #{uang_pangkal_ik_max}, #{created_by}, current_timestamp, #{created_by}, current_timestamp, #{tingkat_role.tingkat_role_id})")
 	void insertSBM(SkemaBiayaModel sbm);
 	
 	@Update("update skema_pembayaran set jumlah_biaya_ipa=#{jumlah_biaya_ipa}, uang_pangkal_ipa=#{uang_pangkal_ipa}, "

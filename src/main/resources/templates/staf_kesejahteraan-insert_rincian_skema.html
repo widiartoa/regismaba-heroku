@@ -122,14 +122,15 @@
 					<br/>
 					
 					<div class="form-group">
-						<label class="control-label col-sm-4" for="tingkat_role_id">Uang pangkal maksimal* : </label>
+						<label class="control-label col-sm-4" for="tingkat_role.tingkat_role_id">Tingkat staf* : </label>
 						<div class="input-group">
-							<select id="tingkat_role_id" name="tingkat_role_id">
-								<option th:each="role, iterationStatus: ${roles}" th:value="${role.tingkat_role_id}" th:text="${role.nama_tingkat}"></option>
+							<select id="tingkat_role.tingkat_role_id" name="tingkat_role.tingkat_role_id" class="form-control">
+								<option th:each="role, iterationStatus: ${roles}" th:value="${role.tingkat_role_id}" th:text="${role.nama_tingkat}"></option>							
 							</select>
 						</div>
 					</div>
 					
+					<br/>
 					<div>*wajib diisi</div>
 					<hr/>
 					
