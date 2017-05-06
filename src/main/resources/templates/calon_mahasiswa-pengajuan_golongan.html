@@ -22,34 +22,124 @@
 					<div th:switch="${rumpun.rumpun_id}">
 						<div th:case="'1'">
 							<div class="form-group">
-								<label class="control-label col-sm-4" for="golongan_id">Pilihan Golongan - Jumlah Biaya - Uang Pangkal Rumpun Saintek: </label>
-								<div class="input-group col-sm-8">
-									<select type="button" class="form-control" data-toggle="dropdown" name="golongan_id" id="golongan_id">
-										<option th:each="schema,iterationStatus: ${schemas}" th:value="${schema.golongan_id}" th:text="${schema.golongan_id + ' - Rp ' + schema.jumlah_biaya_ipa + ' - Rp ' + schema.uang_pangkal_ipa}"></option>
-									</select>
-								</div>
+								<h4>Golongan Pembayaran Rumpun Sains dan Teknologi</h4>
+								<br/>
+								<table class="table">
+									<thead>
+										<tr>
+											<td>
+												Golongan
+											</td>
+											<td>
+												Jumlah biaya semester minimal
+											</td>
+											<td>
+												Jumlah biaya semester maksimal
+											</td>
+											<td>
+												Uang pangkal minimal
+											</td>
+											<td>
+												Uang pangkal maksimal
+											</td>
+											<td>
+												Pilih
+											</td>
+										</tr>
+									</thead>
+									<tbody>
+										<tr th:each="schema,iterationStatus: ${schemas}">
+											<td th:text="${schema.golongan_id}"></td>
+											<td th:text="${schema.jumlah_biaya_ipa_min}"></td>
+											<td th:text="${schema.jumlah_biaya_ipa_max}"></td>
+											<td th:text="${schema.uang_pangkal_ipa_min}"></td>
+											<td th:text="${schema.uang_pangkal_ipa_max}"></td>
+											<td><input type="radio" name="golongan_id" id="golongan_id" th:value="${schema.golongan_id}"></input></td>
+										</tr>
+									</tbody>
+								</table>
 							</div>
 						</div>
 						
 						<div th:case="'2'">
 							<div class="form-group">
-								<label class="control-label col-sm-4" for="golongan_id">Pilihan Golongan - Jumlah Biaya - Uang Pangkal Rumpun Soshum: </label>
-								<div class="input-group col-sm-8">
-									<select type="button" class="form-control" data-toggle="dropdown" name="golongan_id" id="golongan_id">
-										<option th:each="schema,iterationStatus: ${schemas}" th:value="${schema.golongan_id}" th:text="${schema.golongan_id + ' - Rp ' + schema.jumlah_biaya_ips + ' - Rp ' + schema.uang_pangkal_ips}"></option>
-									</select>
-								</div>
+								<h4>Golongan Pembayaran Rumpun Sosial dan Humaniora</h4>
+								<br/>
+								<table class="table">
+									<thead>
+										<tr>
+											<td>
+												Golongan
+											</td>
+											<td>
+												Jumlah biaya semester minimal
+											</td>
+											<td>
+												Jumlah biaya semester maksimal
+											</td>
+											<td>
+												Uang pangkal minimal
+											</td>
+											<td>
+												Uang pangkal maksimal
+											</td>
+											<td>
+												Pilih
+											</td>
+										</tr>
+									</thead>
+									<tbody>
+										<tr th:each="schema,iterationStatus: ${schemas}">
+											<td th:text="${schema.golongan_id}"></td>
+											<td th:text="${schema.jumlah_biaya_ips_min}"></td>
+											<td th:text="${schema.jumlah_biaya_ips_max}"></td>
+											<td th:text="${schema.uang_pangkal_ips_min}"></td>
+											<td th:text="${schema.uang_pangkal_ips_max}"></td>
+											<td><input type="radio" name="golongan_id" id="golongan_id" th:value="${schema.golongan_id}"></input></td>
+										</tr>
+									</tbody>
+								</table>
 							</div>
 						</div>
 						
 						<div th:case="'3'">
 							<div class="form-group">
-								<label class="control-label col-sm-4" for="golongan_id">Pilihan Golongan - Jumlah Biaya - Uang Pangkal Rumpun Kesehatan: </label>
-								<div class="input-group col-sm-8">
-									<select type="button" class="form-control" data-toggle="dropdown" name="golongan_id" id="golongan_id">
-										<option th:each="schema,iterationStatus: ${schemas}" th:value="${schema.golongan_id}" th:text="${schema.golongan_id + ' - Rp ' + schema.jumlah_biaya_ik + ' - Rp ' + schema.uang_pangkal_ik}"></option>
-									</select>
-								</div>
+								<h4>Golongan Pembayaran Rumpun Ilmu Kesehatan</h4>
+								<br/>
+								<table class="table">
+									<thead>
+										<tr>
+											<td>
+												Golongan
+											</td>
+											<td>
+												Jumlah biaya semester minimal
+											</td>
+											<td>
+												Jumlah biaya semester maksimal
+											</td>
+											<td>
+												Uang pangkal minimal
+											</td>
+											<td>
+												Uang pangkal maksimal
+											</td>
+											<td>
+												Pilih
+											</td>
+										</tr>
+									</thead>
+									<tbody>
+										<tr th:each="schema,iterationStatus: ${schemas}">
+											<td th:text="${schema.golongan_id}"></td>
+											<td th:text="${schema.jumlah_biaya_ik_min}"></td>
+											<td th:text="${schema.jumlah_biaya_ik_max}"></td>
+											<td th:text="${schema.uang_pangkal_ik_min}"></td>
+											<td th:text="${schema.uang_pangkal_ik_max}"></td>
+											<td><input type="radio" name="golongan_id" id="golongan_id" th:value="${schema.golongan_id}"></input></td>
+										</tr>
+									</tbody>
+								</table>
 							</div>
 						</div>
 					</div>
@@ -61,7 +151,7 @@
 					</div>
 					
 					<div class="btn-group" role="group" aria-label="...">
-					  <a th:href="'/calon-mahasiswa/skema-pembayaran/golongan'"><button type="button" class="btn btn-default">Kembali</button></a>
+					  <a th:href="'/calon-mahasiswa/skema-pembayaran'"><button type="button" class="btn btn-default">Kembali</button></a>
 					</div>
 				</form>
 			</div>
@@ -70,10 +160,7 @@
 		<div class="footer">Modul Registrasi Mahasiswa Baru</div>
 		
 		<script type="text/javascript">
-			$(document).ready(function(){
-				$('#myTable').dataTable();
-			});
-			
+			/*<![CDATA[*/
 			$(function() {
 				// We can attach the `fileselect` event to all file inputs on the page
 				$(document).on('change', ':file', function() {
@@ -99,13 +186,28 @@
 				});
 			});
 			
-/* 			function validateForm() {
-			    var x = document.forms["skemaForm"]["foto_rumah"].value;
-			    if (x == "") {
-			        alert("Nilai gaji pribadi perlu dimasukkan");
+			function validateRadio (radios)
+			{
+			    for (i = 0; i < radios.length; ++ i)
+			    {
+			        if (radios[i].checked) return true;
+			    }
+			    return false;
+			}
+
+			function validateForm()
+			{
+			    if(validateRadio (document.forms["skemaForm"]["golongan_id"]))
+			    {
+			        return true;
+			    }
+			    else
+			    {
+			        alert('Mohon pilih salah satu golongan yang tersedia.');
 			        return false;
 			    }
-			} */
+			}
+			/*]]>*/
 		</script>
     </body>
 </html>
