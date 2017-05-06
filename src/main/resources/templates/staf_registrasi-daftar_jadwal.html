@@ -140,7 +140,7 @@
 							<td th:text="${jadwalRegis.waktu_akhir}">Waktu Akhir</td>
 							<td th:text="${jadwalRegis.kapasitas}">Kapasitas</td>
 							<td th:text="${jadwalRegis.fakultas}">Fakultas</td>
-							<td><a th:href="'#'" class="btn btn-danger"> <i
+							<td><a th:href="'/staf-registrasi/daftar-jadwal/'+ ${jadwalRegis.jadwal_registrasi_id} + '/hapus'" class="btn btn-danger"> <i
 									class="glyphicon glyphicon-remove"></i>
 							</a></td>
 						</tr>
