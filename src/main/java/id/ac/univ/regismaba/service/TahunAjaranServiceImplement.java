@@ -13,6 +13,8 @@ import lombok.extern.slf4j.Slf4j;
 public class TahunAjaranServiceImplement implements TahunAjaranService {
 	@Autowired
 	TahunAjaranMapper tahunAjaranMapper;
+	
+	@Autowired
 	TermMapper termMapper;
 
 	@Override
