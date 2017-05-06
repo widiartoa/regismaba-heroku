@@ -26,5 +26,6 @@ public class MahasiswaModel {
     Timestamp updated_at;
     String created_by;
     String updated_by;
+    int tahun_ajaran_id;
 	
 }
