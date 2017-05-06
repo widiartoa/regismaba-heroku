@@ -1,6 +1,5 @@
 package id.ac.univ.regismaba.controller;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,13 +12,18 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import id.ac.univ.regismaba.model.SkemaBiayaModel;
+import id.ac.univ.regismaba.model.TingkatRoleModel;
 import id.ac.univ.regismaba.service.SkemaBiayaService;
+import id.ac.univ.regismaba.service.TingkatRoleService;
 
 @Controller
 public class SkemaBiayaController {
 
 	@Autowired
 	SkemaBiayaService sbs;
+	
+	@Autowired
+	TingkatRoleService trs;
 	
 	@RequestMapping("/staf-kesejahteraan/skema-pembayaran/daftar")
 	public String viewAllRincianSkemaPembayaran(Model model)
@@ -32,8 +36,12 @@ public class SkemaBiayaController {
 	}
 	
 	@RequestMapping("/staf-kesejahteraan/skema-pembayaran/insert")
-	public String insertRincianSkemaPembayaran()
+	public String insertRincianSkemaPembayaran(Model model)
 	{
+		List<TingkatRoleModel> roles = trs.selectAllTRM();
+		
+		model.addAttribute("roles", roles);
+		
 		return "staf_kesejahteraan-insert_rincian_skema";
 	}
 	

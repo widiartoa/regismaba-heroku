@@ -24,5 +24,5 @@ public class SkemaBiayaModel
     String updated_by;
     Timestamp created_at;
     Timestamp updated_at;
-    int tingkat_role_id;
+    TingkatRoleModel tingkat_role;
 }

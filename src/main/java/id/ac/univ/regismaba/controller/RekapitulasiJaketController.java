@@ -32,20 +32,23 @@ public class RekapitulasiJaketController {
 		for(int i = 0; i < sizes.size(); i++)
 		{
 			RekapitulasiJaketModel size = rjs.selectRekapUkuran(sizes.get(i));
-			sizeAnalytics.add(size);
+			if(size!=null) { sizeAnalytics.add(size); }
 		}
 		
 		for(int i = 0; i < faculties.size(); i++)
 		{
 			RekapitulasiJaketModel faculty = rjs.selectRekapFakultas(faculties.get(i).getFakultas_id());
-			facultyAnalytics.add(faculty);
+			if(faculty!=null) { facultyAnalytics.add(faculty); }
 			
 			ArrayList<RekapitulasiJaketModel> faculti = rjs.selectUkuranOfFakultas(faculties.get(i).getFakultas_id());
-			CrossRekapJaketModel crjm = new CrossRekapJaketModel();
-			crjm.setFakultas_id(faculties.get(i).getFakultas_id());
-			crjm.setNama_fakultas(faculties.get(i).getNama_fakultas());
-			crjm.setRjm(faculti);
-			crossAnalytics.add(crjm);
+			if(faculti!=null)
+			{
+				CrossRekapJaketModel crjm = new CrossRekapJaketModel();
+				crjm.setFakultas_id(faculties.get(i).getFakultas_id());
+				crjm.setNama_fakultas(faculties.get(i).getNama_fakultas());
+				crjm.setRjm(faculti);
+				crossAnalytics.add(crjm);
+			}
 		}
 		
 		model.addAttribute("sizeAnalytics", sizeAnalytics);
