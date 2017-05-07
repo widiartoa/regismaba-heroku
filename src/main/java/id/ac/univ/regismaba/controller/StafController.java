@@ -150,12 +150,14 @@ public class StafController {
 	public String daftarMhsKesejahteraanSubmitVerifikasiPembayaran(Model model, @PathVariable(value = "npm") String npm,
 			@RequestParam(value = "status-pengajuan", required = true) String status_pengajuan,
 			@RequestParam(value = "ubah-golongan", required = true) int golongan_id,
+			@RequestParam(value = "ubah-uang", required = true) int uang,
 			@RequestParam(value = "komentar", required = true) String komentar) {
 		MahasiswaModel mahasiswa = mahasiswaDAO.selectMahasiswa(npm);
 		PengajuanSkemaBiayaModel psbm = pengajuanSkemaBiayaDAO.selectPSBMFromUsername(mahasiswa.getUsername());
 		if (psbm != null) {
 			psbm.setGolongan_id(golongan_id);
 			psbm.setStatus_pengajuan(status_pengajuan);
+			psbm.setUang_pangkal(uang);
 			psbm.setKomentar(komentar);
 			psbm.setUpdated_by(mahasiswa.getUsername()); // ntar update ke staff
 			pengajuanSkemaBiayaDAO.updatePengajuan(psbm);

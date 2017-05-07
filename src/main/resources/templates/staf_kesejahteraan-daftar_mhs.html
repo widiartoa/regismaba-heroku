@@ -200,8 +200,15 @@
 										</td>
 									</tr>
 									<tr>
-										<td style="width:25%">Uang Pangkal</td>
-										<td style="width:25%">Ubah Golongan Mahasiswa</td>
+										<td style="width:25%">Uang Pangkal yang diberikan</td>
+										<td th:switch="${rumpuns[pengajuanItr.index].rumpun_id}">
+											<input th:case="'1'" type="number" class="form-control" name="ubah-uang" id="ubah-uang" th:value="${pengajuan.uang_pangkal}"
+												th:min="${skemas[pengajuanItr.index].uang_pangkal_ipa_min}" th:max="${skemas[pengajuanItr.index].uang_pangkal_ipa_max}" />
+											<input th:case="'2'" type="number" class="form-control" name="ubah-uang" id="ubah-uang" th:value="${pengajuan.uang_pangkal}"
+												th:min="${skemas[pengajuanItr.index].uang_pangkal_ips_min}" th:max="${skemas[pengajuanItr.index].uang_pangkal_ips_max}" />
+											<input th:case="'3'" type="number" class="form-control" name="ubah-uang" id="ubah-uang" th:value="${pengajuan.uang_pangkal}"
+												th:min="${skemas[pengajuanItr.index].uang_pangkal_ik_min}" th:max="${skemas[pengajuanItr.index].uang_pangkal_ik_max}" />
+										</td>
 									</tr>
 									<tr>
 										<td style="width:25%">Komentar</td>
