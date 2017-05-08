@@ -2,10 +2,10 @@ package id.ac.univ.regismaba.dao;
 
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Result;
 import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import id.ac.univ.regismaba.model.IjazahModel;
 
@@ -35,5 +35,10 @@ public interface IjazahMapper
 		@Result(property="updated_at", column="updated_at"),
 	})
 	IjazahModel selectIjazahByUsername(String username);
+	
+    @Update("UPDATE ijazah SET nomor_ijazah=#{nomor_ijazah}, username=#{username}, institusi_id=#{institusi_id}, jenjang=#{jenjang},"
+    		+ "scan_ijazah=#{scan_ijazah}, scan_pernyataan_ijazah=#{scan_pernyataan_ijazah}, updated_by=#{updated_by},"
+    		+ "updated_at=#{updated_at} WHERE username=#{username}")
+    void updateIjazah(IjazahModel ijazah);
 	
 }

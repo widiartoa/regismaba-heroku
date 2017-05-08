@@ -5,6 +5,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Result;
 import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import id.ac.univ.regismaba.model.DataKesehatanModel;
 
@@ -34,5 +35,11 @@ public interface DataKesehatanMapper {
 		@Result(property="updated_at", column="updated_at"),
 	})
 	DataKesehatanModel selectDataKesehatanByUsername(String username);
+	
+	
+	@Update("UPDATE data_kesehatan SET data_kesehatan_id=#{data_kesehatan_id}, username=#{username},"
+			+ "form_survey_kesehatan=#{form_survey_kesehatan}, hasil_tes_kesehatan=#{hasil_tes_kesehatan},"
+			+ "updated_by=#{updated_by}, updated_at=#{updated_at} WHERE username=#{username}")
+	void updateDataKesehatan(DataKesehatanModel dataKesehatan);
 	
 }
