@@ -43,4 +43,11 @@ public class SkemaBiayaServiceImpl implements SkemaBiayaService {
 		log.info ("select all skema biaya");
 		return sbmd.selectAllSBM();
 	}
+
+	@Override
+	public List<SkemaBiayaModel> selectAllSBMByFacultyLevel() {
+		// TODO Auto-generated method stub
+		log.info ("select all skema biaya on faculty level");
+		return sbmd.selectAllSBMByFacultyLevel();
+	}
 }
