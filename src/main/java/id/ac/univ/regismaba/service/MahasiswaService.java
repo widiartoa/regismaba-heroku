@@ -13,6 +13,10 @@ public interface MahasiswaService {
 	MahasiswaModel loginMahasiswa (String username, String password);
 	
 	List<MahasiswaModel> selectAllMahasiswa();
+	
+	List<MahasiswaModel> selectAllMahasiswabyFakultas(int fakultas_id);
+	
+	List<MahasiswaModel> selectAllMahasiswabyFakultasatTahunAjaran(int fakultas_id);
 		
 	void insertBiodataMahasiswa(String npm, String biodata_id);
 	
