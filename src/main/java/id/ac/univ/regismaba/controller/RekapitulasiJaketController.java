@@ -38,11 +38,12 @@ public class RekapitulasiJaketController {
 		for(int i = 0; i < faculties.size(); i++)
 		{
 			RekapitulasiJaketModel faculty = rjs.selectRekapFakultas(faculties.get(i).getFakultas_id());
-			if(faculty!=null) { facultyAnalytics.add(faculty); }
 			
-			ArrayList<RekapitulasiJaketModel> faculti = rjs.selectUkuranOfFakultas(faculties.get(i).getFakultas_id());
-			if(faculti!=null)
-			{
+			if(faculty.getJumlah()!=0) { 
+				facultyAnalytics.add(faculty);
+				
+				ArrayList<RekapitulasiJaketModel> faculti = rjs.selectUkuranOfFakultas(faculties.get(i).getFakultas_id());
+				
 				CrossRekapJaketModel crjm = new CrossRekapJaketModel();
 				crjm.setFakultas_id(faculties.get(i).getFakultas_id());
 				crjm.setNama_fakultas(faculties.get(i).getNama_fakultas());
