@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+		<div th:replace="resources"></div>
+        <title>Alert!</title>
+    </head>
+	
+    <body>
+    	<div class="container">
+			<div class="content">
+				<div class="row">
+					<div class="col-sm-12"><h1>Perhatian</h1></div>
+					<div class="col-sm-12"><h3>Anda akan menghapus jadwal: <span th:text="${jadwalRegis.hari}+', '+${jadwalRegis.tanggal}+' '+${jadwalRegis.waktu_awal}+'-'+${jadwalRegis.waktu_akhir}"></span></h3></div>
+					<div class="col-sm-12"><h3>Apakah Anda yakin?</h3></div>
+				</div>
+				
+				<div class="btn-group" role="group" aria-label="...">
+					<a th:href="'/staf-registrasi/daftar-jadwal/'+ ${jadwalRegis.jadwal_registrasi_id} + '/hapus-konfirmasi'"><button type="button" class="btn btn-danger">Ya, Hapus Jadwal</button></a>
+					<a th:href="'/staf-registrasi/daftar-jadwal'"><button type="button" class="btn btn-default">Batalkan</button></a>
+				</div>
+			</div>
+       	</div>
+    </body>
+</html>
