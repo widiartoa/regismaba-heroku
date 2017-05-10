@@ -76,9 +76,10 @@
 			                     'height':300};
 			
 			      // Instantiate and draw our chart, passing in some options.
-				  var chart = new google.visualization.PieChart(document.getElementById('regFaculty'));
-			      chart.draw(data, options);
-			      console.log("chart");
+				  var chart1 = new google.visualization.PieChart(document.getElementById('regFaculty_pie'));
+				  var chart2 = new google.visualization.BarChart(document.getElementById('regFaculty_bar'));
+				  chart1.draw(data, options);
+				  chart2.draw(data, options);
 			    }
 
 			    function drawMajorChart() {
@@ -124,9 +125,10 @@
 			                     'height':300};
 			
 			      // Instantiate and draw our chart, passing in some options.
-				  var chart = new google.visualization.PieChart(document.getElementById('regMajor'));
-			      chart.draw(data, options);
-			      console.log("chart");
+				  var chart1 = new google.visualization.PieChart(document.getElementById('regMajor_pie'));
+				  var chart2 = new google.visualization.BarChart(document.getElementById('regMajor_bar'));
+			      chart1.draw(data, options);
+			      chart2.draw(data, options);
 			    }
 			    
 			    function drawLevelChart() {
@@ -172,9 +174,10 @@
 			                     'height':300};
 			
 			      // Instantiate and draw our chart, passing in some options.
-				  var chart = new google.visualization.PieChart(document.getElementById('regLevel'));
-			      chart.draw(data, options);
-			      console.log("chart");
+				  var chart1 = new google.visualization.PieChart(document.getElementById('regLevel_pie'));
+				  var chart2 = new google.visualization.BarChart(document.getElementById('regLevel_bar'));
+			      chart1.draw(data, options);
+			      chart2.draw(data, options);
 			    }
 			    
 			    function drawProgramChart() {
@@ -220,9 +223,10 @@
 			                     'height':300};
 			
 			      // Instantiate and draw our chart, passing in some options.
-				  var chart = new google.visualization.PieChart(document.getElementById('regProgram'));
-			      chart.draw(data, options);
-			      console.log("chart");
+				  var chart1 = new google.visualization.PieChart(document.getElementById('regProgram_pie'));
+				  var chart2 = new google.visualization.BarChart(document.getElementById('regProgram_bar'));
+			      chart1.draw(data, options);
+			      chart2.draw(data, options);
 			    }
 			    
 			    $('#modalCalon').on('show.bs.modal', function(e) {
@@ -258,7 +262,6 @@
 	<body>
 		<div th:include="staf_registrasi-navbar"></div>
 	
-		<div class="container">
 			<div class="content">
 				<div class="row">
 					<div class="col-sm-12">
@@ -275,33 +278,24 @@
 	    		<table>
 					<tbody>
 						<tr>
-							<td>	
-								<div>
-					    			<div th:id="'regFaculty'"></div>
-					    		</div>
-							</td>
-							<td>		
-					    		<div>
-					    			<div th:id="'regMajor'"></div>
-					    		</div>
-							</td>
+							<td th:id="'regFaculty_pie'"></td>
+							<td th:id="'regFaculty_bar'"></td>
 						</tr>
 						<tr>
-							<td>	
-					    		<div>
-					    			<div th:id="'regLevel'"></div>
-					    		</div>
-							</td>
-							<td>		
-					    		<div>
-					    			<div th:id="'regProgram'"></div>
-					    		</div>
-							</td>
+							<td th:id="'regMajor_pie'"></td>
+							<td th:id="'regMajor_bar'"></td>
+						</tr>
+						<tr>
+							<td th:id="'regLevel_pie'"></td>
+							<td th:id="'regLevel_bar'"></td>
+						</tr>
+						<tr>
+							<td th:id="'regProgram_pie'"></td>
+							<td th:id="'regProgram_bar'"></td>
 						</tr>
 					</tbody>
 				</table>
 			</div>
-		</div>
 	
 		<div class="footer">Modul Registrasi Mahasiswa Baru</div>
 		
