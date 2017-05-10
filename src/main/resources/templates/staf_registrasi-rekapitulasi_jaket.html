@@ -39,8 +39,10 @@
 		                     'height':300};
 		
 		      // Instantiate and draw our chart, passing in some options.
-		      var chart = new google.visualization.PieChart(document.getElementById('chart_div_1'));
-		      chart.draw(data, options);
+		      var chart1 = new google.visualization.PieChart(document.getElementById('chart_div_pie_1'));
+		      var chart2 = new google.visualization.BarChart(document.getElementById('chart_div_bar_1'));
+		      chart1.draw(data, options);
+		      chart2.draw(data, options);
 		    }
 		    
 		    function drawFacultyChart() {
@@ -62,9 +64,10 @@
 		                     'height':300};
 		
 		      // Instantiate and draw our chart, passing in some options.
-		      var chart = new google.visualization.PieChart(document.getElementById('chart_div_2'));
-		      chart.draw(data, options);
-		      console.log("chart");
+		      var chart1 = new google.visualization.PieChart(document.getElementById('chart_div_pie_2'));
+		      var chart2 = new google.visualization.BarChart(document.getElementById('chart_div_bar_2'));
+		      chart1.draw(data, options);
+		      chart2.draw(data, options);
 		    }
 		    
 		    function drawCrossChart() {
@@ -91,8 +94,10 @@
 			                     is3D: true};
 			
 			      // Instantiate and draw our chart, passing in some options.
-			      var chart = new google.visualization.PieChart(document.getElementById('cross_' + d[index].fakultas_id));
-			      chart.draw(data, options);
+			      var chart1 = new google.visualization.PieChart(document.getElementById('cross_pie_' + d[index].fakultas_id));
+			      var chart2 = new google.visualization.BarChart(document.getElementById('cross_bar_' + d[index].fakultas_id));
+			      chart1.draw(data, options);
+			      chart2.draw(data, options);
     		  }
 		    }
 	    /*]]>*/
@@ -102,7 +107,7 @@
 <body>
 	<div th:include="staf_registrasi-navbar"></div>
 
-	<div class="container">
+	
 		<div class="content">
 			<div class="row">
 				<div class="col-sm-12">
@@ -120,39 +125,47 @@
 				<tbody>
 					<tr>
 						<td>	
-    						<div id="chart_div_1"></div>
+    						<div id="chart_div_pie_1"></div>
 						</td>
 						<td>	
-    						<div id="chart_div_2"></div>
+    						<div id="chart_div_bar_1"></div>
 						</td>
-					</tr>
+					</tr>			
+					<tr>
+						<td>	
+    						<div id="chart_div_pie_2"></div>
+						</td>
+						<td>	
+    						<div id="chart_div_bar_2"></div>
+						</td>
+					</tr>					
 				</tbody>
 			</table>
 			
-			<div class="modal-body">
-				<div th:each="crossAnalytic,iterationStatus: ${crossAnalytics}" align="center">
-	    			<div th:id="'cross_' + ${crossAnalytic.fakultas_id}"></div>
-	    		</div>
-			</div>
 		</div>
-	</div>
+	
 
 	<div class="footer">Modul Registrasi Mahasiswa Baru</div>
 	
 	<div th:id="'modalOrder'" class="modal fade" role="dialog">
-			<div class="modal-dialog">
-				<div class="modal-content">
-					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal">&times;</button>
-						<h4 class="modal-title" th:text="'Statistik Pemesanan Jaket per Fakultas'"></h4>
-					</div>
-					<div class="modal-body">
-						<div th:each="crossAnalytic,iterationStatus: ${crossAnalytics}" align="center">
-			    			<div th:id="'cross_' + ${crossAnalytic.fakultas_id}"></div>
-			    		</div>
-					</div>
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title" th:text="'Statistik Pemesanan Jaket per Fakultas'"></h4>
+				</div>
+				<div class="modal-body">
+				<table>
+					<tbody>
+						<tr th:each="crossAnalytic,iterationStatus: ${crossAnalytics}">
+							<td th:id="'cross_pie_' + ${crossAnalytic.fakultas_id}"></td>
+							<td th:id="'cross_bar_' + ${crossAnalytic.fakultas_id}"></td>
+						</tr>
+					</tbody>
+				</table>
 				</div>
 			</div>
 		</div>
+	</div>
 </body>
 </html>
