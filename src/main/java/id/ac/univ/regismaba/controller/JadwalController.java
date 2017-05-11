@@ -104,6 +104,14 @@ public class JadwalController {
 	}
 
 	@RequestMapping("/staf-registrasi/daftar-jadwal/{jadwal_registrasi_id}/hapus")
+	public String reqDeleteJadwalRegis(Model model,
+			@PathVariable(value = "jadwal_registrasi_id") int jadwal_registrasi_id) {
+		JadwalRegisModel jadwalRegis = jadwalService.selectJadwalRegis(jadwal_registrasi_id);
+		model.addAttribute("jadwalRegis", jadwalRegis);
+		return "staf_registrasi-konfirmasi_hapus_jadwal";
+	}
+	
+	@RequestMapping("/staf-registrasi/daftar-jadwal/{jadwal_registrasi_id}/hapus-konfirmasi")
 	public String deleteJadwalRegis(Model model,
 			@PathVariable(value = "jadwal_registrasi_id") int jadwal_registrasi_id) {
 		jadwalService.deleteJadwalRegis(jadwal_registrasi_id);
