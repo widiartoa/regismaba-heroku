@@ -36,4 +36,10 @@ public interface StatistikManagerService {
 	StatistikManagerModel selectRegistranProgram(int program_id);
 
 	StatistikManagerSummaryModel summaryFaculty(int fakultas_id);
+	
+	StatistikManagerSummaryModel summaryMajor(int program_studi_id);
+	
+	StatistikManagerSummaryModel summaryLevel(int jenjang_id);
+	
+	StatistikManagerSummaryModel summaryProgram(int program_id);
 }

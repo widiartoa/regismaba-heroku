@@ -112,4 +112,25 @@ public class StatistikManagerServiceImpl implements StatistikManagerService{
 		return smm.summaryFaculty(fakultas_id);
 	}
 
+	@Override
+	public StatistikManagerSummaryModel summaryMajor(int program_studi_id) {
+		// TODO Auto-generated method stub
+		log.info ("select summary prodi with id {}", program_studi_id);
+		return smm.summaryMajor(program_studi_id);
+	}
+
+	@Override
+	public StatistikManagerSummaryModel summaryLevel(int jenjang_id) {
+		// TODO Auto-generated method stub
+		log.info ("select summary jenjang with id {}", jenjang_id);
+		return smm.summaryLevel(jenjang_id);
+	}
+
+	@Override
+	public StatistikManagerSummaryModel summaryProgram(int program_id) {
+		// TODO Auto-generated method stub
+		log.info ("select summary program with id {}", program_id);
+		return smm.summaryProgram(program_id);
+	}
+
 }

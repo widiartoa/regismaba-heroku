@@ -99,6 +99,11 @@ public interface StatistikManagerMapper {
 			+ "from jenjang where jenjang_id=#{jenjang_id}")
 	StatistikManagerSummaryModel summaryLevel(@Param("jenjang_id") int jenjang_id);
 	
-	@Select("")
+	@Select("select nama_program as nama, "
+			+ "(select count(*) from mahasiswa m, program_studi p, program r where m.program_studi_id=p.program_studi_id and p.program_id=r.program_id and r.program_id=#{program_id}) as total, "
+			+ "(select count(*) from mahasiswa m, program_studi p, program r, biodata b, pengajuan_skema_pembayaran s where m.program_studi_id=p.program_studi_id and m.username=b.username and m.username=s.username and p.program_id=r.program_id and r.program_id=#{program_id}) as regis, "
+			+ "((select count(*) from mahasiswa m, program_studi p, program r where m.program_studi_id=p.program_studi_id and p.program_id=r.program_id and r.program_id=#{program_id}) - "
+			+ "(select count(*) from mahasiswa m, program_studi p, program r, biodata b, pengajuan_skema_pembayaran s where m.program_studi_id=p.program_studi_id and m.username=b.username and m.username=s.username and p.program_id=r.program_id and r.program_id=#{program_id})) as non_regis "
+			+ "from program where program_id=#{program_id}")
 	StatistikManagerSummaryModel summaryProgram(@Param("program_id") int program_id);
 }
