@@ -125,9 +125,6 @@
 								<h4 th:text="'Kapasitas'">Kapasitas</h4>
 							</td>
 							<td>
-								<h4 th:text="'Fakultas'">Fakultas</h4>
-							</td>
-							<td>
 								<h4 th:text="'Hapus Jadwal'">Hapus Jadwal</h4>
 							</td>
 						</tr>
@@ -139,7 +136,6 @@
 							<td th:text="${jadwalRegis.waktu_awal}">Waktu Awal</td>
 							<td th:text="${jadwalRegis.waktu_akhir}">Waktu Akhir</td>
 							<td th:text="${jadwalRegis.kapasitas}">Kapasitas</td>
-							<td th:text="${jadwalRegis.fakultas}">Fakultas</td>
 							<td><a th:href="'/staf-registrasi/daftar-jadwal/'+ ${jadwalRegis.jadwal_registrasi_id} + '/hapus'" class="btn btn-danger"> <i
 									class="glyphicon glyphicon-remove"></i>
 							</a></td>

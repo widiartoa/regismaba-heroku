@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import id.ac.univ.regismaba.dao.MahasiswaMapper;
+import id.ac.univ.regismaba.model.AssignJadwalModel;
 import id.ac.univ.regismaba.model.BiodataModel;
 import id.ac.univ.regismaba.model.MahasiswaModel;
 import id.ac.univ.regismaba.model.ProgramStudiModel;
@@ -18,6 +19,9 @@ public class MahasiswaServiceImplement implements MahasiswaService{
 	
 	@Autowired
 	MahasiswaMapper mahasiswaMapper;
+	
+	@Autowired
+	AssignJadwalService assignJadwalService;
 	
 	@Autowired
 	TahunAjaranService tahunAjaranService;
@@ -153,6 +157,14 @@ public class MahasiswaServiceImplement implements MahasiswaService{
 		mahasiswa.setProgram(mahasiswaMapper.selectProgramMahasiswa(program_studi.getProgram_id()));
 		mahasiswa.setFakultas(mahasiswaMapper.selectFakultasMahasiswa(program_studi.getFakultas_id()));
 		mahasiswa.setJenjang(mahasiswaMapper.selectJenjangMahasiswa(program_studi.getJenjang_id()));
+		
+		//set jadwal
+		AssignJadwalModel jadwalmhs = assignJadwalService.selectAssignJadwal(mahasiswa.getNpm());
+		if (jadwalmhs != null){
+			mahasiswa.setJadwal_registrasi_id(jadwalmhs.getJadwal_registrasi_id());
+			mahasiswa.setJadwal_tes_kesehatan_id(jadwalmhs.getJadwal_tes_kesehatan_id());
+			mahasiswa.setJadwal_ept_id(jadwalmhs.getJadwal_ept_id());
+		}
 		return mahasiswa;
 	}
 }
