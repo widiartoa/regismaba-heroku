@@ -78,7 +78,6 @@
 			      // Instantiate and draw our chart, passing in some options.
 				  var chart1 = new google.visualization.PieChart(document.getElementById('regFaculty_pie'));
 				  var chart2 = new google.visualization.BarChart(document.getElementById('regFaculty_bar'));
-				  document.getElementById('regFaculty_total').innerHTML = "Total = " + total;
 				  chart1.draw(data, options);
 				  chart2.draw(data, options);
 			    }
@@ -269,79 +268,156 @@
 						<h3>Statistik Registrasi Mahasiswa Baru</h3>
 					</div>
 				</div>
+				 
+				<div class="tab">
+					<button class="tablinks" onclick="openJadwal(event, 'tabFakultas')" id="defaultOpen">
+						Fakultas
+					</button>
+					<button class="tablinks" onclick="openJadwal(event, 'tabProdi')">
+						Program Studi
+					</button>
+					<button class="tablinks" onclick="openJadwal(event, 'tabJenjang')">
+						Jenjang
+					</button>
+					<button class="tablinks" onclick="openJadwal(event, 'tabProgram')">
+						Program
+					</button>
+				</div>
 				
-				<hr/>
+				<div id="tabFakultas" class="tabcontent">
+					<div class="content-table">
+						<div class="row">
+							<h4>Statistik Registrasi - Fakultas</h4>
+							
+							<hr/>
+							
+							<table align="center">
+								<tbody>
+									<tr>
+										<td th:id="'regFaculty_pie'"></td>
+										<td th:id="'regFaculty_bar'"></td>
+									</tr>
+									<tr>
+										<td th:id="'faculty'"></td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
 				
-				<!--Div that will hold the pie chart-->
-	 			<a type="button" data-toggle="modal" th:attr="data-target='#modalCalon'" class="btn btn-warning">Data Fakultas</a>
-	 			<a type="button" data-toggle="modal" th:attr="data-target='#modalCalon'" class="btn btn-warning">Data Program Studi</a>
-	 			<a type="button" data-toggle="modal" th:attr="data-target='#modalCalon'" class="btn btn-warning">Data Fakultas</a>
-	 			<a type="button" data-toggle="modal" th:attr="data-target='#modalCalon'" class="btn btn-warning">Data Program Studi</a>
-	    		
-	    		<table>
-					<tbody>
-						<tr>
-							<td th:id="'regFaculty_pie'"></td>
-							<td th:id="'regFaculty_bar'"></td>
-							<td><h2 th:id="'regFaculty_total'"></h2></td>
-						</tr>
-						<tr>
-							<td th:id="'regMajor_pie'"></td>
-							<td th:id="'regMajor_bar'"></td>
-						</tr>
-						<tr>
-							<td th:id="'regLevel_pie'"></td>
-							<td th:id="'regLevel_bar'"></td>
-						</tr>
-						<tr>
-							<td th:id="'regProgram_pie'"></td>
-							<td th:id="'regProgram_bar'"></td>
-						</tr>
-					</tbody>
-				</table>
+				<div id="tabProdi" class="tabcontent">
+					<div class="content-table">
+						<div class="row">
+							<h4>Statistik Registrasi - Fakultas</h4>
+							
+							<hr/>
+							
+							<table>
+								<tbody>
+									<tr>
+										<td th:id="'regMajor_pie'"></td>
+										<td th:id="'regMajor_bar'"></td>
+									</tr>
+									<tr>
+										<td th:id="'major'"></td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+				
+				<div id="tabJenjang" class="tabcontent">
+					<div class="content-table">
+						<div class="row">
+							<h4>Statistik Registrasi - Fakultas</h4>
+							
+							<hr/>
+							
+							<table>
+								<tbody>
+									<tr>
+										<td th:id="'regLevel_pie'"></td>
+										<td th:id="'regLevel_bar'"></td>
+									</tr>
+									<tr>
+										<td th:id="'level'"></td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+				
+				<div id="tabProgram" class="tabcontent">
+					<div class="content-table">
+						<div class="row">
+							<h4>Statistik Registrasi - Fakultas</h4>
+							
+							<hr/>
+							
+							<table>
+								<tbody>
+									<tr>
+										<td th:id="'regProgram_pie'"></td>
+										<td th:id="'regProgram_bar'"></td>
+									</tr>
+									<tr>
+										<td th:id="'program'"></td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+				
 			</div>
 	
 		<div class="footer">Modul Registrasi Mahasiswa Baru</div>
-		
-		<div th:id="'modalCalon'" class="modal fade" role="dialog">
-			<div class="modal-dialog">
-				<div class="modal-content">
-					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal">&times;</button>
-						<h4 class="modal-title" th:text="'Statistik Calon Pendaftar Keseluruhan'"></h4>
-					</div>
-					<div class="modal-body">
-						<table>
-							<tbody>
-								<tr>
-									<td>	
-										<div>
-							    			<div th:id="'faculty'"></div>
-							    		</div>
-									</td>
-									<td>		
-							    		<div>
-							    			<div th:id="'major'"></div>
-							    		</div>
-									</td>
-								</tr>
-								<tr>
-									<td>	
-							    		<div>
-							    			<div th:id="'level'"></div>
-							    		</div>
-									</td>
-									<td>		
-							    		<div>
-							    			<div th:id="'program'"></div>
-							    		</div>
-									</td>
-								</tr>
-							</tbody>
-						</table>
-					</div>
-				</div>
-			</div>
-		</div>
 	</body>
+	
+	<script type="text/javascript">
+			$(document)
+			.ready(
+					function() {
+						$('.table').dataTable();
+						var i, tabcontent, tablinks;
+						tabcontent = document
+								.getElementsByClassName("tabcontent");
+						i = 0;
+						while (i != tabcontent.length) {
+							tabcontent[i].style.display = "none";
+							i++;
+						}
+						tablinks = document
+								.getElementsByClassName("tablinks");
+						i = 0;
+						while (i != tablinks.length) {
+							tablinks[i].className = tablinks[i].className
+									.replace(" active", "");
+							i++;
+						}
+						document.getElementById('tabFakultas').style.display = "block";
+						evt.currentTarget.className += " active";
+					});
+			function openJadwal(evt, jadwalName) {
+				var i, tabcontent, tablinks;
+				tabcontent = document.getElementsByClassName("tabcontent");
+				i = 0;
+				while (i != tabcontent.length) {
+					tabcontent[i].style.display = "none";
+					i++;
+				}
+				tablinks = document.getElementsByClassName("tablinks");
+				i = 0;
+				while (i != tablinks.length) {
+					tablinks[i].className = tablinks[i].className.replace(
+							" active", "");
+					i++;
+				}
+				document.getElementById(jadwalName).style.display = "block";
+				evt.currentTarget.className += " active";
+			}
+		</script>
 </html>
