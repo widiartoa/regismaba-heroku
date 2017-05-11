@@ -38,4 +38,8 @@ public interface SkemaBiayaMapper {
 	
 	@Select("select * from tingkat_role where tingkat_role_id=#{tingkat_role_id}")
 	TingkatRoleModel selectRole(@Param("tingkat_role_id") int tingkat_role_id);
+	
+	@Select("select * from skema_pembayaran where tingkat_role_id=2")
+	@Results(@Result(property="tingkat_role", column="tingkat_role_id", javaType=TingkatRoleModel.class, one=@One(select="selectRole")))
+	List<SkemaBiayaModel> selectAllSBMByFacultyLevel();
 }

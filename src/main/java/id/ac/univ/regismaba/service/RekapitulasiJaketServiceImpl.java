@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import id.ac.univ.regismaba.dao.RekapitulasiJaketMapper;
+import id.ac.univ.regismaba.model.CrossRekapJaketModel;
 import id.ac.univ.regismaba.model.FakultasModel;
 import id.ac.univ.regismaba.model.RekapitulasiJaketModel;
 import lombok.extern.slf4j.Slf4j;
@@ -51,5 +52,12 @@ public class RekapitulasiJaketServiceImpl implements RekapitulasiJaketService {
 		// TODO Auto-generated method stub
 		log.info ("select fakultas_id with id {}", fakultas_id);
 		return rjm.selectUkuranOfFakultas(fakultas_id);
+	}
+
+	@Override
+	public CrossRekapJaketModel selectUkuranOfFakultas2(int fakultas_id) {
+		// TODO Auto-generated method stub
+		log.info ("select fakultas_id with id {}", fakultas_id);
+		return rjm.selectUkuranOfFakultas2(fakultas_id);
 	}
 }
