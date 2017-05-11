@@ -7,6 +7,7 @@ import id.ac.univ.regismaba.model.JenjangModel;
 import id.ac.univ.regismaba.model.ProgramModel;
 import id.ac.univ.regismaba.model.ProgramStudiModel;
 import id.ac.univ.regismaba.model.StatistikManagerModel;
+import id.ac.univ.regismaba.model.StatistikManagerSummaryModel;
 
 public interface StatistikManagerService {
 
@@ -34,4 +35,5 @@ public interface StatistikManagerService {
 	
 	StatistikManagerModel selectRegistranProgram(int program_id);
 
+	StatistikManagerSummaryModel summaryFaculty(int fakultas_id);
 }

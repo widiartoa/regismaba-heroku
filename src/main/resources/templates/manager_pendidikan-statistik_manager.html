@@ -20,6 +20,8 @@
 			    google.charts.setOnLoadCallback(drawRegLevelChart);
 			    google.charts.setOnLoadCallback(drawRegProgramChart);
 			    
+			    google.charts.setOnLoadCallback(drawSumFacultyChart);
+			    
 			    var f = [[${faculties}]];
 			    var m = [[${majors}]];
 			    var l = [[${levels}]];
@@ -29,6 +31,8 @@
 			    var rm = [[${regMajors}]];
 			    var rl = [[${regLevels}]];
 			    var rp = [[${regPrograms}]];
+			    
+			    var sf = [[${sumFaculties}]];
 			
 			    // Callback that creates and populates a data table,
 			    // instantiates the pie chart, passes in the data and
@@ -47,7 +51,7 @@
 		    	  }
 			 	
 			      // Set chart options
-			      var options = {'title':'Pendaftar Fakultas (Total : ' + total + ')',
+			      var options = {'title':'Total Pendaftar (Total : ' + total + ')',
 			                     'width':500,
 			                     'height':300};
 			
@@ -71,7 +75,7 @@
 		    	  }
 			 	
 			      // Set chart options
-			      var options = {'title':'Registran Fakultas (Total : ' + total + ')',
+			      var options = {'title':'Pendaftar Ulang (Total : ' + total + ')',
 			                     'width':500,
 			                     'height':300};
 			
@@ -79,6 +83,31 @@
 				  var chart1 = new google.visualization.PieChart(document.getElementById('regFaculty_pie'));
 				  var chart2 = new google.visualization.BarChart(document.getElementById('regFaculty_bar'));
 				  chart1.draw(data, options);
+				  chart2.draw(data, options);
+			    }
+			    
+			    function drawSumFacultyChart() {
+			      // Create the data table.
+			      var data = new google.visualization.DataTable();
+			      
+			      data.addColumn('string', 'Fakultas');
+			      data.addColumn('number', 'Total Pendaftar');
+			      data.addColumn('number', 'Pendaftar Ulang');
+			      data.addColumn('number', 'Tidak Mendaftar');
+			      
+			      for(var i = 0; i < sf.length; i++)
+		    	  {
+			    	  data.addRow([sf[i].nama, sf[i].total, sf[i].regis, sf[i].non_regis]);
+			    	  //data.addRow(['lala', 1, 1, 1]);
+		    	  }
+			 	
+			      // Set chart options
+			      var options = {'title':'Registran Fakultas',
+			                     'width':500,
+			                     'height':300};
+			
+			      // Instantiate and draw our chart, passing in some options.
+				  var chart2 = new google.visualization.BarChart(document.getElementById('sumFaculty_bar'));
 				  chart2.draw(data, options);
 			    }
 
@@ -285,91 +314,76 @@
 				</div>
 				
 				<div id="tabFakultas" class="tabcontent">
-					<div class="content-table">
-						<div class="row">
-							<h4>Statistik Registrasi - Fakultas</h4>
-							
-							<hr/>
-							
-							<table align="center">
-								<tbody>
-									<tr>
-										<td th:id="'regFaculty_pie'"></td>
-										<td th:id="'regFaculty_bar'"></td>
-									</tr>
-									<tr>
-										<td th:id="'faculty'"></td>
-									</tr>
-								</tbody>
-							</table>
-						</div>
-					</div>
+					<h4>Statistik Registrasi - Fakultas</h4>
+					
+					<hr/>
+					
+					<table>
+						<tbody>
+							<tr>
+								<td th:id="'faculty'"></td>
+								<td th:id="'sumFaculty_bar'"></td>
+							</tr>
+							<tr>
+								<td th:id="'regFaculty_pie'"></td>
+								<td th:id="'regFaculty_bar'"></td>
+							</tr>
+						</tbody>
+					</table>
 				</div>
 				
 				<div id="tabProdi" class="tabcontent">
-					<div class="content-table">
-						<div class="row">
-							<h4>Statistik Registrasi - Fakultas</h4>
-							
-							<hr/>
-							
-							<table>
-								<tbody>
-									<tr>
-										<td th:id="'regMajor_pie'"></td>
-										<td th:id="'regMajor_bar'"></td>
-									</tr>
-									<tr>
-										<td th:id="'major'"></td>
-									</tr>
-								</tbody>
-							</table>
-						</div>
-					</div>
+					<h4>Statistik Registrasi - Program Studi</h4>
+					
+					<hr/>
+					
+					<table>
+						<tbody>
+							<tr>
+								<td th:id="'major'"></td>
+							</tr>
+							<tr>
+								<td th:id="'regMajor_pie'"></td>
+								<td th:id="'regMajor_bar'"></td>
+							</tr>
+						</tbody>
+					</table>
 				</div>
 				
 				<div id="tabJenjang" class="tabcontent">
-					<div class="content-table">
-						<div class="row">
-							<h4>Statistik Registrasi - Fakultas</h4>
-							
-							<hr/>
-							
-							<table>
-								<tbody>
-									<tr>
-										<td th:id="'regLevel_pie'"></td>
-										<td th:id="'regLevel_bar'"></td>
-									</tr>
-									<tr>
-										<td th:id="'level'"></td>
-									</tr>
-								</tbody>
-							</table>
-						</div>
-					</div>
+					<h4>Statistik Registrasi - Jenjang</h4>
+					
+					<hr/>
+					
+					<table>
+						<tbody>
+							<tr>
+								<td th:id="'level'"></td>
+							</tr>
+							<tr>
+								<td th:id="'regLevel_pie'"></td>
+								<td th:id="'regLevel_bar'"></td>
+							</tr>
+						</tbody>
+					</table>
 				</div>
 				
 				<div id="tabProgram" class="tabcontent">
-					<div class="content-table">
-						<div class="row">
-							<h4>Statistik Registrasi - Fakultas</h4>
-							
-							<hr/>
-							
-							<table>
-								<tbody>
-									<tr>
-										<td th:id="'regProgram_pie'"></td>
-										<td th:id="'regProgram_bar'"></td>
-									</tr>
-									<tr>
-										<td th:id="'program'"></td>
-									</tr>
-								</tbody>
-							</table>
-						</div>
-					</div>
+					<h4>Statistik Registrasi - Program</h4>
+					
+					<hr/>
+					
+					<table>
+						<tbody>
+							<tr>
+								<td th:id="'program'"></td>
+							</tr>
+							<tr>
+								<td th:id="'regProgram_pie'"></td>
+								<td th:id="'regProgram_bar'"></td>
+							</tr>
+						</tbody>
+					</table>
 				</div>
 				
 			</div>
@@ -381,17 +395,14 @@
 			$(document)
 			.ready(
 					function() {
-						$('.table').dataTable();
 						var i, tabcontent, tablinks;
-						tabcontent = document
-								.getElementsByClassName("tabcontent");
+						tabcontent = document.getElementsByClassName("tabcontent");
 						i = 0;
 						while (i != tabcontent.length) {
 							tabcontent[i].style.display = "none";
 							i++;
 						}
-						tablinks = document
-								.getElementsByClassName("tablinks");
+						tablinks = document.getElementsByClassName("tablinks");
 						i = 0;
 						while (i != tablinks.length) {
 							tablinks[i].className = tablinks[i].className
@@ -399,6 +410,9 @@
 							i++;
 						}
 						document.getElementById('tabFakultas').style.display = "block";
+						document.getElementById('tabProdi').style.display = "block";
+						document.getElementById('tabJenjang').style.display = "block";
+						document.getElementById('tabProgram').style.display = "block";
 						evt.currentTarget.className += " active";
 					});
 			function openJadwal(evt, jadwalName) {

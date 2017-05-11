@@ -13,6 +13,7 @@ import id.ac.univ.regismaba.model.JenjangModel;
 import id.ac.univ.regismaba.model.ProgramModel;
 import id.ac.univ.regismaba.model.ProgramStudiModel;
 import id.ac.univ.regismaba.model.StatistikManagerModel;
+import id.ac.univ.regismaba.model.StatistikManagerSummaryModel;
 import id.ac.univ.regismaba.service.StatistikManagerService;
 
 @Controller
@@ -39,6 +40,8 @@ public class StatistikManagerController {
 		ArrayList<StatistikManagerModel> regLevels = new ArrayList<StatistikManagerModel>();
 		ArrayList<StatistikManagerModel> regPrograms = new ArrayList<StatistikManagerModel>();
 		
+		ArrayList<StatistikManagerSummaryModel> sumFaculties = new ArrayList<StatistikManagerSummaryModel>();
+		
 		for(int i=0; i < f.size(); i++)
 		{
 			StatistikManagerModel faculty = sms.selectPemilihFakultas(f.get(i).getFakultas_id());
@@ -46,6 +49,9 @@ public class StatistikManagerController {
 			
 			StatistikManagerModel faculty2 = sms.selectRegistranFakultas(f.get(i).getFakultas_id());
 			if(faculty2 != null) { regFaculties.add(faculty2); }
+			
+			StatistikManagerSummaryModel faculty3 = sms.summaryFaculty(f.get(i).getFakultas_id());
+			if(faculty3 != null) { sumFaculties.add(faculty3); }
 		}
 		
 		for(int i=0; i < m.size(); i++)
@@ -85,9 +91,9 @@ public class StatistikManagerController {
 		model.addAttribute("regLevels", regLevels);
 		model.addAttribute("regPrograms", regPrograms);
 		
-		System.out.println(regPrograms);
-		System.out.println(regMajors);
-		System.out.println(regLevels);
+		model.addAttribute("sumFaculties", sumFaculties);
+		System.out.println(regFaculties);
+		System.out.println(sumFaculties);
 		
 		return "manager_pendidikan-statistik_manager";
 	}

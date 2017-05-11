@@ -11,6 +11,7 @@ import id.ac.univ.regismaba.model.JenjangModel;
 import id.ac.univ.regismaba.model.ProgramModel;
 import id.ac.univ.regismaba.model.ProgramStudiModel;
 import id.ac.univ.regismaba.model.StatistikManagerModel;
+import id.ac.univ.regismaba.model.StatistikManagerSummaryModel;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -102,6 +103,13 @@ public class StatistikManagerServiceImpl implements StatistikManagerService{
 		// TODO Auto-generated method stub
 		log.info ("select registran program with id {}", program_id);
 		return smm.selectRegistranProgram(program_id);
+	}
+
+	@Override
+	public StatistikManagerSummaryModel summaryFaculty(int fakultas_id) {
+		// TODO Auto-generated method stub
+		log.info ("select summary fakultas with id {}", fakultas_id);
+		return smm.summaryFaculty(fakultas_id);
 	}
 
 }
