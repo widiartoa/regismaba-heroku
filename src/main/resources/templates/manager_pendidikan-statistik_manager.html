@@ -78,6 +78,7 @@
 			      // Instantiate and draw our chart, passing in some options.
 				  var chart1 = new google.visualization.PieChart(document.getElementById('regFaculty_pie'));
 				  var chart2 = new google.visualization.BarChart(document.getElementById('regFaculty_bar'));
+				  document.getElementById('regFaculty_total').innerHTML = "Total = " + total;
 				  chart1.draw(data, options);
 				  chart2.draw(data, options);
 			    }
@@ -272,14 +273,17 @@
 				<hr/>
 				
 				<!--Div that will hold the pie chart-->
-	 			<a type="button" data-toggle="modal" th:attr="data-target='#modalCalon'" class="btn btn-warning">Statistik Calon Pendaftar Keseluruhan</a>
-	 			<a type="button" data-toggle="modal" th:attr="data-target='#modalCalon'" class="btn btn-warning">Statistik Pendaftar</a>
+	 			<a type="button" data-toggle="modal" th:attr="data-target='#modalCalon'" class="btn btn-warning">Data Fakultas</a>
+	 			<a type="button" data-toggle="modal" th:attr="data-target='#modalCalon'" class="btn btn-warning">Data Program Studi</a>
+	 			<a type="button" data-toggle="modal" th:attr="data-target='#modalCalon'" class="btn btn-warning">Data Fakultas</a>
+	 			<a type="button" data-toggle="modal" th:attr="data-target='#modalCalon'" class="btn btn-warning">Data Program Studi</a>
 	    		
 	    		<table>
 					<tbody>
 						<tr>
 							<td th:id="'regFaculty_pie'"></td>
 							<td th:id="'regFaculty_bar'"></td>
+							<td><h2 th:id="'regFaculty_total'"></h2></td>
 						</tr>
 						<tr>
 							<td th:id="'regMajor_pie'"></td>

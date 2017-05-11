@@ -7,7 +7,14 @@ import lombok.Data;
 @Data
 public class CrossRekapJaketModel {
 
-	int fakultas_id;
+//	int fakultas_id;
+//	String nama_fakultas;
+//	ArrayList<RekapitulasiJaketModel> rjm;
+	
 	String nama_fakultas;
-	ArrayList<RekapitulasiJaketModel> rjm;
+	int ukuran_s;
+	int ukuran_m;
+	int ukuran_l;
+	int ukuran_xl;
+	int ukuran_xxl;
 }

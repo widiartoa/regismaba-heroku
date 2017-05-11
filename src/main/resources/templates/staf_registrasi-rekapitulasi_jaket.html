@@ -12,7 +12,8 @@
 		    // Set a callback to run when the Google Visualization API is loaded.
 		    google.charts.setOnLoadCallback(drawSizeChart);
 		    google.charts.setOnLoadCallback(drawFacultyChart);
-		    google.charts.setOnLoadCallback(drawCrossChart);
+		    //google.charts.setOnLoadCallback(drawCrossChart);
+		    google.charts.setOnLoadCallback(drawCrossChart2);
 		    var d = [[${crossAnalytics}]];
 		    var s = [[${sizeAnalytics}]];
 		    var f = [[${facultyAnalytics}]];
@@ -70,7 +71,7 @@
 		      chart2.draw(data, options);
 		    }
 		    
-		    function drawCrossChart() {
+		    /* function drawCrossChart() {
 	    	  for(var index=0; index < d.length; index++)
     		  {
 			      var cross = d[index].rjm;
@@ -98,7 +99,39 @@
 			      var chart2 = new google.visualization.BarChart(document.getElementById('cross_bar_' + d[index].fakultas_id));
 			      chart1.draw(data, options);
 			      chart2.draw(data, options);
-    		  }
+    		  } */
+	    	  
+	    	  function drawCrossChart2() {
+	    		  
+			      var data = new google.visualization.DataTable();
+			      
+			   	  // Create the data table.
+			      data.addColumn('string', 'Nama Fakultas');
+			      data.addColumn('number', 'S');
+			      data.addColumn('number', 'M');
+			      data.addColumn('number', 'L');
+			      data.addColumn('number', 'XL');
+			      data.addColumn('number', 'XXL');
+			      
+		    	  for(var index=0; index < d.length; index++)
+	    		  {
+				      data.addRow([d[index].nama_fakultas, 
+				                   d[index].ukuran_s, 
+				                   d[index].ukuran_m,
+				                   d[index].ukuran_l,
+				                   d[index].ukuran_xl,
+				                   d[index].ukuran_xxl]);
+	    		  }
+		    	  
+		    	  // Set chart options
+			      var options = {'title':'Data Pemesanan Ukuran per Fakultas',
+			                     'width': 800,
+			                     'height':300,
+			                     is3D: true};
+			
+			      // Instantiate and draw our chart, passing in some options.
+			      var chart = new google.visualization.BarChart(document.getElementById('cross_bar'));
+			      chart.draw(data, options);
 		    }
 	    /*]]>*/
     </script>
@@ -118,10 +151,12 @@
 			<hr/>
 			
 			<!--Div that will hold the pie chart-->
+			<!-- 
 			<a type="button" data-toggle="modal" th:attr="data-target='#modalOrder'" class="btn btn-warning">Statistik Pemesanan Jaket per Fakultas</a>
+			 -->
 			<br/>
 			<br/>
-			<table>
+			<table align="center">
 				<tbody>
 					<tr>
 						<td>	
@@ -142,12 +177,13 @@
 				</tbody>
 			</table>
 			
+			<div id="cross_bar" align="center"></div>
 		</div>
 	
 
 	<div class="footer">Modul Registrasi Mahasiswa Baru</div>
 	
-	<div th:id="'modalOrder'" class="modal fade" role="dialog">
+<!-- 	<div th:id="'modalOrder'" class="modal fade" role="dialog">
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
@@ -166,6 +202,19 @@
 				</div>
 			</div>
 		</div>
-	</div>
+	</div> -->
+	
+<!-- 	<div th:id="'modalOrder'" class="modal fade" role="dialog">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title" th:text="'Statistik Pemesanan Jaket per Fakultas'"></h4>
+				</div>
+					<div id="cross_bar" align="center"></div>
+				
+			</div>
+		</div>
+	</div> -->
 </body>
 </html>
