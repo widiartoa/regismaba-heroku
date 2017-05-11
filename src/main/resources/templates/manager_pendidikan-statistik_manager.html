@@ -9,6 +9,22 @@
 				// Load the Visualization API and the corechart package.
 			    google.charts.load('current', {'packages':['corechart']});
 			
+		    	
+			    var f = [[${faculties}]];
+			    var m = [[${majors}]];
+			    var l = [[${levels}]];
+			    var p = [[${programs}]];
+			    
+			    var rf = [[${regFaculties}]];
+			    var rm = [[${regMajors}]];
+			    var rl = [[${regLevels}]];
+			    var rp = [[${regPrograms}]];
+			    
+			    var sf = [[${sumFaculties}]];
+			    var sm = [[${sumMajors}]];
+			    var sl = [[${sumLevels}]];
+			    var sp = [[${sumPrograms}]];
+			    
 			    // Set a callback to run when the Google Visualization API is loaded.
 			    google.charts.setOnLoadCallback(drawFacultyChart);
 			    google.charts.setOnLoadCallback(drawMajorChart);
@@ -21,18 +37,11 @@
 			    google.charts.setOnLoadCallback(drawRegProgramChart);
 			    
 			    google.charts.setOnLoadCallback(drawSumFacultyChart);
+			    google.charts.setOnLoadCallback(drawSumMajorChart);
+			    google.charts.setOnLoadCallback(drawSumLevelChart);
+			    google.charts.setOnLoadCallback(drawSumProgramChart);
 			    
-			    var f = [[${faculties}]];
-			    var m = [[${majors}]];
-			    var l = [[${levels}]];
-			    var p = [[${programs}]];
-			    
-			    var rf = [[${regFaculties}]];
-			    var rm = [[${regMajors}]];
-			    var rl = [[${regLevels}]];
-			    var rp = [[${regPrograms}]];
-			    
-			    var sf = [[${sumFaculties}]];
+			
 			
 			    // Callback that creates and populates a data table,
 			    // instantiates the pie chart, passes in the data and
@@ -83,31 +92,6 @@
 				  var chart1 = new google.visualization.PieChart(document.getElementById('regFaculty_pie'));
 				  var chart2 = new google.visualization.BarChart(document.getElementById('regFaculty_bar'));
 				  chart1.draw(data, options);
-				  chart2.draw(data, options);
-			    }
-			    
-			    function drawSumFacultyChart() {
-			      // Create the data table.
-			      var data = new google.visualization.DataTable();
-			      
-			      data.addColumn('string', 'Fakultas');
-			      data.addColumn('number', 'Total Pendaftar');
-			      data.addColumn('number', 'Pendaftar Ulang');
-			      data.addColumn('number', 'Tidak Mendaftar');
-			      
-			      for(var i = 0; i < sf.length; i++)
-		    	  {
-			    	  data.addRow([sf[i].nama, sf[i].total, sf[i].regis, sf[i].non_regis]);
-			    	  //data.addRow(['lala', 1, 1, 1]);
-		    	  }
-			 	
-			      // Set chart options
-			      var options = {'title':'Registran Fakultas',
-			                     'width':500,
-			                     'height':300};
-			
-			      // Instantiate and draw our chart, passing in some options.
-				  var chart2 = new google.visualization.BarChart(document.getElementById('sumFaculty_bar'));
 				  chart2.draw(data, options);
 			    }
 
@@ -258,33 +242,102 @@
 			      chart2.draw(data, options);
 			    }
 			    
-			    $('#modalCalon').on('show.bs.modal', function(e) {
-
-			        setTimeout(
-			        function() 
-			        {
-			        	drawFacultyChart();
-			        }, 500);
-			        
-			        setTimeout(
-			        function() 
-			        {
-			        	drawMajorChart();
-			        }, 500);
-			        
-			        setTimeout(
-			        function() 
-			        {
-			        	drawLevelChart();
-			        }, 500);
-			        
-			        setTimeout(
-			        function() 
-			        {
-			        	drawProgramChart();
-			        }, 500);		        
-
-			    })
+			    function drawSumFacultyChart() {
+			      // Create the data table.
+			      var data = new google.visualization.DataTable();
+			      
+			      data.addColumn('string', 'Fakultas');
+			      data.addColumn('number', 'Total Pendaftar');
+			      data.addColumn('number', 'Pendaftar Ulang');
+			      data.addColumn('number', 'Tidak Mendaftar');
+			      
+			      for(var i = 0; i < sf.length; i++)
+		    	  {
+			    	  data.addRow([sf[i].nama, sf[i].total, sf[i].regis, sf[i].non_regis]);
+		    	  }
+			 	
+			      // Set chart options
+			      var options = {'title':'Rincian Data Fakultas',
+			                     'width':500,
+			                     'height':300};
+			
+			      // Instantiate and draw our chart, passing in some options.
+				  var chart2 = new google.visualization.BarChart(document.getElementById('sumFaculty_bar'));
+				  chart2.draw(data, options);
+			    }
+			    
+			    function drawSumMajorChart() {
+			      // Create the data table.
+			      var data = new google.visualization.DataTable();
+			      
+			      data.addColumn('string', 'Program Studi');
+			      data.addColumn('number', 'Total Pendaftar');
+			      data.addColumn('number', 'Pendaftar Ulang');
+			      data.addColumn('number', 'Tidak Mendaftar');
+			      
+			      for(var i = 0; i < sm.length; i++)
+		    	  {
+			    	  data.addRow([sm[i].nama, sm[i].total, sm[i].regis, sm[i].non_regis]);
+		    	  }
+			 	
+			      // Set chart options
+			      var options = {'title':'Rincian Data Program Studi',
+			                     'width':500,
+			                     'height':300};
+			
+			      // Instantiate and draw our chart, passing in some options.
+				  var chart2 = new google.visualization.BarChart(document.getElementById('sumMajor_bar'));
+				  chart2.draw(data, options);
+			    }
+			    
+			    function drawSumLevelChart() {
+				      // Create the data table.
+				      var data = new google.visualization.DataTable();
+				      
+				      data.addColumn('string', 'Jenjang');
+				      data.addColumn('number', 'Total Pendaftar');
+				      data.addColumn('number', 'Pendaftar Ulang');
+				      data.addColumn('number', 'Tidak Mendaftar');
+				      
+				      for(var i = 0; i < sl.length; i++)
+			    	  {
+				    	  data.addRow([sl[i].nama, sl[i].total, sl[i].regis, sl[i].non_regis]);
+			    	  }
+				 	
+				      // Set chart options
+				      var options = {'title':'Rincian Data Jenjang',
+				                     'width':500,
+				                     'height':300};
+				
+				      // Instantiate and draw our chart, passing in some options.
+					  var chart2 = new google.visualization.BarChart(document.getElementById('sumLevel_bar'));
+					  chart2.draw(data, options);
+				    }
+			    
+			    function drawSumProgramChart() {
+				      // Create the data table.
+				      var data = new google.visualization.DataTable();
+				      
+				      data.addColumn('string', 'Program');
+				      data.addColumn('number', 'Total Pendaftar');
+				      data.addColumn('number', 'Pendaftar Ulang');
+				      data.addColumn('number', 'Tidak Mendaftar');
+				      
+				      for(var i = 0; i < sp.length; i++)
+			    	  {
+				    	  data.addRow([sp[i].nama, sp[i].total, sp[i].regis, sp[i].non_regis]);
+				    	  //data.addRow(['lala', 1, 1, 1]);
+			    	  }
+				 	
+				      // Set chart options
+				      var options = {'title':'Registran Data Program',
+				                     'width':500,
+				                     'height':300};
+				
+				      // Instantiate and draw our chart, passing in some options.
+					  var chart2 = new google.visualization.BarChart(document.getElementById('sumProgram_bar'));
+					  chart2.draw(data, options);
+				    }
 		    /*]]>*/
 	    </script>
 	</head>
@@ -321,8 +374,8 @@
 					<table>
 						<tbody>
 							<tr>
-								<td th:id="'faculty'"></td>
 								<td th:id="'sumFaculty_bar'"></td>
+								<td th:id="'faculty'"></td>
 							</tr>
 							<tr>
 								<td th:id="'regFaculty_pie'"></td>
@@ -340,6 +393,7 @@
 					<table>
 						<tbody>
 							<tr>
+								<td th:id="'sumMajor_bar'"></td>
 								<td th:id="'major'"></td>
 							</tr>
 							<tr>
@@ -358,6 +412,7 @@
 					<table>
 						<tbody>
 							<tr>
+								<td th:id="'sumLevel_bar'"></td>
 								<td th:id="'level'"></td>
 							</tr>
 							<tr>
@@ -376,6 +431,7 @@
 					<table>
 						<tbody>
 							<tr>
+								<td th:id="'sumProgram_bar'"></td>
 								<td th:id="'program'"></td>
 							</tr>
 							<tr>
