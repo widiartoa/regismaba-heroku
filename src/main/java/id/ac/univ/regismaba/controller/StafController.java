@@ -23,6 +23,7 @@ import id.ac.univ.regismaba.model.RumpunModel;
 import id.ac.univ.regismaba.model.SkemaBiayaModel;
 import id.ac.univ.regismaba.model.UserModel;
 import id.ac.univ.regismaba.service.AlamatService;
+import id.ac.univ.regismaba.service.DataKesehatanService;
 import id.ac.univ.regismaba.service.MahasiswaService;
 import id.ac.univ.regismaba.service.PengajuanSkemaBiayaService;
 import id.ac.univ.regismaba.service.RumpunService;
@@ -102,8 +103,22 @@ public class StafController {
 
 	@RequestMapping("/staf-kesehatan/daftar-mhs")
 	public String daftarMhsKesehatan(Model model) {
-		List<MahasiswaModel> mahasiswas = mahasiswaDAO.selectAllMahasiswa();
+	        String usernameStaf = "wilson.mokoginta";
+                String nipStaf = "0132456789";
+
+                UserModel staf = userDAO.selectUserStafbyNIP(nipStaf);
+                
+                // select mhs by fakultas
+                List<MahasiswaModel> mahasiswas;
+                
+                if (staf.getTingkat_role().getTingkat_role_id() == 1) {
+                        mahasiswas = mahasiswaDAO.selectAllMahasiswa();
+                } else {
+                        mahasiswas = mahasiswaDAO.selectAllMahasiswabyFakultasatTahunAjaran(staf.getRole().getFakultas_id());
+                }
 		model.addAttribute("mahasiswas", mahasiswas);
+		List<DataKesehatanModel> dataKess = verifikasiIdmDAO.selectAllDataKesehatan();
+                model.addAttribute("dataKess", dataKess);
 		return "staf_kesehatan-daftar_mhs";
 	}
 
