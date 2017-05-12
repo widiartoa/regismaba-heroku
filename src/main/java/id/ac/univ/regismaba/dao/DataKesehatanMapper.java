@@ -1,5 +1,7 @@
 package id.ac.univ.regismaba.dao;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Result;
@@ -35,4 +37,15 @@ public interface DataKesehatanMapper {
 	})
 	DataKesehatanModel selectDataKesehatanByUsername(String username);
 	
+	@Select("select * from data_kesehatan")
+	@Results(value = {
+	        @Result(property="data_kesehatan_id", column="data_kesehatan_id"),
+	        @Result(property="form_survey_kesehatan", column="form_survey_kesehatan"),
+                @Result(property="hasil_tes_kesehatan", column="hasil_tes_kesehatan"),
+                @Result(property="created_by", column="created_by"),
+                @Result(property="created_at", column="created_at"),
+                @Result(property="updated_by", column="updated_by"),
+                @Result(property="updated_at", column="updated_at"),
+	})
+	List<DataKesehatanModel> selectAllDataKesehatan();
 }
