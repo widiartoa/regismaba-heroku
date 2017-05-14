@@ -30,14 +30,38 @@ public class JadwalServiceImplement implements JadwalService {
 	public JadwalEptModel selectJadwalEpt(int jadwal_ept_id) {
 		// TODO Auto-generated method stub
 		log.info("select jadwal ept with id {}", jadwal_ept_id);
-		return jadwalMapper.selectJadwalEpt(jadwal_ept_id);
+		JadwalEptModel jadwalEpt = jadwalMapper.selectJadwalEpt(jadwal_ept_id);
+		
+		String hariEpt = this.parseHariEpt(jadwalEpt);
+		String waktuEpt = this.parseWaktuEpt(jadwalEpt);
+		String timestampAwalEpt = this.parseTimestampAwalEpt(jadwalEpt);
+		String timestampAkhirEpt = this.parseTimestampAkhirEpt(jadwalEpt);
+
+		jadwalEpt.setHari(hariEpt);
+		jadwalEpt.setTanggal(waktuEpt);
+		jadwalEpt.setWaktu_awal(timestampAwalEpt);
+		jadwalEpt.setWaktu_akhir(timestampAkhirEpt);
+		
+		return jadwalEpt;
 	}
 
 	@Override
 	public JadwalKesehatanModel selectJadwalKesehatan(int jadwal_tes_kesehatan_id) {
 		// TODO Auto-generated method stub
 		log.info("select jadwal tes kesehatan with id {}", jadwal_tes_kesehatan_id);
-		return jadwalMapper.selectJadwalKesehatan(jadwal_tes_kesehatan_id);
+		JadwalKesehatanModel jadwalTesKes = jadwalMapper.selectJadwalKesehatan(jadwal_tes_kesehatan_id);
+		
+		String hariTesKes = this.parseHariTesKes(jadwalTesKes);
+		String waktuTesKes = this.parseWaktuTesKes(jadwalTesKes);
+		String timestampAwalTesKes = this.parseTimestampAwalTesKes(jadwalTesKes);
+		String timestampAkhirTesKes = this.parseTimestampAkhirTesKes(jadwalTesKes);
+
+		jadwalTesKes.setHari(hariTesKes);
+		jadwalTesKes.setTanggal(waktuTesKes);
+		jadwalTesKes.setWaktu_awal(timestampAwalTesKes);
+		jadwalTesKes.setWaktu_akhir(timestampAkhirTesKes);
+		
+		return jadwalTesKes;
 	}
 
 	@Override
@@ -80,12 +104,61 @@ public class JadwalServiceImplement implements JadwalService {
 			jadwalRegis.setWaktu_awal(timestampAwalRegis);
 			jadwalRegis.setWaktu_akhir(timestampAkhirRegis);
 
-			if (!(jadwalRegis.getFakultas_id() > 0)) {
-				jadwalRegis.setFakultas("fakultas belum ditentukan");
-			}
 		}
 
 		return jadwalRegisList;
+	}
+	
+	@Override
+	public List<JadwalKesehatanModel> selectAllJadwalTesKes() {
+		// TODO Auto-generated method stub
+
+		TahunAjaranModel tahunAjaranSaatIni = tahunAjaranService.selectTahunAjaranSaatIni();
+		log.info("select all jadwal registrasi on tahun ajaran {} term {}", tahunAjaranSaatIni.getTahun_ajaran(),
+				tahunAjaranSaatIni.getTerm_id());
+		List<JadwalKesehatanModel> jadwalTesKesList = jadwalMapper
+				.selectAllJadwalTesKesbyTahunAjaran(tahunAjaranSaatIni.getTahun_ajaran_id());
+
+		for (JadwalKesehatanModel jadwalTesKes : jadwalTesKesList) {
+			String hariTesKes = this.parseHariTesKes(jadwalTesKes);
+			String waktuTesKes = this.parseWaktuTesKes(jadwalTesKes);
+			String timestampAwalTesKes = this.parseTimestampAwalTesKes(jadwalTesKes);
+			String timestampAkhirTesKes = this.parseTimestampAkhirTesKes(jadwalTesKes);
+
+			jadwalTesKes.setHari(hariTesKes);
+			jadwalTesKes.setTanggal(waktuTesKes);
+			jadwalTesKes.setWaktu_awal(timestampAwalTesKes);
+			jadwalTesKes.setWaktu_akhir(timestampAkhirTesKes);
+
+		}
+
+		return jadwalTesKesList;
+	}
+	
+	@Override
+	public List<JadwalEptModel> selectAllJadwalEpt() {
+		// TODO Auto-generated method stub
+
+		TahunAjaranModel tahunAjaranSaatIni = tahunAjaranService.selectTahunAjaranSaatIni();
+		log.info("select all jadwal registrasi on tahun ajaran {} term {}", tahunAjaranSaatIni.getTahun_ajaran(),
+				tahunAjaranSaatIni.getTerm_id());
+		List<JadwalEptModel> jadwalEptList = jadwalMapper
+				.selectAllJadwalEptbyTahunAjaran(tahunAjaranSaatIni.getTahun_ajaran_id());
+
+		for (JadwalEptModel jadwalEpt : jadwalEptList) {
+			String hariEpt = this.parseHariEpt(jadwalEpt);
+			String waktuEpt = this.parseWaktuEpt(jadwalEpt);
+			String timestampAwalEpt = this.parseTimestampAwalEpt(jadwalEpt);
+			String timestampAkhirEpt = this.parseTimestampAkhirEpt(jadwalEpt);
+
+			jadwalEpt.setHari(hariEpt);
+			jadwalEpt.setTanggal(waktuEpt);
+			jadwalEpt.setWaktu_awal(timestampAwalEpt);
+			jadwalEpt.setWaktu_akhir(timestampAkhirEpt);
+
+		}
+
+		return jadwalEptList;
 	}
 
 	@Override

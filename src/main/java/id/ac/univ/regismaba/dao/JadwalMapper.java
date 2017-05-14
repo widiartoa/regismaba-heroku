@@ -36,4 +36,10 @@ public interface JadwalMapper {
 	
 	@Update("update jadwal_registrasi set status_aktif = 0 where jadwal_registrasi_id = #{jadwal_registrasi_id}")
     void deleteJadwalRegis (@Param("jadwal_registrasi_id") int jadwal_registrasi_id);
+
+	@Select("select jadwal_tes_kesehatan_id, timestamp_awal, timestamp_akhir, kapasitas, created_by, created_at, updated_by, updated_at from jadwal_tes_kesehatan WHERE tahun_ajaran_id = #{tahun_ajaran_id} and status_aktif = 1 ORDER BY created_at DESC")
+	List<JadwalKesehatanModel> selectAllJadwalTesKesbyTahunAjaran(int tahun_ajaran_id);
+
+	@Select("select jadwal_ept_id, timestamp_awal, timestamp_akhir, kapasitas, created_by, created_at, updated_by, updated_at from jadwal_ept WHERE tahun_ajaran_id = #{tahun_ajaran_id} and status_aktif = 1 ORDER BY created_at DESC")
+	List<JadwalEptModel> selectAllJadwalEptbyTahunAjaran(int tahun_ajaran_id);
 }
