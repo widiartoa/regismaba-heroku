@@ -37,15 +37,43 @@
 							<td>Program Studi</td>
 							<td th:text="${mahasiswa.program_studi.nama_program_studi}">ProgramStudi</td>
 						</tr>
-						<tr>
-							<td>Status Pengajuan Pembayaran</td>
-							<td th:text="${psbm.status_pengajuan}">Unverified Ceritanya</td>
-						</tr>
-						<tr>
-							<td>Status Verifikasi IDM</td>
-							<td th:text="${mahasiswa.biodata.status_verifikasi}">Unverified
-								Ceritanya</td>
-						</tr>
+						<div th:if="${psbm == null}">
+							<tr>
+								<td>Status Pengajuan Pembayaran</td>
+								<td>Belum Mengisi Pengajuan Pembayaran</td>
+							</tr>
+						</div>
+						<div th:unless="${psbm == null}">
+							<tr>
+								<td>Status Pengajuan Pembayaran</td>
+								<td th:text="${psbm.status_pengajuan}">Unverified Ceritanya</td>
+							</tr>
+							<div th:if="${psbm.komentar != null}">
+								<tr>
+									<td></td>
+									<td th:text="'&quot;'+${psbm.komentar}+'&quot;'">Komentar</td>
+								</tr>
+							</div>
+						</div>
+						
+						<div th:if="${mahasiswa.biodata == null}">
+							<tr>
+								<td>Status Verifikasi IDM</td>
+								<td>Belum Mengisi IDM</td>
+							</tr>
+						</div>
+						<div th:unless="${mahasiswa.biodata == null}">
+							<tr>
+								<td>Status Verifikasi IDM</td>
+								<td th:text="${mahasiswa.biodata.status_verifikasi}">Unverified Ceritanya</td>
+							</tr>
+							<div th:if="${mahasiswa.biodata.komentar != null}">
+								<tr>
+									<td></td>
+									<td th:text="'&quot;'+${mahasiswa.biodata.komentar}+'&quot;'">Komentar</td>
+								</tr>
+							</div>
+						</div>
 					</table>
 				</div>
 				<div class="col-sm-6">
