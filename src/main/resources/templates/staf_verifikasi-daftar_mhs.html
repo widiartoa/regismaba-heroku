@@ -283,14 +283,19 @@
 						  	</div>
 							</form>
 						</div>
-						<div id="confirm" class="modal fade" role="dialog">
+						<div id="confirm" class="modal fade" role="dialog" style="top: auto; bottom: 275px; outline: none;">
 							<div class="modal-dialog">
 								<div class="modal-content">
 									<div class="modal-body">
-										<h4>Apakah Anda yakin untuk verifikasi Isian Data Mahasiswa ini?</h4>
+										<div class="panel-body" style="background-color:#f1f8e9; text-align: center;">
+											<h4>Apakah Anda yakin untuk verifikasi Isian Data Mahasiswa ini?</h4>
+										</div>
+										<div align="center" style="background-color:#f1f8e9;">
 										<a th:href="'/staf-verifikasi/daftar-mhs/verified/' + ${mahasiswa.npm}">
-											<button style="display:inline-block;" th:id="'verify'+${mahasiswa.npm}" type="button" class="btn btn-success">Verifikasi</button>
+											<button style="display:inline-block;" th:id="'verify'+${mahasiswa.npm}" type="button" class="btn btn-success">Yakin</button>
 										</a>
+										<button type="button" class="btn btn-default" data-dismiss="modal">Tidak</button>
+										</div>
 									</div>
 								</div>
 							</div>
