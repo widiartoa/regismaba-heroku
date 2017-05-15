@@ -1,5 +1,7 @@
 package id.ac.univ.regismaba.service;
 
+import java.util.List;
+
 import id.ac.univ.regismaba.model.DataKesehatanModel;
 
 
@@ -9,4 +11,6 @@ public interface DataKesehatanService {
 	void insertDataKesehatan(DataKesehatanModel dataKesehatan);
 	
 	DataKesehatanModel selectDataKesehatanByUsername(String username);
+	
+	List<DataKesehatanModel> selectAllDataKesehatan();
 }

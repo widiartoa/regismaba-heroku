@@ -11,6 +11,7 @@ import id.ac.univ.regismaba.model.JenjangModel;
 import id.ac.univ.regismaba.model.ProgramModel;
 import id.ac.univ.regismaba.model.ProgramStudiModel;
 import id.ac.univ.regismaba.model.StatistikManagerModel;
+import id.ac.univ.regismaba.model.StatistikManagerSummaryModel;
 
 @Mapper
 public interface StatistikManagerMapper {
@@ -73,4 +74,36 @@ public interface StatistikManagerMapper {
 			+ "s.program_studi_id=m.program_studi_id and m.username=b.username and m.username=psp.username and "
 			+ "b.sidik_jari is not null and p.program_id=#{program_id} group by p.nama_program")
 	StatistikManagerModel selectRegistranProgram(@Param("program_id") int program_id);
+	
+	@Select("select nama_fakultas as nama, "
+			+ "(select count(*) from mahasiswa m, program_studi p, fakultas f where m.program_studi_id=p.program_studi_id and p.fakultas_id=f.fakultas_id and f.fakultas_id=#{fakultas_id}) as total, "
+			+ "(select count(*) from mahasiswa m, program_studi p, fakultas f, biodata b, pengajuan_skema_pembayaran s where m.program_studi_id=p.program_studi_id and p.fakultas_id=f.fakultas_id and m.username=b.username and m.username=s.username and b.sidik_jari is not null and f.fakultas_id=#{fakultas_id}) as regis, "
+			+ "((select count(*) from mahasiswa m, program_studi p, fakultas f where m.program_studi_id=p.program_studi_id and p.fakultas_id=f.fakultas_id and f.fakultas_id=#{fakultas_id}) - "
+			+ "(select count(*) from mahasiswa m, program_studi p, fakultas f, biodata b, pengajuan_skema_pembayaran s where m.program_studi_id=p.program_studi_id and p.fakultas_id=f.fakultas_id and m.username=b.username and m.username=s.username and b.sidik_jari is not null and f.fakultas_id=#{fakultas_id})) as non_regis "
+			+ "from fakultas where fakultas_id=#{fakultas_id}")
+	StatistikManagerSummaryModel summaryFaculty(@Param("fakultas_id") int fakultas_id);
+	
+	@Select("select nama_program_studi as nama, "
+			+ "(select count(*) from mahasiswa m, program_studi p where m.program_studi_id=p.program_studi_id and p.program_studi_id=#{program_studi_id}) as total, "
+			+ "(select count(*) from mahasiswa m, program_studi p, biodata b, pengajuan_skema_pembayaran s where m.program_studi_id=p.program_studi_id and m.username=b.username and m.username=s.username and p.program_studi_id=#{program_studi_id}) as regis, "
+			+ "((select count(*) from mahasiswa m, program_studi p where m.program_studi_id=p.program_studi_id and p.program_studi_id=#{program_studi_id}) - "
+			+ "(select count(*) from mahasiswa m, program_studi p, biodata b, pengajuan_skema_pembayaran s where m.program_studi_id=p.program_studi_id and m.username=b.username and m.username=s.username and p.program_studi_id=#{program_studi_id})) as non_regis "
+			+ "from program_studi where program_studi_id=#{program_studi_id}")
+	StatistikManagerSummaryModel summaryMajor(@Param("program_studi_id") int program_studi_id);
+	
+	@Select("select nama_jenjang as nama, "
+			+ "(select count(*) from mahasiswa m, program_studi p, jenjang j where m.program_studi_id=p.program_studi_id and p.jenjang_id=j.jenjang_id and j.jenjang_id=#{jenjang_id}) as total, "
+			+ "(select count(*) from mahasiswa m, program_studi p, jenjang j, biodata b, pengajuan_skema_pembayaran s where m.program_studi_id=p.program_studi_id and m.username=b.username and m.username=s.username and p.jenjang_id=j.jenjang_id and j.jenjang_id=#{jenjang_id}) as regis, "
+			+ "((select count(*) from mahasiswa m, program_studi p, jenjang j where m.program_studi_id=p.program_studi_id and p.jenjang_id=j.jenjang_id and j.jenjang_id=#{jenjang_id}) - "
+			+ "(select count(*) from mahasiswa m, program_studi p, jenjang j, biodata b, pengajuan_skema_pembayaran s where m.program_studi_id=p.program_studi_id and m.username=b.username and m.username=s.username and p.jenjang_id=j.jenjang_id and j.jenjang_id=#{jenjang_id})) as non_regis "
+			+ "from jenjang where jenjang_id=#{jenjang_id}")
+	StatistikManagerSummaryModel summaryLevel(@Param("jenjang_id") int jenjang_id);
+	
+	@Select("select nama_program as nama, "
+			+ "(select count(*) from mahasiswa m, program_studi p, program r where m.program_studi_id=p.program_studi_id and p.program_id=r.program_id and r.program_id=#{program_id}) as total, "
+			+ "(select count(*) from mahasiswa m, program_studi p, program r, biodata b, pengajuan_skema_pembayaran s where m.program_studi_id=p.program_studi_id and m.username=b.username and m.username=s.username and p.program_id=r.program_id and r.program_id=#{program_id}) as regis, "
+			+ "((select count(*) from mahasiswa m, program_studi p, program r where m.program_studi_id=p.program_studi_id and p.program_id=r.program_id and r.program_id=#{program_id}) - "
+			+ "(select count(*) from mahasiswa m, program_studi p, program r, biodata b, pengajuan_skema_pembayaran s where m.program_studi_id=p.program_studi_id and m.username=b.username and m.username=s.username and p.program_id=r.program_id and r.program_id=#{program_id})) as non_regis "
+			+ "from program where program_id=#{program_id}")
+	StatistikManagerSummaryModel summaryProgram(@Param("program_id") int program_id);
 }

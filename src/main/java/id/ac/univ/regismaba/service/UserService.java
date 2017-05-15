@@ -6,4 +6,5 @@ public interface UserService {
 	UserModel selectUser(String username);
 	
 	UserModel selectUserStafbyNIP(String nip);
+	
 }

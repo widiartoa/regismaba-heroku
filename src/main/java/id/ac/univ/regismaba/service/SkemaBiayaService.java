@@ -13,4 +13,6 @@ public interface SkemaBiayaService {
 	void insertSBM(SkemaBiayaModel sbm);
 	
 	void updateSBM(SkemaBiayaModel sbm);
+	
+	List<SkemaBiayaModel> selectAllSBMByFacultyLevel();
 }
