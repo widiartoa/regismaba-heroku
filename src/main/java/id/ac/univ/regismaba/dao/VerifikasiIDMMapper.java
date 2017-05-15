@@ -64,4 +64,7 @@ public interface VerifikasiIDMMapper
     @Update("update biodata set komentar = #{komentar} where username = #{username}")
     void updateComment (@Param("username") String username,
             @Param("komentar") String komentar);
+    
+    @Select("select u.email as email from user u, mahasiswa m where u.username = m.username and m.username = #{username}")
+    String selectUserEmail(@Param("username") String username);
 }

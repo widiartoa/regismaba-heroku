@@ -22,6 +22,7 @@ import lombok.extern.slf4j.Slf4j;
 @Service
 public class VerifikasiIDMServiceImplement implements VerifikasiIDMService
 {
+    
     @Autowired
     VerifikasiIDMMapper verifikasiIDMMapper;
 
@@ -159,4 +160,11 @@ public class VerifikasiIDMServiceImplement implements VerifikasiIDMService
             String tanggalLahir = dateFormat.format(date);
             return tanggalLahir;
     }
+    
+    @Override
+    public String selectUserEmail(String username) {
+        log.info ("select email of " + username);
+        return verifikasiIDMMapper.selectUserEmail (username);
+    }
+    
 }

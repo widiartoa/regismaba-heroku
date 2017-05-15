@@ -23,7 +23,19 @@
 							<h4 th:text="'Username'">Username</h4>
 						</td>
 						<td>
+							<h4 th:text="'Nama Lengkap'">Nama Lengkap</h4>
+						</td>
+						<td>
 							<h4 th:text="'NPM'">NPM</h4>
+						</td>
+						<td>
+							<h4 th:text="'Jurusan'">Jurusan</h4>
+						</td>
+						<td>
+							<h4 th:text="'Fakultas'">Fakultas</h4>
+						</td>
+						<td>
+							<h4 th:text="'Riwayat'">Riwayat Kesehatan</h4>
 						</td>
 						<td>
 							<h4 th:text="'Survei Kesehatan'">Survei Kesehatan</h4>
@@ -31,13 +43,19 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr th:each="mahasiswa,iterationStatus: ${mahasiswas}">
-						<td th:text="${mahasiswa.username}" class="center">username</td>
-						<td th:text="${mahasiswa.npm}">npm</td>
-						<td><a th:href="'/staf/' + ${mahasiswa.npm} + '/survey_kesehatan'"
-							class="btn btn-info"> <i class="glyphicon glyphicon-pencil"></i>
-						</a></td>
-					</tr>
+					<span th:each="mahasiswa,iterationStatus: ${mahasiswas}">
+						<tr th:each="dataKes,iterationStatus:${dataKess}" th:if="${dataKes.username.equals(mahasiswa.username)}">
+							<td th:text="${mahasiswa.username}" class="center">username</td>
+							<td th:text="${mahasiswa.nama_lengkap}" class="center">nama lengkap</td>
+							<td th:text="${mahasiswa.npm}">npm</td>
+							<td th:text="${mahasiswa.program_studi.nama_program_studi}">jurusan</td>
+							<td th:text="${mahasiswa.fakultas}">fakultas</td>
+							<td><a th:href="${dataKes.form_survey_kesehatan}">(unduh form survey kesehatan)</a></td>
+							<td><a th:href="'/staf/' + ${mahasiswa.npm} + '/survey_kesehatan'"
+								class="btn btn-info"> <i class="glyphicon glyphicon-pencil"></i>
+							</a></td>
+						</tr>
+					</span>
 				</tbody>
 			</table>
 		</div>
@@ -47,7 +65,7 @@
 
 	<script type="text/javascript">
 		$(document).ready(function() {
-			$('#table').dataTable();
+			$('.table').dataTable();
 		});
 	</script>
 </body>
