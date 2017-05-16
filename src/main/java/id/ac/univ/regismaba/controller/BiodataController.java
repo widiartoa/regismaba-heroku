@@ -638,6 +638,7 @@ public class BiodataController {
             DateFormat dateFormat = new SimpleDateFormat("dd-MM-YYYY");
             String tanggalLahir = dateFormat.format(date);
 			biodata.setTanggal_lahirr(tanggalLahir);
+			System.out.println(tanggalLahir);
 			model.addAttribute("biodata", biodata);
 			System.out.println("biodata ke add ke model");
 			
@@ -883,8 +884,6 @@ public class BiodataController {
         User user = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         String name = user.getUsername(); //get logged in username
         
-        bio.setUsername(name);	
-        bio.setBiodata_id(0);
         bio.setFlag_aktif("1");
         bio.setSidik_jari("Belum scan sidik jari");
         
@@ -916,17 +915,20 @@ public class BiodataController {
         
         //===================================
 
-        AlamatModel alamat = new AlamatModel(0, kota_kabupaten_id, jalan, kecamatan, kelurahan, kode_pos, null, null, null, null);
+        AlamatModel alamat = new AlamatModel();
+        
+        alamat.setKota_kabupaten_id(kota_kabupaten_id);
+        alamat.setJalan(jalan);
+        alamat.setKecamatan(kecamatan);
+        alamat.setKelurahan(kelurahan);
+        alamat.setKode_pos(kode_pos);
+        
         alamat.setCreated_by(name);
 		alamat.setUpdated_by(name);
 		alamat.setUpdated_at(null);
-        int idAlamat = alamatDAO.selectJalanId(alamat);
-		if (idAlamat == 0) {
-			alamatDAO.insertAlamat(alamat);
-		}
-		alamat.setJalan_id(alamatDAO.selectJalanId(alamat));
-		bio.setJalan_id(alamatDAO.selectJalanId(alamat));
 
+		alamatDAO.updateAlamat(alamat);
+		
 		
 		AsuransiKesehatanModel asuransiKesehatan = new AsuransiKesehatanModel();
 		
@@ -946,10 +948,11 @@ public class BiodataController {
 		asuransiKesehatan.setUpdated_by(name);
 		asuransiKesehatan.setUpdated_at(null);
 		
-		biodataDAO.insertBiodata(bio);
-		ijazahDAO.addIjazah(ijazah);
-		dataKesehatanDAO.insertDataKesehatan(dataKesehatan);
-		asuransiKesehatanDAO.insertAsuransiKesehatan(asuransiKesehatan);
+		biodataDAO.updateBiodataByUsername(bio);
+		ijazahDAO.updateIjazah(ijazah);
+		dataKesehatanDAO.updateDataKesehatan(dataKesehatan);
+
+		asuransiKesehatanDAO.updateAsuransiKesehatan(asuransiKesehatan);
 		
 		MahasiswaModel mahasiswa = mahasiswaDAO.selectMahasiswaByUsername(name);
 		if (mahasiswa != null){

@@ -42,7 +42,7 @@
 						<label for="tanggal_lahir" >Tanggal Lahir *</label> 
 						<input
 							type="text" id="datepicker" name="tanggal_lahir" class="form-control"
-							th:value="${biodata.tanggal_lahir}" data-validation="required"
+							th:value="${biodata.tanggal_lahirr}" data-validation="required"
 							data-validation-error-msg="Tanggal lahir harus diisi"/>
 					</div>
 					
@@ -320,7 +320,7 @@
 						<label for="nomor_asuransi">Tanggal Kadaluarsa Asuransi</label>
 						<input
 							type="text" name="expired_date" class="form-control"
-							th:value="${asuransiKesehatan.expired_date}" />
+							th:value="${asuransiKesehatan.expired_date_format}" />
 					</div>
 		
 					<div class="form-group">
