@@ -1004,4 +1004,112 @@ public class BiodataController {
 //		}
 //	}
     
+	
+	@RequestMapping("/staf-registrasi/biodata/view/{npm}")
+	public String viewByStafRegis(Model model, @PathVariable(value = "npm") String npm) {
+		System.out.println(npm);
+		System.out.println("masuk atas");
+		MahasiswaModel mahasiswa = mahasiswaDAO.selectMahasiswa(npm);
+		String username = mahasiswa.getUsername();
+		model.addAttribute("mahasiswa", mahasiswa);
+		
+		BiodataModel biodata = biodataDAO.selectBiodataByUsername(username);
+		System.out.println("biodata ke select");
+		System.out.println(biodata);
+		if (biodata != null) {
+			System.out.println("biodata gak null");
+//			String tanggalLahir = verifIDMDAO.parseTanggalLahirBiodata(biodata);
+			
+			Date date = biodata.getTanggal_lahir ();
+            DateFormat dateFormat = new SimpleDateFormat("dd-MM-YYYY");
+            String tanggalLahir = dateFormat.format(date);
+			biodata.setTanggal_lahirr(tanggalLahir);
+			model.addAttribute("biodata", biodata);
+			System.out.println("biodata ke add ke model");
+			
+			
+			//ALAMAT
+			int jalan_id = biodata.getJalan_id();
+			System.out.println("jalan id = " + jalan_id);
+			AlamatModel alamat = alamatDAO.selectAlamat(jalan_id);
+			System.out.println(alamat);
+			if (alamat != null) {
+				model.addAttribute("alamat", alamat);
+					System.out.println("alamat ke add ke model");
+				//KOTA KABUPATEN
+				int kota_kabupaten_id = alamat.getKota_kabupaten_id();
+					System.out.println("kota kabupaten id " + kota_kabupaten_id);
+				KotaKabupatenModel kotaKabupaten = kotaKabupatenDAO.selectKotaKabupaten(kota_kabupaten_id);
+					System.out.println(kotaKabupaten);
+				if (kotaKabupaten != null) {
+					model.addAttribute("kotaKabupaten", kotaKabupaten);
+						System.out.println("kota kabupaten ke add ke model");
+					//PROVINSI
+					int provinsi_id = kotaKabupaten.getProvinsi_id();
+					System.out.println("provinsi id " + provinsi_id);
+					ProvinsiModel provinsi = provinsiDAO.selectProvinsi(provinsi_id);
+					System.out.println(provinsi);
+					if (provinsi != null) {
+						model.addAttribute("provinsi", provinsi);
+							System.out.println("provinsi ke add ke model");
+							
+						int agama_id = biodata.getAgama_id();
+						AgamaModel agama = agamaDAO.selectAgama(agama_id);
+						if (agama != null) {
+							model.addAttribute("agama", agama);
+							System.out.println(agama.getNama_agama());
+						} else {
+							return "error";
+						}
+						
+						DataKesehatanModel dataKesehatan = dataKesehatanDAO.selectDataKesehatanByUsername(username);
+						System.out.println(provinsi);
+						if (dataKesehatan != null) {
+							model.addAttribute("dataKesehatan", dataKesehatan);
+								System.out.println("data kesehatan ke add ke model");
+							IjazahModel ijazah = ijazahDAO.selectIjazahByUsername(username);
+							System.out.println(ijazah);
+							if (ijazah != null){
+								model.addAttribute("ijazah", ijazah);
+									System.out.println("ijazah ke add ke model");
+								int institusi_id = ijazah.getInstitusi_id();
+								InstitusiModel institusi = institusiDAO.selectInstitusi(institusi_id);
+								System.out.println(provinsi);
+								model.addAttribute("institusi", institusi);
+									System.out.println("institusi ke add ke model");
+								AsuransiKesehatanModel asuransiKesehatan = asuransiKesehatanDAO.selectAsuransiKesehatanByUsername(username);
+									System.out.println(asuransiKesehatan);
+								if(asuransiKesehatan != null) {
+									
+									Date expiredDate = asuransiKesehatan.getExpired_date();
+						            DateFormat expiredDateFormat = new SimpleDateFormat("dd-MM-YYYY");
+						            String expired_date = expiredDateFormat.format(expiredDate);
+									asuransiKesehatan.setExpired_date_format(expired_date);
+						            
+									model.addAttribute("asuransiKesehatan", asuransiKesehatan);
+									System.out.println("asuransi ke add ke model");
+									int tingkat_pendidikan_id = institusi.getTingkat_pendidikan_id();
+									TingkatPendidikanModel tingkatPendidikan = tingkatPendidikanDAO.selectTingkatPendidikan(tingkat_pendidikan_id);
+									model.addAttribute("tingkatPendidikan", tingkatPendidikan);
+									return "staf_registrasi-melihat_idm";
+								}
+							} else {
+								return "error";
+							}
+						} else {
+							return "error";
+						}
+					}
+				}
+			}
+		}
+		System.out.println("keluuarrrr");
+		return "error";
+	}
+	
+	
+	
+	
+	
+	
 }
