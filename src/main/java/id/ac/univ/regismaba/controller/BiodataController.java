@@ -250,70 +250,70 @@ public class BiodataController {
 			return "calon_mahasiswa-salah_file_upload";
 		}
     	
-        //================================IJAZAH=====================================
-        Path data1 = storageService.load(scan_ijazah.getOriginalFilename());
-        String pdb1 = MvcUriComponentsBuilder
-                .fromMethodName(BiodataController.class, "serveFile", data1.getFileName().toString())
-                .build().toString();
-        
-        ijazah.setScan_ijazah (pdb1);
-        
-        //SCAN PERNYATAAN IJAZAH UPLOAD//
-        Path data2 = storageService.load(scan_ijazah.getOriginalFilename());
-        String pdb2 = MvcUriComponentsBuilder
-                .fromMethodName(BiodataController.class, "serveFile", data2.getFileName().toString())
-                .build().toString();
-        
-        ijazah.setScan_pernyataan_ijazah (pdb2);
-        
-        //=================================BIODATA======================================
-        BiodataModel bio = new BiodataModel();
-        
-        //SCAN SIDIK JARI UPLOAD//        
-        /*Path data3 = storageService.load(sidik_jari.getOriginalFilename());
-        String pdb3 = MvcUriComponentsBuilder
-                .fromMethodName(BiodataController.class, "serveFile", data3.getFileName().toString())
-                .build().toString();
-        
-        bio.setSidik_jari(pdb3);*/
-
-        
-        //SCAN SCAN KTP UPLOAD//
-        Path data4 = storageService.load(scan_ktp.getOriginalFilename());
-        String pdb4 = MvcUriComponentsBuilder
-                .fromMethodName(BiodataController.class, "serveFile", data4.getFileName().toString())
-                .build().toString();
-        
-        bio.setScan_ktp(pdb4);
-        
-        
-        //SCAN SCAN KK UPLOAD//
-        Path data5 = storageService.load(scan_kk.getOriginalFilename());
-        String pdb5 = MvcUriComponentsBuilder
-                .fromMethodName(BiodataController.class, "serveFile", data5.getFileName().toString())
-                .build().toString();
-        
-        bio.setScan_kk(pdb5);
-        
-        
-        //SCAN SCAN SURAT PERNYATAAN MAHASISWA UPLOAD//
-        Path data6 = storageService.load(scan_surat_pernyataan_mahasiswa.getOriginalFilename());
-        String pdb6 = MvcUriComponentsBuilder
-                .fromMethodName(BiodataController.class, "serveFile", data6.getFileName().toString())
-                .build().toString();
-        
-        bio.setScan_surat_pernyataan_mahasiswa(pdb6);
+//        //================================IJAZAH=====================================
+//        Path data1 = storageService.load(scan_ijazah.getOriginalFilename());
+//        String pdb1 = MvcUriComponentsBuilder
+//                .fromMethodName(BiodataController.class, "serveFile", data1.getFileName().toString())
+//                .build().toString();
+//        
+//        ijazah.setScan_ijazah (pdb1);
+//        
+//        //SCAN PERNYATAAN IJAZAH UPLOAD//
+//        Path data2 = storageService.load(scan_ijazah.getOriginalFilename());
+//        String pdb2 = MvcUriComponentsBuilder
+//                .fromMethodName(BiodataController.class, "serveFile", data2.getFileName().toString())
+//                .build().toString();
+//        
+//        ijazah.setScan_pernyataan_ijazah (pdb2);
+//        
+//        //=================================BIODATA======================================
+//        BiodataModel bio = new BiodataModel();
+//        
+//        //SCAN SIDIK JARI UPLOAD//        
+//        /*Path data3 = storageService.load(sidik_jari.getOriginalFilename());
+//        String pdb3 = MvcUriComponentsBuilder
+//                .fromMethodName(BiodataController.class, "serveFile", data3.getFileName().toString())
+//                .build().toString();
+//        
+//        bio.setSidik_jari(pdb3);*/
+//
+//        
+//        //SCAN SCAN KTP UPLOAD//
+//        Path data4 = storageService.load(scan_ktp.getOriginalFilename());
+//        String pdb4 = MvcUriComponentsBuilder
+//                .fromMethodName(BiodataController.class, "serveFile", data4.getFileName().toString())
+//                .build().toString();
+//        
+//        bio.setScan_ktp(pdb4);
+//        
+//        
+//        //SCAN SCAN KK UPLOAD//
+//        Path data5 = storageService.load(scan_kk.getOriginalFilename());
+//        String pdb5 = MvcUriComponentsBuilder
+//                .fromMethodName(BiodataController.class, "serveFile", data5.getFileName().toString())
+//                .build().toString();
+//        
+//        bio.setScan_kk(pdb5);
+//        
+//        
+//        //SCAN SCAN SURAT PERNYATAAN MAHASISWA UPLOAD//
+//        Path data6 = storageService.load(scan_surat_pernyataan_mahasiswa.getOriginalFilename());
+//        String pdb6 = MvcUriComponentsBuilder
+//                .fromMethodName(BiodataController.class, "serveFile", data6.getFileName().toString())
+//                .build().toString();
+//        
+//        bio.setScan_surat_pernyataan_mahasiswa(pdb6);
         
         
         //SCAN FORM SURVEY KESEHATAN UPLOAD//
-        DataKesehatanModel dataKesehatan = new DataKesehatanModel();
+        DataKesehatanModel dkm = new DataKesehatanModel();
         
-        Path data7 = storageService.load(form_survey_kesehatan.getOriginalFilename());
-        String pdb7 = MvcUriComponentsBuilder
-                .fromMethodName(BiodataController.class, "serveFile", data7.getFileName().toString())
-                .build().toString();
-        
-        dataKesehatan.setForm_survey_kesehatan(pdb7);
+//        Path data7 = storageService.load(form_survey_kesehatan.getOriginalFilename());
+//        String pdb7 = MvcUriComponentsBuilder
+//                .fromMethodName(BiodataController.class, "serveFile", data7.getFileName().toString())
+//                .build().toString();
+//        
+//        dkm.setForm_survey_kesehatan(pdb7);
               
         
         User user = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -343,12 +343,12 @@ public class BiodataController {
 		ijazah.setUpdated_by(name);
 		ijazah.setUpdated_at(null);
         
-		dataKesehatan.setData_kesehatan_id(0);
-        dataKesehatan.setHasil_tes_kesehatan("Belum cek kesehatan");
-        dataKesehatan.setUsername(name);
-        dataKesehatan.setCreated_by(name);
-		dataKesehatan.setUpdated_by(name);
-		dataKesehatan.setUpdated_at(null);
+		dkm.setData_kesehatan_id(0);
+        dkm.setHasil_tes_kesehatan("Belum cek kesehatan");
+        dkm.setUsername(name);
+        dkm.setCreated_by(name);
+		dkm.setUpdated_by(name);
+		dkm.setUpdated_at(null);
         
         //===================================
 
@@ -384,7 +384,7 @@ public class BiodataController {
 		
 		biodataDAO.insertBiodata(bio);
 		ijazahDAO.addIjazah(ijazah);
-		dataKesehatanDAO.insertDataKesehatan(dataKesehatan);
+		dataKesehatanDAO.insertDataKesehatan(dkm);
 		asuransiKesehatanDAO.insertAsuransiKesehatan(asuransiKesehatan);
 		
 		MahasiswaModel mahasiswa = mahasiswaDAO.selectMahasiswaByUsername(name);
@@ -486,7 +486,6 @@ public class BiodataController {
     @GetMapping("/files2/{filename:.+}")
     @ResponseBody
     public ResponseEntity<Resource> serveFile(@PathVariable String filename) {
-
         Resource file = storageService.loadAsResource(filename);
         return ResponseEntity
                 .ok()
@@ -815,75 +814,76 @@ public class BiodataController {
 			return "calon_mahasiswa-salah_file_upload";
 		}
     	
-        //================================IJAZAH=====================================
-        Path data1 = storageService.load(scan_ijazah.getOriginalFilename());
-        String pdb1 = MvcUriComponentsBuilder
-                .fromMethodName(BiodataController.class, "serveFile", data1.getFileName().toString())
-                .build().toString();
-        
-        ijazah.setScan_ijazah (pdb1);
-        
-        //SCAN PERNYATAAN IJAZAH UPLOAD//
-        Path data2 = storageService.load(scan_ijazah.getOriginalFilename());
-        String pdb2 = MvcUriComponentsBuilder
-                .fromMethodName(BiodataController.class, "serveFile", data2.getFileName().toString())
-                .build().toString();
-        
-        ijazah.setScan_pernyataan_ijazah (pdb2);
-        
-        //=================================BIODATA======================================
-        BiodataModel bio = new BiodataModel();
-        
-        //SCAN SIDIK JARI UPLOAD//        
-        /*Path data3 = storageService.load(sidik_jari.getOriginalFilename());
-        String pdb3 = MvcUriComponentsBuilder
-                .fromMethodName(BiodataController.class, "serveFile", data3.getFileName().toString())
-                .build().toString();
-        
-        bio.setSidik_jari(pdb3);*/
-
-        
-        //SCAN SCAN KTP UPLOAD//
-        Path data4 = storageService.load(scan_ktp.getOriginalFilename());
-        String pdb4 = MvcUriComponentsBuilder
-                .fromMethodName(BiodataController.class, "serveFile", data4.getFileName().toString())
-                .build().toString();
-        
-        bio.setScan_ktp(pdb4);
-        
-        
-        //SCAN SCAN KK UPLOAD//
-        Path data5 = storageService.load(scan_kk.getOriginalFilename());
-        String pdb5 = MvcUriComponentsBuilder
-                .fromMethodName(BiodataController.class, "serveFile", data5.getFileName().toString())
-                .build().toString();
-        
-        bio.setScan_kk(pdb5);
-        
-        
-        //SCAN SCAN SURAT PERNYATAAN MAHASISWA UPLOAD//
-        Path data6 = storageService.load(scan_surat_pernyataan_mahasiswa.getOriginalFilename());
-        String pdb6 = MvcUriComponentsBuilder
-                .fromMethodName(BiodataController.class, "serveFile", data6.getFileName().toString())
-                .build().toString();
-        
-        bio.setScan_surat_pernyataan_mahasiswa(pdb6);
+//        //================================IJAZAH=====================================
+//        Path data1 = storageService.load(scan_ijazah.getOriginalFilename());
+//        String pdb1 = MvcUriComponentsBuilder
+//                .fromMethodName(BiodataController.class, "serveFile", data1.getFileName().toString())
+//                .build().toString();
+//        
+//        ijazah.setScan_ijazah (pdb1);
+//        
+//        //SCAN PERNYATAAN IJAZAH UPLOAD//
+//        Path data2 = storageService.load(scan_ijazah.getOriginalFilename());
+//        String pdb2 = MvcUriComponentsBuilder
+//                .fromMethodName(BiodataController.class, "serveFile", data2.getFileName().toString())
+//                .build().toString();
+//        
+//        ijazah.setScan_pernyataan_ijazah (pdb2);
+//        
+////        =================================BIODATA======================================
+//        BiodataModel bio = new BiodataModel();
+//        
+//        //SCAN SIDIK JARI UPLOAD//        
+//        /*Path data3 = storageService.load(sidik_jari.getOriginalFilename());
+//        String pdb3 = MvcUriComponentsBuilder
+//                .fromMethodName(BiodataController.class, "serveFile", data3.getFileName().toString())
+//                .build().toString();
+//        
+//        bio.setSidik_jari(pdb3);*/
+//
+//        
+//        //SCAN SCAN KTP UPLOAD//
+//        Path data4 = storageService.load(scan_ktp.getOriginalFilename());
+//        String pdb4 = MvcUriComponentsBuilder
+//                .fromMethodName(BiodataController.class, "serveFile", data4.getFileName().toString())
+//                .build().toString();
+//        
+//        bio.setScan_ktp(pdb4);
+//        
+//        
+//        //SCAN SCAN KK UPLOAD//
+//        Path data5 = storageService.load(scan_kk.getOriginalFilename());
+//        String pdb5 = MvcUriComponentsBuilder
+//                .fromMethodName(BiodataController.class, "serveFile", data5.getFileName().toString())
+//                .build().toString();
+//        
+//        bio.setScan_kk(pdb5);
+//        
+//        
+//        //SCAN SCAN SURAT PERNYATAAN MAHASISWA UPLOAD//
+//        Path data6 = storageService.load(scan_surat_pernyataan_mahasiswa.getOriginalFilename());
+//        String pdb6 = MvcUriComponentsBuilder
+//                .fromMethodName(BiodataController.class, "serveFile", data6.getFileName().toString())
+//                .build().toString();
+//        
+//        bio.setScan_surat_pernyataan_mahasiswa(pdb6);
         
         
         //SCAN FORM SURVEY KESEHATAN UPLOAD//
-        DataKesehatanModel dataKesehatan = new DataKesehatanModel();
-        
-        Path data7 = storageService.load(form_survey_kesehatan.getOriginalFilename());
-        String pdb7 = MvcUriComponentsBuilder
-                .fromMethodName(BiodataController.class, "serveFile", data7.getFileName().toString())
-                .build().toString();
-        
-        dataKesehatan.setForm_survey_kesehatan(pdb7);
-              
+//        DataKesehatanModel dkm = new DataKesehatanModel();
+//        
+//        Path data7 = storageService.load(form_survey_kesehatan.getOriginalFilename());
+//        String pdb7 = MvcUriComponentsBuilder
+//                .fromMethodName(BiodataController.class, "serveFile", data7.getFileName().toString())
+//                .build().toString();
+//        
+//        dkm.setForm_survey_kesehatan(pdb7);
+//              
         
         User user = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         String name = user.getUsername(); //get logged in username
         
+        bio.setUsername(name);
         bio.setFlag_aktif("1");
         bio.setSidik_jari("Belum scan sidik jari");
         
@@ -894,7 +894,6 @@ public class BiodataController {
         bio.setStatus_verifikasi("Not verified yet");
         bio.setTanggal_lahir(tanggalLahir);
         bio.setUkuran_jaket(ukuran_jaket);
-        bio.setCreated_by(name);
         bio.setUpdated_at(null);
         bio.setUpdated_by(name);
         bio.setAgama_id(agamaId);
@@ -902,16 +901,14 @@ public class BiodataController {
         ijazah.setUsername(name);
         ijazah.setInstitusi_id(Integer.parseInt(institusi_id));
         ijazah.setJenjang(jenjang);
-        ijazah.setCreated_by(name);
 		ijazah.setUpdated_by(name);
 		ijazah.setUpdated_at(null);
         
-		dataKesehatan.setData_kesehatan_id(0);
-        dataKesehatan.setHasil_tes_kesehatan("Belum cek kesehatan");
-        dataKesehatan.setUsername(name);
-        dataKesehatan.setCreated_by(name);
-		dataKesehatan.setUpdated_by(name);
-		dataKesehatan.setUpdated_at(null);
+		dkm.setData_kesehatan_id(0);
+        dkm.setHasil_tes_kesehatan("Belum cek kesehatan");
+        dkm.setUsername(name);
+		dkm.setUpdated_by(name);
+		dkm.setUpdated_at(null);
         
         //===================================
 
@@ -930,29 +927,29 @@ public class BiodataController {
 		alamatDAO.updateAlamat(alamat);
 		
 		
-		AsuransiKesehatanModel asuransiKesehatan = new AsuransiKesehatanModel();
+//		AsuransiKesehatanModel akm = new AsuransiKesehatanModel();
+//		
+//		//SCAN KARTU ASURANSI
+//        Path data8 = storageService.load(scan_kartu.getOriginalFilename());
+//        String pdb8 = MvcUriComponentsBuilder
+//                .fromMethodName(BiodataController.class, "serveFile", data8.getFileName().toString())
+//                .build().toString();
+//        
+//        akm.setScan_kartu(pdb8);
 		
-		//SCAN KARTU ASURANSI
-        Path data8 = storageService.load(scan_kartu.getOriginalFilename());
-        String pdb8 = MvcUriComponentsBuilder
-                .fromMethodName(BiodataController.class, "serveFile", data8.getFileName().toString())
-                .build().toString();
-        
-        asuransiKesehatan.setScan_kartu(pdb8);
-		
-		asuransiKesehatan.setNomor_asuransi(nomor_asuransi);
-		asuransiKesehatan.setUsername(name);
-		asuransiKesehatan.setNomor_penerbit_asuransi(nomor_penerbit_asuransi);
-		asuransiKesehatan.setExpired_date(expiredDate);
-		asuransiKesehatan.setCreated_by(name);
-		asuransiKesehatan.setUpdated_by(name);
-		asuransiKesehatan.setUpdated_at(null);
+		akm.setNomor_asuransi(nomor_asuransi);
+		akm.setUsername(name);
+		akm.setNomor_penerbit_asuransi(nomor_penerbit_asuransi);
+		akm.setExpired_date(expiredDate);
+		akm.setCreated_by(name);
+		akm.setUpdated_by(name);
+		akm.setUpdated_at(null);
 		
 		biodataDAO.updateBiodataByUsername(bio);
 		ijazahDAO.updateIjazah(ijazah);
-		dataKesehatanDAO.updateDataKesehatan(dataKesehatan);
+		dataKesehatanDAO.updateDataKesehatan(dkm);
 
-		asuransiKesehatanDAO.updateAsuransiKesehatan(asuransiKesehatan);
+		asuransiKesehatanDAO.updateAsuransiKesehatan(akm);
 		
 		MahasiswaModel mahasiswa = mahasiswaDAO.selectMahasiswaByUsername(name);
 		if (mahasiswa != null){

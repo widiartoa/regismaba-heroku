@@ -45,15 +45,12 @@ public interface BiodataMapper {
 		})
 		BiodataModel selectBiodataByUsername(String username);
 		
-		@Update("UPDATE biodata SET flag_aktif=#{flag_aktif}, status_verifikasi=#{status_verifikasi},"
-				+ "tanggal_lahir=#{tanggal_lahir}, jenis_kelamin=#{jenis_kelamin}, nomor_telepon=#{nomor_telepon}, kewarganegaraan=#{kewarganegaraan},"
+		@Update("UPDATE biodata SET flag_aktif=#{flag_aktif}, status_verifikasi=#{status_verifikasi}, "
+				+ "tanggal_lahir=#{tanggal_lahir}, jenis_kelamin=#{jenis_kelamin}, nomor_telepon=#{nomor_telepon}, kewarganegaraan=#{kewarganegaraan}, "
 				+ "nomor_ktp=#{nomor_ktp}, sidik_jari=#{sidik_jari}, scan_ktp=#{scan_ktp}, scan_kk=#{scan_kk}, scan_surat_pernyataan_mahasiswa=#{scan_surat_pernyataan_mahasiswa},"
-				+ "ukuran_jaket=#{ukuran_jaket}, created_by=#{created_by}, updated_by=#{updated_by}, updated_at=#{updated_at}, agama_id=#{agama_id} "
+				+ "ukuran_jaket=#{ukuran_jaket}, updated_by=#{updated_by}, updated_at=#{updated_at}, agama_id=#{agama_id} "
 				+ "WHERE username=#{username}")
 		void updateBiodataByUsername(BiodataModel biodata);
-
-//		@Update("UPDATE absensi_dosen SET idStatus=#{idStatus} WHERE idKelas=#{idKelas} AND tanggal=#{tanggal} AND jamMulai=#{jamMulai} AND jamSelesai=#{jamSelesai} AND nip=#{nip}")
-//	    void updateAbsensiDosen (AbsensiDosenModel absensiDosen);
 		
 		
 }

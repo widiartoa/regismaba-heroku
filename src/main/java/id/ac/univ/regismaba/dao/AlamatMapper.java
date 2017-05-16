@@ -40,4 +40,4 @@ public interface AlamatMapper {
 	@Update("UPDATE alamat SET kota_kabupaten_id=#{kota_kabupaten_id}, jalan=#{jalan}, kecamatan=#{kecamatan}, kelurahan=#{kelurahan}, kode_pos=#{kode_pos},"
 			+ "updated_by=#{updated_by}, updated_at=#{updated_at} WHERE jalan_id=#{jalan_id}")
 	void updateAlamat(AlamatModel alamat);
-}
+	}
