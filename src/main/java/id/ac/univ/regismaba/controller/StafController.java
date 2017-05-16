@@ -1,6 +1,11 @@
 package id.ac.univ.regismaba.controller;
 
 import java.util.List;
+import java.util.Map;
+import java.util.Scanner;
+
+import java.net.URL;
+import java.net.HttpURLConnection;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -9,6 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.boot.json.GsonJsonParser;
 
 import id.ac.univ.regismaba.model.AlamatModel;
 import id.ac.univ.regismaba.model.BiodataModel;
@@ -66,6 +72,43 @@ public class StafController
     // untuk Staf Kesehatan redirect:/staf_kesehatan/daftar_mhs
     // untuk Staf Kesejahteraan redirect:/staf_kesejahteraan/daftar_mhs
 
+	@RequestMapping("/staf/login")
+	public String loginStaf(Model model,
+		@RequestParam(value = "username", required = true) String username,
+		@RequestParam(value = "password", required = true) String password)
+	{
+		try {		
+			HttpURLConnection con = (HttpURLConnection) new URL("https://sso.ui.ac.id/oauth/lockdin/token").openConnection();
+			con.setDoOutput(true);
+			con.setRequestMethod("POST");
+			String param = "grant_type=password&client_id=dev-propensi-cs&client_secret=od5ifie3ueSeeshai9ohyoo9cha2ZuhueMoo0equ&username="+username+"&password="+password;
+			con.getOutputStream().write(param.getBytes("UTF-8"));
+			
+			GsonJsonParser jsonParser = new GsonJsonParser();
+			Scanner s = new Scanner(con.getInputStream()).useDelimiter("\\A");
+			String resultTokenJSON = s.hasNext() ? s.next() : "";
+			System.out.println(resultTokenJSON);
+			Map<String, Object> resultTokenMap = jsonParser.parseMap(resultTokenJSON);
+			String resultSessionId = resultTokenMap.get("access_token").toString();
+			System.out.println(resultSessionId);
+
+			HttpURLConnection conResource = (HttpURLConnection) new URL("https://sso.ui.ac.id/oauth/lockdin/resource?access_token="+resultSessionId).openConnection();
+			conResource.setDoOutput(true);
+			
+			Scanner s2 = new Scanner(conResource.getInputStream()).useDelimiter("\\A");
+			String resultResourceJSON = s2.hasNext() ? s2.next() : "";
+			System.out.println(resultResourceJSON);
+			Map<String, Object> resultResourceMap = jsonParser.parseMap(resultResourceJSON);
+			String resultUserId = resultResourceMap.get("user_id").toString();
+			System.out.println(resultUserId);
+		}
+		catch(Exception e){
+			System.out.println("error "+e);
+		}
+		
+		return "redirect:/";
+	}
+	
     @RequestMapping("/staf-verifikasi/daftar-mhs")
     public String daftarMhsVerifikator (Model model)
     {
