@@ -43,3 +43,4 @@ public interface DataKesehatanMapper {
 	void updateDataKesehatan(DataKesehatanModel dataKesehatan);
 	
 }
+

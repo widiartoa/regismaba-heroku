@@ -264,8 +264,8 @@
 					</div>
 					<div th:if="${biodata.status_verifikasi.equals('Not verified yet')}">
 						<div class="modal-footer">
-						  	<a  th:href="'/staf-verifikasi/daftar-mhs/verified/' + ${mahasiswa.npm}">
-						  		<button style="display:inline-block;" th:id="'verify'+${mahasiswa.npm}" type="button" class="btn btn-success">Verifikasi</button>
+						  	<a>
+						  		<button style="display:inline-block;" type="button" class="btn btn-success" data-toggle="modal" data-target="#confirm">Verifikasi</button>
 						  	</a>
 						 	<a>
 						 		<button style="display:inline-block;" th:id="'unverify'+${mahasiswa.npm}" type="button" class="btn btn-warning" data-toggle="collapse" data-target="#commentForm" th:onclick="'toggle(' + ${mahasiswa.npm}  + ')'">Belum Sesuai</button>
@@ -281,9 +281,20 @@
 						  		<button id="submitComment" type="submit" class="btn btn-success" value="Upload">Simpan</button>
 						  		<button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
 						  	</div>
-						</form>
+							</form>
 						</div>
-						
+						<div id="confirm" class="modal fade" role="dialog">
+							<div class="modal-dialog">
+								<div class="modal-content">
+									<div class="modal-body">
+										<h4>Apakah Anda yakin untuk verifikasi Isian Data Mahasiswa ini?</h4>
+										<a th:href="'/staf-verifikasi/daftar-mhs/verified/' + ${mahasiswa.npm}">
+											<button style="display:inline-block;" th:id="'verify'+${mahasiswa.npm}" type="button" class="btn btn-success">Verifikasi</button>
+										</a>
+									</div>
+								</div>
+							</div>
+						</div>
 					</div>
 					
 					<div th:if="${biodata.status_verifikasi.equals('Verified')}">

@@ -43,4 +43,7 @@ public interface VerifikasiIDMService
     String parseWaktuUpdateBiodata(BiodataModel biodata);
     
     String parseTanggalLahirBiodata(BiodataModel biodata);
+   
+    String selectUserEmail(String username);
+    
 }

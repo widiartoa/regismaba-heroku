@@ -22,11 +22,11 @@
 		<div id="registrasi" class="tabcontent">
 			<div class="content-table">
 				<div class="row">
-					<div class="col-sm-6">
+					<div class="col-sm-9">
 						<h4>Daftar Jadwal Registrasi</h4>
 					</div>
 					<!-- Trigger the modal with a button -->
-					<div class="col-sm-6">
+					<div class="col-sm-3">
 						<button type="button" class="btn btn-info pull-right"
 							data-toggle="modal" data-target="#myModal"
 							title="Buat Jadwal Baru">
@@ -125,9 +125,6 @@
 								<h4 th:text="'Kapasitas'">Kapasitas</h4>
 							</td>
 							<td>
-								<h4 th:text="'Fakultas'">Fakultas</h4>
-							</td>
-							<td>
 								<h4 th:text="'Hapus Jadwal'">Hapus Jadwal</h4>
 							</td>
 						</tr>
@@ -139,7 +136,6 @@
 							<td th:text="${jadwalRegis.waktu_awal}">Waktu Awal</td>
 							<td th:text="${jadwalRegis.waktu_akhir}">Waktu Akhir</td>
 							<td th:text="${jadwalRegis.kapasitas}">Kapasitas</td>
-							<td th:text="${jadwalRegis.fakultas}">Fakultas</td>
 							<td><a th:href="'/staf-registrasi/daftar-jadwal/'+ ${jadwalRegis.jadwal_registrasi_id} + '/hapus'" class="btn btn-danger"> <i
 									class="glyphicon glyphicon-remove"></i>
 							</a></td>
@@ -152,10 +148,40 @@
 		<div id="tes-kesehatan" class="tabcontent">
 			<div class="content-table">
 				<div class="row">
-					<div class="col-sm-6">
+					<div class="col-sm-12">
 						<h4>Daftar Jadwal Tes Kesehatan</h4>
 					</div>
 				</div>
+				<table class="table">
+					<thead>
+						<tr>
+							<td>
+								<h4 th:text="'Tanggal'">Tanggal</h4>
+							</td>
+							<td>
+								<h4 th:text="'Hari'">Hari</h4>
+							</td>
+							<td>
+								<h4 th:text="'Rentang Waktu'">Waktu Awal</h4>
+							</td>
+							<td>
+								<h4 th:text="'Rentang Waktu'">Waktu Akhir</h4>
+							</td>
+							<td>
+								<h4 th:text="'Kapasitas'">Kapasitas</h4>
+							</td>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="jadwalTesKes,iterationStatus: ${jadwalTesKesList}">
+							<td th:text="${jadwalTesKes.tanggal}">Tanggal</td>
+							<td th:text="${jadwalTesKes.hari}">Hari</td>
+							<td th:text="${jadwalTesKes.waktu_awal}">Waktu Awal</td>
+							<td th:text="${jadwalTesKes.waktu_akhir}">Waktu Akhir</td>
+							<td th:text="${jadwalTesKes.kapasitas}">Kapasitas</td>
+						</tr>
+					</tbody>
+				</table>
 			</div>
 		</div>
 
@@ -166,6 +192,36 @@
 						<h4>Daftar Jadwal EPT</h4>
 					</div>
 				</div>
+				<table class="table">
+					<thead>
+						<tr>
+							<td>
+								<h4 th:text="'Tanggal'">Tanggal</h4>
+							</td>
+							<td>
+								<h4 th:text="'Hari'">Hari</h4>
+							</td>
+							<td>
+								<h4 th:text="'Rentang Waktu'">Waktu Awal</h4>
+							</td>
+							<td>
+								<h4 th:text="'Rentang Waktu'">Waktu Akhir</h4>
+							</td>
+							<td>
+								<h4 th:text="'Kapasitas'">Kapasitas</h4>
+							</td>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="jadwalEpt,iterationStatus: ${jadwalEptList}">
+							<td th:text="${jadwalEpt.tanggal}">Tanggal</td>
+							<td th:text="${jadwalEpt.hari}">Hari</td>
+							<td th:text="${jadwalEpt.waktu_awal}">Waktu Awal</td>
+							<td th:text="${jadwalEpt.waktu_akhir}">Waktu Akhir</td>
+							<td th:text="${jadwalEpt.kapasitas}">Kapasitas</td>
+						</tr>
+					</tbody>
+				</table>
 			</div>
 		</div>
 	</div>

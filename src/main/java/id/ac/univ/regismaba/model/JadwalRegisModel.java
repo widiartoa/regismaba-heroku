@@ -14,7 +14,6 @@ public class JadwalRegisModel {
 	String waktu_akhir;
 	String fakultas;
 	int kapasitas;
-	int fakultas_id;
 	String created_by;
 	Date created_at;
 	String updated_by;

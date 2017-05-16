@@ -1,5 +1,7 @@
 package id.ac.univ.regismaba.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -30,5 +32,10 @@ public class DataKesehatanServiceImplement implements DataKesehatanService {
 		// TODO Auto-generated method stub
 		return dataKesehatanMapper.selectDataKesehatanByUsername(username);
 	}
+	
+//	@Override
+//	public List<DataKesehatanModel> selectAllDataKesehatan() {
+//	    return dataKesehatanMapper.selectAllDataKesehatan ();
+//	}
 
 }

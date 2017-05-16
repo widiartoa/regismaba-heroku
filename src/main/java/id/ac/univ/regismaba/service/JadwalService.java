@@ -18,6 +18,10 @@ public interface JadwalService {
 	void insertJadwalRegis(String hari, String waktu_awal, String waktu_akhir, int kapasitas) throws ParseException;
 	
 	List<JadwalRegisModel> selectAllJadwalRegis();
+
+	List<JadwalKesehatanModel> selectAllJadwalTesKes();
+	
+	List<JadwalEptModel> selectAllJadwalEpt();
 	
 	void deleteJadwalRegis(int jadwal_registrasi_id);
 

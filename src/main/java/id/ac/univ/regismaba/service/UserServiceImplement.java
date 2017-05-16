@@ -9,7 +9,7 @@ import id.ac.univ.regismaba.model.UserModel;
 @Service
 public class UserServiceImplement implements UserService{
 
-	@Autowired
+        @Autowired
 	UserMapper userMapper;
 	
 	@Autowired

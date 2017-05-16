@@ -11,10 +11,14 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import id.ac.univ.regismaba.model.RoleModel;
 import id.ac.univ.regismaba.model.SkemaBiayaModel;
 import id.ac.univ.regismaba.model.TingkatRoleModel;
+import id.ac.univ.regismaba.model.UserModel;
+import id.ac.univ.regismaba.service.RoleService;
 import id.ac.univ.regismaba.service.SkemaBiayaService;
 import id.ac.univ.regismaba.service.TingkatRoleService;
+import id.ac.univ.regismaba.service.UserService;
 
 @Controller
 public class SkemaBiayaController {
@@ -25,12 +29,29 @@ public class SkemaBiayaController {
 	@Autowired
 	TingkatRoleService trs;
 	
+	@Autowired
+	UserService us;
+	
+	@Autowired
+	RoleService rs;
+	
 	@RequestMapping("/staf-kesejahteraan/skema-pembayaran/daftar")
 	public String viewAllRincianSkemaPembayaran(Model model)
 	{
-		List<SkemaBiayaModel> schemas = sbs.selectAllSBM();
+		String username = "irsyadillah.nuralifa";
+		UserModel user =  us.selectUser(username);
+		RoleModel role = rs.selectRole(user.getId_role());
 		
-		model.addAttribute("schemas", schemas);
+		if(role.getTingkat_role_id() == 1){
+			List<SkemaBiayaModel> schemas = sbs.selectAllSBM();
+			
+			model.addAttribute("schemas", schemas);
+		}
+		else{
+			List<SkemaBiayaModel> schemas = sbs.selectAllSBMByFacultyLevel();
+			
+			model.addAttribute("schemas", schemas);
+		}
 		
 		return "staf_kesejahteraan-daftar_rincian_skema";
 	}

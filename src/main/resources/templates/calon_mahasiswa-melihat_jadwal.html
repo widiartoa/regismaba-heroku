@@ -11,11 +11,13 @@
 	<div class="container">
 		<div class="content">
 			<div class="row">
-				<div class="col-sm-12"><h3>Home</h3></div>
+				<div class="col-sm-12">
+					<h3>Home</h3>
+				</div>
 			</div>
-			
-			<hr/>
-			
+
+			<hr />
+
 			<div class="row">
 				<div class="col-sm-6">
 					<table class="tg">
@@ -35,81 +37,135 @@
 							<td>Program Studi</td>
 							<td th:text="${mahasiswa.program_studi.nama_program_studi}">ProgramStudi</td>
 						</tr>
-						<tr>
-							<td>Status Pengajuan Pembayaran</td>
-							<td th:text="${psbm.status_pengajuan}">Unverified Ceritanya</td>
-						</tr>
-						<tr>
-							<td>Status Verifikasi IDM</td>
-							<td th:text="${mahasiswa.biodata.status_verifikasi}">Unverified Ceritanya</td>
-						</tr>
+						<div th:if="${psbm == null}">
+							<tr>
+								<td>Status Pengajuan Pembayaran</td>
+								<td>Belum Mengisi Pengajuan Pembayaran</td>
+							</tr>
+						</div>
+						<div th:unless="${psbm == null}">
+							<tr>
+								<td>Status Pengajuan Pembayaran</td>
+								<td th:text="${psbm.status_pengajuan}">Unverified Ceritanya</td>
+							</tr>
+							<div th:if="${psbm.komentar != null}">
+								<tr>
+									<td></td>
+									<td th:text="'&quot;'+${psbm.komentar}+'&quot;'">Komentar</td>
+								</tr>
+							</div>
+						</div>
+						
+						<div th:if="${mahasiswa.biodata == null}">
+							<tr>
+								<td>Status Verifikasi IDM</td>
+								<td>Belum Mengisi IDM</td>
+							</tr>
+						</div>
+						<div th:unless="${mahasiswa.biodata == null}">
+							<tr>
+								<td>Status Verifikasi IDM</td>
+								<td th:text="${mahasiswa.biodata.status_verifikasi}">Unverified Ceritanya</td>
+							</tr>
+							<div th:if="${mahasiswa.biodata.komentar != null}">
+								<tr>
+									<td></td>
+									<td th:text="'&quot;'+${mahasiswa.biodata.komentar}+'&quot;'">Komentar</td>
+								</tr>
+							</div>
+						</div>
 					</table>
 				</div>
 				<div class="col-sm-6">
-					<div class="col-xs-6 col-md-6" style="float:right;" >
-						<a href="#" class="thumbnail">
-						  <img src="/img/logo.png" alt="profpic"/>
+					<div class="col-xs-6 col-md-6" style="float: right;">
+						<a href="#" class="thumbnail"> <img src="/img/logo.png"
+							alt="profpic" />
 						</a>
 					</div>
 				</div>
 			</div>
-			
-			<br/>
-			
+
+			<br />
+
 			<div class="row">
-				<div class="col-sm-12"><h3>Jadwal</h3></div>
+				<div class="col-sm-12">
+					<h3>Jadwal</h3>
+				</div>
 			</div>
 
-			<hr/>
-			
+			<hr />
+
 			<div class="table-responsive">
 				<table class="table">
 					<thead>
 						<tr>
 							<th>Jenis Jadwal</th>
-							<th style="text-align:center;">Day</th>
-							<th style="text-align:center;">Date</th>
-							<th style="text-align:center;">Timespan</th>
+							<th style="text-align: center;">Day</th>
+							<th style="text-align: center;">Date</th>
+							<th style="text-align: center;">Timespan</th>
 						</tr>
 					</thead>
 					<tbody>
-						<tr>
+						<tr th:if="${jadwalRegis!=null}">
 							<td th:text="'Jadwal Registrasi'">Jenis Jadwal</td>
-							<td th:text="${jadwalRegis.hari}" style="text-align:center;">Hari</td>
-							<td th:text="${jadwalRegis.tanggal}" style="text-align:center;">Tanggal</td>
-							<td th:text="${jadwalRegis.waktu_awal}+'-'+${jadwalRegis.waktu_akhir}" style="text-align:center;">Waktu
-								Awal-Waktu Akhir</td>
+							<td th:text="${jadwalRegis.hari}" style="text-align: center;">Hari</td>
+							<td th:text="${jadwalRegis.tanggal}" style="text-align: center;">Tanggal</td>
+							<td
+								th:text="${jadwalRegis.waktu_awal}+'-'+${jadwalRegis.waktu_akhir}"
+								style="text-align: center;">Waktu Awal-Waktu Akhir</td>
 						</tr>
-						<tr>
+						<tr th:if="${jadwalRegis==null}">
+							<td th:text="'Jadwal Registrasi belum ditentukan'">Jenis Jadwal</td>
+							<td></td>
+							<td></td>
+							<td></td>
+						</tr>
+						<tr th:if="${jadwalTesKes!=null}">
 							<td th:text="'Jadwal Tes Kesehatan'">Jenis Jadwal</td>
-							<td th:text="${hariTesKes}" style="text-align:center;">Hari</td>
-							<td th:text="${waktuTesKes}" style="text-align:center;">Tanggal</td>
-							<td th:text="${timestampAwalTesKes}+'-'+${timestampAkhirTesKes}" style="text-align:center;">Waktu
-								Awal-Waktu Akhir</td>
+							<td th:text="${jadwalTesKes.hari}" style="text-align: center;">Hari</td>
+							<td th:text="${jadwalTesKes.tanggal}" style="text-align: center;">Tanggal</td>
+							<td
+								th:text="${jadwalTesKes.waktu_awal}+'-'+${jadwalTesKes.waktu_akhir}"
+								style="text-align: center;">Waktu Awal-Waktu Akhir</td>
 						</tr>
-						<tr>
+						<tr th:if="${jadwalTesKes==null}">
+							<td th:text="'Jadwal Tes Kesehatan belum ditentukan'">Jenis Jadwal</td>
+							<td></td>
+							<td></td>
+							<td></td>
+						</tr>
+						<tr th:if="${jadwalEpt!=null}">
 							<td th:text="'Jadwal English Profiency Test (EPT)'">Jenis
 								Jadwal</td>
-							<td th:text="${hariEpt}" style="text-align:center;">Hari</td>
-							<td th:text="${waktuEpt}" style="text-align:center;">Tanggal</td>
-							<td th:text="${timestampAwalEpt}+'-'+${timestampAkhirEpt}" style="text-align:center;">Waktu
-								Awal-Waktu Akhir</td>
+							<td th:text="${jadwalEpt.hari}" style="text-align: center;">Hari</td>
+							<td th:text="${jadwalEpt.tanggal}" style="text-align: center;">Tanggal</td>
+							<td
+								th:text="${jadwalEpt.waktu_awal}+'-'+${jadwalEpt.waktu_akhir}"
+								style="text-align: center;">Waktu Awal-Waktu Akhir</td>
+						</tr>
+						<tr th:if="${jadwalEpt==null}">
+							<td th:text="'Jadwal English Profiency Test (EPT) belum ditentukan'">Jenis Jadwal</td>
+							<td></td>
+							<td></td>
+							<td></td>
 						</tr>
 					</tbody>
 				</table>
 			</div>
-					
-			<div class="row" style="text-align:center; padding:3%;" >
+
+			<div class="row" style="text-align: center; padding: 3%;">
 				<div class="col-sm-12">
-					<a href="#" ><img src="/img/profile_timeline.png" alt="Timeline" style="width:100%;"/></a>
+					<a href="#"><img src="/img/profile_timeline.png"
+						alt="Timeline" style="width: 100%;" /></a>
 				</div>
 			</div>
 		</div>
 	</div>
-	
+
 	<div class="footer">Modul Registrasi Mahasiswa Baru</div>
 
 	<script type="text/javascript">
+		
 	</script>
 </body>
 </html>

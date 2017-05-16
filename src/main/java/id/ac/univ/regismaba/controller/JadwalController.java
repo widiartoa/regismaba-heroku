@@ -46,39 +46,26 @@ public class JadwalController {
 
 		model.addAttribute("mahasiswa", mahasiswa);
 
-		int jadwalEptId = mahasiswa.getJadwal_ept_id();
-
-		JadwalEptModel jadwalEpt = jadwalService.selectJadwalEpt(jadwalEptId);
-
-		String hariEpt = jadwalService.parseHariEpt(jadwalEpt);
-		String waktuEpt = jadwalService.parseWaktuEpt(jadwalEpt);
-		String timestampAwalEpt = jadwalService.parseTimestampAwalEpt(jadwalEpt);
-		String timestampAkhirEpt = jadwalService.parseTimestampAkhirEpt(jadwalEpt);
-
-		model.addAttribute("hariEpt", hariEpt);
-		model.addAttribute("waktuEpt", waktuEpt);
-		model.addAttribute("timestampAwalEpt", timestampAwalEpt);
-		model.addAttribute("timestampAkhirEpt", timestampAkhirEpt);
-
-		int jadwalKesehatanId = mahasiswa.getJadwal_tes_kesehatan_id();
-
-		JadwalKesehatanModel jadwalKesehatan = jadwalService.selectJadwalKesehatan(jadwalKesehatanId);
-
-		String hariTesKes = jadwalService.parseHariTesKes(jadwalKesehatan);
-		String waktuTesKes = jadwalService.parseWaktuTesKes(jadwalKesehatan);
-		String timestampAwalTesKes = jadwalService.parseTimestampAwalTesKes(jadwalKesehatan);
-		String timestampAkhirTesKes = jadwalService.parseTimestampAkhirTesKes(jadwalKesehatan);
-
-		model.addAttribute("hariTesKes", hariTesKes);
-		model.addAttribute("waktuTesKes", waktuTesKes);
-		model.addAttribute("timestampAwalTesKes", timestampAwalTesKes);
-		model.addAttribute("timestampAkhirTesKes", timestampAkhirTesKes);
-
-		int jadwalRegisId = mahasiswa.getJadwal_registrasi_id();
-
-		JadwalRegisModel jadwalRegis = jadwalService.selectJadwalRegis(jadwalRegisId);
-
+		JadwalRegisModel jadwalRegis = null;
+		if (mahasiswa.getJadwal_registrasi_id() != 0) {
+			int jadwalRegisId = mahasiswa.getJadwal_registrasi_id();
+			jadwalRegis = jadwalService.selectJadwalRegis(jadwalRegisId);
+		}
 		model.addAttribute("jadwalRegis", jadwalRegis);
+
+		JadwalKesehatanModel jadwalTesKes = null;
+		if (mahasiswa.getJadwal_tes_kesehatan_id() != 0) {
+			int jadwalTesKesId = mahasiswa.getJadwal_tes_kesehatan_id();
+			jadwalTesKes = jadwalService.selectJadwalKesehatan(jadwalTesKesId);
+		}
+		model.addAttribute("jadwalTesKes", jadwalTesKes);
+
+		JadwalEptModel jadwalEpt = null;
+		if (mahasiswa.getJadwal_ept_id() != 0) {
+			int jadwalEptId = mahasiswa.getJadwal_ept_id();
+			jadwalEpt = jadwalService.selectJadwalEpt(jadwalEptId);
+		}
+		model.addAttribute("jadwalEpt", jadwalEpt);
 
 		PengajuanSkemaBiayaModel psbm = psbmService.selectPSBMFromUsername(mahasiswa.getUsername());
 		model.addAttribute("psbm", psbm);
@@ -90,6 +77,10 @@ public class JadwalController {
 	public String getAllJadwal(Model model) {
 		List<JadwalRegisModel> jadwalRegisList = jadwalService.selectAllJadwalRegis();
 		model.addAttribute("jadwalRegisList", jadwalRegisList);
+		List<JadwalKesehatanModel> jadwalTesKesList = jadwalService.selectAllJadwalTesKes();
+		model.addAttribute("jadwalTesKesList", jadwalTesKesList);
+		List<JadwalEptModel> jadwalEptList = jadwalService.selectAllJadwalEpt();
+		model.addAttribute("jadwalEptList", jadwalEptList);
 		return "staf_registrasi-daftar_jadwal";
 	}
 
@@ -104,6 +95,14 @@ public class JadwalController {
 	}
 
 	@RequestMapping("/staf-registrasi/daftar-jadwal/{jadwal_registrasi_id}/hapus")
+	public String reqDeleteJadwalRegis(Model model,
+			@PathVariable(value = "jadwal_registrasi_id") int jadwal_registrasi_id) {
+		JadwalRegisModel jadwalRegis = jadwalService.selectJadwalRegis(jadwal_registrasi_id);
+		model.addAttribute("jadwalRegis", jadwalRegis);
+		return "staf_registrasi-konfirmasi_hapus_jadwal";
+	}
+
+	@RequestMapping("/staf-registrasi/daftar-jadwal/{jadwal_registrasi_id}/hapus-konfirmasi")
 	public String deleteJadwalRegis(Model model,
 			@PathVariable(value = "jadwal_registrasi_id") int jadwal_registrasi_id) {
 		jadwalService.deleteJadwalRegis(jadwal_registrasi_id);
