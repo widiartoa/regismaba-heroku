@@ -3,7 +3,7 @@
 <head>
 <div th:replace="resources"></div>
 
-<title>Calon Mahasiswa - Mengisi IDM</title>
+<title>Calon Mahasiswa - Mengubah IDM</title>
 
 <!--  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"> </link>
   <link rel="stylesheet" href="/resources/demos/style.css"> </link>
@@ -368,12 +368,43 @@
 					<hr/>
 					
 					<div class="form-group">
-						<label for="ukuran_jaket">Pilih Ukuran Jaket :</label> 
-						<input type="radio" name="ukuran_jaket" value="S">S</input>
-						<input type="radio" name="ukuran_jaket" value="M">M</input>
-						<input type="radio" name="ukuran_jaket" value="L">L</input>
-						<input type="radio" name="ukuran_jaket" value="XL">XL</input>
-						<input type="radio" name="ukuran_jaket" value="XXL">XXL</input>
+						<label for="ukuran_jaket">Pilih Ukuran Jaket :</label>
+						<div th:if="${biodata.ukuran_jaket} == 'S'">
+							<input type="radio" name="ukuran_jaket" value="S" checked="checked">S</input>
+							<input type="radio" name="ukuran_jaket" value="M">M</input>
+							<input type="radio" name="ukuran_jaket" value="L">L</input>
+							<input type="radio" name="ukuran_jaket" value="XL">XL</input>
+							<input type="radio" name="ukuran_jaket" value="XXL">XXL</input>
+						</div>
+						<div th:if="${biodata.ukuran_jaket} == 'M'">
+							<input type="radio" name="ukuran_jaket" value="S">S</input>
+							<input type="radio" name="ukuran_jaket" value="M" checked="checked">M</input>
+							<input type="radio" name="ukuran_jaket" value="L">L</input>
+							<input type="radio" name="ukuran_jaket" value="XL">XL</input>
+							<input type="radio" name="ukuran_jaket" value="XXL">XXL</input>
+						</div>
+						<div th:if="${biodata.ukuran_jaket} == 'L'">
+							<input type="radio" name="ukuran_jaket" value="S">S</input>
+							<input type="radio" name="ukuran_jaket" value="M">M</input>
+							<input type="radio" name="ukuran_jaket" value="L" checked="checked">L</input>
+							<input type="radio" name="ukuran_jaket" value="XL">XL</input>
+							<input type="radio" name="ukuran_jaket" value="XXL">XXL</input>
+						</div>
+						<div th:if="${biodata.ukuran_jaket} == 'XL'">
+							<input type="radio" name="ukuran_jaket" value="S">S</input>
+							<input type="radio" name="ukuran_jaket" value="M">M</input>
+							<input type="radio" name="ukuran_jaket" value="L">L</input>
+							<input type="radio" name="ukuran_jaket" value="XL" checked="checked">XL</input>
+							<input type="radio" name="ukuran_jaket" value="XXL">XXL</input>
+						</div>
+						<div th:if="${biodata.ukuran_jaket} == 'XXL'">
+							<input type="radio" name="ukuran_jaket" value="S">S</input>
+							<input type="radio" name="ukuran_jaket" value="M">M</input>
+							<input type="radio" name="ukuran_jaket" value="L">L</input>
+							<input type="radio" name="ukuran_jaket" value="XL">XL</input>
+							<input type="radio" name="ukuran_jaket" value="XXL" checked="checked">XXL</input>
+						</div>
+						
 					</div>
 					
 					<hr/>
