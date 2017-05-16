@@ -41,6 +41,13 @@ public class AlamatServiceImplement implements AlamatService {
 		// TODO Auto-generated method stub
 		return alamatMapper.selectAlamat(jalan_id);
 	}
+
+	@Override
+	public void updateAlamat(AlamatModel alamat) {
+		alamatMapper.updateAlamat(alamat);
+	
+		
+	}
 	
 	
 
