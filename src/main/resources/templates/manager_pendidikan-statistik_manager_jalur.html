@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<div th:replace="resources"></div>
+		<title>Manager Pendidikan - Statistik Jalur</title>
+		
+		<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+	    <script type="text/javascript" th:inline="javascript">
+		    /*<![CDATA[*/
+				// Load the Visualization API and the corechart package.
+			    google.charts.load('current', {'packages':['corechart']});
+			
+			    var p = [[${paths}]];
+			    var rp = [[${regPaths}]];
+			    var sp = [[${sumPaths}]];
+			    
+			    // Set a callback to run when the Google Visualization API is loaded.
+			    google.charts.setOnLoadCallback(drawPathChart);
+			    google.charts.setOnLoadCallback(drawRegPathChart);
+			    google.charts.setOnLoadCallback(drawSumPathChart);
+			    
+			    // Callback that creates and populates a data table,
+			    // instantiates the pie chart, passes in the data and
+			    // draws it. 
+			    function drawPathChart() {
+			      // Create the data table.
+			      var data = new google.visualization.DataTable();
+			      data.addColumn('string', 'Jalur');
+			      data.addColumn('number', 'Jumlah');
+			      
+			      var total = 0;
+			      for(var i = 0; i < p.length; i++)
+		    	  {
+			    	  data.addRow([p[i].jenis_rekap, p[i].jumlah]);
+			    	  total = total+p[i].jumlah;
+		    	  }
+			 	
+			      // Set chart options
+			      var options = {'title':'Pendaftar Jalur (Total : ' + total + ')',
+			                     'width':500,
+			                     'height':300};
+			
+			      // Instantiate and draw our chart, passing in some options.
+				  var chart = new google.visualization.PieChart(document.getElementById('path'));
+			      chart.draw(data, options);
+			      console.log("chart");
+			    }
+			    
+			    function drawRegPathChart() {
+			      // Create the data table.
+			      var data = new google.visualization.DataTable();
+			      data.addColumn('string', 'Jalur');
+			      data.addColumn('number', 'Jumlah');
+			      
+			      var total = 0;
+			      for(var i = 0; i < rp.length; i++)
+		    	  {
+			    	  data.addRow([rp[i].jenis_rekap, rp[i].jumlah]);
+			    	  total = total+rp[i].jumlah;
+		    	  }
+			 	
+			      // Set chart options
+			      var options = {'title':'Registran Jalur (Total : ' + total + ')',
+			                     'width':500,
+			                     'height':300};
+			
+			      // Instantiate and draw our chart, passing in some options.
+				  var chart1 = new google.visualization.PieChart(document.getElementById('regPath_pie'));
+				  var chart2 = new google.visualization.BarChart(document.getElementById('regPath_bar'));
+			      chart1.draw(data, options);
+			      chart2.draw(data, options);
+			    }
+			    
+			    function drawSumPathChart() {
+			      // Create the data table.
+			      var data = new google.visualization.DataTable();
+			      
+			      data.addColumn('string', 'Jalur');
+			      data.addColumn('number', 'Total Pendaftar');
+			      data.addColumn('number', 'Pendaftar Ulang');
+			      data.addColumn('number', 'Tidak Mendaftar');
+			      
+			      for(var i = 0; i < sp.length; i++)
+		    	  {
+			    	  data.addRow([sp[i].nama, sp[i].total, sp[i].regis, sp[i].non_regis]);
+		    	  }
+			 	
+			      // Set chart options
+			      var options = {'title':'Registran Data Program',
+			                     'width':500,
+			                     'height':300};
+			
+			      // Instantiate and draw our chart, passing in some options.
+				  var chart2 = new google.visualization.BarChart(document.getElementById('sumPath_bar'));
+				  chart2.draw(data, options);
+			    }
+		    /*]]>*/
+	    </script>
+	</head>
+	<body>
+		<div th:include="manager_pendidikan-navbar"></div>
+	
+			<div class="content">
+				<div class="row">
+					<div class="col-sm-12">
+						<h3>Statistik Registrasi Mahasiswa Baru</h3>
+						<h4>Program</h4>
+					</div>
+				</div>
+				
+				<hr/>
+				
+				<table align="center">
+					<tbody>
+						<tr>
+							<td th:id="'sumPath_bar'"></td>
+							<td th:id="'path'"></td>
+						</tr>
+						<tr>
+							<td th:id="'regPath_pie'"></td>
+							<td th:id="'regPath_bar'"></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+	
+		<div class="footer">Modul Registrasi Mahasiswa Baru</div>
+	</body>
+</html>

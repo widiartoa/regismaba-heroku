@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 	<head>
 		<div th:replace="resources"></div>
-		<title>Manager Pendidikan - Statistik Jenjang</title>
+		<title>Manager Pendidikan - Statistik Program</title>
 		
 		<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 	    <script type="text/javascript" th:inline="javascript">
@@ -83,7 +83,6 @@
 			      for(var i = 0; i < sp.length; i++)
 		    	  {
 			    	  data.addRow([sp[i].nama, sp[i].total, sp[i].regis, sp[i].non_regis]);
-			    	  //data.addRow(['lala', 1, 1, 1]);
 		    	  }
 			 	
 			      // Set chart options
