@@ -306,7 +306,7 @@ public class BiodataController {
         
         
         //SCAN FORM SURVEY KESEHATAN UPLOAD//
-        DataKesehatanModel dkm = new DataKesehatanModel();
+//        DataKesehatanModel dkm = new DataKesehatanModel();
         
 //        Path data7 = storageService.load(form_survey_kesehatan.getOriginalFilename());
 //        String pdb7 = MvcUriComponentsBuilder
@@ -364,28 +364,28 @@ public class BiodataController {
 		bio.setJalan_id(alamatDAO.selectJalanId(alamat));
 
 		
-		AsuransiKesehatanModel asuransiKesehatan = new AsuransiKesehatanModel();
+//		AsuransiKesehatanModel akm = new AsuransiKesehatanModel();
 		
-		//SCAN KARTU ASURANSI
-        Path data8 = storageService.load(scan_kartu.getOriginalFilename());
-        String pdb8 = MvcUriComponentsBuilder
-                .fromMethodName(BiodataController.class, "serveFile", data8.getFileName().toString())
-                .build().toString();
-        
-        asuransiKesehatan.setScan_kartu(pdb8);
+//		//SCAN KARTU ASURANSI
+//        Path data8 = storageService.load(scan_kartu.getOriginalFilename());
+//        String pdb8 = MvcUriComponentsBuilder
+//                .fromMethodName(BiodataController.class, "serveFile", data8.getFileName().toString())
+//                .build().toString();
+//        
+//        akm.setScan_kartu(pdb8);
 		
-		asuransiKesehatan.setNomor_asuransi(nomor_asuransi);
-		asuransiKesehatan.setUsername(name);
-		asuransiKesehatan.setNomor_penerbit_asuransi(nomor_penerbit_asuransi);
-		asuransiKesehatan.setExpired_date(expiredDate);
-		asuransiKesehatan.setCreated_by(name);
-		asuransiKesehatan.setUpdated_by(name);
-		asuransiKesehatan.setUpdated_at(null);
+		akm.setNomor_asuransi(nomor_asuransi);
+		akm.setUsername(name);
+		akm.setNomor_penerbit_asuransi(nomor_penerbit_asuransi);
+		akm.setExpired_date(expiredDate);
+		akm.setCreated_by(name);
+		akm.setUpdated_by(name);
+		akm.setUpdated_at(null);
 		
 		biodataDAO.insertBiodata(bio);
 		ijazahDAO.addIjazah(ijazah);
 		dataKesehatanDAO.insertDataKesehatan(dkm);
-		asuransiKesehatanDAO.insertAsuransiKesehatan(asuransiKesehatan);
+		asuransiKesehatanDAO.insertAsuransiKesehatan(akm);
 		
 		MahasiswaModel mahasiswa = mahasiswaDAO.selectMahasiswaByUsername(name);
 		if (mahasiswa != null){
