@@ -110,8 +110,8 @@ public class SkemaBiayaController {
 		
 		for(int index=0; index < s.size(); index++)
 		{
-//			StatistikManagerSummaryModel schema = sbs.summarySchema(s.get(index).getGolongan_id());
-//			if(schema != null) { schemas.add(schema); }
+			StatistikManagerSummaryModel schema = sbs.summarySchema(s.get(index).getGolongan_id());
+			if(schema != null) { schemas.add(schema); }
 		}
 		
 		model.addAttribute("schemas", schemas);
