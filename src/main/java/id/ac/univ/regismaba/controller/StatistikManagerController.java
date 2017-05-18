@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import id.ac.univ.regismaba.model.FakultasModel;
+import id.ac.univ.regismaba.model.JalurModel;
 import id.ac.univ.regismaba.model.JenjangModel;
 import id.ac.univ.regismaba.model.ProgramModel;
 import id.ac.univ.regismaba.model.ProgramStudiModel;
@@ -134,6 +135,27 @@ public class StatistikManagerController {
 	@RequestMapping("/manager-pendidikan/statistik-manager/jalur")
 	public String statistikManagerJalur(Model model)
 	{
+		List<JalurModel> j = sms.getPaths();
+		ArrayList<StatistikManagerModel> paths = new ArrayList<StatistikManagerModel>();
+		ArrayList<StatistikManagerModel> regPaths = new ArrayList<StatistikManagerModel>();
+		ArrayList<StatistikManagerSummaryModel> sumPaths = new ArrayList<StatistikManagerSummaryModel>();
+		
+		for(int i=0; i < j.size(); i++)
+		{
+			StatistikManagerModel jalur = sms.selectJalur(j.get(i).getJalur_id());
+			if(jalur != null) { paths.add(jalur); }
+			
+			StatistikManagerModel jalur2 = sms.selectRegistranJalur(j.get(i).getJalur_id());
+			if(jalur2 != null) { regPaths.add(jalur2); }
+			
+			StatistikManagerSummaryModel jalur3 = sms.summaryPath(j.get(i).getJalur_id());
+			if(jalur3 != null) { sumPaths.add(jalur3); }
+		}
+		
+		model.addAttribute("paths", paths);
+		model.addAttribute("regPaths", regPaths);
+		model.addAttribute("sumPaths", sumPaths);
+		
 		return "manager_pendidikan-statistik_manager_jalur";
 	}
 }
