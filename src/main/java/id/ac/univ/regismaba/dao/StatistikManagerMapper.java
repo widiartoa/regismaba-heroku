@@ -83,6 +83,12 @@ public interface StatistikManagerMapper {
 			+ "b.sidik_jari is not null and p.program_id=#{program_id} group by p.nama_program")
 	StatistikManagerModel selectRegistranProgram(@Param("program_id") int program_id);
 	
+	@Select("select j.nama_jalur as jenis_rekap, count(*) as jumlah from jalur j, "
+			+ "mahasiswa m, biodata b, pengajuan_skema_pembayaran psp where "
+			+ "m.username=b.username and m.username=psp.username and j.jalur_id=m.jalur_id and "
+			+ "b.sidik_jari is not null and j.jalur_id=#{jalur_id} group by j.nama_jalur")
+	StatistikManagerModel selectRegistranJalur(@Param("jalur_id") int jalur_id);
+	
 	@Select("select nama_fakultas as nama, "
 			+ "(select count(*) from mahasiswa m, program_studi p, fakultas f where m.program_studi_id=p.program_studi_id and p.fakultas_id=f.fakultas_id and f.fakultas_id=#{fakultas_id}) as total, "
 			+ "(select count(*) from mahasiswa m, program_studi p, fakultas f, biodata b, pengajuan_skema_pembayaran s where m.program_studi_id=p.program_studi_id and p.fakultas_id=f.fakultas_id and m.username=b.username and m.username=s.username and b.sidik_jari is not null and f.fakultas_id=#{fakultas_id}) as regis, "

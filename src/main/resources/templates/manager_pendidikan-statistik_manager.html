@@ -3,6 +3,7 @@
 	<head>
 		<div th:replace="resources"></div>
 		<title>Manager Pendidikan - Statistik Registrasi</title>
+		
 		<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 	    <script type="text/javascript" th:inline="javascript">
 		    /*<![CDATA[*/
@@ -350,7 +351,32 @@
 						<h3>Statistik Registrasi Mahasiswa Baru</h3>
 					</div>
 				</div>
-				 
+				
+				 <!-- 
+				<div>
+					<p>
+					  <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseFaculty" aria-expanded="false" aria-controls="collapseFaculty">
+					    Button with data-target
+					  </button>
+					</p>
+					<div class="collapse" id="collapseFaculty">
+					  <div class="card card-block">
+					    <table>
+							<tbody>
+								<tr>
+									<td th:id="'sumFaculty_bar'"></td>
+									<td th:id="'faculty'"></td>
+								</tr>
+								<tr>
+									<td th:id="'regFaculty_pie'"></td>
+									<td th:id="'regFaculty_bar'"></td>
+								</tr>
+							</tbody>
+						</table>
+					  </div>
+					</div>
+		        </div>
+				 -->
 				<div class="tab">
 					<button class="tablinks" onclick="openJadwal(event, 'tabFakultas')" id="defaultOpen">
 						Fakultas
@@ -365,7 +391,7 @@
 						Program
 					</button>
 				</div>
-				
+			
 				<div id="tabFakultas" class="tabcontent">
 					<h4>Statistik Registrasi - Fakultas</h4>
 					
@@ -384,7 +410,7 @@
 						</tbody>
 					</table>
 				</div>
-				
+	
 				<div id="tabProdi" class="tabcontent">
 					<h4>Statistik Registrasi - Program Studi</h4>
 					
@@ -441,7 +467,6 @@
 						</tbody>
 					</table>
 				</div>
-				
 			</div>
 	
 		<div class="footer">Modul Registrasi Mahasiswa Baru</div>

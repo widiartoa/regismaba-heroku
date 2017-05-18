@@ -2,7 +2,10 @@ package id.ac.univ.regismaba.service;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 import id.ac.univ.regismaba.model.FakultasModel;
+import id.ac.univ.regismaba.model.JalurModel;
 import id.ac.univ.regismaba.model.JenjangModel;
 import id.ac.univ.regismaba.model.ProgramModel;
 import id.ac.univ.regismaba.model.ProgramStudiModel;
@@ -42,4 +45,12 @@ public interface StatistikManagerService {
 	StatistikManagerSummaryModel summaryLevel(int jenjang_id);
 	
 	StatistikManagerSummaryModel summaryProgram(int program_id);
+	
+	StatistikManagerModel selectJalur(int jalur_id);
+	
+	List<JalurModel> getPaths();
+	
+	StatistikManagerModel selectRegistranJalur(int jalur_id);
+	
+	StatistikManagerSummaryModel summaryPath(int jalur_id);
 }
