@@ -12,6 +12,7 @@ import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
 import id.ac.univ.regismaba.model.SkemaBiayaModel;
+import id.ac.univ.regismaba.model.StatistikManagerSummaryModel;
 import id.ac.univ.regismaba.model.TingkatRoleModel;
 
 @Mapper
@@ -42,4 +43,12 @@ public interface SkemaBiayaMapper {
 	@Select("select * from skema_pembayaran where tingkat_role_id=2")
 	@Results(@Result(property="tingkat_role", column="tingkat_role_id", javaType=TingkatRoleModel.class, one=@One(select="selectRole")))
 	List<SkemaBiayaModel> selectAllSBMByFacultyLevel();
+	
+	@Select("select golongan_id as nama, "
+			+ "(select count(*) from mahasiswa m, pengajuan_skema_pembayaran p where m.username=p.username and p.golongan_id=#{golongan_id}) as total, "
+			+ "(select count(*) from mahasiswa m, biodata b, pengajuan_skema_pembayaran s where m.username=b.username and m.username=s.username and s.golongan_id=#{golongan_id}) as regis, "
+			+ "((select count(*) from mahasiswa m, pengajuan_skema_pembayaran p where m.username=p.username and p.golongan_id=#{golongan_id}) - "
+			+ "(select count(*) from mahasiswa m, biodata b, pengajuan_skema_pembayaran s where m.username=b.username and m.username=s.username and s.golongan_id=#{golongan_id})) as non_regis "
+			+ "from skema_pembayaran where golongan_id=#{golongan_id}")
+	StatistikManagerSummaryModel summarySchema(@Param("golongan_id") int golongan_id);
 }
