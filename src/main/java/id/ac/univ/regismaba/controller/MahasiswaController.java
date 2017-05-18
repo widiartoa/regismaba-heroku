@@ -43,6 +43,15 @@ public class MahasiswaController {
     @Autowired
     MahasiswaService mahasiswaDAO;
 	
+	/**
+	*	1 : Mahasiswa
+	*	2 : Verifikator
+	*	3 : Staf Registrasi
+	*	4 : Staf Kesejahteraan M
+	*	5 : Staf Kesehatan Mahas
+	*	6 : Manajer Pendidikan
+	*
+	*/
 	@RequestMapping("/")
 	public String index(Model model,
 		@RequestParam(value = "error", required = false) String error) 
@@ -51,6 +60,16 @@ public class MahasiswaController {
 		Collection<? extends GrantedAuthority> authorities = auth.getAuthorities();
 		if (authorities.contains(new SimpleGrantedAuthority("1"))){
 			return "redirect:/calon-mahasiswa/";
+		} else if(authorities.contains(new SimpleGrantedAuthority("2"))) {
+			return "redirect:/staf-verifikasi/";
+		} else if(authorities.contains(new SimpleGrantedAuthority("3"))) {
+			return "redirect:/staf-registrasi/";
+		} else if(authorities.contains(new SimpleGrantedAuthority("4"))) {
+			return "redirect:/staf-kesejahteraan/";
+		} else if(authorities.contains(new SimpleGrantedAuthority("5"))) {
+			return "redirect:/staf-kesehatan/";
+		} else if(authorities.contains(new SimpleGrantedAuthority("6"))) {
+			return "redirect:/manajer-pendidikan/";
 		} else {
 			model.addAttribute("error", error != null);
 			return "index";
