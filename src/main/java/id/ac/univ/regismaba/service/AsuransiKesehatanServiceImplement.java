@@ -25,4 +25,11 @@ public class AsuransiKesehatanServiceImplement implements AsuransiKesehatanServi
 		return asuransiKesehatanMapper.selectAsuransiKesehatanByUsername(username);
 	}
 
+	@Override
+	public void updateAsuransiKesehatan(AsuransiKesehatanModel asuransiKesehatan) {
+		asuransiKesehatanMapper.updateAsuransiKesehatan(asuransiKesehatan);
+		// TODO Auto-generated method stub
+		
+	}
+
 }

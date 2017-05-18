@@ -36,4 +36,10 @@ public class BiodataServiceImplement implements BiodataService{
 	public BiodataModel selectBiodataByUsername(String username) {
 		return biodataMapper.selectBiodataByUsername(username);
 	}
+
+	@Override
+	public void updateBiodataByUsername(BiodataModel biodata) {
+		// TODO Auto-generated method stub
+		biodataMapper.updateBiodataByUsername(biodata);
+	}
 }

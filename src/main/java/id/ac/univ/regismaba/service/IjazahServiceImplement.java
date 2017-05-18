@@ -34,4 +34,10 @@ public class IjazahServiceImplement implements IjazahService
         log.info ("select ijazah with username {}", username);
         return ijazahMapper.selectIjazahByUsername(username);
     }
+
+	@Override
+	public void updateIjazah(IjazahModel ijazah) {
+		ijazahMapper.updateIjazah(ijazah);
+		
+	}
 }

@@ -10,5 +10,7 @@ public interface BiodataService {
 	String updateBiodata(String biodata_id);
 	
 	BiodataModel selectBiodataByUsername(String username);
+	
+	void updateBiodataByUsername(BiodataModel biodata);
 		
 }
