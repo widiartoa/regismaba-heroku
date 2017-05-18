@@ -22,7 +22,9 @@ import id.ac.univ.regismaba.service.JadwalService;
 import id.ac.univ.regismaba.service.MahasiswaService;
 import id.ac.univ.regismaba.service.PengajuanSkemaBiayaService;
 import id.ac.univ.regismaba.service.VerifikasiIDMService;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @Controller
 public class JadwalController {
 
@@ -108,4 +110,11 @@ public class JadwalController {
 		jadwalService.deleteJadwalRegis(jadwal_registrasi_id);
 		return "redirect:/staf-registrasi/daftar-jadwal";
 	}
+	
+	@PostMapping("/staf-registrasi/assign-jadwal")
+	public String assignJadwal(Model model, @RequestParam(value = "myArray[]", required = false) String[] myArray){
+		log.info("get array filled with {}", myArray[0]);
+		return "index";
+	}
+	
 }

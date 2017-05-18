@@ -3,6 +3,39 @@
 <head>
 <div th:replace="resources"></div>
 <title>Staf Registrasi - Daftar Jadwal</title>
+<meta name="_csrf" th:content="${_csrf.token}" />
+<meta name="_csrf_header" th:content="${_csrf.headerName}" />
+<link rel="stylesheet"
+	href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" />
+<link rel="stylesheet" href="/resources/demos/style.css" />
+<style>
+#sortable {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	width: 60%;
+}
+
+#sortable li {
+	margin: 0 3px 3px 3px;
+	padding: 0.1em;
+	padding-left: 1.5em;
+	font-size: 1em;
+	height: 30px;
+}
+
+#sortable li span {
+	position: absolute;
+	margin-left: -1.3em;
+}
+</style>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script>
+	$(function() {
+		$("#sortable").sortable();
+		$("#sortable").disableSelection();
+	});
+</script>
 </head>
 
 <body>
@@ -26,11 +59,18 @@
 						<h4>Daftar Jadwal Registrasi</h4>
 					</div>
 					<!-- Trigger the modal with a button -->
-					<div class="col-sm-3">
+					<div class="col-sm-1">
 						<button type="button" class="btn btn-info pull-right"
 							data-toggle="modal" data-target="#myModal"
 							title="Buat Jadwal Baru">
 							<i class="glyphicon glyphicon-plus"></i>
+						</button>
+					</div>
+					<!-- Trigger the modal with a button -->
+					<div class="col-sm-1">
+						<button type="button" class="btn btn-info" data-toggle="modal"
+							data-target="#myModal1" title="Assign Jadwal">
+							<i>Assign</i> Jadwal
 						</button>
 					</div>
 
@@ -54,9 +94,10 @@
 											<div class="row">
 												<div class="col-md-6">
 													<div class="form-group">
-														<label for="hari">Hari</label> 
-														<input type="date" name="hari" class="form-control" 
-															placeholder="YYYY-MM-DD" th:min="${#dates.format(#dates.createNow(), 'YYYY-MM-dd')}" required="true" />
+														<label for="hari">Hari</label> <input type="date"
+															name="hari" class="form-control" placeholder="YYYY-MM-DD"
+															th:min="${#dates.format(#dates.createNow(), 'YYYY-MM-dd')}"
+															required="true" />
 													</div>
 												</div>
 											</div>
@@ -105,6 +146,57 @@
 						</div>
 
 					</div>
+
+					<!-- Modal -->
+					<div class="modal fade" id="myModal1" role="dialog">
+						<div class="modal-dialog modal-lg">
+							<!-- Modal content-->
+							<div class="modal-content">
+								<div class="content-table">
+									<div class="modal-header">
+										<button type="button" class="close" data-dismiss="modal">&times;</button>
+										<h4 class="modal-title">
+											<i>Assign</i> Jadwal Baru
+										</h4>
+									</div>
+									<div class="modal-body">
+										<p>
+											<i>Assign</i> Jadwal akan membagikan secara otomatis jadwal
+											yang telah dibuat kepada seluruh mahasiswa dengan urutan
+											fakultas yang ditentukan
+										</p>
+										<p>
+											Tentukan urutan fakultas berikut ini untuk memulai <i>Assign</i>
+											Jadwal
+										</p>
+
+										<ul id="sortable">
+											<li id="Item 1" class="ui-state-default"><span
+												class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 1</li>
+											<li id="Item 2" class="ui-state-default"><span
+												class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 2</li>
+											<li id="Item 3" class="ui-state-default"><span
+												class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 3</li>
+											<li id="Item 4" class="ui-state-default"><span
+												class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 4</li>
+											<li id="Item 5" class="ui-state-default"><span
+												class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 5</li>
+											<li id="Item 6" class="ui-state-default"><span
+												class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 6</li>
+											<li id="Item 7" class="ui-state-default"><span
+												class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 7</li>
+										</ul>
+									</div>
+								</div>
+								<div class="modal-footer">
+									<button class="btn btn-default" onclick="submitSort()">Submit</button>
+								</div>
+							</div>
+
+						</div>
+
+					</div>
+
 				</div>
 				<table class="table">
 					<thead>
@@ -136,7 +228,9 @@
 							<td th:text="${jadwalRegis.waktu_awal}">Waktu Awal</td>
 							<td th:text="${jadwalRegis.waktu_akhir}">Waktu Akhir</td>
 							<td th:text="${jadwalRegis.kapasitas}">Kapasitas</td>
-							<td><a th:href="'/staf-registrasi/daftar-jadwal/'+ ${jadwalRegis.jadwal_registrasi_id} + '/hapus'" class="btn btn-danger"> <i
+							<td><a
+								th:href="'/staf-registrasi/daftar-jadwal/'+ ${jadwalRegis.jadwal_registrasi_id} + '/hapus'"
+								class="btn btn-danger"> <i
 									class="glyphicon glyphicon-remove"></i>
 							</a></td>
 						</tr>
@@ -228,7 +322,7 @@
 
 	<div class="footer navbar navbar-fixed-bottom">Modul Registrasi
 		Mahasiswa Baru</div>
-		
+
 	<script type="text/javascript">
 		$(document)
 				.ready(
@@ -251,8 +345,36 @@
 								i++;
 							}
 							document.getElementById('registrasi').style.display = "block";
-							evt.currentTarget.className += " active";
 						});
+		function submitSort() {
+			var sortedIDs = $("#sortable").sortable("toArray");
+			$.ajax({
+				type : "POST",
+				url : "/staf-registrasi/assign-jadwal",
+				data : {
+					myArray : sortedIDs
+				//notice that "myArray" matches the value for @RequestParam
+				//on the Java side
+				},
+				beforeSend : function(xhr) {
+					if (!header || !token) {
+						var token = $("meta[name='_csrf']").attr("content");
+						var header = $("meta[name='_csrf_header']").attr("content");
+						$(document).ajaxSend(function(e, xhr, options) {
+							xhr.setRequestHeader(header, token);
+						});
+					} else {
+						xhr.setRequestHeader(header, token);
+					}
+				},
+				success : function(response) {
+					// do something ... 
+				},
+				error : function(e) {
+					console.log('Error:', e);
+				}
+			});
+		}
 		function openJadwal(evt, jadwalName) {
 			var i, tabcontent, tablinks;
 			tabcontent = document.getElementsByClassName("tabcontent");
