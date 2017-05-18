@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<div th:replace="resources"></div>
+		<title>Manager Pendidikan - Statistik Jenjang</title>
+		
+		<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+	    <script type="text/javascript" th:inline="javascript">
+		    /*<![CDATA[*/
+				// Load the Visualization API and the corechart package.
+			    google.charts.load('current', {'packages':['corechart']});
+		    
+			    var l = [[${levels}]];
+			    var rl = [[${regLevels}]];
+			    var sl = [[${sumLevels}]];
+			    
+			    // Set a callback to run when the Google Visualization API is loaded.
+			    google.charts.setOnLoadCallback(drawLevelChart);
+			    google.charts.setOnLoadCallback(drawRegLevelChart);
+			    google.charts.setOnLoadCallback(drawSumLevelChart);
+			
+			    // Callback that creates and populates a data table,
+			    // instantiates the pie chart, passes in the data and
+			    // draws it. 
+			    function drawLevelChart() {
+			      // Create the data table.
+			      var data = new google.visualization.DataTable();
+			      data.addColumn('string', 'Jenjang');
+			      data.addColumn('number', 'Jumlah');
+			      
+			      var total = 0;
+			      for(var i = 0; i < l.length; i++)
+		    	  {
+			    	  data.addRow([l[i].jenis_rekap, l[i].jumlah]);
+			    	  total = total+l[i].jumlah;
+		    	  }
+			 	
+			      // Set chart options
+			      var options = {'title':'Pendaftar Jenjang (Total : ' + total + ')',
+			                     'width':500,
+			                     'height':300};
+			
+			      // Instantiate and draw our chart, passing in some options.
+				  var chart = new google.visualization.PieChart(document.getElementById('level'));
+			      chart.draw(data, options);
+			      console.log("chart");
+			    }
+			    
+			    function drawRegLevelChart() {
+			      // Create the data table.
+			      var data = new google.visualization.DataTable();
+			      data.addColumn('string', 'Jenjang');
+			      data.addColumn('number', 'Jumlah');
+			      
+			      var total = 0;
+			      for(var i = 0; i < rl.length; i++)
+		    	  {
+			    	  data.addRow([rl[i].jenis_rekap, rl[i].jumlah]);
+			    	  total = total+rl[i].jumlah;
+		    	  }
+			 	
+			      // Set chart options
+			      var options = {'title':'Registran Jenjang (Total : ' + total + ')',
+			                     'width':500,
+			                     'height':300};
+			
+			      // Instantiate and draw our chart, passing in some options.
+				  var chart1 = new google.visualization.PieChart(document.getElementById('regLevel_pie'));
+				  var chart2 = new google.visualization.BarChart(document.getElementById('regLevel_bar'));
+			      chart1.draw(data, options);
+			      chart2.draw(data, options);
+			    }
+			    
+			    function drawSumLevelChart() {
+			      // Create the data table.
+			      var data = new google.visualization.DataTable();
+			      
+			      data.addColumn('string', 'Jenjang');
+			      data.addColumn('number', 'Total Pendaftar');
+			      data.addColumn('number', 'Pendaftar Ulang');
+			      data.addColumn('number', 'Tidak Mendaftar');
+			      
+			      for(var i = 0; i < sl.length; i++)
+		    	  {
+			    	  data.addRow([sl[i].nama, sl[i].total, sl[i].regis, sl[i].non_regis]);
+		    	  }
+			 	
+			      // Set chart options
+			      var options = {'title':'Rincian Data Jenjang',
+			                     'width':500,
+			                     'height':300};
+			
+			      // Instantiate and draw our chart, passing in some options.
+				  var chart2 = new google.visualization.BarChart(document.getElementById('sumLevel_bar'));
+				  chart2.draw(data, options);
+			    }
+		    /*]]>*/
+	    </script>
+	</head>
+	<body>
+		<div th:include="manager_pendidikan-navbar"></div>
+	
+			<div class="content">
+				<div class="row">
+					<div class="col-sm-12">
+						<h3>Statistik Registrasi Mahasiswa Baru</h3>
+						<h4>Jenjang</h4>
+					</div>
+				</div>
+				
+				<hr/>
+				
+				<table align="center">
+					<tbody>
+						<tr>
+							<td th:id="'sumLevel_bar'"></td>
+							<td th:id="'level'"></td>
+						</tr>
+						<tr>
+							<td th:id="'regLevel_pie'"></td>
+							<td th:id="'regLevel_bar'"></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+	
+		<div class="footer">Modul Registrasi Mahasiswa Baru</div>
+	</body>
+</html>
