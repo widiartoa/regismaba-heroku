@@ -22,7 +22,7 @@ public class StatistikManagerController {
 	@Autowired
 	StatistikManagerService sms;
 	
-	@RequestMapping("/manager-pendidikan/statistik-manager")
+	@RequestMapping("/manager-pendidikan/statistik-manager/fakultas")
 	public String statistikManager(Model model)
 	{
 		List<FakultasModel> f = sms.getFaculties();
