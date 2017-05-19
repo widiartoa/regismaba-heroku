@@ -8,4 +8,5 @@ public interface FakultasService {
 
 	List<FakultasModel> selectAllFakultas();
 	
+	FakultasModel selectFakultas(int fakultas_id);
 }

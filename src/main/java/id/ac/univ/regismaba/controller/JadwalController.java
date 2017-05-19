@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import id.ac.univ.regismaba.model.AssignJadwalModel;
 import id.ac.univ.regismaba.model.FakultasModel;
 import id.ac.univ.regismaba.model.JadwalEptModel;
 import id.ac.univ.regismaba.model.JadwalKesehatanModel;
@@ -21,6 +22,7 @@ import id.ac.univ.regismaba.model.MahasiswaModel;
 import id.ac.univ.regismaba.model.PengajuanSkemaBiayaModel;
 import id.ac.univ.regismaba.model.TahunAjaranModel;
 import id.ac.univ.regismaba.model.UrutanAssignJadwalModel;
+import id.ac.univ.regismaba.service.AssignJadwalService;
 import id.ac.univ.regismaba.service.FakultasService;
 import id.ac.univ.regismaba.service.JadwalService;
 import id.ac.univ.regismaba.service.MahasiswaService;
@@ -50,8 +52,11 @@ public class JadwalController {
 	
 	@Autowired
 	TahunAjaranService tahunAjaranService;
+	
+	@Autowired
+	AssignJadwalService assignJadwalService;
 
-	@RequestMapping("/c6/calon-mahasiswa/")
+	@RequestMapping("/calon-mahasiswa/")
 	public String getJadwal(Model model) {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		String user = auth.getName();
@@ -86,7 +91,7 @@ public class JadwalController {
 		return "calon_mahasiswa-melihat_jadwal";
 	}
 
-	@RequestMapping("/c6/staf-registrasi/daftar-jadwal")
+	@RequestMapping("/staf-registrasi/daftar-jadwal")
 	public String getAllJadwal(Model model) {
 		List<JadwalRegisModel> jadwalRegisList = jadwalService.selectAllJadwalRegis();
 		model.addAttribute("jadwalRegisList", jadwalRegisList);
@@ -102,7 +107,7 @@ public class JadwalController {
 		return "staf_registrasi-daftar_jadwal";
 	}
 
-	@PostMapping("/c6/staf-registrasi/membuat-jadwal/submit")
+	@PostMapping("/staf-registrasi/membuat-jadwal/submit")
 	public String insertJadwal(@RequestParam(value = "hari", required = false) String hari,
 			@RequestParam(value = "waktu_awal", required = false) String waktu_awal,
 			@RequestParam(value = "waktu_akhir", required = false) String waktu_akhir,
@@ -112,7 +117,7 @@ public class JadwalController {
 		return "redirect:/staf-registrasi/daftar-jadwal";
 	}
 
-	@RequestMapping("/c6/staf-registrasi/daftar-jadwal/{jadwal_registrasi_id}/hapus")
+	@RequestMapping("/staf-registrasi/daftar-jadwal/{jadwal_registrasi_id}/hapus")
 	public String reqDeleteJadwalRegis(Model model,
 			@PathVariable(value = "jadwal_registrasi_id") int jadwal_registrasi_id) {
 		JadwalRegisModel jadwalRegis = jadwalService.selectJadwalRegis(jadwal_registrasi_id);
@@ -120,14 +125,14 @@ public class JadwalController {
 		return "staf_registrasi-konfirmasi_hapus_jadwal";
 	}
 
-	@RequestMapping("/c6/staf-registrasi/daftar-jadwal/{jadwal_registrasi_id}/hapus-konfirmasi")
+	@RequestMapping("/staf-registrasi/daftar-jadwal/{jadwal_registrasi_id}/hapus-konfirmasi")
 	public String deleteJadwalRegis(Model model,
 			@PathVariable(value = "jadwal_registrasi_id") int jadwal_registrasi_id) {
 		jadwalService.deleteJadwalRegis(jadwal_registrasi_id);
 		return "redirect:/staf-registrasi/daftar-jadwal";
 	}
 	
-	@PostMapping("/c6/staf-registrasi/assign-jadwal")
+	@PostMapping("/staf-registrasi/assign-jadwal")
 	public String assignJadwal(Model model, @RequestParam(value = "myArray[]", required = false) Integer[] myArray){
 		
 		String username = "redita.arifin";
@@ -157,10 +162,43 @@ public class JadwalController {
 		List<MahasiswaModel> mahasiswaList = mahasiswaService.selectAllMahasiswaSortedUrutanAssignonTahunAjaran(tahunAjaranSaatIni.getTahun_ajaran_id());
 		
 		log.info("get one of mahasiswa with npm {} and fakultas {} on the list", mahasiswaList.get(0).getNpm(), mahasiswaList.get(0).getFakultas());
-		//TODO: buat halaman sukses assign jadwal + view assigned jadwal
 		
+		//TODO: assign jadwal
+		jadwalService.assignJadwalReg(jadwalRegisList, 0, jadwalRegisList.get(0).getKapasitas(), mahasiswaList, 0, "redita.arifin");
 		
-		return "index";
+		return "redirect:/staf-registrasi/daftar-assign-jadwal/";
+	}
+	
+	@RequestMapping("/staf-registrasi/daftar-assign-jadwal/")
+	public String getAssignedJadwals(Model model) {
+		List<AssignJadwalModel> assignedJadwals = assignJadwalService.selectAllAssignJadwal();
+
+		model.addAttribute("assignedJadwals", assignedJadwals);
+
+		for (AssignJadwalModel assign : assignedJadwals){
+		JadwalRegisModel jadwalRegis = null;
+		if (assign.getJadwal_registrasi_id() != 0) {
+			int jadwalRegisId = assign.getJadwal_registrasi_id();
+			jadwalRegis = jadwalService.selectJadwalRegis(jadwalRegisId);
+		}
+		assign.setJadwalRegis(jadwalRegis);
+
+		JadwalKesehatanModel jadwalTesKes = null;
+		if (assign.getJadwal_tes_kesehatan_id() != 0) {
+			int jadwalTesKesId = assign.getJadwal_tes_kesehatan_id();
+			jadwalTesKes = jadwalService.selectJadwalKesehatan(jadwalTesKesId);
+		}
+		assign.setJadwalTesKes(jadwalTesKes);
+
+		JadwalEptModel jadwalEpt = null;
+		if (assign.getJadwal_ept_id() != 0) {
+			int jadwalEptId = assign.getJadwal_ept_id();
+			jadwalEpt = jadwalService.selectJadwalEpt(jadwalEptId);
+		}
+		assign.setJadwalEpt(jadwalEpt);
+		}
+
+		return "staf_registrasi-daftar_assign_jadwal";
 	}
 	
 }

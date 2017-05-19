@@ -57,4 +57,8 @@ public interface JadwalMapper {
 	
 	@Delete("DELETE FROM urutan_assign_jadwal WHERE tahun_ajaran_id=#{tahun_ajaran_id}")
 	void resetUrutanAssignJadwal(int tahun_ajaran_id);
+	
+	@Insert("insert into assign_jadwal (fakultas_id, npm, jadwal_registrasi_id, created_by, created_at, updated_by, updated_at, tahun_ajaran_id) "
+			+ "values (#{fakultas_id}, #{npm}, #{jadwal_registrasi_id}, #{created_by}, current_timestamp, #{created_by}, current_timestamp, #{tahun_ajaran_id})")
+	void assignJadwalReg(@Param("fakultas_id") int fakultas_id, @Param("npm") String npm, @Param("jadwal_registrasi_id") int jadwal_registrasi_id, @Param("tahun_ajaran_id") int tahun_ajaran_id, @Param("created_by") String created_by);
 }

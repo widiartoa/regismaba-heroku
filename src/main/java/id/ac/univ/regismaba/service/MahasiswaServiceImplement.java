@@ -179,6 +179,7 @@ public class MahasiswaServiceImplement implements MahasiswaService {
 		for (MahasiswaModel mahasiswa : mahasiswaList){
 			ProgramStudiModel program_studi = mahasiswaMapper.selectProgramStudiMahasiswa(mahasiswa.getProgram_studi_id());
 			mahasiswa.setProgram_studi(program_studi);
+			mahasiswa.setFakultas_id(program_studi.getFakultas_id());
 			mahasiswa.setFakultas(mahasiswaMapper.selectFakultasMahasiswa(program_studi.getFakultas_id()));
 		}
 		return mahasiswaList;

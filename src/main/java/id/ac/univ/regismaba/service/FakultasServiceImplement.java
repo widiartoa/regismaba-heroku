@@ -25,4 +25,12 @@ public class FakultasServiceImplement implements FakultasService {
 		return fakultasList;
 	}
 
+	@Override
+	public FakultasModel selectFakultas(int fakultas_id) {
+		// TODO Auto-generated method stub
+		FakultasModel fakultas = fakultasMapper.selectFakultas(fakultas_id);
+		
+		return fakultas;
+	}
+
 }
