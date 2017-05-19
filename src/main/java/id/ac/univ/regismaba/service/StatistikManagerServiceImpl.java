@@ -162,4 +162,25 @@ public class StatistikManagerServiceImpl implements StatistikManagerService{
 		return smm.summaryPath(jalur_id);
 	}
 
+	@Override
+	public StatistikManagerSummaryModel summarySNMPTN(int fakultas_id) {
+		// TODO Auto-generated method stub
+		log.info ("select summary fakultas with id {}", fakultas_id);
+		return smm.summarySNMPTN(fakultas_id);
+	}
+
+	@Override
+	public StatistikManagerSummaryModel summarySBMPTN(int fakultas_id) {
+		// TODO Auto-generated method stub
+		log.info ("select summary fakultas with id {}", fakultas_id);
+		return smm.summarySBMPTN(fakultas_id);
+	}
+
+	@Override
+	public StatistikManagerSummaryModel summarySIMAK(int fakultas_id) {
+		// TODO Auto-generated method stub
+		log.info ("select summary fakultas with id {}", fakultas_id);
+		return smm.summarySIMAK(fakultas_id);
+	}
+
 }

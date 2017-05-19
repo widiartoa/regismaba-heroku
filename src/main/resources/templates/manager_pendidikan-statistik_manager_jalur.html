@@ -14,10 +14,17 @@
 			    var rp = [[${regPaths}]];
 			    var sp = [[${sumPaths}]];
 			    
+			    var snmptn = [[${snmptn}]];
+			    var sbmptn = [[${sbmptn}]];
+			    var simak = [[${simak}]];
+			    
 			    // Set a callback to run when the Google Visualization API is loaded.
 			    google.charts.setOnLoadCallback(drawPathChart);
 			    google.charts.setOnLoadCallback(drawRegPathChart);
 			    google.charts.setOnLoadCallback(drawSumPathChart);
+			    google.charts.setOnLoadCallback(drawSumFacultyChart);
+			    google.charts.setOnLoadCallback(drawSumFacultyChart2);
+			    google.charts.setOnLoadCallback(drawSumFacultyChart3);
 			    
 			    // Callback that creates and populates a data table,
 			    // instantiates the pie chart, passes in the data and
@@ -43,7 +50,6 @@
 			      // Instantiate and draw our chart, passing in some options.
 				  var chart = new google.visualization.PieChart(document.getElementById('path'));
 			      chart.draw(data, options);
-			      console.log("chart");
 			    }
 			    
 			    function drawRegPathChart() {
@@ -94,6 +100,79 @@
 				  var chart2 = new google.visualization.BarChart(document.getElementById('sumPath_bar'));
 				  chart2.draw(data, options);
 			    }
+			    
+			    function drawSumFacultyChart() {
+			      // Create the data table.
+			      var data = new google.visualization.DataTable();
+			      
+			      data.addColumn('string', 'Fakultas');
+			      data.addColumn('number', 'Total Pendaftar');
+			      data.addColumn('number', 'Pendaftar Ulang');
+			      data.addColumn('number', 'Tidak Mendaftar');
+			      
+			      for(var i = 0; i < snmptn.length; i++)
+		    	  {
+			    	  data.addRow([snmptn[i].nama, snmptn[i].total, snmptn[i].regis, snmptn[i].non_regis]);
+		    	  }
+			 	
+			      // Set chart options
+			      var options = {'title':'Rincian Data Jalur SNMPTN Setiap Fakultas',
+			                     'width':500,
+			                     'height':300};
+			
+			      // Instantiate and draw our chart, passing in some options.
+				  var chart = new google.visualization.BarChart(document.getElementById('snmptn'));
+				  chart.draw(data, options);
+				  
+			    }
+			    
+			    function drawSumFacultyChart2() {
+				      // Create the data table.
+				      var data = new google.visualization.DataTable();
+				      
+				      data.addColumn('string', 'Fakultas');
+				      data.addColumn('number', 'Total Pendaftar');
+				      data.addColumn('number', 'Pendaftar Ulang');
+				      data.addColumn('number', 'Tidak Mendaftar');
+				      
+				      for(var i = 0; i < sbmptn.length; i++)
+			    	  {
+				    	  data.addRow([sbmptn[i].nama, sbmptn[i].total, sbmptn[i].regis, sbmptn[i].non_regis]);
+			    	  }
+				 	
+				      // Set chart options
+				      var options = {'title':'Rincian Data Jalur SBMPTN Setiap Fakultas',
+				                     'width':500,
+				                     'height':300};
+				
+				      // Instantiate and draw our chart, passing in some options.
+					  var chart = new google.visualization.BarChart(document.getElementById('sbmptn'));
+					  chart.draw(data, options);
+				    }
+			    
+			    function drawSumFacultyChart3() {
+				      // Create the data table.
+				      var data = new google.visualization.DataTable();
+				      
+				      data.addColumn('string', 'Fakultas');
+				      data.addColumn('number', 'Total Pendaftar');
+				      data.addColumn('number', 'Pendaftar Ulang');
+				      data.addColumn('number', 'Tidak Mendaftar');
+				      
+				      for(var i = 0; i < simak.length; i++)
+			    	  {
+				    	  data.addRow([simak[i].nama, simak[i].total, simak[i].regis, simak[i].non_regis]);
+			    	  }
+				 	
+				      // Set chart options
+				      var options = {'title':'Rincian Data Jalur MANDIRI Setiap Fakultas',
+				                     'width':500,
+				                     'height':300};
+				
+				      // Instantiate and draw our chart, passing in some options.
+					  var chart = new google.visualization.BarChart(document.getElementById('simak'));
+					  chart.draw(data, options);
+				    }
 		    /*]]>*/
 	    </script>
 	</head>
@@ -119,6 +198,13 @@
 						<tr>
 							<td th:id="'regPath_pie'"></td>
 							<td th:id="'regPath_bar'"></td>
+						</tr>
+						<tr>
+							<td th:id="'snmptn'"></td>
+							<td th:id="'sbmptn'"></td>
+						</tr>
+						<tr>
+							<td th:id="'simak'"></td>
 						</tr>
 					</tbody>
 				</table>

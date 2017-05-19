@@ -140,6 +140,11 @@ public class StatistikManagerController {
 		ArrayList<StatistikManagerModel> regPaths = new ArrayList<StatistikManagerModel>();
 		ArrayList<StatistikManagerSummaryModel> sumPaths = new ArrayList<StatistikManagerSummaryModel>();
 		
+		List<FakultasModel> f = sms.getFaculties();
+		ArrayList<StatistikManagerSummaryModel> snmptn = new ArrayList<StatistikManagerSummaryModel>();
+		ArrayList<StatistikManagerSummaryModel> sbmptn = new ArrayList<StatistikManagerSummaryModel>();
+		ArrayList<StatistikManagerSummaryModel> simak = new ArrayList<StatistikManagerSummaryModel>();
+		
 		for(int i=0; i < j.size(); i++)
 		{
 			StatistikManagerModel jalur = sms.selectJalur(j.get(i).getJalur_id());
@@ -152,9 +157,30 @@ public class StatistikManagerController {
 			if(jalur3 != null) { sumPaths.add(jalur3); }
 		}
 		
+		for(int i=0; i < f.size(); i++)
+		{	
+			StatistikManagerSummaryModel faculty = sms.summarySNMPTN(f.get(i).getFakultas_id());
+			if((faculty.getTotal() > 0) || (faculty.getRegis() > 0) || (faculty.getNon_regis() > 0)) 
+			{ snmptn.add(faculty); }
+			
+			StatistikManagerSummaryModel faculty2 = sms.summarySBMPTN(f.get(i).getFakultas_id());
+			if((faculty2.getTotal() > 0) || (faculty2.getRegis() > 0) || (faculty2.getNon_regis() > 0))
+			{ sbmptn.add(faculty2); }
+			
+			StatistikManagerSummaryModel faculty3 = sms.summarySIMAK(f.get(i).getFakultas_id());
+			if((faculty3.getTotal() > 0) || (faculty3.getRegis() > 0) || (faculty3.getNon_regis() > 0))
+			{ simak.add(faculty3); }
+		}
+		
 		model.addAttribute("paths", paths);
 		model.addAttribute("regPaths", regPaths);
 		model.addAttribute("sumPaths", sumPaths);
+		model.addAttribute("snmptn", snmptn);
+		model.addAttribute("sbmptn", sbmptn);
+		model.addAttribute("simak", simak);
+		
+		System.out.println(sbmptn);
+		System.out.println(simak);
 		
 		return "manager_pendidikan-statistik_manager_jalur";
 	}
