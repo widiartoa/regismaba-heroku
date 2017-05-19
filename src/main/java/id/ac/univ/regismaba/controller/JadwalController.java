@@ -13,11 +13,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import id.ac.univ.regismaba.model.FakultasModel;
 import id.ac.univ.regismaba.model.JadwalEptModel;
 import id.ac.univ.regismaba.model.JadwalKesehatanModel;
 import id.ac.univ.regismaba.model.JadwalRegisModel;
 import id.ac.univ.regismaba.model.MahasiswaModel;
 import id.ac.univ.regismaba.model.PengajuanSkemaBiayaModel;
+import id.ac.univ.regismaba.service.FakultasService;
 import id.ac.univ.regismaba.service.JadwalService;
 import id.ac.univ.regismaba.service.MahasiswaService;
 import id.ac.univ.regismaba.service.PengajuanSkemaBiayaService;
@@ -39,8 +41,11 @@ public class JadwalController {
 
 	@Autowired
 	VerifikasiIDMService verifikasiIDMService;
+	
+	@Autowired
+	FakultasService fakultasService;
 
-	@RequestMapping("/calon-mahasiswa/")
+	@RequestMapping("/c6/calon-mahasiswa/")
 	public String getJadwal(Model model) {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		String user = auth.getName();
@@ -75,7 +80,7 @@ public class JadwalController {
 		return "calon_mahasiswa-melihat_jadwal";
 	}
 
-	@RequestMapping("/staf-registrasi/daftar-jadwal")
+	@RequestMapping("/c6/staf-registrasi/daftar-jadwal")
 	public String getAllJadwal(Model model) {
 		List<JadwalRegisModel> jadwalRegisList = jadwalService.selectAllJadwalRegis();
 		model.addAttribute("jadwalRegisList", jadwalRegisList);
@@ -83,10 +88,15 @@ public class JadwalController {
 		model.addAttribute("jadwalTesKesList", jadwalTesKesList);
 		List<JadwalEptModel> jadwalEptList = jadwalService.selectAllJadwalEpt();
 		model.addAttribute("jadwalEptList", jadwalEptList);
+		
+		//assign jadwal
+		List<FakultasModel> fakultasList = fakultasService.selectAllFakultas();
+		model.addAttribute("fakultasList", fakultasList);
+		
 		return "staf_registrasi-daftar_jadwal";
 	}
 
-	@PostMapping("/staf-registrasi/membuat-jadwal/submit")
+	@PostMapping("/c6/staf-registrasi/membuat-jadwal/submit")
 	public String insertJadwal(@RequestParam(value = "hari", required = false) String hari,
 			@RequestParam(value = "waktu_awal", required = false) String waktu_awal,
 			@RequestParam(value = "waktu_akhir", required = false) String waktu_akhir,
@@ -96,7 +106,7 @@ public class JadwalController {
 		return "redirect:/staf-registrasi/daftar-jadwal";
 	}
 
-	@RequestMapping("/staf-registrasi/daftar-jadwal/{jadwal_registrasi_id}/hapus")
+	@RequestMapping("/c6/staf-registrasi/daftar-jadwal/{jadwal_registrasi_id}/hapus")
 	public String reqDeleteJadwalRegis(Model model,
 			@PathVariable(value = "jadwal_registrasi_id") int jadwal_registrasi_id) {
 		JadwalRegisModel jadwalRegis = jadwalService.selectJadwalRegis(jadwal_registrasi_id);
@@ -104,16 +114,22 @@ public class JadwalController {
 		return "staf_registrasi-konfirmasi_hapus_jadwal";
 	}
 
-	@RequestMapping("/staf-registrasi/daftar-jadwal/{jadwal_registrasi_id}/hapus-konfirmasi")
+	@RequestMapping("/c6/staf-registrasi/daftar-jadwal/{jadwal_registrasi_id}/hapus-konfirmasi")
 	public String deleteJadwalRegis(Model model,
 			@PathVariable(value = "jadwal_registrasi_id") int jadwal_registrasi_id) {
 		jadwalService.deleteJadwalRegis(jadwal_registrasi_id);
 		return "redirect:/staf-registrasi/daftar-jadwal";
 	}
 	
-	@PostMapping("/staf-registrasi/assign-jadwal")
+	@PostMapping("/c6/staf-registrasi/assign-jadwal")
 	public String assignJadwal(Model model, @RequestParam(value = "myArray[]", required = false) String[] myArray){
 		log.info("get array filled with {}", myArray[0]);
+		//TODO: insert fakultas order
+		//TODO: get jadwal order by timestamp_awal ASC
+		//TODO: get mhs left join fakultasorder order by fakultasorder_id
+		//TODO: insert mhs + jadwal to assign_jadwal
+		
+		//TODO: buat halaman sukses assign jadwal + view assigned jadwal
 		return "index";
 	}
 	

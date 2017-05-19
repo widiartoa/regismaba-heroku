@@ -30,12 +30,6 @@
 }
 </style>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<script>
-	$(function() {
-		$("#sortable").sortable();
-		$("#sortable").disableSelection();
-	});
-</script>
 </head>
 
 <body>
@@ -69,7 +63,8 @@
 					<!-- Trigger the modal with a button -->
 					<div class="col-sm-1">
 						<button type="button" class="btn btn-info" data-toggle="modal"
-							data-target="#myModal1" title="Assign Jadwal">
+							data-target="#myModal1" title="Assign Jadwal"
+							onclick="activateSortables()">
 							<i>Assign</i> Jadwal
 						</button>
 					</div>
@@ -87,7 +82,7 @@
 									<div class="modal-body">
 
 										<!-- FORM MEMBUAT JADWAL BARU -->
-										<form action="/staf-registrasi/membuat-jadwal/submit"
+										<form action="/c6/staf-registrasi/membuat-jadwal/submit"
 											method="post" enctype="multipart/form-data">
 											<input type="hidden" th:name="${_csrf.parameterName}"
 												th:value="${_csrf.token}" />
@@ -171,25 +166,16 @@
 										</p>
 
 										<ul id="sortable">
-											<li id="Item 1" class="ui-state-default"><span
-												class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 1</li>
-											<li id="Item 2" class="ui-state-default"><span
-												class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 2</li>
-											<li id="Item 3" class="ui-state-default"><span
-												class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 3</li>
-											<li id="Item 4" class="ui-state-default"><span
-												class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 4</li>
-											<li id="Item 5" class="ui-state-default"><span
-												class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 5</li>
-											<li id="Item 6" class="ui-state-default"><span
-												class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 6</li>
-											<li id="Item 7" class="ui-state-default"><span
-												class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 7</li>
+											<li th:each="fakultas,iterationStatus: ${fakultasList}"
+												class="ui-state-default" th:id="${fakultas.fakultas_id}"><i
+												class="ui-icon ui-icon-arrowthick-2-n-s"></i><text
+												th:text="${fakultas.nama_fakultas}">Nama Fakultas</text></li>
 										</ul>
+
 									</div>
 								</div>
 								<div class="modal-footer">
-									<button class="btn btn-default" onclick="submitSort()">Submit</button>
+									<button class="btn btn-default" onclick="submitSort()" data-dismiss="modal">Submit</button>
 								</div>
 							</div>
 
@@ -327,6 +313,10 @@
 		$(document)
 				.ready(
 						function() {
+
+							$("#sortable").sortable();
+							$("#sortable").disableSelection();
+
 							$('.table').dataTable();
 							var i, tabcontent, tablinks;
 							tabcontent = document
@@ -350,7 +340,7 @@
 			var sortedIDs = $("#sortable").sortable("toArray");
 			$.ajax({
 				type : "POST",
-				url : "/staf-registrasi/assign-jadwal",
+				url : "/c6/staf-registrasi/assign-jadwal",
 				data : {
 					myArray : sortedIDs
 				//notice that "myArray" matches the value for @RequestParam
@@ -359,7 +349,8 @@
 				beforeSend : function(xhr) {
 					if (!header || !token) {
 						var token = $("meta[name='_csrf']").attr("content");
-						var header = $("meta[name='_csrf_header']").attr("content");
+						var header = $("meta[name='_csrf_header']").attr(
+								"content");
 						$(document).ajaxSend(function(e, xhr, options) {
 							xhr.setRequestHeader(header, token);
 						});
@@ -392,6 +383,10 @@
 			}
 			document.getElementById(jadwalName).style.display = "block";
 			evt.currentTarget.className += " active";
+		}
+		function activateSortables() {
+			$("#sortable").sortable();
+			$("#sortable").disableSelection();
 		}
 	</script>
 </body>
