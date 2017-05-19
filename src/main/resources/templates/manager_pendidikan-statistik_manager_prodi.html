@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 	<head>
 		<div th:replace="resources"></div>
-		<title>Manager Pendidikan - Statistik Fakultas</title>
+		<title>Manager Pendidikan - Statistik Program Studi</title>
 		
 		<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 	    <script type="text/javascript" th:inline="javascript">
@@ -10,88 +10,88 @@
 				// Load the Visualization API and the corechart package.
 			    google.charts.load('current', {'packages':['corechart']});
 			
-			    var f = [[${faculties}]];
-			    var rf = [[${regFaculties}]];
-			    var sf = [[${sumFaculties}]];
+			    var m = [[${majors}]];
+			    var rm = [[${regMajors}]];
+			    var sm = [[${sumMajors}]];
 			    
 			    // Set a callback to run when the Google Visualization API is loaded.
-			    google.charts.setOnLoadCallback(drawFacultyChart);
-			    google.charts.setOnLoadCallback(drawRegFacultyChart);
-			    google.charts.setOnLoadCallback(drawSumFacultyChart);
-			    
+			    google.charts.setOnLoadCallback(drawMajorChart);
+			    google.charts.setOnLoadCallback(drawRegMajorChart);
+			    google.charts.setOnLoadCallback(drawSumMajorChart);
+			
 			    // Callback that creates and populates a data table,
 			    // instantiates the pie chart, passes in the data and
 			    // draws it. 
-			    function drawFacultyChart() {
+			    function drawMajorChart() {
 			      // Create the data table.
 			      var data = new google.visualization.DataTable();
-			      data.addColumn('string', 'Fakultas');
+			      data.addColumn('string', 'Program Studi');
 			      data.addColumn('number', 'Jumlah');
 			      
 			      var total = 0;
-			      for(var i = 0; i < f.length; i++)
+			      for(var i = 0; i < m.length; i++)
 		    	  {
-			    	  data.addRow([f[i].jenis_rekap, f[i].jumlah]);
-			    	  total = total+f[i].jumlah;
+			    	  data.addRow([m[i].jenis_rekap, m[i].jumlah]);
+			    	  total = total+m[i].jumlah;
 		    	  }
 			 	
 			      // Set chart options
-			      var options = {'title':'Total Pendaftar (Total : ' + total + ')',
+			      var options = {'title':'Pendaftar Program Studi (Total : ' + total + ')',
 			                     'width':500,
 			                     'height':300};
 			
 			      // Instantiate and draw our chart, passing in some options.
-				  var chart = new google.visualization.PieChart(document.getElementById('faculty'));
+				  var chart = new google.visualization.PieChart(document.getElementById('major'));
 			      chart.draw(data, options);
 			      console.log("chart");
 			    }
 			    
-			    function drawRegFacultyChart() {
+			    function drawRegMajorChart() {
 			      // Create the data table.
 			      var data = new google.visualization.DataTable();
-			      data.addColumn('string', 'Fakultas');
+			      data.addColumn('string', 'Program Studi');
 			      data.addColumn('number', 'Jumlah');
 			      
 			      var total = 0;
-			      for(var i = 0; i < rf.length; i++)
+			      for(var i = 0; i < rm.length; i++)
 		    	  {
-			    	  data.addRow([rf[i].jenis_rekap, rf[i].jumlah]);
-			    	  total = total+rf[i].jumlah;
+			    	  data.addRow([rm[i].jenis_rekap, rm[i].jumlah]);
+			    	  total = total+rm[i].jumlah;
 		    	  }
 			 	
 			      // Set chart options
-			      var options = {'title':'Pendaftar Ulang (Total : ' + total + ')',
+			      var options = {'title':'Registran Program Studi (Total : ' + total + ')',
 			                     'width':500,
 			                     'height':300};
 			
 			      // Instantiate and draw our chart, passing in some options.
-				  var chart1 = new google.visualization.PieChart(document.getElementById('regFaculty_pie'));
-				  var chart2 = new google.visualization.BarChart(document.getElementById('regFaculty_bar'));
-				  chart1.draw(data, options);
-				  chart2.draw(data, options);
+				  var chart1 = new google.visualization.PieChart(document.getElementById('regMajor_pie'));
+				  var chart2 = new google.visualization.BarChart(document.getElementById('regMajor_bar'));
+			      chart1.draw(data, options);
+			      chart2.draw(data, options);
 			    }
-
-			    function drawSumFacultyChart() {
+			    
+			    function drawSumMajorChart() {
 			      // Create the data table.
 			      var data = new google.visualization.DataTable();
 			      
-			      data.addColumn('string', 'Fakultas');
+			      data.addColumn('string', 'Program Studi');
 			      data.addColumn('number', 'Total Pendaftar');
 			      data.addColumn('number', 'Pendaftar Ulang');
 			      data.addColumn('number', 'Tidak Mendaftar');
 			      
-			      for(var i = 0; i < sf.length; i++)
+			      for(var i = 0; i < sm.length; i++)
 		    	  {
-			    	  data.addRow([sf[i].nama, sf[i].total, sf[i].regis, sf[i].non_regis]);
+			    	  data.addRow([sm[i].nama, sm[i].total, sm[i].regis, sm[i].non_regis]);
 		    	  }
 			 	
 			      // Set chart options
-			      var options = {'title':'Rincian Data Fakultas',
+			      var options = {'title':'Rincian Data Program Studi',
 			                     'width':500,
 			                     'height':300};
 			
 			      // Instantiate and draw our chart, passing in some options.
-				  var chart2 = new google.visualization.BarChart(document.getElementById('sumFaculty_bar'));
+				  var chart2 = new google.visualization.BarChart(document.getElementById('sumMajor_bar'));
 				  chart2.draw(data, options);
 			    }
 		    /*]]>*/
@@ -104,19 +104,21 @@
 				<div class="row">
 					<div class="col-sm-12">
 						<h3>Statistik Registrasi Mahasiswa Baru</h3>
-						<h4>Fakultas</h4>
+						<h4>Program Studi</h4>
 					</div>
 				</div>
-			
+				
+				<hr/>
+				
 				<table align="center">
 					<tbody>
 						<tr>
-							<td th:id="'sumFaculty_bar'"></td>
-							<td th:id="'faculty'"></td>
+							<td th:id="'sumMajor_bar'"></td>
+							<td th:id="'major'"></td>
 						</tr>
 						<tr>
-							<td th:id="'regFaculty_pie'"></td>
-							<td th:id="'regFaculty_bar'"></td>
+							<td th:id="'regMajor_pie'"></td>
+							<td th:id="'regMajor_bar'"></td>
 						</tr>
 					</tbody>
 				</table>

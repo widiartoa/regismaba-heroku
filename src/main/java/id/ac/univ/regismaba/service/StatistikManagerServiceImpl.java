@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import id.ac.univ.regismaba.dao.StatistikManagerMapper;
 import id.ac.univ.regismaba.model.FakultasModel;
+import id.ac.univ.regismaba.model.JalurModel;
 import id.ac.univ.regismaba.model.JenjangModel;
 import id.ac.univ.regismaba.model.ProgramModel;
 import id.ac.univ.regismaba.model.ProgramStudiModel;
@@ -131,6 +132,34 @@ public class StatistikManagerServiceImpl implements StatistikManagerService{
 		// TODO Auto-generated method stub
 		log.info ("select summary program with id {}", program_id);
 		return smm.summaryProgram(program_id);
+	}
+
+	@Override
+	public StatistikManagerModel selectJalur(int jalur_id) {
+		// TODO Auto-generated method stub
+		log.info ("select jalur with id {}", jalur_id);
+		return smm.selectJalur(jalur_id);
+	}
+
+	@Override
+	public List<JalurModel> getPaths() {
+		// TODO Auto-generated method stub
+		log.info ("select paths");
+		return smm.getPaths();
+	}
+
+	@Override
+	public StatistikManagerModel selectRegistranJalur(int jalur_id) {
+		// TODO Auto-generated method stub
+		log.info ("select registran jalur with id {}", jalur_id);
+		return smm.selectRegistranJalur(jalur_id);
+	}
+
+	@Override
+	public StatistikManagerSummaryModel summaryPath(int jalur_id) {
+		// TODO Auto-generated method stub
+		log.info ("select summary path with id {}", jalur_id);
+		return smm.summaryPath(jalur_id);
 	}
 
 }

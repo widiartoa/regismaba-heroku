@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import id.ac.univ.regismaba.dao.SkemaBiayaMapper;
 import id.ac.univ.regismaba.model.SkemaBiayaModel;
+import id.ac.univ.regismaba.model.StatistikManagerSummaryModel;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -49,5 +50,12 @@ public class SkemaBiayaServiceImpl implements SkemaBiayaService {
 		// TODO Auto-generated method stub
 		log.info ("select all skema biaya on faculty level");
 		return sbmd.selectAllSBMByFacultyLevel();
+	}
+
+	@Override
+	public StatistikManagerSummaryModel summarySchema(int golongan_id) {
+		// TODO Auto-generated method stub
+		log.info ("select skema summary with golongan_id {}", golongan_id);
+		return sbmd.summarySchema(golongan_id);
 	}
 }
