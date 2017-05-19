@@ -55,8 +55,6 @@
 		</div>
 	</div>
 
-	
-
 	<div th:each="mahasiswa,iterationStatus:${mahasiswas}">
 	<div th:each="biodata,iterationStatus:${biodatas}" th:if="${biodata.username.equals(mahasiswa.username)}">
 	<div th:each="alamat,iterationStatus:${alamats}" th:if="${alamat.created_by.equals(biodata.username)}">
