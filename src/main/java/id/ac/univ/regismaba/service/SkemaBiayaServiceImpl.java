@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import id.ac.univ.regismaba.dao.SkemaBiayaMapper;
+import id.ac.univ.regismaba.model.FakultasModel;
 import id.ac.univ.regismaba.model.SkemaBiayaModel;
 import id.ac.univ.regismaba.model.StatistikManagerSummaryModel;
 import lombok.extern.slf4j.Slf4j;
@@ -57,5 +58,19 @@ public class SkemaBiayaServiceImpl implements SkemaBiayaService {
 		// TODO Auto-generated method stub
 		log.info ("select skema summary with golongan_id {}", golongan_id);
 		return sbmd.summarySchema(golongan_id);
+	}
+
+	@Override
+	public StatistikManagerSummaryModel selectSchemaType(int golongan_id, int fakultas_id) {
+		// TODO Auto-generated method stub
+		log.info ("select skema golongan with fakultas");
+		return sbmd.selectSchemaType(golongan_id, fakultas_id);
+	}
+
+	@Override
+	public List<FakultasModel> getFaculties() {
+		// TODO Auto-generated method stub
+		log.info ("select all fakultas");
+		return sbmd.getFaculties();
 	}
 }

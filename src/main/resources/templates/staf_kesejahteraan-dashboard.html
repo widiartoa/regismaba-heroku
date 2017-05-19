@@ -23,9 +23,9 @@
 			      var data = new google.visualization.DataTable();
 			      
 			      data.addColumn('string', 'Golongan');
-			      data.addColumn('number', 'Total Pendaftar');
-			      data.addColumn('number', 'Pendaftar Ulang');
-			      data.addColumn('number', 'Tidak Mendaftar');
+			      data.addColumn('number', 'Total Pengaju');
+			      data.addColumn('number', 'Terverifikasi');
+			      data.addColumn('number', 'Belum terverifikasi');
 			      
 			      for(var i = 0; i < s.length; i++)
 		    	  {
@@ -61,6 +61,11 @@
 						<tr>
 							<td th:id="'schema'"></td>
 						</tr>
+						<div>
+							<tr>
+								<td></td>
+							</tr>
+						</div>
 					</tbody>
 				</table>
 			</div>
