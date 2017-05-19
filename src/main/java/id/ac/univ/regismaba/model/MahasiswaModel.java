@@ -27,5 +27,5 @@ public class MahasiswaModel {
     String created_by;
     String updated_by;
     int tahun_ajaran_id;
-	
+	int jalur_id;
 }

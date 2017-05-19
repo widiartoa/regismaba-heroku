@@ -5,6 +5,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Result;
 import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import id.ac.univ.regismaba.model.AsuransiKesehatanModel;
 
@@ -32,4 +33,8 @@ public interface AsuransiKesehatanMapper {
 		@Result(property="updated_at", column="updated_at"),
 	})
 	AsuransiKesehatanModel selectAsuransiKesehatanByUsername(String username);
+	
+	@Update("UPDATE asuransi_kesehatan SET nomor_asuransi=#{nomor_asuransi}, username=#{username}, nomor_penerbit_asuransi=#{nomor_penerbit_asuransi},"
+			+ "expired_date=#{expired_date}, scan_kartu=#{scan_kartu}, updated_by=#{updated_by}, updated_at=#{updated_at} WHERE username=#{username}")
+    void updateAsuransiKesehatan(AsuransiKesehatanModel asuransiKesehatan);
 }

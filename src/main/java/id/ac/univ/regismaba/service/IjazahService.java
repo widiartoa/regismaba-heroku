@@ -9,4 +9,6 @@ public interface IjazahService
     void addIjazah(IjazahModel ijazah);
     
     IjazahModel selectIjazahByUsername(String username);
+    
+    void updateIjazah(IjazahModel ijazah);
 }

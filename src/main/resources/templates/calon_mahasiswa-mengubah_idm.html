@@ -3,7 +3,7 @@
 <head>
 <div th:replace="resources"></div>
 
-<title>Calon Mahasiswa - Mengisi IDM</title>
+<title>Calon Mahasiswa - Mengubah IDM</title>
 
 <!--  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"> </link>
   <link rel="stylesheet" href="/resources/demos/style.css"> </link>
@@ -25,7 +25,7 @@
 	<div class="container">
 		<div class="content">
 			<div id="contact">
-				<form action="/calon-mahasiswa/biodata/fill/submit" method="post" enctype="multipart/form-data" >
+				<form action="/calon-mahasiswa/biodata/update/submit" method="post" enctype="multipart/form-data" >
 					<input type="hidden"  th:name="${_csrf.parameterName}"   th:value="${_csrf.token}"/>
 					<div class="row">
 						<div class="col-sm-12"><h3>Isi Biodata</h3></div>
@@ -39,24 +39,30 @@
 					</div>
 					
 					<div class="form-group">
-						<label for="tanggal_lahir">Tanggal Lahir *</label> 
+						<label for="tanggal_lahir" >Tanggal Lahir *</label> 
 						<input
 							type="text" id="datepicker" name="tanggal_lahir" class="form-control"
-							placeholder="YYYY-MM-DD" data-validation="required"
+							th:value="${biodata.tanggal_lahirr}" data-validation="required"
 							data-validation-error-msg="Tanggal lahir harus diisi"/>
 					</div>
 					
 					<div class="form-group">
 						<label for="jenis_kelamin">Jenis Kelamin</label> <br></br>
-						<input type="radio" name="jenis_kelamin" value="L">L</input>
-						<input type="radio" name="jenis_kelamin" value="P">P</input>
+						<div th:if="${biodata.jenis_kelamin} == 'P'">
+							<input type="radio" name="jenis_kelamin" value="L">Laki-laki</input>
+							<input type="radio" name="jenis_kelamin" value="P" checked="checked">Perempuan</input>
+						</div>
+						<div th:if="${biodata.jenis_kelamin} == 'L'">
+							<input type="radio" name="jenis_kelamin" value="L" checked="checked">Laki-laki</input>
+							<input type="radio" name="jenis_kelamin" value="P">Perempuan</input>
+						</div>
 					</div>
 
 					<div class="form-group">
 						<label for="nomor_telepon">Nomor Telepon *</label> 
 						<input
 							type="number" name="nomor_telepon" class="form-control"
-							placeholder="Nomor Telepon" data-validation="required"
+							th:value="${biodata.nomor_telepon}" data-validation="required"
 							data-validation-error-msg="Nomor telepon harus diisi"/>
 					</div>
 					
@@ -64,7 +70,7 @@
 						<label for="kewarganegaraan">Kewarganegaraan *</label> 
 						<input
 							type="text" name="kewarganegaraan" class="form-control"
-							placeholder="Kewarganegaraan" data-validation="required"
+							th:value="${biodata.kewarganegaraan}" data-validation="required"
 							data-validation-error-msg="Kewarganegaraan harus diisi"/>
 					</div>
 					
@@ -79,7 +85,7 @@
 						<label for="nomor_ktp">Nomor KTP *</label> 
 						<input type="text"
 							name="nomor_ktp" class="form-control" placeholder="Nomor KTP" data-validation="required"
-							data-validation-error-msg="Nomor KTP harus diisi"/>
+							th:value="${biodata.nomor_ktp}" data-validation-error-msg="Nomor KTP harus diisi"/>
 					</div>
 					
 				<!-- 					<div class="col-md-6">
@@ -92,7 +98,7 @@
 					<div class="form-group">
 						<label for="scan_ktp">Scan Kartu Tanda Penduduk(KTP) *</label> 
 						<div class="input-group" name="scan_ktp">
-							<input type="text" class="form-control" id="basic-addon1" readonly="true" data-validation="required" data-validation-error-msg="Scan KTP harus diisi" />
+							<input type="text" class="form-control" id="basic-addon1" th:placeholder="${biodata.scan_ktp}" readonly="true" data-validation="required" data-validation-error-msg="Scan KTP harus diisi" />
 							<label class="input-group-btn">
 								<span class="btn btn-default">Browse&hellip;
 									<input type="file" name="scan_ktp"
@@ -160,8 +166,8 @@
 					
 					<div class="form-group">
 						<label for="nama_provinsi">Provinsi</label> 
-						<select id="nama_provinsi_select" class="form-control">
-							<option value="null">[Pilih Provinsi]</option>
+						<select id="nama_provinsi_select" class="form-control" >
+							<option th:value="${provinsi.provinsi_id}" th:text="${provinsi.nama_provinsi}">[Pilih Provinsi]</option>
 							<option th:each="provinsi : ${provinsis}" th:value="${provinsi.provinsi_id}" th:text="${provinsi.nama_provinsi}"></option>							
 						</select>
 					</div>
@@ -169,6 +175,7 @@
 					<div class="form-group">
 						<label for="kota_kabupaten_id">Kabupaten/Kota</label>
 						<select id="kota_kabupaten_select" name="kota_kabupaten_id" class="form-control">
+							<option th:value="${kotaKabupaten.nama_kota_kabupaten}" th:text="${kotaKabupaten.nama_kota_kabupaten}">[Pilih Kota/ Kabupaten]</option>						
 						</select>
 					</div>
 					
@@ -176,7 +183,7 @@
 						<label for="kecamatan">Nama Kecamatan *</label> 
 						<input type="text"
 							name="kecamatan" class="form-control"
-							placeholder="Nama Kecamatan" data-validation="required"
+							th:value="${alamat.kecamatan}" data-validation="required"
 							data-validation-error-msg="Nama kecamatan harus diisi" />
 					</div>
 					
@@ -184,21 +191,21 @@
 						<label for="kelurahan">Nama Kelurahan *</label> 
 						<input type="text"
 							name="kelurahan" class="form-control"
-							placeholder="Nama Kelurahan" data-validation="required"
+							th:value="${alamat.kelurahan}" data-validation="required"
 							data-validation-error-msg="Nama kelurahan harus diisi" />
 					</div>
 					
 					<div class="form-group">
 						<label for="jalan">Nama Jalan *</label> 
 						<input type="text"
-							name="jalan" class="form-control" placeholder="Nama Jalan" data-validation="required"
+							name="jalan" class="form-control" th:value="${alamat.jalan}" data-validation="required"
 							data-validation-error-msg="Nama jalan harus diisi" />
 					</div>
 					
 					<div class="form-group">
 						<label for="kode_pos">Kode Pos *</label> 
 						<input type="text"
-							name="kode_pos" class="form-control" placeholder="Kode Pos" data-validation="required"
+							name="kode_pos" class="form-control" th:value="${alamat.kode_pos}" data-validation="required"
 							data-validation-error-msg="Kode pos harus diisi"/>
 					</div>
 					
@@ -232,7 +239,8 @@
 					<div class="form-group">
 						<label for="nama_tingkat_pendidikan">Tingkat Pendidikan Terakhir</label> 
 						<select id="nama_tingkat_pendidikan_select" class="form-control">
-							<option value="null">[Pilih Tingkat Pendidikan Terakhir]</option>
+							<!-- <option value="null">[Pilih Tingkat Pendidikan Terakhir]</option> -->
+							<option th:value="${tingkatPendidikan.tingkat_pendidikan_id}" th:text="${tingkatPendidikan.nama_tingkat_pendidikan}">[Pilih Provinsi]</option>
 							<option th:each="tingkatPendidikan : ${tingkatPendidikans}" th:value="${tingkatPendidikan.tingkat_pendidikan_id}" th:text="${tingkatPendidikan.nama_tingkat_pendidikan}"></option>							
 						</select>
 					</div>
@@ -240,7 +248,31 @@
 					<div class="form-group">
 						<label for="jenjang">Jenjang</label> 
 						<select id="nama_jenjang_select" name="jenjang" class="form-control">
-							<option value="null">[Pilih Jenjang Terakhir]</option>
+							<!-- <option value="null">[Pilih Jenjang Terakhir]</option> -->
+							<option th:value="${jenjang.jenjang_id}" th:text="${jenjang.nama_jenjang}"></option>
+							
+							<!-- <div th:if="${ijazah.jenjang} == '1'">
+								<option th:value="${ijazah.jenjang}" th:text="Sarjana"></option>
+							</div>
+							<div th:if="${ijazah.jenjang} == '2'">
+								<option th:value="${ijazah.jenjang}" th:text="Magister"></option>
+							</div>
+							<div th:if="${ijazah.jenjang} == '3'">
+								<option th:value="${ijazah.jenjang}" th:text="Doktor"></option>
+							</div>
+							<div th:if="${ijazah.jenjang} == '4'">
+								<option th:value="${ijazah.jenjang}" th:text="Profesi"></option>
+							</div>
+							<div th:if="${ijazah.jenjang} == '5'">
+								<option th:value="${ijazah.jenjang}" th:text="Spesialis"></option>
+							</div>
+							<div th:if="${ijazah.jenjang} == '6'">
+								<option th:value="${ijazah.jenjang}" th:text="Vokasi"></option>
+							</div>
+							<div th:if="${ijazah.jenjang} == '7'">
+								<option th:value="${ijazah.jenjang}" th:text="SMA"></option>
+							</div> -->
+
 							<option th:each="jenjang : ${jenjangs}" th:value="${jenjang.jenjang_id}" th:text="${jenjang.nama_jenjang}"></option>							
 						</select>
 					</div>
@@ -248,6 +280,7 @@
 					<div class="form-group">
 						<label for="institusi_id">Nama Institusi</label>
 						<select id="institusi_select" name="institusi_id" class="form-control">
+							<option th:value="${institusi.institusi_id}" th:text="${institusi.nama_institusi}"></option>
 						</select>
 					</div>
 					
@@ -255,7 +288,7 @@
 						<label for="nomor_ijazah">Nomor Ijazah *</label> 
 						<input type="text"
 							name="nomor_ijazah" class="form-control"
-							placeholder="Nomor Ijazah" data-validation="required"
+							th:value="${ijazah.nomor_ijazah}" data-validation="required"
 							data-validation-error-msg="Nomor ijazah harus diisi"/>
 					</div>
 				
@@ -299,21 +332,21 @@
 						<label for="nomor_asuransi">Nomor Asuransi</label> 
 						<input
 							type="text" name="nomor_asuransi" class="form-control"
-							placeholder="Nomor Asuransi" />
+							th:value="${asuransiKesehatan.nomor_asuransi}" />
 					</div>
 					
 					<div class="form-group">
 						<label for="nomor_asuransi">Nomor Penerbit Asuransi</label> 
 						<input
 							type="text" name="nomor_penerbit_asuransi" class="form-control"
-							placeholder="Nomor Penerbit Asuransi" />
+							th:value="${asuransiKesehatan.nomor_penerbit_asuransi}" />
 					</div>
 					
 					<div class="form-group">
 						<label for="nomor_asuransi">Tanggal Kadaluarsa Asuransi</label>
 						<input
 							type="text" name="expired_date" class="form-control"
-							placeholder="YYYY-MM-DD" />
+							th:value="${asuransiKesehatan.expired_date_format}" />
 					</div>
 		
 					<div class="form-group">
@@ -361,12 +394,43 @@
 					<hr/>
 					
 					<div class="form-group">
-						<label for="ukuran_jaket">Pilih Ukuran Jaket :</label> 
-						<input type="radio" name="ukuran_jaket" value="S">S</input>
-						<input type="radio" name="ukuran_jaket" value="M">M</input>
-						<input type="radio" name="ukuran_jaket" value="L">L</input>
-						<input type="radio" name="ukuran_jaket" value="XL">XL</input>
-						<input type="radio" name="ukuran_jaket" value="XXL">XXL</input>
+						<label for="ukuran_jaket">Pilih Ukuran Jaket :</label>
+						<div th:if="${biodata.ukuran_jaket} == 'S'">
+							<input type="radio" name="ukuran_jaket" value="S" checked="checked">S</input>
+							<input type="radio" name="ukuran_jaket" value="M">M</input>
+							<input type="radio" name="ukuran_jaket" value="L">L</input>
+							<input type="radio" name="ukuran_jaket" value="XL">XL</input>
+							<input type="radio" name="ukuran_jaket" value="XXL">XXL</input>
+						</div>
+						<div th:if="${biodata.ukuran_jaket} == 'M'">
+							<input type="radio" name="ukuran_jaket" value="S">S</input>
+							<input type="radio" name="ukuran_jaket" value="M" checked="checked">M</input>
+							<input type="radio" name="ukuran_jaket" value="L">L</input>
+							<input type="radio" name="ukuran_jaket" value="XL">XL</input>
+							<input type="radio" name="ukuran_jaket" value="XXL">XXL</input>
+						</div>
+						<div th:if="${biodata.ukuran_jaket} == 'L'">
+							<input type="radio" name="ukuran_jaket" value="S">S</input>
+							<input type="radio" name="ukuran_jaket" value="M">M</input>
+							<input type="radio" name="ukuran_jaket" value="L" checked="checked">L</input>
+							<input type="radio" name="ukuran_jaket" value="XL">XL</input>
+							<input type="radio" name="ukuran_jaket" value="XXL">XXL</input>
+						</div>
+						<div th:if="${biodata.ukuran_jaket} == 'XL'">
+							<input type="radio" name="ukuran_jaket" value="S">S</input>
+							<input type="radio" name="ukuran_jaket" value="M">M</input>
+							<input type="radio" name="ukuran_jaket" value="L">L</input>
+							<input type="radio" name="ukuran_jaket" value="XL" checked="checked">XL</input>
+							<input type="radio" name="ukuran_jaket" value="XXL">XXL</input>
+						</div>
+						<div th:if="${biodata.ukuran_jaket} == 'XXL'">
+							<input type="radio" name="ukuran_jaket" value="S">S</input>
+							<input type="radio" name="ukuran_jaket" value="M">M</input>
+							<input type="radio" name="ukuran_jaket" value="L">L</input>
+							<input type="radio" name="ukuran_jaket" value="XL">XL</input>
+							<input type="radio" name="ukuran_jaket" value="XXL" checked="checked">XXL</input>
+						</div>
+						
 					</div>
 					
 					<hr/>

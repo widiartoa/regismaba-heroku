@@ -6,4 +6,6 @@ public interface AsuransiKesehatanService {
     void insertAsuransiKesehatan(AsuransiKesehatanModel asuransiKesehatan);
     
     AsuransiKesehatanModel selectAsuransiKesehatanByUsername(String username);
+    
+    void updateAsuransiKesehatan(AsuransiKesehatanModel asuransiKesehatan);
 }

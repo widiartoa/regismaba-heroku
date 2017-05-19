@@ -12,5 +12,7 @@ public interface DataKesehatanService {
 	
 	DataKesehatanModel selectDataKesehatanByUsername(String username);
 	
-	List<DataKesehatanModel> selectAllDataKesehatan();
+	void updateDataKesehatan(DataKesehatanModel dataKesehatan);
+	
+//	List<DataKesehatanModel> selectAllDataKesehatan();
 }

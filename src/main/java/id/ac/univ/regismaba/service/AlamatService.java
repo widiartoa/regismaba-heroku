@@ -10,4 +10,6 @@ public interface AlamatService {
 		
 	AlamatModel selectAlamat(int jalan_id);
 	
+	void updateAlamat(AlamatModel alamat);
+	
 }
