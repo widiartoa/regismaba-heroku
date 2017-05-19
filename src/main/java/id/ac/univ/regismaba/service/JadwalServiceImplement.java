@@ -7,6 +7,8 @@ import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import id.ac.univ.regismaba.dao.JadwalMapper;
@@ -178,7 +180,10 @@ public class JadwalServiceImplement implements JadwalService {
 	public void insertJadwalRegis(String hari, String waktu_awal, String waktu_akhir, int kapasitas)
 			throws ParseException {
 		// TODO Auto-generated method stub
-
+		
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		String user = auth.getName();
+		
 		TahunAjaranModel tahunAjaranSaatIni = tahunAjaranService.selectTahunAjaranSaatIni();
 
 		DateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
@@ -193,8 +198,8 @@ public class JadwalServiceImplement implements JadwalService {
 		jadwalRegis.setWaktu_akhir(waktu_akhir);
 		jadwalRegis.setTimestamp_awal(timestamp_awal);
 		jadwalRegis.setTimestamp_akhir(timestamp_akhir);
-		jadwalRegis.setCreated_by("redita.arifin");
-		jadwalRegis.setUpdated_by("redita.arifin");
+		jadwalRegis.setCreated_by(user);
+		jadwalRegis.setUpdated_by(user);
 		jadwalRegis.setTahun_ajaran_id(tahunAjaranSaatIni.getTahun_ajaran_id());
 
 		jadwalMapper.insertJadwalRegis(jadwalRegis);

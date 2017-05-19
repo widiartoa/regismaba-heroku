@@ -93,6 +93,9 @@ public class JadwalController {
 
 	@RequestMapping("/staf-registrasi/daftar-jadwal")
 	public String getAllJadwal(Model model) {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		String user = auth.getName();
+		
 		List<JadwalRegisModel> jadwalRegisList = jadwalService.selectAllJadwalRegis();
 		model.addAttribute("jadwalRegisList", jadwalRegisList);
 		List<JadwalKesehatanModel> jadwalTesKesList = jadwalService.selectAllJadwalTesKes();
@@ -134,8 +137,9 @@ public class JadwalController {
 	
 	@PostMapping("/staf-registrasi/assign-jadwal")
 	public String assignJadwal(Model model, @RequestParam(value = "myArray[]", required = false) Integer[] myArray){
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		String user = auth.getName();
 		
-		String username = "redita.arifin";
 		TahunAjaranModel tahunAjaranSaatIni = tahunAjaranService.selectTahunAjaranSaatIni();
 		jadwalService.resetAssignJadwal(tahunAjaranSaatIni.getTahun_ajaran_id());
 		
@@ -144,8 +148,8 @@ public class JadwalController {
 			int fakultas_id = myArray[i];
 			UrutanAssignJadwalModel uaj = new UrutanAssignJadwalModel();
 			uaj.setFakultas_id(fakultas_id);
-			uaj.setCreated_by(username);
-			uaj.setUpdated_by(username);
+			uaj.setCreated_by(user);
+			uaj.setUpdated_by(user);
 			uaj.setTahun_ajaran_id(tahunAjaranSaatIni.getTahun_ajaran_id());
 			
 			log.info("get fakultas id {} insert urutan assign", fakultas_id);
