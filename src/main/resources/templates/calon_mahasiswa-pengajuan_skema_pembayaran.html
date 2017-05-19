@@ -16,7 +16,7 @@
 				
 				<hr/>
 				
-				<form name="skemaForm" method="POST" enctype="multipart/form-data" action="/calon-mahasiswa/skema-pembayaran/submit" onsubmit="return validateForm()" class="form-horizontal">
+				<form name="skemaForm" method="POST" enctype="multipart/form-data" action="/c6/calon-mahasiswa/skema-pembayaran/submit" onsubmit="return validateForm()" class="form-horizontal">
 					<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
 					
 					<div>
@@ -171,7 +171,7 @@
 					</div>
 					
 					<div class="btn-group" role="group" aria-label="...">
-					  <a th:href="'/calon-mahasiswa/skema-pembayaran'"><button type="button" class="btn btn-default">Kembali</button></a>
+					  <a th:href="'/c6/calon-mahasiswa/skema-pembayaran'"><button type="button" class="btn btn-default">Kembali</button></a>
 					</div>
 				</form>
 			</div>
