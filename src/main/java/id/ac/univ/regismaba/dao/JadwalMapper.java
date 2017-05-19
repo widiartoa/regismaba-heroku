@@ -2,6 +2,7 @@ package id.ac.univ.regismaba.dao;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -11,6 +12,7 @@ import org.apache.ibatis.annotations.Update;
 import id.ac.univ.regismaba.model.JadwalEptModel;
 import id.ac.univ.regismaba.model.JadwalKesehatanModel;
 import id.ac.univ.regismaba.model.JadwalRegisModel;
+import id.ac.univ.regismaba.model.UrutanAssignJadwalModel;
 
 @Mapper
 public interface JadwalMapper {
@@ -30,6 +32,9 @@ public interface JadwalMapper {
 	@Select("select jadwal_registrasi_id, timestamp_awal, timestamp_akhir, kapasitas, created_by, created_at, updated_by, updated_at from jadwal_registrasi WHERE tahun_ajaran_id = #{tahun_ajaran_id} and status_aktif = 1 ORDER BY created_at DESC")
 	List<JadwalRegisModel> selectAllJadwalRegisbyTahunAjaran(@Param("tahun_ajaran_id") int tahun_ajaran_id);
 	
+	@Select("select * from jadwal_registrasi WHERE tahun_ajaran_id = #{tahun_ajaran_id} and status_aktif = 1 ORDER BY timestamp_awal ASC")
+	List<JadwalRegisModel> selectAllJadwalRegisbyTahunAjaranSortAsc(@Param("tahun_ajaran_id") int tahun_ajaran_id);
+	
 	@Insert("insert into jadwal_registrasi (timestamp_awal, timestamp_akhir, kapasitas, created_by, created_at, updated_by, updated_at, tahun_ajaran_id, status_aktif) "
 			+ "values (#{timestamp_awal}, #{timestamp_akhir}, #{kapasitas}, #{created_by}, current_timestamp, #{updated_by}, current_timestamp, #{tahun_ajaran_id}, 1)")
 	void insertJadwalRegis(JadwalRegisModel jadwalRegis);
@@ -42,4 +47,18 @@ public interface JadwalMapper {
 
 	@Select("select jadwal_ept_id, timestamp_awal, timestamp_akhir, kapasitas, created_by, created_at, updated_by, updated_at from jadwal_ept WHERE tahun_ajaran_id = #{tahun_ajaran_id} and status_aktif = 1 ORDER BY created_at DESC")
 	List<JadwalEptModel> selectAllJadwalEptbyTahunAjaran(int tahun_ajaran_id);
+	
+	@Insert("insert into urutan_assign_jadwal (fakultas_id, tahun_ajaran_id, created_by, created_at, updated_by, updated_at) "
+			+ "values (#{fakultas_id}, #{tahun_ajaran_id}, #{created_by}, current_timestamp, #{updated_by}, current_timestamp)")
+	void insertUrutanAssign(UrutanAssignJadwalModel uaj);
+	
+	@Delete("DELETE FROM assign_jadwal WHERE tahun_ajaran_id=#{tahun_ajaran_id}")
+	void resetAssignJadwal(int tahun_ajaran_id);
+	
+	@Delete("DELETE FROM urutan_assign_jadwal WHERE tahun_ajaran_id=#{tahun_ajaran_id}")
+	void resetUrutanAssignJadwal(int tahun_ajaran_id);
+	
+	@Insert("insert into assign_jadwal (fakultas_id, npm, jadwal_registrasi_id, created_by, created_at, updated_by, updated_at, tahun_ajaran_id) "
+			+ "values (#{fakultas_id}, #{npm}, #{jadwal_registrasi_id}, #{created_by}, current_timestamp, #{created_by}, current_timestamp, #{tahun_ajaran_id})")
+	void assignJadwalReg(@Param("fakultas_id") int fakultas_id, @Param("npm") String npm, @Param("jadwal_registrasi_id") int jadwal_registrasi_id, @Param("tahun_ajaran_id") int tahun_ajaran_id, @Param("created_by") String created_by);
 }

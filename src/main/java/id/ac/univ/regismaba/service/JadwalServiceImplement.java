@@ -13,7 +13,9 @@ import id.ac.univ.regismaba.dao.JadwalMapper;
 import id.ac.univ.regismaba.model.JadwalEptModel;
 import id.ac.univ.regismaba.model.JadwalKesehatanModel;
 import id.ac.univ.regismaba.model.JadwalRegisModel;
+import id.ac.univ.regismaba.model.MahasiswaModel;
 import id.ac.univ.regismaba.model.TahunAjaranModel;
+import id.ac.univ.regismaba.model.UrutanAssignJadwalModel;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -31,7 +33,7 @@ public class JadwalServiceImplement implements JadwalService {
 		// TODO Auto-generated method stub
 		log.info("select jadwal ept with id {}", jadwal_ept_id);
 		JadwalEptModel jadwalEpt = jadwalMapper.selectJadwalEpt(jadwal_ept_id);
-		
+
 		String hariEpt = this.parseHariEpt(jadwalEpt);
 		String waktuEpt = this.parseWaktuEpt(jadwalEpt);
 		String timestampAwalEpt = this.parseTimestampAwalEpt(jadwalEpt);
@@ -41,7 +43,7 @@ public class JadwalServiceImplement implements JadwalService {
 		jadwalEpt.setTanggal(waktuEpt);
 		jadwalEpt.setWaktu_awal(timestampAwalEpt);
 		jadwalEpt.setWaktu_akhir(timestampAkhirEpt);
-		
+
 		return jadwalEpt;
 	}
 
@@ -50,7 +52,7 @@ public class JadwalServiceImplement implements JadwalService {
 		// TODO Auto-generated method stub
 		log.info("select jadwal tes kesehatan with id {}", jadwal_tes_kesehatan_id);
 		JadwalKesehatanModel jadwalTesKes = jadwalMapper.selectJadwalKesehatan(jadwal_tes_kesehatan_id);
-		
+
 		String hariTesKes = this.parseHariTesKes(jadwalTesKes);
 		String waktuTesKes = this.parseWaktuTesKes(jadwalTesKes);
 		String timestampAwalTesKes = this.parseTimestampAwalTesKes(jadwalTesKes);
@@ -60,7 +62,7 @@ public class JadwalServiceImplement implements JadwalService {
 		jadwalTesKes.setTanggal(waktuTesKes);
 		jadwalTesKes.setWaktu_awal(timestampAwalTesKes);
 		jadwalTesKes.setWaktu_akhir(timestampAkhirTesKes);
-		
+
 		return jadwalTesKes;
 	}
 
@@ -108,7 +110,18 @@ public class JadwalServiceImplement implements JadwalService {
 
 		return jadwalRegisList;
 	}
-	
+
+	@Override
+	public List<JadwalRegisModel> selectAllJadwalRegisAsc() {
+		// TODO Auto-generated method stub
+		TahunAjaranModel tahunAjaranSaatIni = tahunAjaranService.selectTahunAjaranSaatIni();
+		log.info("select all jadwal registrasi on tahun ajaran {} term {}", tahunAjaranSaatIni.getTahun_ajaran(),
+				tahunAjaranSaatIni.getTerm_id());
+		List<JadwalRegisModel> jadwalRegisList = jadwalMapper
+				.selectAllJadwalRegisbyTahunAjaranSortAsc(tahunAjaranSaatIni.getTahun_ajaran_id());
+		return jadwalRegisList;
+	}
+
 	@Override
 	public List<JadwalKesehatanModel> selectAllJadwalTesKes() {
 		// TODO Auto-generated method stub
@@ -134,7 +147,7 @@ public class JadwalServiceImplement implements JadwalService {
 
 		return jadwalTesKesList;
 	}
-	
+
 	@Override
 	public List<JadwalEptModel> selectAllJadwalEpt() {
 		// TODO Auto-generated method stub
@@ -187,19 +200,54 @@ public class JadwalServiceImplement implements JadwalService {
 		jadwalMapper.insertJadwalRegis(jadwalRegis);
 	}
 
-
 	@Override
 	public void deleteJadwalRegis(int jadwal_registrasi_id) {
 		// TODO Auto-generated method stub
-		if (jadwalMapper.selectJadwalRegis(jadwal_registrasi_id) != null){
+		if (jadwalMapper.selectJadwalRegis(jadwal_registrasi_id) != null) {
 			log.info("delete jadwal registrasi dengan id {}", jadwal_registrasi_id);
 			jadwalMapper.deleteJadwalRegis(jadwal_registrasi_id);
 		} else {
 			log.info("tidak ada jadwal registrasi dengan id {}", jadwal_registrasi_id);
 		}
 	}
-	
-	
+
+	@Override
+	public void insertUrutanAssign(UrutanAssignJadwalModel uaj) {
+		// TODO Auto-generated method stub
+		jadwalMapper.insertUrutanAssign(uaj);
+	}
+
+	@Override
+	public void resetAssignJadwal(int tahun_ajaran_id) {
+		// TODO Auto-generated method stub
+		jadwalMapper.resetAssignJadwal(tahun_ajaran_id);
+		jadwalMapper.resetUrutanAssignJadwal(tahun_ajaran_id);
+	}
+
+	/*
+	 * @param jadwal_registrasi_id sebagai penunjuk saat ini sedang menggunakan
+	 * jadwal yang mana
+	 */
+	@Override
+	public void assignJadwalReg(List<JadwalRegisModel> jadwalList, int indexJadwalList, int kapasitasSisa,
+			List<MahasiswaModel> mahasiswaList, int totalJadwalAssigned, String created_by) {
+		if (indexJadwalList < jadwalList.size()) {
+			TahunAjaranModel tahunAjaranSaatIni = tahunAjaranService.selectTahunAjaranSaatIni();
+
+			MahasiswaModel mahasiswa = mahasiswaList.get(totalJadwalAssigned);
+			JadwalRegisModel jadwal = jadwalList.get(indexJadwalList);
+			log.info("mahasiswa dengan npm {} fakultas id {}", mahasiswa.getNpm(),
+					mahasiswa.getFakultas_id());
+			jadwalMapper.assignJadwalReg(mahasiswa.getFakultas_id(), mahasiswa.getNpm(),
+					jadwal.getJadwal_registrasi_id(), tahunAjaranSaatIni.getTahun_ajaran_id(), created_by);
+			log.info("mahasiswa dengan npm {} diberikan jadwal dengan id {}", mahasiswa.getNpm(),
+					jadwal.getJadwal_registrasi_id());
+
+			assignJadwalReg(jadwalList, indexJadwalList + 1, kapasitasSisa - 1, mahasiswaList, totalJadwalAssigned + 1,
+					created_by);
+		}
+	}
+
 	/**
 	 * Parsing Methods
 	 *
