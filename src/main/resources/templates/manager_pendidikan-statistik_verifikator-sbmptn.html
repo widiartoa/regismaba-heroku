@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<div th:replace="resources"></div>
+<title>Manager Pendidikan - Statistik Program</title>
+
+<script type="text/javascript"
+	src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript" th:inline="javascript">
+		    /*<![CDATA[*/
+				// Load the Visualization API and the corechart package.
+			    google.charts.load('current', {'packages':['corechart']});
+			
+			    var sp = [[${sumSBMPTNVerified}]];
+			    
+			    // Set a callback to run when the Google Visualization API is loaded.
+			    google.charts.setOnLoadCallback(drawSumSNMPTNVerifiedChart);
+			    
+			    function drawSumSNMPTNVerifiedChart() {
+			      // Create the data table.
+			      var data = new google.visualization.DataTable();
+			      
+			      data.addColumn('string', 'SBMPTN');
+			      data.addColumn('number', 'Total Pendaftar');
+			      data.addColumn('number', 'Total Pendaftar yang Terverifikasi');
+			      data.addColumn('number', 'Total Pendaftar yang Tidak Terverifikasi');
+			      
+			      for(var i = 0; i < sp.length; i++)
+		    	  {
+			    	  data.addRow([sp[i].nama, sp[i].total, sp[i].regis, sp[i].non_regis]);
+		    	  }
+			 	
+			      // Set chart options
+			      var options = {'title':'Data Pendaftar SBMPTN Setiap Fakultas',
+			                     'width':500,
+			                     'height':300};
+			
+			      // Instantiate and draw our chart, passing in some options.
+				  var chart2 = new google.visualization.ColumnChart(document.getElementById('sumSNMPTNVerified_column'));
+				  chart2.draw(data, options);
+			    }
+			    
+		    /*]]>*/
+	    </script>
+</head>
+<body>
+	<div th:include="manager_pendidikan-statistik_verifikator-navbar"></div>
+
+	<div class="content">
+		<div class="row">
+			<div class="col-sm-12">
+				<h3>Statistik Registrasi Mahasiswa Baru S1</h3>
+				<h4>SBMPTN - Tahun Ajaran 2016/2017 Genap</h4>
+			</div>
+		</div>
+
+		<hr />
+
+		<table align="center">
+			<tbody>
+				<tr>
+					<td th:id="'sumSNMPTNVerified_column'"></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+
+	<div class="footer">Modul Registrasi Mahasiswa Baru</div>
+</body>
+</html>
