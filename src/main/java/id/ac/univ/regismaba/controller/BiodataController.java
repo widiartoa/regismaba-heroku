@@ -66,6 +66,8 @@ public class BiodataController {
 	private IjazahModel ijazah = new IjazahModel();
 	private DataKesehatanModel dkm = new DataKesehatanModel();
 	private AsuransiKesehatanModel akm = new AsuransiKesehatanModel();
+	private InstitusiModel institusi = new InstitusiModel();
+	private JenjangModel jenjang = new JenjangModel();
     
     @Autowired
     public BiodataController(StorageService storageService) {
@@ -343,6 +345,12 @@ public class BiodataController {
 		ijazah.setUpdated_by(name);
 		ijazah.setUpdated_at(null);
         
+		institusi = institusiDAO.selectInstitusi(Integer.parseInt(institusi_id));
+		model.addAttribute("institusi", institusi);
+		
+		
+		//lalalala
+		
 		dkm.setData_kesehatan_id(0);
         dkm.setHasil_tes_kesehatan("Belum cek kesehatan");
         dkm.setUsername(name);
@@ -563,9 +571,13 @@ public class BiodataController {
 									System.out.println("ijazah ke add ke model");
 								int institusi_id = ijazah.getInstitusi_id();
 								InstitusiModel institusi = institusiDAO.selectInstitusi(institusi_id);
-								System.out.println(provinsi);
+								System.out.println(institusi_id);
 								model.addAttribute("institusi", institusi);
 									System.out.println("institusi ke add ke model");
+								
+								jenjang = jenjangDAO.selectJenjang(Integer.parseInt(ijazah.getJenjang()));	
+								model.addAttribute("jenjang", jenjang);	
+								
 								AsuransiKesehatanModel asuransiKesehatan = asuransiKesehatanDAO.selectAsuransiKesehatanByUsername(username);
 									System.out.println(asuransiKesehatan);
 								if(asuransiKesehatan != null) {
@@ -691,6 +703,10 @@ public class BiodataController {
 								System.out.println(provinsi);
 								model.addAttribute("institusi", institusi);
 									System.out.println("institusi ke add ke model");
+									
+								jenjang = jenjangDAO.selectJenjang(Integer.parseInt(ijazah.getJenjang()));	
+								model.addAttribute("jenjang", jenjang);	
+									
 								AsuransiKesehatanModel asuransiKesehatan = asuransiKesehatanDAO.selectAsuransiKesehatanByUsername(username);
 									System.out.println(asuransiKesehatan);
 								if(asuransiKesehatan != null) {
