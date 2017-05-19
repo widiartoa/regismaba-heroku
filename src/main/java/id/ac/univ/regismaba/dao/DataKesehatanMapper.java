@@ -42,5 +42,7 @@ public interface DataKesehatanMapper {
 			+ "updated_by=#{updated_by}, updated_at=#{updated_at} WHERE username=#{username}")
 	void updateDataKesehatan(DataKesehatanModel dataKesehatan);
 	
+	@Update("update data_kesehatan set hasil_tes_kesehatan=#{hasil_tes_kesehatan}, updated_by=#{updated_by}, updated_at=current_timestamp where username=#{username}")
+	void updateHasilTes(DataKesehatanModel dataKes);
 }
 
