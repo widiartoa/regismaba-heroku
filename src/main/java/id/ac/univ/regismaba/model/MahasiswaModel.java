@@ -13,6 +13,7 @@ public class MahasiswaModel {
 	String nama_lengkap;
 	String uid_sso;
 	int program_studi_id;
+	int fakultas_id;
 	String no_seleksi;
 	int jadwal_registrasi_id;
 	int jadwal_tes_kesehatan_id;
