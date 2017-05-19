@@ -12,4 +12,6 @@ public interface AlamatService {
 	
 	void updateAlamat(AlamatModel alamat);
 	
+	int selectJalanIdByUsername(String username);
+	
 }
