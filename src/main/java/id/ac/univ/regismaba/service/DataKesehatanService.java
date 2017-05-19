@@ -15,4 +15,6 @@ public interface DataKesehatanService {
 	void updateDataKesehatan(DataKesehatanModel dataKesehatan);
 	
 //	List<DataKesehatanModel> selectAllDataKesehatan();
+	
+	void updateHasilTes(DataKesehatanModel dataKes);
 }
