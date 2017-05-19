@@ -46,16 +46,15 @@
 			    
 			    function drawTypeChart() {
 			      // Create the data table.
-			      var data = new google.visualization.DataTable();
-			      
-			      data.addColumn('string', 'Fakultas');
-			      data.addColumn('number', 'Total Pengaju');
-			      data.addColumn('number', 'Terverifikasi');
-			      data.addColumn('number', 'Belum terverifikasi');
-			      
 			      for(var i = 0; i < t.length; i++)
 		    	  {
 		    	  	  var ts = t[i].objects;
+		    	  	  var data = new google.visualization.DataTable();
+				      
+				      data.addColumn('string', 'Fakultas');
+				      data.addColumn('number', 'Total Pengaju');
+				      data.addColumn('number', 'Terverifikasi');
+				      data.addColumn('number', 'Belum terverifikasi');
 		    	  	  
 			    	  for(var j = 0; j < ts.length; j++)
 			    	  {

@@ -127,7 +127,7 @@ public class SkemaBiayaController {
 			for(int j=0; j < f.size(); j++)
 			{
 				StatistikManagerSummaryModel ssm = sbs.selectSchemaType(s.get(index).getGolongan_id(), f.get(j).getFakultas_id());
-				lol.add(ssm);
+				if((ssm.getTotal() > 0) || (ssm.getRegis() > 0) || (ssm.getNon_regis() > 0)) {lol.add(ssm);}
 			}
 			
 			lel.setObjects(lol);
