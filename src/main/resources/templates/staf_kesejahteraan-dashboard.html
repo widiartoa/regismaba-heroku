@@ -11,9 +11,11 @@
 			    google.charts.load('current', {'packages':['corechart']});
 		    
 			    var s = [[${schemas}]];
+			    var t = [[${types}]];
 			    
 			    // Set a callback to run when the Google Visualization API is loaded.
 			    google.charts.setOnLoadCallback(drawSchemaChart);
+			    google.charts.setOnLoadCallback(drawTypeChart);
 			    
 			    // Callback that creates and populates a data table,
 			    // instantiates the pie chart, passes in the data and
@@ -41,6 +43,35 @@
 				  var chart = new google.visualization.BarChart(document.getElementById('schema'));
 				  chart.draw(data, options);
 			    }
+			    
+			    function drawTypeChart() {
+			      // Create the data table.
+			      var data = new google.visualization.DataTable();
+			      
+			      data.addColumn('string', 'Fakultas');
+			      data.addColumn('number', 'Total Pengaju');
+			      data.addColumn('number', 'Terverifikasi');
+			      data.addColumn('number', 'Belum terverifikasi');
+			      
+			      for(var i = 0; i < t.length; i++)
+		    	  {
+		    	  	  var ts = t[i].objects;
+		    	  	  
+			    	  for(var j = 0; j < ts.length; j++)
+			    	  {
+				    	  data.addRow([ts[j].nama, ts[j].total, ts[j].regis, ts[j].non_regis]);
+			    	  }
+				 	
+				      // Set chart options
+				      var options = {'title':'Pengaju Golongan ' + t[i].nama,
+				                     'width':500,
+				                     'height':300};
+				
+				      // Instantiate and draw our chart, passing in some options.
+					  var chart = new google.visualization.BarChart(document.getElementById('chart_' + t[i].nama));
+					  chart.draw(data, options);
+		    	  }
+			    }
 		    /*]]>*/
 	    </script>
 	</head>
@@ -61,11 +92,9 @@
 						<tr>
 							<td th:id="'schema'"></td>
 						</tr>
-						<div>
-							<tr>
-								<td></td>
-							</tr>
-						</div>
+						<tr th:each="type, iterationStatus: ${types}">
+							<td th:id="'chart_' + ${type.nama}"></td>
+						</tr>
 					</tbody>
 				</table>
 			</div>

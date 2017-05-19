@@ -135,6 +135,7 @@ public class SkemaBiayaController {
 		}
 		
 		model.addAttribute("schemas", schemas);
+		model.addAttribute("types", types);
 		System.out.println(types);
 		
 		return "staf_kesejahteraan-dashboard";
