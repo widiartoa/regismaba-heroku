@@ -36,7 +36,7 @@
 		    	  }
 			 	
 			      // Set chart options
-			      var options = {'title':'Pendaftar Jenjang (Total : ' + total + ')',
+			      var options = {'title':'Total Pendaftar Setiap Jenjang (Total : ' + total + ')',
 			                     'width':500,
 			                     'height':300};
 			
@@ -60,7 +60,7 @@
 		    	  }
 			 	
 			      // Set chart options
-			      var options = {'title':'Registran Jenjang (Total : ' + total + ')',
+			      var options = {'title':'Pendaftar Ulang Setiap Jenjang (Total : ' + total + ')',
 			                     'width':500,
 			                     'height':300};
 			
@@ -86,7 +86,7 @@
 		    	  }
 			 	
 			      // Set chart options
-			      var options = {'title':'Rincian Data Jenjang',
+			      var options = {'title':'Rincian Data Setiap Jenjang',
 			                     'width':500,
 			                     'height':300};
 			
@@ -113,12 +113,28 @@
 				<table align="center">
 					<tbody>
 						<tr>
-							<td th:id="'sumLevel_bar'"></td>
-							<td th:id="'level'"></td>
+							<td>
+								<div th:id="'sumLevel_bar'"></div>
+								<h4>Grafik ini berguna untuk memperlihatkan data registrasi mahasiswa baru secara umum pada setiap jenjang</h4>
+								<hr/>
+							</td>
+							<td>
+								<div th:id="'level'"></div>
+								<h4>Grafik ini berguna untuk memperlihatkan persentase pendaftar mahasiswa baru pada setiap jenjang</h4>
+								<hr/>
+							</td>
 						</tr>
 						<tr>
-							<td th:id="'regLevel_pie'"></td>
-							<td th:id="'regLevel_bar'"></td>
+							<td>
+								<div th:id="'regLevel_pie'"></div>
+								<h4>Grafik ini berguna untuk memperlihatkan persentase mahasiswa baru yang melakukan registrasi ulang pada setiap jenjang</h4>
+								<hr/>
+							</td>
+							<td>
+								<div th:id="'regLevel_bar'"></div>
+								<h4>Grafik ini berguna untuk memperlihatkan perbandingan jumlah mahasiswa baru yang melakukan registrasi ulang pada setiap jenjang</h4>
+								<hr/>
+							</td>
 						</tr>
 					</tbody>
 				</table>
