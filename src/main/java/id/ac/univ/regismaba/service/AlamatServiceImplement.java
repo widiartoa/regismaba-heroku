@@ -48,6 +48,12 @@ public class AlamatServiceImplement implements AlamatService {
 	
 		
 	}
+
+	@Override
+	public int selectJalanIdByUsername(String username) {
+		// TODO Auto-generated method stub
+		return alamatMapper.selectJalanIdByUsername(username);
+	}
 	
 	
 
