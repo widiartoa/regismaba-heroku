@@ -6,6 +6,7 @@ import java.util.List;
 import id.ac.univ.regismaba.model.JadwalEptModel;
 import id.ac.univ.regismaba.model.JadwalKesehatanModel;
 import id.ac.univ.regismaba.model.JadwalRegisModel;
+import id.ac.univ.regismaba.model.UrutanAssignJadwalModel;
 
 public interface JadwalService {
 
@@ -18,13 +19,23 @@ public interface JadwalService {
 	void insertJadwalRegis(String hari, String waktu_awal, String waktu_akhir, int kapasitas) throws ParseException;
 	
 	List<JadwalRegisModel> selectAllJadwalRegis();
+	
+	List<JadwalRegisModel> selectAllJadwalRegisAsc();
 
 	List<JadwalKesehatanModel> selectAllJadwalTesKes();
 	
 	List<JadwalEptModel> selectAllJadwalEpt();
 	
 	void deleteJadwalRegis(int jadwal_registrasi_id);
-
+	
+	void insertUrutanAssign(UrutanAssignJadwalModel uaj);
+	
+	void resetAssignJadwal(int tahun_ajaran_id);
+	
+	/*
+		parsings method
+	 */
+	
 	String parseHariRegis(JadwalRegisModel jadwalRegis);
 
 	String parseHariTesKes(JadwalKesehatanModel jadwalKesehatan);

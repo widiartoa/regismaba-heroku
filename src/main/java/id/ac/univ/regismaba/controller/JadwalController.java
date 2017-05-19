@@ -19,10 +19,13 @@ import id.ac.univ.regismaba.model.JadwalKesehatanModel;
 import id.ac.univ.regismaba.model.JadwalRegisModel;
 import id.ac.univ.regismaba.model.MahasiswaModel;
 import id.ac.univ.regismaba.model.PengajuanSkemaBiayaModel;
+import id.ac.univ.regismaba.model.TahunAjaranModel;
+import id.ac.univ.regismaba.model.UrutanAssignJadwalModel;
 import id.ac.univ.regismaba.service.FakultasService;
 import id.ac.univ.regismaba.service.JadwalService;
 import id.ac.univ.regismaba.service.MahasiswaService;
 import id.ac.univ.regismaba.service.PengajuanSkemaBiayaService;
+import id.ac.univ.regismaba.service.TahunAjaranService;
 import id.ac.univ.regismaba.service.VerifikasiIDMService;
 import lombok.extern.slf4j.Slf4j;
 
@@ -44,6 +47,9 @@ public class JadwalController {
 	
 	@Autowired
 	FakultasService fakultasService;
+	
+	@Autowired
+	TahunAjaranService tahunAjaranService;
 
 	@RequestMapping("/c6/calon-mahasiswa/")
 	public String getJadwal(Model model) {
@@ -122,14 +128,38 @@ public class JadwalController {
 	}
 	
 	@PostMapping("/c6/staf-registrasi/assign-jadwal")
-	public String assignJadwal(Model model, @RequestParam(value = "myArray[]", required = false) String[] myArray){
-		log.info("get array filled with {}", myArray[0]);
-		//TODO: insert fakultas order
-		//TODO: get jadwal order by timestamp_awal ASC
-		//TODO: get mhs left join fakultasorder order by fakultasorder_id
-		//TODO: insert mhs + jadwal to assign_jadwal
+	public String assignJadwal(Model model, @RequestParam(value = "myArray[]", required = false) Integer[] myArray){
 		
+		String username = "redita.arifin";
+		TahunAjaranModel tahunAjaranSaatIni = tahunAjaranService.selectTahunAjaranSaatIni();
+		jadwalService.resetAssignJadwal(tahunAjaranSaatIni.getTahun_ajaran_id());
+		
+		//TODO: insert into urutan_assign_jadwal 
+		for (int i=0; i < myArray.length; i++){
+			int fakultas_id = myArray[i];
+			UrutanAssignJadwalModel uaj = new UrutanAssignJadwalModel();
+			uaj.setFakultas_id(fakultas_id);
+			uaj.setCreated_by(username);
+			uaj.setUpdated_by(username);
+			uaj.setTahun_ajaran_id(tahunAjaranSaatIni.getTahun_ajaran_id());
+			
+			log.info("get fakultas id {} insert urutan assign", fakultas_id);
+			
+			jadwalService.insertUrutanAssign(uaj);
+		}
+		
+		//TODO: get jadwal order by timestamp_awal ASC
+		List<JadwalRegisModel> jadwalRegisList = jadwalService.selectAllJadwalRegisAsc();
+		
+		//TODO: Select * from mahasiswa as m inner join program_studi as p on m.fakultas_id = p.fakultas_id 
+		//		inner join urutan_assign_jadwal as u on m.fakultas_id = u.fakultas_id 
+		//		order by fakultasorder_id insert mhs + jadwal to assign_jadwal
+		List<MahasiswaModel> mahasiswaList = mahasiswaService.selectAllMahasiswaSortedUrutanAssignonTahunAjaran(tahunAjaranSaatIni.getTahun_ajaran_id());
+		
+		log.info("get one of mahasiswa with npm {} and fakultas {} on the list", mahasiswaList.get(0).getNpm(), mahasiswaList.get(0).getFakultas());
 		//TODO: buat halaman sukses assign jadwal + view assigned jadwal
+		
+		
 		return "index";
 	}
 	
