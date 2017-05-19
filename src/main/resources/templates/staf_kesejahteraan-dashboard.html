@@ -35,7 +35,7 @@
 		    	  }
 			 	
 			      // Set chart options
-			      var options = {'title':'Pengaju Golongan',
+			      var options = {'title':'Pengaju Golongan Secara Umum',
 			                     'width':500,
 			                     'height':300};
 			
@@ -90,9 +90,11 @@
 					<tbody>
 						<tr>
 							<td th:id="'schema'"></td>
+							<td>Grafik ini dapat digunakan untuk melihat statistik skema secara keseluruhan</td>
 						</tr>
 						<tr th:each="type, iterationStatus: ${types}">
 							<td th:id="'chart_' + ${type.nama}"></td>
+							<td>Grafik ini dapat digunakan untuk melihat statistik golongan terkait di setiap fakultas</td>
 						</tr>
 					</tbody>
 				</table>
