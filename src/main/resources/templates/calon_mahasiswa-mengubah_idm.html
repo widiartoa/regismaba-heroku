@@ -98,7 +98,7 @@
 					<div class="form-group">
 						<label for="scan_ktp">Scan Kartu Tanda Penduduk(KTP) *</label> 
 						<div class="input-group" name="scan_ktp">
-							<input type="text" class="form-control" id="basic-addon1" readonly="true" data-validation="required" data-validation-error-msg="Scan KTP harus diisi" />
+							<input type="text" class="form-control" id="basic-addon1" th:placeholder="${biodata.scan_ktp}" readonly="true" data-validation="required" data-validation-error-msg="Scan KTP harus diisi" />
 							<label class="input-group-btn">
 								<span class="btn btn-default">Browse&hellip;
 									<input type="file" name="scan_ktp"
@@ -239,7 +239,8 @@
 					<div class="form-group">
 						<label for="nama_tingkat_pendidikan">Tingkat Pendidikan Terakhir</label> 
 						<select id="nama_tingkat_pendidikan_select" class="form-control">
-							<option value="null">[Pilih Tingkat Pendidikan Terakhir]</option>
+							<!-- <option value="null">[Pilih Tingkat Pendidikan Terakhir]</option> -->
+							<option th:value="${tingkatPendidikan.tingkat_pendidikan_id}" th:text="${tingkatPendidikan.nama_tingkat_pendidikan}">[Pilih Provinsi]</option>
 							<option th:each="tingkatPendidikan : ${tingkatPendidikans}" th:value="${tingkatPendidikan.tingkat_pendidikan_id}" th:text="${tingkatPendidikan.nama_tingkat_pendidikan}"></option>							
 						</select>
 					</div>
@@ -247,7 +248,31 @@
 					<div class="form-group">
 						<label for="jenjang">Jenjang</label> 
 						<select id="nama_jenjang_select" name="jenjang" class="form-control">
-							<option value="null">[Pilih Jenjang Terakhir]</option>
+							<!-- <option value="null">[Pilih Jenjang Terakhir]</option> -->
+							<option th:value="${jenjang.jenjang_id}" th:text="${jenjang.nama_jenjang}"></option>
+							
+							<!-- <div th:if="${ijazah.jenjang} == '1'">
+								<option th:value="${ijazah.jenjang}" th:text="Sarjana"></option>
+							</div>
+							<div th:if="${ijazah.jenjang} == '2'">
+								<option th:value="${ijazah.jenjang}" th:text="Magister"></option>
+							</div>
+							<div th:if="${ijazah.jenjang} == '3'">
+								<option th:value="${ijazah.jenjang}" th:text="Doktor"></option>
+							</div>
+							<div th:if="${ijazah.jenjang} == '4'">
+								<option th:value="${ijazah.jenjang}" th:text="Profesi"></option>
+							</div>
+							<div th:if="${ijazah.jenjang} == '5'">
+								<option th:value="${ijazah.jenjang}" th:text="Spesialis"></option>
+							</div>
+							<div th:if="${ijazah.jenjang} == '6'">
+								<option th:value="${ijazah.jenjang}" th:text="Vokasi"></option>
+							</div>
+							<div th:if="${ijazah.jenjang} == '7'">
+								<option th:value="${ijazah.jenjang}" th:text="SMA"></option>
+							</div> -->
+
 							<option th:each="jenjang : ${jenjangs}" th:value="${jenjang.jenjang_id}" th:text="${jenjang.nama_jenjang}"></option>							
 						</select>
 					</div>
@@ -255,6 +280,7 @@
 					<div class="form-group">
 						<label for="institusi_id">Nama Institusi</label>
 						<select id="institusi_select" name="institusi_id" class="form-control">
+							<option th:value="${institusi.institusi_id}" th:text="${institusi.nama_institusi}"></option>
 						</select>
 					</div>
 					
