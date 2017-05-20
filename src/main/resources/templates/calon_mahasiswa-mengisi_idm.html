@@ -388,7 +388,7 @@
 				/* alert($(this).find(':selected').text() + " dipilih"); */
 				var nama_provinsi_id = $(this).find(':selected').val();
 				
-				$.ajax("/api/provinsi/" + nama_provinsi_id, {
+				$.ajax("/c6/api/provinsi/" + nama_provinsi_id, {
 			        success: function(data) {
 			        	var listOfKotaKabupaten = JSON.parse(data);
 			            
@@ -416,7 +416,7 @@
 				/* alert($(this).find(':selected').text() + " dipilih"); */
 				var nama_tingkat_pendidikan_id = $(this).find(':selected').val();
 				
-				$.ajax("/api/tingkat_pendidikan/" + nama_tingkat_pendidikan_id, {
+				$.ajax("/c6/api/tingkat_pendidikan/" + nama_tingkat_pendidikan_id, {
 			        success: function(data) {
 			        	var listOfInstitusi = JSON.parse(data);
 			            
