@@ -9,33 +9,52 @@
     	<div th:include="calon_mahasiswa-navbar"></div>
 		
     	<div class="container">
-			<div class="content">
+			<div class="content content-top">
 				<div class="row">
-					<div class="col-sm-12"><h3>Skema Pembayaran</h3></div>
+					<div class="col-sm-12">
+						<h3><span class="glyphicon glyphicon-usd"></span>Skema Pembayaran</h3>
+					</div>
 				</div>
+				
 				<hr/>
-				<div class="col-xs-6 col-md-3">
+				
+				<div class="col-xs-4 col-md-4 content-profpic">
 				    <a href="#" class="thumbnail">
 				      <img src="/img/logo.png" alt="profpic"/>
 					</a>
 				</div>
 				
-				<table class="table">
+				<table class="tg">
 					<tbody>
-						<tr><h4 th:text="${mahasiswa.username}">Pilihan Golongan</h4></tr>
-						<tr><h4 th:text="${mahasiswa.npm}">Pilihan Golongan</h4></tr>
+						<div><tr><label>Username :<h4 th:text="${mahasiswa.username}">Pilihan Golongan</h4></label></tr></div>
+						<div><tr><label>NPM :<h4 th:text="${mahasiswa.npm}">Pilihan Golongan</h4></label></tr></div>
+						<div><tr>							
+							<div class="btn-group" role="group" aria-label="..." style="text-align:right;">
+								<a th:href="'/c6/calon-mahasiswa/skema-pembayaran/golongan'">
+									<button type="button" class="btn btn-default">Ajukan Skema Pembayaran</button>
+								</a>
+							</div>
+						</tr></div>
 					</tbody>
 				</table>
+			</div>
+			
+			<div class="content">
+				<div class="row">
+					<div class="col-sm-12">
+						<h3><span class="glyphicon glyphicon-list-alt"></span>Rincian Skema Pembayaran</h3>
+					</div>
+				</div>
 				
-				<h3>Rincian Skema Pembayaran</h3>
+				<hr/>
 				
-				<table class="table">
+				<table class="tg">
 					<tbody>
 						<tr>
 							<td>
 								<div class="col-sm-12"><h4 th:text="'Status Pengajuan'">Status Pengajuan</h4></div>
 							</td>
-							<td>
+							<td style="text-align:right;">
 								<div class="col-sm-12"><h4 th:text="${psbm.status_pengajuan}">Status Pengajuan</h4></div>
 							</td>
 						</tr>
@@ -43,7 +62,7 @@
 							<td>
 								<div class="col-sm-12"><h4 th:text="'Golongan'">Pilihan Golongan</h4></div>
 							</td>
-							<td>
+							<td style="text-align:right;">
 								<div class="col-sm-12"><h4 th:text="${psbm.golongan_id}">Pilihan Golongan</h4></div>
 							</td>
 						</tr>
@@ -53,7 +72,7 @@
 									<td>
 										<div class="col-sm-12"><h4 th:text="'Jumlah Biaya Semester Minimal Rumpun Saintek'">Jumlah Biaya</h4></div>
 									</td>
-									<td>
+									<td style="text-align:right;">
 										<div class="col-sm-12"><h4 th:text="'Rp ' + ${sbm.jumlah_biaya_ipa_min}">Jumlah Biaya</h4></div>
 									</td>
 								</tr>
@@ -61,7 +80,7 @@
 									<td>
 										<div class="col-sm-12"><h4 th:text="'Jumlah Biaya Semester Maksimal Rumpun Saintek'">Jumlah Biaya</h4></div>
 									</td>
-									<td>
+									<td style="text-align:right;">
 										<div class="col-sm-12"><h4 th:text="'Rp ' + ${sbm.jumlah_biaya_ipa_max}">Jumlah Biaya</h4></div>
 									</td>
 								</tr>
@@ -69,7 +88,7 @@
 									<td>
 										<div class="col-sm-12"><h4 th:text="'Uang Pangkal Minimal Rumpun Saintek'">Uang Pangkal</h4></div>
 									</td>
-									<td>
+									<td style="text-align:right;">
 										<div class="col-sm-12"><h4 th:text="'Rp ' + ${sbm.uang_pangkal_ipa_min}">Uang Pangkal</h4></div>
 									</td>
 								</tr>
@@ -77,7 +96,7 @@
 									<td>
 										<div class="col-sm-12"><h4 th:text="'Uang Pangkal Maksimal Rumpun Saintek'">Uang Pangkal</h4></div>
 									</td>
-									<td>
+									<td style="text-align:right;">
 										<div class="col-sm-12"><h4 th:text="'Rp ' + ${sbm.uang_pangkal_ipa_max}">Uang Pangkal</h4></div>
 									</td>
 								</tr>
@@ -87,7 +106,7 @@
 									<td>
 										<div class="col-sm-12"><h4 th:text="'Jumlah Biaya Semester Minimal Rumpun Soshum'">Jumlah Biaya</h4></div>
 									</td>
-									<td>
+									<td style="text-align:right;">
 										<div class="col-sm-12"><h4 th:text="'Rp ' + ${sbm.jumlah_biaya_ips_min}">Jumlah Biaya</h4></div>
 									</td>
 								</tr>
@@ -95,7 +114,7 @@
 									<td>
 										<div class="col-sm-12"><h4 th:text="'Jumlah Biaya Semester Maksimal Rumpun Soshum'">Jumlah Biaya</h4></div>
 									</td>
-									<td>
+									<td style="text-align:right;">
 										<div class="col-sm-12"><h4 th:text="'Rp ' + ${sbm.jumlah_biaya_ips_max}">Jumlah Biaya</h4></div>
 									</td>
 								</tr>
@@ -103,7 +122,7 @@
 									<td>
 										<div class="col-sm-12"><h4 th:text="'Uang Pangkal Minimal Rumpun Soshum'">Uang Pangkal</h4></div>
 									</td>
-									<td>
+									<td style="text-align:right;">
 										<div class="col-sm-12"><h4 th:text="'Rp ' + ${sbm.uang_pangkal_ips_min}">Uang Pangkal</h4></div>
 									</td>
 								</tr>
@@ -111,7 +130,7 @@
 									<td>
 										<div class="col-sm-12"><h4 th:text="'Uang Pangkal Maksimal Rumpun Soshum'">Uang Pangkal</h4></div>
 									</td>
-									<td>
+									<td style="text-align:right;">
 										<div class="col-sm-12"><h4 th:text="'Rp ' + ${sbm.uang_pangkal_ips_max}">Uang Pangkal</h4></div>
 									</td>
 								</tr>
@@ -121,7 +140,7 @@
 									<td>
 										<div class="col-sm-12"><h4 th:text="'Jumlah Biaya Semester Minimal Rumpun Kesehatan'">Jumlah Biaya</h4></div>
 									</td>
-									<td>
+									<td style="text-align:right;">
 										<div class="col-sm-12"><h4 th:text="'Rp ' + ${sbm.jumlah_biaya_ik_min}">Jumlah Biaya</h4></div>
 									</td>
 								</tr>
@@ -129,7 +148,7 @@
 									<td>
 										<div class="col-sm-12"><h4 th:text="'Jumlah Biaya Semester Maksimal Rumpun Kesehatan'">Jumlah Biaya</h4></div>
 									</td>
-									<td>
+									<td style="text-align:right;">
 										<div class="col-sm-12"><h4 th:text="'Rp ' + ${sbm.jumlah_biaya_ik_max}">Jumlah Biaya</h4></div>
 									</td>
 								</tr>
@@ -137,7 +156,7 @@
 									<td>
 										<div class="col-sm-12"><h4 th:text="'Uang Pangkal Rumpun Minimal Kesehatan'">Uang Pangkal</h4></div>
 									</td>
-									<td>
+									<td style="text-align:right;">
 										<div class="col-sm-12"><h4 th:text="'Rp ' + ${sbm.uang_pangkal_ik_min}">Uang Pangkal</h4></div>
 									</td>
 								</tr>
@@ -145,7 +164,7 @@
 									<td>
 										<div class="col-sm-12"><h4 th:text="'Uang Pangkal Rumpun Maksimal Kesehatan'">Uang Pangkal</h4></div>
 									</td>
-									<td>
+									<td style="text-align:right;">
 										<div class="col-sm-12"><h4 th:text="'Rp ' + ${sbm.uang_pangkal_ik_max}">Uang Pangkal</h4></div>
 									</td>
 								</tr>
@@ -153,16 +172,24 @@
 						</div>
 					</tbody>
 				</table>
+			</div>
+		
+			<div class="content">
+				<div class="row">
+					<div class="col-sm-12">
+						<h3><span class="glyphicon glyphicon-education"></span>Pembayaran Mahasiswa</h3>
+					</div>
+				</div>
 				
-				<h3>Pembayaran Mahasiswa</h3>
+				<hr/>
 				
-				<table class="table">
+				<table class="tg">
 					<tbody>
 						<tr>
 							<td>
 								<div class="col-sm-12"><h4 th:text="'Status Pembayaran'">Status Pembayaran</h4></div>
 							</td>
-							<td>
+							<td style="text-align:right;">
 								<div class="col-sm-12"><h4 th:text="${psbm.status_pembayaran}">Status Pembayaran</h4></div>
 							</td>
 						</tr>
@@ -170,7 +197,7 @@
 							<td>
 								<div class="col-sm-12"><h4 th:text="'Jumlah Biaya Semester Mahasiswa'">Jumlah Biaya</h4></div>
 							</td>
-							<td>
+							<td style="text-align:right;">
 								<div class="col-sm-12"><h4 th:text="'Rp ' + ${psbm.jumlah_biaya_semester}">Jumlah Biaya</h4></div>
 							</td>
 						</tr>
@@ -178,110 +205,126 @@
 							<td>
 								<div class="col-sm-12"><h4 th:text="'Uang Pangkal Mahasiswa'">Uang Pangkal</h4></div>
 							</td>
-							<td>
+							<td style="text-align:right;">
 								<div class="col-sm-12"><h4 th:text="'Rp ' + ${psbm.uang_pangkal}">Uang Pangkal</h4></div>
 							</td>
 						</tr>
 					</tbody>
 				</table>
+			</div>
 				
-				<div th:if="${psbm.golongan_id} != 1">
-					<h3>Dokumen Pengajuan</h3>
-					<table class="table">
-						<tbody>
-							<div th:if="${psbm.surat_keterangan_rtrw} != null">
-								<tr>
-									<td>
-										<div class="col-sm-12"><h4 th:text="'Surat Keterangan RT RW'">Surat Keterangan RT RW</h4></div>
-									</td>
-									<td>
-										<div class="col-sm-12"><a th:href="${psbm.surat_keterangan_rtrw}">Unduh Scan Surat Keterangan RT RW</a></div>
-									</td>
-								</tr>
-							</div>
-							
-							<div>
-								<tr th:if="${psbm.foto_rumah != '-'}">
-									<td>
-										<div class="col-sm-12"><h4 th:text="'Foto Rumah'">Foto Rumah</h4></div>
-									</td>
-									<td>
-										<div class="col-sm-12"><a th:href="${psbm.foto_rumah}">Unduh Foto Rumah</a></div>
-									</td>
-								</tr>
-							</div>
-							
-							<div th:if="${psbm.slip_gaji_pribadi} != null">
-								<tr>
-									<td>
-										<div class="col-sm-12"><h4 th:text="'Slip Gaji Pribadi'">Slip Gaji Pribadi</h4></div>
-									</td>
-									<td>
-										<div class="col-sm-12"><a th:text="'Rp ' + ${psbm.gaji_pribadi}" th:href="${psbm.slip_gaji_pribadi}">Unduh Scan Slip Gaji Pribadi</a></div>
-									</td>
-								</tr>
-							</div>
-							
-							<div th:if="${psbm.slip_gaji_wali1} != null">
-								<tr>
-									<td>
-										<div class="col-sm-12"><h4 th:text="'Slip Gaji Wali 1'">Slip Gaji Wali 1</h4></div>
-									</td>
-									<td>
-										<div class="col-sm-12"><a th:text="'Rp ' + ${psbm.gaji_wali1}" th:href="${psbm.slip_gaji_wali1}">Unduh Scan Slip Gaji Wali 1</a></div>
-									</td>
-								</tr>
-							</div>
-							
-							<div th:if="${psbm.slip_gaji_wali2} != null">
-								<tr>
-									<td>
-										<div class="col-sm-12"><h4 th:text="'Slip Gaji Wali 2'">Slip Gaji Wali 2</h4></div>
-									</td>
-									<td>
-										<div class="col-sm-12"><a th:text="'Rp ' + ${psbm.gaji_wali2}" th:href="${psbm.slip_gaji_wali2}">Unduh Scan Slip Gaji Wali 2</a></div>
-									</td>
-								</tr>
-							</div>
-							
-							<div th:if="${psbm.tagihan_air != null}">
-								<tr>
-									<td>
-										<div class="col-sm-12"><h4 th:text="'Tagihan Air'">Tagihan Air</h4></div>
-									</td>
-									<td>
-										<div class="col-sm-12"><a th:text="'Rp ' + ${psbm.nilai_tagihan_air}" th:href="${psbm.tagihan_air}">Unduh Scan Tagihan Air</a></div>
-									</td>
-								</tr>
-							</div>
-						
-							<div th:if="${psbm.tagihan_listrik} != null">
-								<tr>
-									<td>
-										<div class="col-sm-12"><h4 th:text="'Tagihan Listrik'">Tagihan Listrik</h4></div>
-									</td>
-									<td>
-										<div class="col-sm-12"><a th:text="'Rp ' + ${psbm.nilai_tagihan_listrik}" th:href="${psbm.tagihan_listrik}">Unduh Scan Tagihan Listrik</a></div>
-									</td>
-								</tr>
-							</div>
-							
-							<div th:if="${psbm.tagihan_telepon}"> 
-								<tr>
-									<td>
-										<div class="col-sm-12"><h4 th:text="'Tagihan Telepon'">Tagihan Telepon</h4></div>
-									</td>
-									<td>
-										<div class="col-sm-12"><a th:text="'Rp ' + ${psbm.nilai_tagihan_telepon}" th:href="${psbm.tagihan_telepon}">Unduh Scan Tagihan Telepon</a></div>
-									</td>
-								</tr>
-							</div>
-						</tbody>
-	  				</table>
+			<div th:if="${psbm.golongan_id} != 1" class="content">
+				<div class="row">
+					<div class="col-sm-12">
+						<h3><span class="glyphicon glyphicon-file"></span>Dokumen Pengajuan</h3>
+					</div>
 				</div>
 				
-				<h3>Komentar Staf Kesejahteraan Mahasiswa</h3>
-				<table class="table">
+				<hr/>
+				
+				<table class="tg">
+					<tbody>
+						<div th:if="${psbm.surat_keterangan_rtrw} != null">
+							<tr>
+								<td>
+									<div class="col-sm-12"><h4 th:text="'Surat Keterangan RT RW'">Surat Keterangan RT RW</h4></div>
+								</td>
+								<td style="text-align:right;">
+									<div class="col-sm-12"><a th:href="${psbm.surat_keterangan_rtrw}">Unduh Scan Surat Keterangan RT RW</a></div>
+								</td>
+							</tr>
+						</div>
+						
+						<div>
+							<tr th:if="${psbm.foto_rumah != '-'}">
+								<td>
+									<div class="col-sm-12"><h4 th:text="'Foto Rumah'">Foto Rumah</h4></div>
+								</td>
+								<td style="text-align:right;">
+									<div class="col-sm-12"><a th:href="${psbm.foto_rumah}">Unduh Foto Rumah</a></div>
+								</td>
+							</tr>
+						</div>
+						
+						<div th:if="${psbm.slip_gaji_pribadi} != null">
+							<tr>
+								<td>
+									<div class="col-sm-12"><h4 th:text="'Slip Gaji Pribadi'">Slip Gaji Pribadi</h4></div>
+								</td>
+								<td style="text-align:right;">
+									<div class="col-sm-12"><a th:text="'Rp ' + ${psbm.gaji_pribadi}" th:href="${psbm.slip_gaji_pribadi}">Unduh Scan Slip Gaji Pribadi</a></div>
+								</td>
+							</tr>
+						</div>
+						
+						<div th:if="${psbm.slip_gaji_wali1} != null">
+							<tr>
+								<td>
+									<div class="col-sm-12"><h4 th:text="'Slip Gaji Wali 1'">Slip Gaji Wali 1</h4></div>
+								</td>
+								<td style="text-align:right;">
+									<div class="col-sm-12"><a th:text="'Rp ' + ${psbm.gaji_wali1}" th:href="${psbm.slip_gaji_wali1}">Unduh Scan Slip Gaji Wali 1</a></div>
+								</td>
+							</tr>
+						</div>
+						
+						<div th:if="${psbm.slip_gaji_wali2} != null">
+							<tr>
+								<td>
+									<div class="col-sm-12"><h4 th:text="'Slip Gaji Wali 2'">Slip Gaji Wali 2</h4></div>
+								</td>
+								<td style="text-align:right;">
+									<div class="col-sm-12"><a th:text="'Rp ' + ${psbm.gaji_wali2}" th:href="${psbm.slip_gaji_wali2}">Unduh Scan Slip Gaji Wali 2</a></div>
+								</td>
+							</tr>
+						</div>
+						
+						<div th:if="${psbm.tagihan_air != null}">
+							<tr>
+								<td>
+									<div class="col-sm-12"><h4 th:text="'Tagihan Air'">Tagihan Air</h4></div>
+								</td>
+								<td style="text-align:right;">
+									<div class="col-sm-12"><a th:text="'Rp ' + ${psbm.nilai_tagihan_air}" th:href="${psbm.tagihan_air}">Unduh Scan Tagihan Air</a></div>
+								</td>
+							</tr>
+						</div>
+					
+						<div th:if="${psbm.tagihan_listrik} != null">
+							<tr>
+								<td>
+									<div class="col-sm-12"><h4 th:text="'Tagihan Listrik'">Tagihan Listrik</h4></div>
+								</td>
+								<td style="text-align:right;">
+									<div class="col-sm-12"><a th:text="'Rp ' + ${psbm.nilai_tagihan_listrik}" th:href="${psbm.tagihan_listrik}">Unduh Scan Tagihan Listrik</a></div>
+								</td>
+							</tr>
+						</div>
+						
+						<div th:if="${psbm.tagihan_telepon}"> 
+							<tr>
+								<td>
+									<div class="col-sm-12"><h4 th:text="'Tagihan Telepon'">Tagihan Telepon</h4></div>
+								</td>
+								<td style="text-align:right;">
+									<div class="col-sm-12"><a th:text="'Rp ' + ${psbm.nilai_tagihan_telepon}" th:href="${psbm.tagihan_telepon}">Unduh Scan Tagihan Telepon</a></div>
+								</td>
+							</tr>
+						</div>
+					</tbody>
+				</table>
+			</div>
+			
+			<div class="content">
+				<div class="row">
+					<div class="col-sm-12">
+						<h3><span class="glyphicon glyphicon-comment"></span>Komentar Staf Kesejahteraan Mahasiswa</h3>
+					</div>
+				</div>
+				
+				<hr/>
+				
+				<table class="tg">
 					<tbody>
 							<tr>
 								<td th:if="${psbm.komentar != null}">
@@ -298,14 +341,10 @@
   				<div><h5 th:text="'Terakhir diubah pada ' + ${psbm.updated_at}"></h5></div>
   				
   				<hr/>
-				
-				<div class="btn-group" role="group" aria-label="...">
-				  <a th:href="'/c6/calon-mahasiswa/skema-pembayaran/golongan'"><button type="button" class="btn btn-warning">Ubah Skema Pembayaran</button></a>
-				</div>
 			</div>
        	</div>
 		
-		<div class="footer">Modul Registrasi Mahasiswa Baru</div>
+		<div th:include="footer"></div>
 		
 		<script type="text/javascript">
 			$(document).ready(function(){

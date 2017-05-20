@@ -62,10 +62,12 @@ public class BiodataController {
     private final StorageService storageService;
     private static final List<String> contentTypes = Arrays.asList("image/png", "image/jpeg", "application/pdf");
 	private boolean fileError = false;
-	private BiodataModel bio = new BiodataModel();
+	private BiodataModel biodata = new BiodataModel();
 	private IjazahModel ijazah = new IjazahModel();
 	private DataKesehatanModel dkm = new DataKesehatanModel();
 	private AsuransiKesehatanModel akm = new AsuransiKesehatanModel();
+	private InstitusiModel institusi = new InstitusiModel();
+	private JenjangModel jenjang = new JenjangModel();
     
     @Autowired
     public BiodataController(StorageService storageService) {
@@ -306,7 +308,7 @@ public class BiodataController {
         
         
         //SCAN FORM SURVEY KESEHATAN UPLOAD//
-        DataKesehatanModel dkm = new DataKesehatanModel();
+//        DataKesehatanModel dkm = new DataKesehatanModel();
         
 //        Path data7 = storageService.load(form_survey_kesehatan.getOriginalFilename());
 //        String pdb7 = MvcUriComponentsBuilder
@@ -319,22 +321,22 @@ public class BiodataController {
         User user = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         String name = user.getUsername(); //get logged in username
         
-        bio.setUsername(name);	
-        bio.setBiodata_id(0);
-        bio.setFlag_aktif("1");
-        bio.setSidik_jari("Belum scan sidik jari");
+        biodata.setUsername(name);	
+        biodata.setBiodata_id(0);
+        biodata.setFlag_aktif("1");
+        biodata.setSidik_jari("Belum scan sidik jari");
         
-        bio.setJenis_kelamin(jenis_kelamin);
-        bio.setKewarganegaraan(kewarganegaraan);
-        bio.setNomor_ktp(nomor_ktp);
-        bio.setNomor_telepon(nomor_telepon);
-        bio.setStatus_verifikasi("Not verified yet");
-        bio.setTanggal_lahir(tanggalLahir);
-        bio.setUkuran_jaket(ukuran_jaket);
-        bio.setCreated_by(name);
-        bio.setUpdated_at(null);
-        bio.setUpdated_by(name);
-        bio.setAgama_id(agamaId);
+        biodata.setJenis_kelamin(jenis_kelamin);
+        biodata.setKewarganegaraan(kewarganegaraan);
+        biodata.setNomor_ktp(nomor_ktp);
+        biodata.setNomor_telepon(nomor_telepon);
+        biodata.setStatus_verifikasi("Not verified yet");
+        biodata.setTanggal_lahir(tanggalLahir);
+        biodata.setUkuran_jaket(ukuran_jaket);
+        biodata.setCreated_by(name);
+        biodata.setUpdated_at(null);
+        biodata.setUpdated_by(name);
+        biodata.setAgama_id(agamaId);
         
         ijazah.setUsername(name);
         ijazah.setInstitusi_id(Integer.parseInt(institusi_id));
@@ -343,6 +345,12 @@ public class BiodataController {
 		ijazah.setUpdated_by(name);
 		ijazah.setUpdated_at(null);
         
+		institusi = institusiDAO.selectInstitusi(Integer.parseInt(institusi_id));
+		model.addAttribute("institusi", institusi);
+		
+		
+		//lalalala
+		
 		dkm.setData_kesehatan_id(0);
         dkm.setHasil_tes_kesehatan("Belum cek kesehatan");
         dkm.setUsername(name);
@@ -361,31 +369,31 @@ public class BiodataController {
 			alamatDAO.insertAlamat(alamat);
 		}
 		alamat.setJalan_id(alamatDAO.selectJalanId(alamat));
-		bio.setJalan_id(alamatDAO.selectJalanId(alamat));
+		biodata.setJalan_id(alamatDAO.selectJalanId(alamat));
 
 		
-		AsuransiKesehatanModel asuransiKesehatan = new AsuransiKesehatanModel();
+//		AsuransiKesehatanModel akm = new AsuransiKesehatanModel();
 		
-		//SCAN KARTU ASURANSI
-        Path data8 = storageService.load(scan_kartu.getOriginalFilename());
-        String pdb8 = MvcUriComponentsBuilder
-                .fromMethodName(BiodataController.class, "serveFile", data8.getFileName().toString())
-                .build().toString();
-        
-        asuransiKesehatan.setScan_kartu(pdb8);
+//		//SCAN KARTU ASURANSI
+//        Path data8 = storageService.load(scan_kartu.getOriginalFilename());
+//        String pdb8 = MvcUriComponentsBuilder
+//                .fromMethodName(BiodataController.class, "serveFile", data8.getFileName().toString())
+//                .build().toString();
+//        
+//        akm.setScan_kartu(pdb8);
 		
-		asuransiKesehatan.setNomor_asuransi(nomor_asuransi);
-		asuransiKesehatan.setUsername(name);
-		asuransiKesehatan.setNomor_penerbit_asuransi(nomor_penerbit_asuransi);
-		asuransiKesehatan.setExpired_date(expiredDate);
-		asuransiKesehatan.setCreated_by(name);
-		asuransiKesehatan.setUpdated_by(name);
-		asuransiKesehatan.setUpdated_at(null);
+		akm.setNomor_asuransi(nomor_asuransi);
+		akm.setUsername(name);
+		akm.setNomor_penerbit_asuransi(nomor_penerbit_asuransi);
+		akm.setExpired_date(expiredDate);
+		akm.setCreated_by(name);
+		akm.setUpdated_by(name);
+		akm.setUpdated_at(null);
 		
-		biodataDAO.insertBiodata(bio);
+		biodataDAO.insertBiodata(biodata);
 		ijazahDAO.addIjazah(ijazah);
 		dataKesehatanDAO.insertDataKesehatan(dkm);
-		asuransiKesehatanDAO.insertAsuransiKesehatan(asuransiKesehatan);
+		asuransiKesehatanDAO.insertAsuransiKesehatan(akm);
 		
 		MahasiswaModel mahasiswa = mahasiswaDAO.selectMahasiswaByUsername(name);
 		if (mahasiswa != null){
@@ -428,13 +436,13 @@ public class BiodataController {
 				if(type == 1) {akm.setScan_kartu(dbURL);}
 				
 				//scan_ktp
-				if(type == 2) {bio.setScan_ktp(dbURL);}
+				if(type == 2) {biodata.setScan_ktp(dbURL);}
 				
 				//scan_kk
-				if(type == 3) {bio.setScan_kk(dbURL);}
+				if(type == 3) {biodata.setScan_kk(dbURL);}
 				
 				//scan_surat_pernyataan_mahasiswa
-				if(type == 4) {bio.setScan_surat_pernyataan_mahasiswa(dbURL);}
+				if(type == 4) {biodata.setScan_surat_pernyataan_mahasiswa(dbURL);}
 							
 				//form_survey_kesehatan
 				if(type == 5) {dkm.setForm_survey_kesehatan(dbURL);}
@@ -458,13 +466,13 @@ public class BiodataController {
 				if(type == 1) {akm.setScan_kartu("-");}
 				
 				//scan_ktp
-				if(type == 2) {bio.setScan_ktp("-");}
+				if(type == 2) {biodata.setScan_ktp("-");}
 				
 				//scan_kk
-				if(type == 3) {bio.setScan_kk("-");}
+				if(type == 3) {biodata.setScan_kk("-");}
 				
 				//scan_surat_pernyataan_mahasiswa
-				if(type == 4) {bio.setScan_surat_pernyataan_mahasiswa("-");}
+				if(type == 4) {biodata.setScan_surat_pernyataan_mahasiswa("-");}
 							
 				//form_survey_kesehatan
 				if(type == 5) {dkm.setForm_survey_kesehatan("-");}
@@ -563,9 +571,13 @@ public class BiodataController {
 									System.out.println("ijazah ke add ke model");
 								int institusi_id = ijazah.getInstitusi_id();
 								InstitusiModel institusi = institusiDAO.selectInstitusi(institusi_id);
-								System.out.println(provinsi);
+								System.out.println(institusi_id);
 								model.addAttribute("institusi", institusi);
 									System.out.println("institusi ke add ke model");
+								
+								jenjang = jenjangDAO.selectJenjang(Integer.parseInt(ijazah.getJenjang()));	
+								model.addAttribute("jenjang", jenjang);	
+								
 								AsuransiKesehatanModel asuransiKesehatan = asuransiKesehatanDAO.selectAsuransiKesehatanByUsername(username);
 									System.out.println(asuransiKesehatan);
 								if(asuransiKesehatan != null) {
@@ -691,6 +703,10 @@ public class BiodataController {
 								System.out.println(provinsi);
 								model.addAttribute("institusi", institusi);
 									System.out.println("institusi ke add ke model");
+									
+								jenjang = jenjangDAO.selectJenjang(Integer.parseInt(ijazah.getJenjang()));	
+								model.addAttribute("jenjang", jenjang);	
+									
 								AsuransiKesehatanModel asuransiKesehatan = asuransiKesehatanDAO.selectAsuransiKesehatanByUsername(username);
 									System.out.println(asuransiKesehatan);
 								if(asuransiKesehatan != null) {
@@ -883,20 +899,21 @@ public class BiodataController {
         User user = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         String name = user.getUsername(); //get logged in username
         
-        bio.setUsername(name);
-        bio.setFlag_aktif("1");
-        bio.setSidik_jari("Belum scan sidik jari");
+        biodata.setUsername(name);
+        biodata.setFlag_aktif("1");
+        biodata.setSidik_jari("Belum scan sidik jari");
         
-        bio.setJenis_kelamin(jenis_kelamin);
-        bio.setKewarganegaraan(kewarganegaraan);
-        bio.setNomor_ktp(nomor_ktp);
-        bio.setNomor_telepon(nomor_telepon);
-        bio.setStatus_verifikasi("Not verified yet");
-        bio.setTanggal_lahir(tanggalLahir);
-        bio.setUkuran_jaket(ukuran_jaket);
-        bio.setUpdated_at(null);
-        bio.setUpdated_by(name);
-        bio.setAgama_id(agamaId);
+        biodata.setJenis_kelamin(jenis_kelamin);
+        biodata.setKewarganegaraan(kewarganegaraan);
+        biodata.setNomor_ktp(nomor_ktp);
+        biodata.setNomor_telepon(nomor_telepon);
+        biodata.setStatus_verifikasi("Not verified yet");
+        biodata.setTanggal_lahir(tanggalLahir);
+        biodata.setUkuran_jaket(ukuran_jaket);
+        biodata.setUpdated_at(null);
+        biodata.setUpdated_by(name);
+        biodata.setAgama_id(agamaId);
+      
         
         ijazah.setUsername(name);
         ijazah.setInstitusi_id(Integer.parseInt(institusi_id));
@@ -914,12 +931,18 @@ public class BiodataController {
 
         AlamatModel alamat = new AlamatModel();
         
+        //lalala
+
+        int jalanID = alamatDAO.selectJalanIdByUsername(name);
+        alamat.setJalan_id(jalanID);
+        System.out.println("JALAN ID= " + biodata.getJalan_id());
+        
+        
         alamat.setKota_kabupaten_id(kota_kabupaten_id);
         alamat.setJalan(jalan);
         alamat.setKecamatan(kecamatan);
         alamat.setKelurahan(kelurahan);
         alamat.setKode_pos(kode_pos);
-        
         alamat.setCreated_by(name);
 		alamat.setUpdated_by(name);
 		alamat.setUpdated_at(null);
@@ -945,7 +968,7 @@ public class BiodataController {
 		akm.setUpdated_by(name);
 		akm.setUpdated_at(null);
 		
-		biodataDAO.updateBiodataByUsername(bio);
+		biodataDAO.updateBiodataByUsername(biodata);
 		ijazahDAO.updateIjazah(ijazah);
 		dataKesehatanDAO.updateDataKesehatan(dkm);
 

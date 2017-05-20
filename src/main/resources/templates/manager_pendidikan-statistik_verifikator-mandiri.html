@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<div th:replace="resources"></div>
+<title>Manager Pendidikan - Statistik Program</title>
+
+<script type="text/javascript"
+	src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript" th:inline="javascript">
+		    /*<![CDATA[*/
+				// Load the Visualization API and the corechart package.
+			    google.charts.load('current', {'packages':['corechart']});
+			
+			    var sp = [[${sumMANDIRIVerified}]];
+			    var sbm = [[${sumMANDIRIRegVerified}]];
+			    var reg = [[${sumMANDIRIParVerified}]];
+			    var reg2 = [[${sumMANDIRIKKIVerified}]];
+			    
+			    // Set a callback to run when the Google Visualization API is loaded.
+			    google.charts.setOnLoadCallback(drawSumSNMPTNVerifiedChart);
+			    google.charts.setOnLoadCallback(drawSumSBMPTNVerifiedChart);
+			    google.charts.setOnLoadCallback(drawSumSBMPTNVerifiedRegChart);
+			    google.charts.setOnLoadCallback(drawSumSBMPTNVerifiedReg2Chart);
+			    
+			    function drawSumSNMPTNVerifiedChart() {
+			      // Create the data table.
+			      var data = new google.visualization.DataTable();
+			      
+			      data.addColumn('string', 'MANDIRI');
+			      data.addColumn('number', 'Total Pendaftar');
+			      data.addColumn('number', 'Total Pendaftar yang Terverifikasi');
+			      data.addColumn('number', 'Total Pendaftar yang Tidak Terverifikasi');
+			      
+			      for(var i = 0; i < sp.length; i++)
+		    	  {
+			    	  data.addRow([sp[i].nama, sp[i].total, sp[i].regis, sp[i].non_regis]);
+		    	  }
+			 	
+			      // Set chart options
+			      var options = {'title':'Data Pendaftar MANDIRI Setiap Fakultas',
+			                     'width':500,
+			                     'height':300};
+			
+			      // Instantiate and draw our chart, passing in some options.
+				  var chart2 = new google.visualization.ColumnChart(document.getElementById('sumSNMPTNVerified_column'));
+				  chart2.draw(data, options);
+			    }
+			    
+			    function drawSumSBMPTNVerifiedChart() {
+				      // Create the data table.
+				      var data = new google.visualization.DataTable();
+				      
+				      data.addColumn('string', 'MANDIRI Reguler');
+				      data.addColumn('number', 'Total Pendaftar');
+				      data.addColumn('number', 'Total Pendaftar yang Terverifikasi');
+				      data.addColumn('number', 'Total Pendaftar yang Tidak Terverifikasi');
+				      
+				      for(var i = 0; i < sbm.length; i++)
+			    	  {
+				    	  data.addRow([sbm[i].nama, sbm[i].total, sbm[i].regis, sbm[i].non_regis]);
+			    	  }
+				 	
+				      // Set chart options
+				      var options = {'title':'Data MANDIRI Reguler Setiap Fakultas',
+				                     'width':500,
+				                     'height':300};
+				
+				      // Instantiate and draw our chart, passing in some options.
+					  var chart2 = new google.visualization.ColumnChart(document.getElementById('sumSBMPTNVerified_column'));
+					  chart2.draw(data, options);
+				    }
+			    
+			    function drawSumSBMPTNVerifiedRegChart() {
+				      // Create the data table.
+				      var data = new google.visualization.DataTable();
+				      
+				      data.addColumn('string', 'MANDIRI Paralel');
+				      data.addColumn('number', 'Total Pendaftar');
+				      data.addColumn('number', 'Total Pendaftar yang Terverifikasi');
+				      data.addColumn('number', 'Total Pendaftar yang Tidak Terverifikasi');
+				      
+				      for(var i = 0; i < reg.length; i++)
+			    	  {
+				    	  data.addRow([reg[i].nama, reg[i].total, reg[i].regis, reg[i].non_regis]);
+			    	  }
+				 	
+				      // Set chart options
+				      var options = {'title':'Data Pendaftar MANDIRI Paralel Setiap Fakultas',
+				                     'width':500,
+				                     'height':300};
+				
+				      // Instantiate and draw our chart, passing in some options.
+					  var chart2 = new google.visualization.ColumnChart(document.getElementById('sumSBMPTNVerifiedReg_column'));
+					  chart2.draw(data, options);
+				    }
+			    
+			    function drawSumSBMPTNVerifiedReg2Chart() {
+				      // Create the data table.
+				      var data = new google.visualization.DataTable();
+				      
+				      data.addColumn('string', 'MANDIRI KKI');
+				      data.addColumn('number', 'Total Pendaftar');
+				      data.addColumn('number', 'Total Pendaftar yang Terverifikasi');
+				      data.addColumn('number', 'Total Pendaftar yang Tidak Terverifikasi');
+				      
+				      for(var i = 0; i < reg.length; i++)
+			    	  {
+				    	  data.addRow([reg2[i].nama, reg2[i].total, reg2[i].regis, reg2[i].non_regis]);
+			    	  }
+				 	
+				      // Set chart options
+				      var options = {'title':'Data Pendaftar MANDIRI KKI Reguler Setiap Fakultas',
+				                     'width':500,
+				                     'height':300};
+				
+				      // Instantiate and draw our chart, passing in some options.
+					  var chart2 = new google.visualization.ColumnChart(document.getElementById('sumSBMPTNVerifiedReg2_column'));
+					  chart2.draw(data, options);
+				    }
+		    /*]]>*/
+	    </script>
+</head>
+<body>
+	<div th:include="manager_pendidikan-statistik_verifikator-navbar"></div>
+
+	<div class="content">
+		<div class="row">
+			<div class="col-sm-12">
+				<h3>Statistik Registrasi Mahasiswa Baru S1</h3>
+				<h4>MANDIRI - Tahun Ajaran 2016/2017 Genap</h4>
+			</div>
+		</div>
+
+		<hr />
+
+		<table align="center">
+			<tbody>
+				<tr>
+					<td th:id="'sumSNMPTNVerified_column'"></td>
+				</tr>
+				<tr>
+					<td th:id="'sumSBMPTNVerified_column'"></td>
+				</tr>
+				<tr>
+					<td th:id="'sumSBMPTNVerifiedReg_column'"></td>
+				</tr>
+				<tr>
+					<td th:id="'sumSBMPTNVerifiedReg2_column'"></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+
+	<div class="footer">Modul Registrasi Mahasiswa Baru</div>
+</body>
+</html>

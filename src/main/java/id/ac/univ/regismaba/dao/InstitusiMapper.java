@@ -8,7 +8,6 @@ import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
 
 import id.ac.univ.regismaba.model.InstitusiModel;
-import id.ac.univ.regismaba.model.KotaKabupatenModel;
 
 @Mapper
 public interface InstitusiMapper {

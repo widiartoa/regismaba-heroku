@@ -14,6 +14,8 @@ public interface MahasiswaService {
 	
 	List<MahasiswaModel> selectAllMahasiswa();
 	
+	List<MahasiswaModel> selectAllMahasiswaSortedUrutanAssignonTahunAjaran(int tahun_ajaran_id);
+	
 	List<MahasiswaModel> selectAllMahasiswabyFakultas(int fakultas_id);
 	
 	List<MahasiswaModel> selectAllMahasiswabyFakultasatTahunAjaran(int fakultas_id);

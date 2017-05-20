@@ -1,8 +1,5 @@
 <!-- 
-Navbar/Header buat semua page Calon Mahasiswa
-Bedanya ama navbar lain cuma beda menu doang
-Di setiap page Calon Mahasiswa include ini aja
-Link-link yang ke menu lain diganti aja kalo perlu
+Navbar/Header for Manager Pendidikan
 -->
 
 <nav class="navbar-inverse navbar-fixed-top">
@@ -14,35 +11,33 @@ Link-link yang ke menu lain diganti aja kalo perlu
 				<span class="icon-bar"></span>
 				<span class="icon-bar"></span>
 			</button>
-			<a th:href="'/c6/'"><img class="navbar-brand" src="/img/logo.png" alt="Logo"/></a>
+			<a th:href="'/'"><img class="navbar-brand" src="/img/logo.png" alt="Logo"/></a>
 		</div>
 		
 		<div class="collapse navbar-collapse" id="navbar-collapse">
 			<ul class="nav navbar-nav navbar-left">
 				<div class="dropdown">
-					<a th:href="'/c6/staf-kesejahteraan/daftar-mhs'"><button class="dropbtn">Daftar Mahasiswa</button></a>
+					<a th:href="'/manager-pendidikan/statistik-verifikator/snmptn'"><button class="dropbtn">Statistik SNMPTN</button></a>
 				</div>
 			</ul>
 			
 			<ul class="nav navbar-nav navbar-left">
 				<div class="dropdown">
-					<a th:href="'/c6/staf-kesejahteraan/skema-pembayaran/daftar'"><button class="dropbtn">Rincian Skema Pembayaran</button></a>
+					<a th:href="'/manager-pendidikan/statistik-verifikator/sbmptn'"><button class="dropbtn">Statistik SBMPTN</button></a>
 				</div>
 			</ul>
 			
 			<ul class="nav navbar-nav navbar-left">
 				<div class="dropdown">
-					<a th:href="'/c6/staf-kesejahteraan/skema-pembayaran/dashboard'"><button class="dropbtn">Menu Statistik Skema Pembayaran</button></a>
+					<a th:href="'/manager-pendidikan/statistik-verifikator/mandiri'"><button class="dropbtn">Statistik MANDIRI</button></a>
 				</div>
 			</ul>
-		
+			
 			<ul class="nav navbar-nav navbar-right">
 				<div class="dropdown">
-					<a th:href="'/c6/logout'"><button class="dropbtn">Keluar</button></a>
+					<a th:href="'/logout'"><button class="dropbtn">Keluar</button></a>
 				</div>
 			</ul>
 		</div>
 	</div>
-	
-	<div class="navbar-strip"/>
 </nav>

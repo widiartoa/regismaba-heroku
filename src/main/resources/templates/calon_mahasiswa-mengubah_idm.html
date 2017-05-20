@@ -41,10 +41,20 @@
 					<div class="form-group">
 						<label for="tanggal_lahir" >Tanggal Lahir *</label> 
 						<input
-							type="text" id="datepicker" name="tanggal_lahir" class="form-control"
-							th:value="${biodata.tanggal_lahirr}" data-validation="required"
+							type="date" name="tanggal_lahir" class="form-control"
+							th:value="${biodata.tanggal_lahirr}" th:placeholder="${biodata.tanggal_lahirr}" data-validation="required"
 							data-validation-error-msg="Tanggal lahir harus diisi"/>
 					</div>
+<!-- lalala -->		
+<!-- 					<div class="row">
+						<div class="form-group">
+							<label for="hari">Hari</label> 
+							<input type="date" name="hari" class="form-control" 
+								placeholder="YYYY-MM-DD" th:min="${#dates.format(#dates.createNow(), 'YYYY-MM-dd')}" required="true" />
+						</div>
+					</div> -->
+					
+					
 					
 					<div class="form-group">
 						<label for="jenis_kelamin">Jenis Kelamin</label> <br></br>
@@ -98,7 +108,7 @@
 					<div class="form-group">
 						<label for="scan_ktp">Scan Kartu Tanda Penduduk(KTP) *</label> 
 						<div class="input-group" name="scan_ktp">
-							<input type="text" class="form-control" id="basic-addon1" readonly="true" data-validation="required" data-validation-error-msg="Scan KTP harus diisi" />
+							<input type="text" class="form-control" id="basic-addon1" th:placeholder="${biodata.scan_ktp}" readonly="true" data-validation="required" data-validation-error-msg="Scan KTP harus diisi" />
 							<label class="input-group-btn">
 								<span class="btn btn-default">Browse&hellip;
 									<input type="file" name="scan_ktp"
@@ -166,16 +176,18 @@
 					
 					<div class="form-group">
 						<label for="nama_provinsi">Provinsi</label> 
-						<select id="nama_provinsi_select" class="form-control" >
-							<option th:value="${provinsi.provinsi_id}" th:text="${provinsi.nama_provinsi}">[Pilih Provinsi]</option>
-							<option th:each="provinsi : ${provinsis}" th:value="${provinsi.provinsi_id}" th:text="${provinsi.nama_provinsi}"></option>							
+						<select id="nama_provinsi_select" class="form-control" name="provinsi_id" >
+							<option th:each="p : ${provinsis}" 
+									th:value="${p.provinsi_id}"
+									th:selected="${provinsi.provinsi_id==p.provinsi_id}" 
+									th:text="${p.nama_provinsi}"></option>							
 						</select>
 					</div>
 					
 					<div class="form-group">
 						<label for="kota_kabupaten_id">Kabupaten/Kota</label>
 						<select id="kota_kabupaten_select" name="kota_kabupaten_id" class="form-control">
-							<option th:value="${kotaKabupaten.nama_kota_kabupaten}" th:text="${kotaKabupaten.nama_kota_kabupaten}">[Pilih Kota/ Kabupaten]</option>						
+							<option th:value="${alamat.kota_kabupaten_id}" th:text="${kotaKabupaten.nama_kota_kabupaten}"></option>						
 						</select>
 					</div>
 					
@@ -238,16 +250,48 @@
 					
 					<div class="form-group">
 						<label for="nama_tingkat_pendidikan">Tingkat Pendidikan Terakhir</label> 
-						<select id="nama_tingkat_pendidikan_select" class="form-control">
-							<option value="null">[Pilih Tingkat Pendidikan Terakhir]</option>
+						<select id="nama_tingkat_pendidikan_select" class="form-control" name="tingkat_pendidikan_id">
+							<!-- <option value="null">[Pilih Tingkat Pendidikan Terakhir]</option> -->
+							<!-- <option th:value="${tingkatPendidikan.tingkat_pendidikan_id}" th:text="${tingkatPendidikan.nama_tingkat_pendidikan}">[Pilih Provinsi]</option>
 							<option th:each="tingkatPendidikan : ${tingkatPendidikans}" th:value="${tingkatPendidikan.tingkat_pendidikan_id}" th:text="${tingkatPendidikan.nama_tingkat_pendidikan}"></option>							
+						 -->
+							<option th:each="tp : ${tingkatPendidikans}" 
+									th:value="${tp.tingkat_pendidikan_id}"
+									th:selected="${tingkatPendidikan.tingkat_pendidikan_id==tp.tingkat_pendidikan_id}" 
+									th:text="${tp.nama_tingkat_pendidikan}"></option>	
+						
+						
 						</select>
 					</div>
 					
 					<div class="form-group">
 						<label for="jenjang">Jenjang</label> 
 						<select id="nama_jenjang_select" name="jenjang" class="form-control">
-							<option value="null">[Pilih Jenjang Terakhir]</option>
+							<!-- <option value="null">[Pilih Jenjang Terakhir]</option> -->
+							<option th:value="${jenjang.jenjang_id}" th:text="${jenjang.nama_jenjang}"></option>
+							
+							<!-- <div th:if="${ijazah.jenjang} == '1'">
+								<option th:value="${ijazah.jenjang}" th:text="Sarjana"></option>
+							</div>
+							<div th:if="${ijazah.jenjang} == '2'">
+								<option th:value="${ijazah.jenjang}" th:text="Magister"></option>
+							</div>
+							<div th:if="${ijazah.jenjang} == '3'">
+								<option th:value="${ijazah.jenjang}" th:text="Doktor"></option>
+							</div>
+							<div th:if="${ijazah.jenjang} == '4'">
+								<option th:value="${ijazah.jenjang}" th:text="Profesi"></option>
+							</div>
+							<div th:if="${ijazah.jenjang} == '5'">
+								<option th:value="${ijazah.jenjang}" th:text="Spesialis"></option>
+							</div>
+							<div th:if="${ijazah.jenjang} == '6'">
+								<option th:value="${ijazah.jenjang}" th:text="Vokasi"></option>
+							</div>
+							<div th:if="${ijazah.jenjang} == '7'">
+								<option th:value="${ijazah.jenjang}" th:text="SMA"></option>
+							</div> -->
+
 							<option th:each="jenjang : ${jenjangs}" th:value="${jenjang.jenjang_id}" th:text="${jenjang.nama_jenjang}"></option>							
 						</select>
 					</div>
@@ -255,6 +299,7 @@
 					<div class="form-group">
 						<label for="institusi_id">Nama Institusi</label>
 						<select id="institusi_select" name="institusi_id" class="form-control">
+							<option th:value="${institusi.institusi_id}" th:text="${institusi.nama_institusi}"></option>
 						</select>
 					</div>
 					
@@ -417,43 +462,11 @@
 		</div>
 	</div>
 	
-	<div class="footer">Modul Registrasi Mahasiswa Baru</div>
+	<div th:include="footer"></div>
 
 	<script type="text/javascript">
 		$(document).ready(function() {
-			$('#myTable').dataTable();
-			$('#nama_provinsi_select').on('change', function() {
-				/* alert($(this).find(':selected').text() + " dipilih"); */
-				var nama_provinsi_id = $(this).find(':selected').val();
-				
-				$.ajax("/api/provinsi/" + nama_provinsi_id, {
-			        success: function(data) {
-			        	var listOfKotaKabupaten = JSON.parse(data);
-			            
-			            var options = "";
-			            listOfKotaKabupaten.forEach(function(element) {
-			                options += '<option value="' + element.id + '">' + element.nama + '</option>';
-			            });
-			            console.log(options);
-			            $('#kota_kabupaten_select').html(options);
-			        },
-			        error: function (data) {
-			        	alert('Pilih salah satu!');
-			        }
-			    });
-			});
-			$('#agama_id_select').on('change', function() {
-				/* alert($(this).find(':selected').text() + " dipilih"); */
-				var nama_agama_id = $(this).find(':selected').val();
-			});
-			$('#nama_jenjang_select').on('change', function() {
-				/* alert($(this).find(':selected').text() + " dipilih"); */
-				var nama_jenjang_id = $(this).find(':selected').val();
-			});
-			$('#nama_tingkat_pendidikan_select').on('change', function() {
-				/* alert($(this).find(':selected').text() + " dipilih"); */
-				var nama_tingkat_pendidikan_id = $(this).find(':selected').val();
-				
+			var loadTingkatPendidikan = function (nama_tingkat_pendidikan_id) {
 				$.ajax("/api/tingkat_pendidikan/" + nama_tingkat_pendidikan_id, {
 			        success: function(data) {
 			        	var listOfInstitusi = JSON.parse(data);
@@ -469,6 +482,57 @@
 			        	alert('Pilih salah satu!');
 			        }
 			    });
+			}
+			try {
+				var nama_tingkat_pendidikan_id = $('#nama_tingkat_pendidikan_select').find(':selected').val();
+				console.log(nama_tingkat_pendidikan_id); loadTingkatPendidikan(nama_tingkat_pendidikan_id);
+			} catch(e){
+				console.log(e);
+			}
+			
+			var loadKotaKabupaten = function (nama_provinsi_id) {
+				$.ajax("/api/provinsi/" + nama_provinsi_id, {
+			        success: function(data) {
+			        	var listOfKotaKabupaten = JSON.parse(data);
+			            
+			            var options = "";
+			            listOfKotaKabupaten.forEach(function(element) {
+			                options += '<option value="' + element.id + '">' + element.nama + '</option>';
+			            });
+			            $('#kota_kabupaten_select').html(options);
+			        },
+			        error: function (data) {
+			        	alert('Pilih salah satu!');
+			        }
+			    });
+			};
+			try {
+				var nama_provinsi_id = $('#nama_provinsi_select').find(':selected').val();
+				console.log(nama_provinsi_id); loadKotaKabupaten(nama_provinsi_id);
+			} catch(e){
+				console.log(e);
+			}
+			
+			$('#myTable').dataTable();
+			$('#nama_provinsi_select').on('change', function() {
+				/* alert($(this).find(':selected').text() + " dipilih"); */
+				var nama_provinsi_id = $(this).find(':selected').val();
+				console.log(nama_provinsi_id);
+				loadKotaKabupaten(nama_provinsi_id);
+			});
+			$('#agama_id_select').on('change', function() {
+				/* alert($(this).find(':selected').text() + " dipilih"); */
+				var nama_agama_id = $(this).find(':selected').val();
+			});
+			$('#nama_jenjang_select').on('change', function() {
+				/* alert($(this).find(':selected').text() + " dipilih"); */
+				var nama_jenjang_id = $(this).find(':selected').val();
+			});
+			$('#nama_tingkat_pendidikan_select').on('change', function() {
+				/* alert($(this).find(':selected').text() + " dipilih"); */
+				var nama_tingkat_pendidikan_id = $(this).find(':selected').val();
+				
+				
 			});
 		});
 		

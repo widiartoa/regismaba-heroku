@@ -9,87 +9,53 @@
 	<div th:include="calon_mahasiswa-navbar"></div>
 
 	<div class="container">
-		<div class="content">
+		<div class="content content-top">
 			<div class="row">
 				<div class="col-sm-12">
-					<h3>Home</h3>
+					<h3><span class="glyphicon glyphicon-home"></span>Home</h3>
 				</div>
 			</div>
 
 			<hr />
-
-			<div class="row">
-				<div class="col-sm-6">
-					<table class="tg">
-						<tr>
-							<td>Username</td>
-							<td th:text="${mahasiswa.username}">Username</td>
-						</tr>
-						<tr>
-							<td>NPM</td>
-							<td th:text="${mahasiswa.npm}">NPM</td>
-						</tr>
-						<tr>
-							<td>Fakultas</td>
-							<td th:text="${mahasiswa.fakultas}">Fakultas</td>
-						</tr>
-						<tr>
-							<td>Program Studi</td>
-							<td th:text="${mahasiswa.program_studi.nama_program_studi}">ProgramStudi</td>
-						</tr>
-						<div th:if="${psbm == null}">
-							<tr>
-								<td>Status Pengajuan Pembayaran</td>
-								<td>Belum Mengisi Pengajuan Pembayaran</td>
-							</tr>
-						</div>
-						<div th:unless="${psbm == null}">
-							<tr>
-								<td>Status Pengajuan Pembayaran</td>
-								<td th:text="${psbm.status_pengajuan}">Unverified Ceritanya</td>
-							</tr>
-							<div th:if="${psbm.komentar != null}">
-								<tr>
-									<td></td>
-									<td th:text="'&quot;'+${psbm.komentar}+'&quot;'">Komentar</td>
-								</tr>
-							</div>
-						</div>
-						
-						<div th:if="${mahasiswa.biodata == null}">
-							<tr>
-								<td>Status Verifikasi IDM</td>
-								<td>Belum Mengisi IDM</td>
-							</tr>
-						</div>
-						<div th:unless="${mahasiswa.biodata == null}">
-							<tr>
-								<td>Status Verifikasi IDM</td>
-								<td th:text="${mahasiswa.biodata.status_verifikasi}">Unverified Ceritanya</td>
-							</tr>
-							<div th:if="${mahasiswa.biodata.komentar != null}">
-								<tr>
-									<td></td>
-									<td th:text="'&quot;'+${mahasiswa.biodata.komentar}+'&quot;'">Komentar</td>
-								</tr>
-							</div>
-						</div>
-					</table>
-				</div>
-				<div class="col-sm-6">
-					<div class="col-xs-6 col-md-6" style="float: right;">
-						<a href="#" class="thumbnail"> <img src="/img/logo.png"
-							alt="profpic" />
-						</a>
-					</div>
-				</div>
+			
+			<div class="col-xs-4 col-md-4 content-profpic">
+				<a href="#" class="thumbnail"> 
+					<img src="/img/logo.png" alt="profpic" />
+				</a>
 			</div>
 
-			<br />
-
+			<table class="tg">
+				<tbody>
+					<div><tr><label>Username :<h4 th:text="${mahasiswa.username}">Username</h4></label></tr></div>
+					<div><tr><label>NPM :<h4 th:text="${mahasiswa.npm}">NPM</h4></label></tr></div>
+					<div><tr><label>Fakultas :<h4 th:text="${mahasiswa.fakultas}">Fakultas</h4></label></tr></div>
+					<div><tr><label>Program Studi :<h4 th:text="${mahasiswa.program_studi.nama_program_studi}">ProgramStudi</h4></label></tr></div>
+					
+					<div th:if="${psbm == null}">
+						<tr><label>Status Pengajuan Pembayaran :<h4 style="color:#fca300;">Belum Mengisi Pengajuan Pembayaran</h4></label></tr>
+					</div>
+					<div th:unless="${psbm == null}">
+						<tr><label>Status Pengajuan Pembayaran :<h4><span th:text="${psbm.status_pengajuan}">Unverified Ceritanya</span>
+							<span th:if="${psbm.komentar != null}" th:text="' - &quot;'+${psbm.komentar}+'&quot;'">Komentar</span>
+						</h4></label></tr>
+					</div>
+					
+					<div th:if="${mahasiswa.biodata == null}">
+						<tr><label>Status Verifikasi IDM :<h4 style="color:#fca300;">Belum Mengisi IDM</h4></label></tr>
+					</div>
+					<div th:unless="${mahasiswa.biodata == null}">
+						<tr><label>Status Verifikasi IDM :<h4><span th:text="${mahasiswa.biodata.status_verifikasi}">Unverified Ceritanya</span>
+							<span th:if="${mahasiswa.biodata.komentar != null}" th:text="' - &quot;'+${mahasiswa.biodata.komentar}+'&quot;'">Komentar</span>
+						</h4></label></tr>
+					</div>
+				</tbody>
+			</table>
+		</div>
+		
+		<div class="content">
 			<div class="row">
 				<div class="col-sm-12">
-					<h3>Jadwal</h3>
+					<h3><span class="glyphicon glyphicon-time"></span>Jadwal</h3>
 				</div>
 			</div>
 
@@ -162,7 +128,7 @@
 		</div>
 	</div>
 
-	<div class="footer">Modul Registrasi Mahasiswa Baru</div>
+	<div th:include="footer"></div>
 
 	<script type="text/javascript">
 		
