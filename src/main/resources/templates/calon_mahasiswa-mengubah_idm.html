@@ -471,7 +471,7 @@
 	<script type="text/javascript">
 		$(document).ready(function() {
 			var loadTingkatPendidikan = function (nama_tingkat_pendidikan_id) {
-				$.ajax("/api/tingkat_pendidikan/" + nama_tingkat_pendidikan_id, {
+				$.ajax("/c6/api/tingkat_pendidikan/" + nama_tingkat_pendidikan_id, {
 			        success: function(data) {
 			        	var listOfInstitusi = JSON.parse(data);
 			            
@@ -495,7 +495,7 @@
 			}
 			
 			var loadKotaKabupaten = function (nama_provinsi_id) {
-				$.ajax("/api/provinsi/" + nama_provinsi_id, {
+				$.ajax("/c6/api/provinsi/" + nama_provinsi_id, {
 			        success: function(data) {
 			        	var listOfKotaKabupaten = JSON.parse(data);
 			            
