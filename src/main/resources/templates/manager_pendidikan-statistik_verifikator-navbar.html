@@ -11,33 +11,42 @@ Navbar/Header for Manager Pendidikan
 				<span class="icon-bar"></span>
 				<span class="icon-bar"></span>
 			</button>
-			<a th:href="'/'"><img class="navbar-brand" src="/c6/img/logo.png" alt="Logo"/></a>
+			<a th:href="'/c6/'"><img class="navbar-brand" src="/c6/img/logo.png" alt="Logo"/></a>
 		</div>
 		
 		<div class="collapse navbar-collapse" id="navbar-collapse">
 			<ul class="nav navbar-nav navbar-left">
 				<div class="dropdown">
-					<a th:href="'/manager-pendidikan/statistik-verifikator/snmptn'"><button class="dropbtn">Statistik SNMPTN</button></a>
+					<a th:href="'/c6/manager-pendidikan/statistik-verifikator/snmptn'"><button class="dropbtn">Statistik SNMPTN</button></a>
 				</div>
 			</ul>
 			
 			<ul class="nav navbar-nav navbar-left">
 				<div class="dropdown">
-					<a th:href="'/manager-pendidikan/statistik-verifikator/sbmptn'"><button class="dropbtn">Statistik SBMPTN</button></a>
+					<a th:href="'/c6/manager-pendidikan/statistik-verifikator/sbmptn'"><button class="dropbtn">Statistik SBMPTN</button></a>
 				</div>
 			</ul>
 			
 			<ul class="nav navbar-nav navbar-left">
 				<div class="dropdown">
-					<a th:href="'/manager-pendidikan/statistik-verifikator/mandiri'"><button class="dropbtn">Statistik MANDIRI</button></a>
+					<a th:href="'/c6/manager-pendidikan/statistik-verifikator/mandiri'"><button class="dropbtn">Statistik MANDIRI</button></a>
+				</div>
+			</ul>
+			
+			<ul class="nav navbar-nav navbar-left">
+				<div class="dropdown">
+					<a th:href="'/c6/manager-pendidikan/statistik-manager/fakultas'"><button class="dropbtn">Statistik Manager</button></a>
 				</div>
 			</ul>
 			
 			<ul class="nav navbar-nav navbar-right">
 				<div class="dropdown">
-					<a th:href="'/logout'"><button class="dropbtn">Keluar</button></a>
+					<a th:href="'/c6/logout'"><button class="dropbtn">Keluar</button></a>
 				</div>
 			</ul>
 		</div>
 	</div>
+	
+	
+	<div class="navbar-strip"/>
 </nav>

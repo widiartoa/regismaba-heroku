@@ -46,10 +46,10 @@
 <body>
 	<div th:include="manager_pendidikan-statistik_verifikator-navbar"></div>
 
-	<div class="content">
+	<div class="content content-top">
 		<div class="row">
 			<div class="col-sm-12">
-				<h3>Statistik Registrasi Mahasiswa Baru S1</h3>
+				<h3><span class="glyphicon glyphicon-stats"></span>Statistik Registrasi Mahasiswa Baru S1</h3>
 				<h4>SBMPTN - Tahun Ajaran 2016/2017 Genap</h4>
 			</div>
 		</div>
@@ -65,6 +65,6 @@
 		</table>
 	</div>
 
-	<div class="footer">Modul Registrasi Mahasiswa Baru</div>
+	<div th:include="footer"></div>
 </body>
 </html>
