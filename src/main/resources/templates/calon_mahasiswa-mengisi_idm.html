@@ -23,12 +23,12 @@
 	<div th:include="calon_mahasiswa-navbar"></div>
 
 	<div class="container">
-		<div class="content content-top">
+		<div class="content">
 			<div id="contact">
 				<form action="/c6/calon-mahasiswa/biodata/fill/submit" method="post" enctype="multipart/form-data" >
 					<input type="hidden"  th:name="${_csrf.parameterName}"   th:value="${_csrf.token}"/>
 					<div class="row">
-						<div class="col-sm-12"><h3><span class="glyphicon glyphicon-user"></span>Isi Biodata</h3></div>
+						<div class="col-sm-12"><h3>Isi Biodata</h3></div>
 					</div>
 					
 					<hr/>
