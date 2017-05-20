@@ -108,7 +108,7 @@
 					<div class="form-group">
 						<label for="scan_ktp">Scan Kartu Tanda Penduduk(KTP) *</label> 
 						<div class="input-group" name="scan_ktp">
-							<input type="text" class="form-control" id="basic-addon1" th:placeholder="${biodata.scan_ktp}" readonly="true" data-validation="required" data-validation-error-msg="Scan KTP harus diisi" />
+							<input type="text" class="form-control" id="basic-addon1" readonly="true" data-validation="required" data-validation-error-msg="Scan KTP harus diisi" />
 							<label class="input-group-btn">
 								<span class="btn btn-default">Browse&hellip;
 									<input type="file" name="scan_ktp"
@@ -364,7 +364,7 @@
 					<div class="form-group">
 						<label for="nomor_asuransi">Tanggal Kadaluarsa Asuransi</label>
 						<input
-							type="text" name="expired_date" class="form-control"
+							type="date" name="expired_date" class="form-control"
 							th:value="${asuransiKesehatan.expired_date_format}" />
 					</div>
 		
@@ -455,6 +455,10 @@
 					<hr/>
 					
 					<div class="form-group" style="text-align: right">
+						
+						<div class="btn-group" role="group" aria-label="...">
+						<a th:href="'/calon-mahasiswa/biodata/view/' + ${mahasiswa.npm}"><button type="button" class="btn btn-default btn-cancel">Batal</button></a>
+						</div>
 						<button class="btn btn-default">Simpan</button>
 					</div>
 				</form>

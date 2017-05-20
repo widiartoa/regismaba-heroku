@@ -9,10 +9,10 @@
 	<div th:include="staf_verifikasi-navbar"></div>
 
 	<div class="container" style="min-height:100vh">
-		<div class="content">
+		<div class="content content-top">
 			<div class="row">
 				<div class="col-sm-12">
-					<h3>Daftar Mahasiswa</h3>
+					<h3><span class="glyphicon glyphicon-list"></span>Daftar Mahasiswa</h3>
 				</div>
 			</div>
 
@@ -47,7 +47,7 @@
 						<td th:text="${mahasiswa.program_studi.nama_program_studi}" class="center">jurusan</td>
 						<td th:text="${mahasiswa.biodata.status_verifikasi}">status_verifikasi </td>
 						<td><a type="button" data-toggle="modal" th:attr="data-target='#mahasiswaModel' + ${mahasiswa.npm}"
-							class="btn btn-warning"> <i class="glyphicon glyphicon-pencil"></i></a>
+							class="btn btn-default"> <i class="glyphicon glyphicon-pencil"></i></a>
 						</td>
 					</tr>
 				</tbody>
