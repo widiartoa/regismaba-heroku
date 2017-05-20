@@ -15,12 +15,14 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.boot.json.GsonJsonParser;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import id.ac.univ.regismaba.model.AlamatModel;
 import id.ac.univ.regismaba.model.BiodataModel;
@@ -78,10 +80,12 @@ public class StafController
     // untuk Staf Kesejahteraan redirect:/staf_kesejahteraan/daftar_mhs
 
 	@RequestMapping("/staf/login")
-	public String loginStaf(Model model,
+	public String loginStaf(Model model, RedirectAttributes redirectAttrs,
 		@RequestParam(value = "username", required = true) String username,
 		@RequestParam(value = "password", required = true) String password)
 	{
+		String errorStaf = "";
+		
 		try {		
 			HttpURLConnection con = (HttpURLConnection) new URL("https://sso.ui.ac.id/oauth/lockdin/token").openConnection();
 			con.setDoOutput(true);
@@ -114,13 +118,22 @@ public class StafController
 				authorities.add(new SimpleGrantedAuthority("" + staf.getId_role())); //ntar ganti jadi authoritiesStr
 				Authentication auth = new UsernamePasswordAuthenticationToken(resultUserId, null, authorities);
 				SecurityContextHolder.getContext().setAuthentication(auth);	
+				return "redirect:/";
+			} else {
+				errorStaf = "Anda tidak memiliki akses untuk memasuki sistem. Silahkan mengontak admin.";
+				model.addAttribute("errorStaf", errorStaf);
+				System.out.println(errorStaf);
+				return "errorSSO";
 			}
 		}
 		catch(Exception e){
+			errorStaf = "Salah memasukkan Username atau Password SSO.";
+			model.addAttribute("errorStaf", errorStaf);
 			System.out.println("error "+e);
+			System.out.println(errorStaf);
+			return "errorSSO";
 		}
 		
-		return "redirect:/";
 	}
 	
 	@RequestMapping("/staf-verifikasi/")
