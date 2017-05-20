@@ -17,7 +17,7 @@
 				<hr/>
 				
 				<form 	name="skemaForm" method="POST" enctype="multipart/form-data" 
-						action="/staf-kesejahteraan/skema-pembayaran/insert-submit" 
+						action="/c6/staf-kesejahteraan/skema-pembayaran/insert-submit" 
 						class="form-horizontal"
 						th:object="${sbm}">
 					<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
@@ -175,7 +175,7 @@
 					</div>
 					
 					<div class="btn-group" role="group" aria-label="...">
-					  <a th:href="'/staf-kesejahteraan/skema-pembayaran/daftar'"><button type="button" class="btn btn-warning">Kembali</button></a>
+					  <a th:href="'/c6/staf-kesejahteraan/skema-pembayaran/daftar'"><button type="button" class="btn btn-warning">Kembali</button></a>
 					</div>
 				</form>
 			</div>

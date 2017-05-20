@@ -2,96 +2,96 @@
 <html xmlns:th="http://www.thymeleaf.org">
 	<head>
 		<div th:replace="resources"></div>
-		<title>Manager Pendidikan - Statistik Fakultas</title>
+		<title>Manager Pendidikan - Statistik Jenjang</title>
 		
 		<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 	    <script type="text/javascript" th:inline="javascript">
 		    /*<![CDATA[*/
 				// Load the Visualization API and the corechart package.
 			    google.charts.load('current', {'packages':['corechart']});
-			
-			    var f = [[${faculties}]];
-			    var rf = [[${regFaculties}]];
-			    var sf = [[${sumFaculties}]];
+		    
+			    var l = [[${levels}]];
+			    var rl = [[${regLevels}]];
+			    var sl = [[${sumLevels}]];
 			    
 			    // Set a callback to run when the Google Visualization API is loaded.
-			    google.charts.setOnLoadCallback(drawFacultyChart);
-			    google.charts.setOnLoadCallback(drawRegFacultyChart);
-			    google.charts.setOnLoadCallback(drawSumFacultyChart);
-			    
+			    google.charts.setOnLoadCallback(drawLevelChart);
+			    google.charts.setOnLoadCallback(drawRegLevelChart);
+			    google.charts.setOnLoadCallback(drawSumLevelChart);
+			
 			    // Callback that creates and populates a data table,
 			    // instantiates the pie chart, passes in the data and
 			    // draws it. 
-			    function drawFacultyChart() {
+			    function drawLevelChart() {
 			      // Create the data table.
 			      var data = new google.visualization.DataTable();
-			      data.addColumn('string', 'Fakultas');
+			      data.addColumn('string', 'Jenjang');
 			      data.addColumn('number', 'Jumlah');
 			      
 			      var total = 0;
-			      for(var i = 0; i < f.length; i++)
+			      for(var i = 0; i < l.length; i++)
 		    	  {
-			    	  data.addRow([f[i].jenis_rekap, f[i].jumlah]);
-			    	  total = total+f[i].jumlah;
+			    	  data.addRow([l[i].jenis_rekap, l[i].jumlah]);
+			    	  total = total+l[i].jumlah;
 		    	  }
 			 	
 			      // Set chart options
-			      var options = {'title':'Total Pendaftar Setiap Fakultas (Total : ' + total + ')',
+			      var options = {'title':'Total Pendaftar Setiap Jenjang (Total : ' + total + ')',
 			                     'width':500,
 			                     'height':300};
 			
 			      // Instantiate and draw our chart, passing in some options.
-				  var chart = new google.visualization.PieChart(document.getElementById('faculty'));
+				  var chart = new google.visualization.PieChart(document.getElementById('level'));
 			      chart.draw(data, options);
 			      console.log("chart");
 			    }
 			    
-			    function drawRegFacultyChart() {
+			    function drawRegLevelChart() {
 			      // Create the data table.
 			      var data = new google.visualization.DataTable();
-			      data.addColumn('string', 'Fakultas');
+			      data.addColumn('string', 'Jenjang');
 			      data.addColumn('number', 'Jumlah');
 			      
 			      var total = 0;
-			      for(var i = 0; i < rf.length; i++)
+			      for(var i = 0; i < rl.length; i++)
 		    	  {
-			    	  data.addRow([rf[i].jenis_rekap, rf[i].jumlah]);
-			    	  total = total+rf[i].jumlah;
+			    	  data.addRow([rl[i].jenis_rekap, rl[i].jumlah]);
+			    	  total = total+rl[i].jumlah;
 		    	  }
 			 	
 			      // Set chart options
-			      var options = {'title':'Pendaftar Ulang Setiap Fakultas (Total : ' + total + ')',
+			      var options = {'title':'Pendaftar Ulang Setiap Jenjang (Total : ' + total + ')',
 			                     'width':500,
 			                     'height':300};
 			
 			      // Instantiate and draw our chart, passing in some options.
-				  var chart1 = new google.visualization.PieChart(document.getElementById('regFaculty_pie'));
-				  var chart2 = new google.visualization.BarChart(document.getElementById('regFaculty_bar'));
-				  chart1.draw(data, options);
-				  chart2.draw(data, options);
+				  var chart1 = new google.visualization.PieChart(document.getElementById('regLevel_pie'));
+				  var chart2 = new google.visualization.BarChart(document.getElementById('regLevel_bar'));
+			      chart1.draw(data, options);
+			      chart2.draw(data, options);
 			    }
-
-			    function drawSumFacultyChart() {
+			    
+			    function drawSumLevelChart() {
 			      // Create the data table.
 			      var data = new google.visualization.DataTable();
 			      
-			      data.addColumn('string', 'Fakultas');
+			      data.addColumn('string', 'Jenjang');
 			      data.addColumn('number', 'Total Pendaftar');
 			      data.addColumn('number', 'Pendaftar Ulang');
 			      data.addColumn('number', 'Tidak Mendaftar');
 			      
-			      for(var i = 0; i < sf.length; i++)
+			      for(var i = 0; i < sl.length; i++)
 		    	  {
-			    	  data.addRow([sf[i].nama, sf[i].total, sf[i].regis, sf[i].non_regis]);
+			    	  data.addRow([sl[i].nama, sl[i].total, sl[i].regis, sl[i].non_regis]);
 		    	  }
 			 	
 			      // Set chart options
-			      var options = {'title':'Rincian Data Setiap Fakultas',
+			      var options = {'title':'Rincian Data Setiap Jenjang',
 			                     'width':500,
 			                     'height':300};
 			
 			      // Instantiate and draw our chart, passing in some options.
-				  var chart2 = new google.visualization.BarChart(document.getElementById('sumFaculty_bar'));
+				  var chart2 = new google.visualization.BarChart(document.getElementById('sumLevel_bar'));
 				  chart2.draw(data, options);
 			    }
 		    /*]]>*/
@@ -104,35 +104,35 @@
 				<div class="row">
 					<div class="col-sm-12">
 						<h3>Statistik Registrasi Mahasiswa Baru</h3>
-						<h4>Fakultas</h4>
+						<h4>Jenjang</h4>
 					</div>
 				</div>
-			
+				
 				<hr/>
-			
+				
 				<table align="center">
 					<tbody>
 						<tr>
 							<td>
-								<div th:id="'sumFaculty_bar'"></div>
-								<h4>Grafik ini berguna untuk memperlihatkan data registrasi mahasiswa baru secara umum pada setiap fakultas</h4>
+								<div th:id="'sumLevel_bar'"></div>
+								<h4>Grafik ini berguna untuk memperlihatkan data registrasi mahasiswa baru secara umum pada setiap jenjang</h4>
 								<hr/>
 							</td>
 							<td>
-								<div th:id="'faculty'"></div>
-								<h4>Grafik ini berguna untuk memperlihatkan persentase pendaftar mahasiswa baru pada setiap fakultas</h4>
+								<div th:id="'level'"></div>
+								<h4>Grafik ini berguna untuk memperlihatkan persentase pendaftar mahasiswa baru pada setiap jenjang</h4>
 								<hr/>
 							</td>
 						</tr>
 						<tr>
 							<td>
-								<div th:id="'regFaculty_pie'"></div>
-								<h4>Grafik ini berguna untuk memperlihatkan persentase mahasiswa baru yang melakukan registrasi ulang pada setiap fakultas</h4>
+								<div th:id="'regLevel_pie'"></div>
+								<h4>Grafik ini berguna untuk memperlihatkan persentase mahasiswa baru yang melakukan registrasi ulang pada setiap jenjang</h4>
 								<hr/>
 							</td>
 							<td>
-								<div th:id="'regFaculty_bar'"></div>
-								<h4>Grafik ini berguna untuk memperlihatkan perbandingan jumlah mahasiswa baru yang melakukan registrasi ulang pada setiap fakultas</h4>
+								<div th:id="'regLevel_bar'"></div>
+								<h4>Grafik ini berguna untuk memperlihatkan perbandingan jumlah mahasiswa baru yang melakukan registrasi ulang pada setiap jenjang</h4>
 								<hr/>
 							</td>
 						</tr>

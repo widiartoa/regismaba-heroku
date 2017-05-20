@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import id.ac.univ.regismaba.model.FakultasModel;
+import id.ac.univ.regismaba.model.JalurModel;
 import id.ac.univ.regismaba.model.JenjangModel;
 import id.ac.univ.regismaba.model.ProgramModel;
 import id.ac.univ.regismaba.model.ProgramStudiModel;
@@ -22,28 +23,13 @@ public class StatistikManagerController {
 	@Autowired
 	StatistikManagerService sms;
 	
-	@RequestMapping("/manager-pendidikan/statistik-manager")
-	public String statistikManager(Model model)
+	@RequestMapping("/manager-pendidikan/statistik-manager/fakultas")
+	public String statistikManagerFakultas(Model model)
 	{
 		List<FakultasModel> f = sms.getFaculties();
-		List<ProgramStudiModel> m = sms.getMajors();
-		List<JenjangModel> l = sms.getLevels();
-		List<ProgramModel> p = sms.getPrograms();
-		
 		ArrayList<StatistikManagerModel> faculties = new ArrayList<StatistikManagerModel>();
-		ArrayList<StatistikManagerModel> majors = new ArrayList<StatistikManagerModel>();
-		ArrayList<StatistikManagerModel> levels = new ArrayList<StatistikManagerModel>();
-		ArrayList<StatistikManagerModel> programs = new ArrayList<StatistikManagerModel>();
-		
 		ArrayList<StatistikManagerModel> regFaculties = new ArrayList<StatistikManagerModel>();
-		ArrayList<StatistikManagerModel> regMajors = new ArrayList<StatistikManagerModel>();
-		ArrayList<StatistikManagerModel> regLevels = new ArrayList<StatistikManagerModel>();
-		ArrayList<StatistikManagerModel> regPrograms = new ArrayList<StatistikManagerModel>();
-		
 		ArrayList<StatistikManagerSummaryModel> sumFaculties = new ArrayList<StatistikManagerSummaryModel>();
-		ArrayList<StatistikManagerSummaryModel> sumMajors = new ArrayList<StatistikManagerSummaryModel>();
-		ArrayList<StatistikManagerSummaryModel> sumLevels = new ArrayList<StatistikManagerSummaryModel>();
-		ArrayList<StatistikManagerSummaryModel> sumPrograms = new ArrayList<StatistikManagerSummaryModel>();
 		
 		for(int i=0; i < f.size(); i++)
 		{
@@ -57,6 +43,21 @@ public class StatistikManagerController {
 			if(faculty3 != null) { sumFaculties.add(faculty3); }
 		}
 		
+		model.addAttribute("faculties", faculties);
+		model.addAttribute("regFaculties", regFaculties);
+		model.addAttribute("sumFaculties", sumFaculties);
+		
+		return "manager_pendidikan-statistik_manager";
+	}
+	
+	@RequestMapping("/manager-pendidikan/statistik-manager/prodi")
+	public String statistikManagerProdi(Model model)
+	{
+		List<ProgramStudiModel> m = sms.getMajors();
+		ArrayList<StatistikManagerModel> majors = new ArrayList<StatistikManagerModel>();
+		ArrayList<StatistikManagerModel> regMajors = new ArrayList<StatistikManagerModel>();
+		ArrayList<StatistikManagerSummaryModel> sumMajors = new ArrayList<StatistikManagerSummaryModel>();
+		
 		for(int i=0; i < m.size(); i++)
 		{
 			StatistikManagerModel major = sms.selectPemilihProdi(m.get(i).getProgram_studi_id());
@@ -69,6 +70,22 @@ public class StatistikManagerController {
 			if(major3 != null) { sumMajors.add(major3); }
 		}
 		
+		model.addAttribute("majors", majors);
+		model.addAttribute("regMajors", regMajors);
+		model.addAttribute("sumMajors", sumMajors);
+		
+		return "manager_pendidikan-statistik_manager_prodi";
+	}
+	
+	@RequestMapping("/manager-pendidikan/statistik-manager/jenjang")
+	public String statistikManagerJenjang(Model model)
+	{
+
+		List<JenjangModel> l = sms.getLevels();
+		ArrayList<StatistikManagerModel> levels = new ArrayList<StatistikManagerModel>();
+		ArrayList<StatistikManagerModel> regLevels = new ArrayList<StatistikManagerModel>();
+		ArrayList<StatistikManagerSummaryModel> sumLevels = new ArrayList<StatistikManagerSummaryModel>();
+		
 		for(int i=0; i < l.size(); i++)
 		{
 			StatistikManagerModel level = sms.selectJenjang(l.get(i).getJenjang_id());
@@ -80,7 +97,22 @@ public class StatistikManagerController {
 			StatistikManagerSummaryModel level3 = sms.summaryLevel(l.get(i).getJenjang_id());
 			if(level3 != null) { sumLevels.add(level3); }
 		}
+
+		model.addAttribute("levels", levels);
+		model.addAttribute("regLevels", regLevels);
+		model.addAttribute("sumLevels", sumLevels);
 		
+		return "manager_pendidikan-statistik_manager_jenjang";
+	}
+	
+	@RequestMapping("/manager-pendidikan/statistik-manager/program")
+	public String statistikManagerProgram(Model model)
+	{
+		List<ProgramModel> p = sms.getPrograms();
+		ArrayList<StatistikManagerModel> programs = new ArrayList<StatistikManagerModel>();
+		ArrayList<StatistikManagerModel> regPrograms = new ArrayList<StatistikManagerModel>();
+		ArrayList<StatistikManagerSummaryModel> sumPrograms = new ArrayList<StatistikManagerSummaryModel>();
+
 		for(int i=0; i < p.size(); i++)
 		{
 			StatistikManagerModel program = sms.selectProgram(p.get(i).getProgram_id());
@@ -92,23 +124,64 @@ public class StatistikManagerController {
 			StatistikManagerSummaryModel program3 = sms.summaryProgram(p.get(i).getProgram_id());
 			if(program3 != null) { sumPrograms.add(program3); }
 		}
-		
-		model.addAttribute("faculties", faculties);
-		model.addAttribute("majors", majors);
-		model.addAttribute("levels", levels);
+
 		model.addAttribute("programs", programs);
-		
-		model.addAttribute("regFaculties", regFaculties);
-		model.addAttribute("regMajors", regMajors);
-		model.addAttribute("regLevels", regLevels);
 		model.addAttribute("regPrograms", regPrograms);
-		
-		model.addAttribute("sumFaculties", sumFaculties);
-		model.addAttribute("sumMajors", sumMajors);
-		model.addAttribute("sumLevels", sumLevels);
 		model.addAttribute("sumPrograms", sumPrograms);
 		
-		return "manager_pendidikan-statistik_manager";
+		return "manager_pendidikan-statistik_manager_program";
 	}
 	
+	@RequestMapping("/manager-pendidikan/statistik-manager/jalur")
+	public String statistikManagerJalur(Model model)
+	{
+		List<JalurModel> j = sms.getPaths();
+		ArrayList<StatistikManagerModel> paths = new ArrayList<StatistikManagerModel>();
+		ArrayList<StatistikManagerModel> regPaths = new ArrayList<StatistikManagerModel>();
+		ArrayList<StatistikManagerSummaryModel> sumPaths = new ArrayList<StatistikManagerSummaryModel>();
+		
+		List<FakultasModel> f = sms.getFaculties();
+		ArrayList<StatistikManagerSummaryModel> snmptn = new ArrayList<StatistikManagerSummaryModel>();
+		ArrayList<StatistikManagerSummaryModel> sbmptn = new ArrayList<StatistikManagerSummaryModel>();
+		ArrayList<StatistikManagerSummaryModel> simak = new ArrayList<StatistikManagerSummaryModel>();
+		
+		for(int i=0; i < j.size(); i++)
+		{
+			StatistikManagerModel jalur = sms.selectJalur(j.get(i).getJalur_id());
+			if(jalur != null) { paths.add(jalur); }
+			
+			StatistikManagerModel jalur2 = sms.selectRegistranJalur(j.get(i).getJalur_id());
+			if(jalur2 != null) { regPaths.add(jalur2); }
+			
+			StatistikManagerSummaryModel jalur3 = sms.summaryPath(j.get(i).getJalur_id());
+			if(jalur3 != null) { sumPaths.add(jalur3); }
+		}
+		
+		for(int i=0; i < f.size(); i++)
+		{	
+			StatistikManagerSummaryModel faculty = sms.summarySNMPTN(f.get(i).getFakultas_id());
+			if((faculty.getTotal() > 0) || (faculty.getRegis() > 0) || (faculty.getNon_regis() > 0)) 
+			{ snmptn.add(faculty); }
+			
+			StatistikManagerSummaryModel faculty2 = sms.summarySBMPTN(f.get(i).getFakultas_id());
+			if((faculty2.getTotal() > 0) || (faculty2.getRegis() > 0) || (faculty2.getNon_regis() > 0))
+			{ sbmptn.add(faculty2); }
+			
+			StatistikManagerSummaryModel faculty3 = sms.summarySIMAK(f.get(i).getFakultas_id());
+			if((faculty3.getTotal() > 0) || (faculty3.getRegis() > 0) || (faculty3.getNon_regis() > 0))
+			{ simak.add(faculty3); }
+		}
+		
+		model.addAttribute("paths", paths);
+		model.addAttribute("regPaths", regPaths);
+		model.addAttribute("sumPaths", sumPaths);
+		model.addAttribute("snmptn", snmptn);
+		model.addAttribute("sbmptn", sbmptn);
+		model.addAttribute("simak", simak);
+		
+		System.out.println(sbmptn);
+		System.out.println(simak);
+		
+		return "manager_pendidikan-statistik_manager_jalur";
+	}
 }
