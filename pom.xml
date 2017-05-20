@@ -6,7 +6,7 @@
 	<groupId>id.ac.univ.regismaba</groupId>
 	<artifactId>regismaba</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>jar</packaging>
+	<packaging>war</packaging>
 
 	<name>regismaba</name>
 	<description>Modul Registrasi Mahasiswa Baru HEIS Kelompok Propensi C6</description>
@@ -70,7 +70,14 @@
         <dependency>
 	    	<groupId>org.springframework.boot</groupId>
 		    <artifactId>spring-boot-starter-mail</artifactId>
-		</dependency>	
+		</dependency>
+		
+		<dependency>
+         <groupId>org.springframework.boot</groupId>
+         <artifactId>spring-boot-starter-tomcat</artifactId>
+         <scope>provided</scope>
+      	</dependency>
+			
 	</dependencies>
 
 	<build>
