@@ -99,12 +99,10 @@
 	</head>
 	<body>
 		<div th:include="manager_pendidikan-navbar"></div>
-	
-			<div class="content">
+			<div class="content content-top">
 				<div class="row">
 					<div class="col-sm-12">
-						<h3>Statistik Registrasi Mahasiswa Baru</h3>
-						<h4>Program</h4>
+						<h3><span class="glyphicon glyphicon-stats"></span>Statistik Registrasi Mahasiswa Baru - Program</h3>
 					</div>
 				</div>
 				
@@ -138,8 +136,6 @@
 						</tr>
 					</tbody>
 				</table>
-			</div>
-	
-		<div class="footer">Modul Registrasi Mahasiswa Baru</div>
+		<div th:include="footer"></div>
 	</body>
 </html>

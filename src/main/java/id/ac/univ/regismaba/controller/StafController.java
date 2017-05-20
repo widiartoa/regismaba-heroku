@@ -192,7 +192,7 @@ public class StafController
 	@RequestMapping("/manager-pendidikan/")
     public String managerPendidikanHome (Model model)
     {
-		return "redirect:/manager-pendidikan/statistik-manager";
+		return "redirect:/manager-pendidikan/statistik-manager/fakultas";
 	}
 	
     @RequestMapping("/staf-verifikasi/daftar-mhs")
