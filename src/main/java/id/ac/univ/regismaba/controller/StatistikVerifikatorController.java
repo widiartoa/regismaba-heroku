@@ -22,7 +22,7 @@ public class StatistikVerifikatorController
     @Autowired
     StatistikManagerService sms;
     
-    @RequestMapping("/manager-pendidikan/statistik-verifikator/snmptn")
+    @RequestMapping("/staf-verifikasi/statistik-verifikator/snmptn")
     public String statistikVerifSNMPTN (Model model)
     {
         List<FakultasModel> f = sms.getFaculties();
@@ -60,7 +60,7 @@ public class StatistikVerifikatorController
         return "manager_pendidikan-statistik_verifikator-snmptn";
     }
     
-    @RequestMapping("/manager-pendidikan/statistik-verifikator/sbmptn")
+    @RequestMapping("/staf-verifikasi/statistik-verifikator/sbmptn")
     public String statistikVerifSBMPTN (Model model)
     {
         List<FakultasModel> f = sms.getFaculties();
@@ -100,7 +100,7 @@ public class StatistikVerifikatorController
         return "manager_pendidikan-statistik_verifikator-sbmptn";
     }
     
-    @RequestMapping("/manager-pendidikan/statistik-verifikator/mandiri")
+    @RequestMapping("/staf-verifikasi/statistik-verifikator/mandiri")
     public String statistikVerifMANDIRI (Model model)
     {
         List<FakultasModel> f = sms.getFaculties();

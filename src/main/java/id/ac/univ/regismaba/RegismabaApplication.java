@@ -24,12 +24,12 @@ public class RegismabaApplication extends SpringBootServletInitializer {
 		SpringApplication.run(RegismabaApplication.class, args);
 	}
 	
-	@Bean
-	CommandLineRunner init(StorageService storageService) {
-		return (args) -> {
-            //storageService.deleteAll();
-            storageService.init();
-		};
-	}
+//	@Bean
+//	CommandLineRunner init(StorageService storageService) {
+//		return (args) -> {
+//            //storageService.deleteAll();
+//            storageService.init();
+//		};
+//	}
 	
 }

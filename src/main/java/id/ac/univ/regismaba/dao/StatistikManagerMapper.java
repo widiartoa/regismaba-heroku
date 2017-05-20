@@ -129,9 +129,9 @@ public interface StatistikManagerMapper {
 	
 	@Select("select nama_jalur as nama, "
 			+ "(select count(*) from mahasiswa m, jalur j where j.jalur_id=m.jalur_id and j.jalur_id=#{jalur_id}) as total, "
-			+ "(select count(*) from mahasiswa m, jalur j, biodata b, pengajuan_skema_pembayaran s where m.jalur_id=j.jalur_id and m.username=b.username and m.username=s.username and j.jalur_id=#{jalur_id}) as regis, "
+			+ "(select count(*) from mahasiswa m, jalur j, biodata b, pengajuan_skema_pembayaran s where m.jalur_id=j.jalur_id and m.username=b.username and m.username=s.username and j.jalur_id=#{jalur_id} and b.sidik_jari is not null and s.status_pengajuan='Verified' and s.status_pembayaran='Verified') as regis, "
 			+ "((select count(*) from mahasiswa m, jalur j where j.jalur_id=m.jalur_id and j.jalur_id=#{jalur_id}) - "
-			+ "(select count(*) from mahasiswa m, jalur j, biodata b, pengajuan_skema_pembayaran s where m.jalur_id=j.jalur_id and m.username=b.username and m.username=s.username and j.jalur_id=#{jalur_id})) as non_regis "
+			+ "(select count(*) from mahasiswa m, jalur j, biodata b, pengajuan_skema_pembayaran s where m.jalur_id=j.jalur_id and m.username=b.username and m.username=s.username and j.jalur_id=#{jalur_id} and b.sidik_jari is not null and s.status_pengajuan='Verified' and s.status_pembayaran='Verified')) as non_regis "
 			+ "from jalur where jalur_id=#{jalur_id}")
 	StatistikManagerSummaryModel summaryPath(@Param("jalur_id") int jalur_id);
 	
