@@ -173,7 +173,7 @@ public class JadwalController {
 		return "redirect:/staf-registrasi/daftar-assign-jadwal/";
 	}
 	
-	@RequestMapping("/staf-registrasi/daftar-assign-jadwal/")
+	@RequestMapping("/staf-registrasi/daftar-assign-jadwal")
 	public String getAssignedJadwals(Model model) {
 		List<AssignJadwalModel> assignedJadwals = assignJadwalService.selectAllAssignJadwal();
 
