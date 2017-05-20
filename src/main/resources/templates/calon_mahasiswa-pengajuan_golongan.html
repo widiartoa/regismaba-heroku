@@ -9,9 +9,11 @@
     	<div th:include="calon_mahasiswa-navbar"></div>
 		
     	<div class="container">
-			<div class="content">
+			<div class="content content-top">
 				<div class="row">
-					<div class="col-sm-12"><h3>Pilih Golongan Pembayaran</h3></div>
+					<div class="col-sm-12">
+						<h3><span class="glyphicon glyphicon-th-list"></span>Pilih Golongan Pembayaran</h3>
+					</div>
 				</div>
 				
 				<hr/>
@@ -21,40 +23,28 @@
 					
 					<div th:switch="${rumpun.rumpun_id}">
 						<div th:case="'1'">
-							<div class="form-group">
-								<h4>Golongan Pembayaran Rumpun Sains dan Teknologi</h4>
-								<br/>
+							<h4>Golongan Pembayaran Rumpun Sains dan Teknologi</h4>
+							<br/>
+							<div class="table-responsive">
 								<table class="table">
 									<thead>
 										<tr>
-											<td>
-												Golongan
-											</td>
-											<td>
-												Jumlah biaya semester minimal
-											</td>
-											<td>
-												Jumlah biaya semester maksimal
-											</td>
-											<td>
-												Uang pangkal minimal
-											</td>
-											<td>
-												Uang pangkal maksimal
-											</td>
-											<td>
-												Pilih
-											</td>
+											<th style="text-align: center;">Golongan</th>
+											<th style="text-align: center;">Jumlah biaya semester minimal</th>
+											<th style="text-align: center;">Jumlah biaya semester maksimal</th>
+											<th style="text-align: center;">Uang pangkal minimal</th>
+											<th style="text-align: center;">Uang pangkal maksimal</th>
+											<th style="text-align: center;">Pilih</th>
 										</tr>
 									</thead>
 									<tbody>
 										<tr th:each="schema,iterationStatus: ${schemas}">
-											<td th:text="${schema.golongan_id}"></td>
-											<td th:text="${schema.jumlah_biaya_ipa_min}"></td>
-											<td th:text="${schema.jumlah_biaya_ipa_max}"></td>
-											<td th:text="${schema.uang_pangkal_ipa_min}"></td>
-											<td th:text="${schema.uang_pangkal_ipa_max}"></td>
-											<td><input type="radio" name="golongan_id" id="golongan_id" th:value="${schema.golongan_id}"></input></td>
+											<td th:text="${schema.golongan_id}" style="text-align: center;"></td>
+											<td th:text="${schema.jumlah_biaya_ipa_min}" style="text-align: center;"></td>
+											<td th:text="${schema.jumlah_biaya_ipa_max}" style="text-align: center;"></td>
+											<td th:text="${schema.uang_pangkal_ipa_min}" style="text-align: center;"></td>
+											<td th:text="${schema.uang_pangkal_ipa_max}" style="text-align: center;"></td>
+											<td><input type="radio" name="golongan_id" id="golongan_id" th:value="${schema.golongan_id}" style="text-align: center;"></input></td>
 										</tr>
 									</tbody>
 								</table>
@@ -62,40 +52,28 @@
 						</div>
 						
 						<div th:case="'2'">
-							<div class="form-group">
-								<h4>Golongan Pembayaran Rumpun Sosial dan Humaniora</h4>
-								<br/>
+							<h4>Golongan Pembayaran Rumpun Sosial dan Humaniora</h4>
+							<br/>
+							<div class="table-responsive">
 								<table class="table">
 									<thead>
 										<tr>
-											<td>
-												Golongan
-											</td>
-											<td>
-												Jumlah biaya semester minimal
-											</td>
-											<td>
-												Jumlah biaya semester maksimal
-											</td>
-											<td>
-												Uang pangkal minimal
-											</td>
-											<td>
-												Uang pangkal maksimal
-											</td>
-											<td>
-												Pilih
-											</td>
+											<th style="text-align: center;">Golongan</th>
+											<th style="text-align: center;">Jumlah biaya semester minimal</th>
+											<th style="text-align: center;">Jumlah biaya semester maksimal</th>
+											<th style="text-align: center;">Uang pangkal minimal</th>
+											<th style="text-align: center;">Uang pangkal maksimal</th>
+											<th style="text-align: center;">Pilih</th>
 										</tr>
 									</thead>
 									<tbody>
 										<tr th:each="schema,iterationStatus: ${schemas}">
-											<td th:text="${schema.golongan_id}"></td>
-											<td th:text="${schema.jumlah_biaya_ips_min}"></td>
-											<td th:text="${schema.jumlah_biaya_ips_max}"></td>
-											<td th:text="${schema.uang_pangkal_ips_min}"></td>
-											<td th:text="${schema.uang_pangkal_ips_max}"></td>
-											<td><input type="radio" name="golongan_id" id="golongan_id" th:value="${schema.golongan_id}"></input></td>
+											<td th:text="${schema.golongan_id}" style="text-align: center;"></td>
+											<td th:text="${schema.jumlah_biaya_ips_min}" style="text-align: center;"></td>
+											<td th:text="${schema.jumlah_biaya_ips_max}" style="text-align: center;"></td>
+											<td th:text="${schema.uang_pangkal_ips_min}" style="text-align: center;"></td>
+											<td th:text="${schema.uang_pangkal_ips_max}" style="text-align: center;"></td>
+											<td><input type="radio" name="golongan_id" id="golongan_id" th:value="${schema.golongan_id}" style="text-align: center;"></input></td>
 										</tr>
 									</tbody>
 								</table>
@@ -103,37 +81,25 @@
 						</div>
 						
 						<div th:case="'3'">
-							<div class="form-group">
-								<h4>Golongan Pembayaran Rumpun Ilmu Kesehatan</h4>
-								<br/>
+							<h4>Golongan Pembayaran Rumpun Ilmu Kesehatan</h4>
+							<br/>
+							<div class="table-responsive">
 								<table class="table">
 									<thead>
 										<tr>
-											<td>
-												Golongan
-											</td>
-											<td>
-												Jumlah biaya semester minimal
-											</td>
-											<td>
-												Jumlah biaya semester maksimal
-											</td>
-											<td>
-												Uang pangkal minimal
-											</td>
-											<td>
-												Uang pangkal maksimal
-											</td>
-											<td>
-												Pilih
-											</td>
+											<th style="text-align: center;">Golongan</th>
+											<th style="text-align: center;">Jumlah biaya semester minimal</th>
+											<th style="text-align: center;">Jumlah biaya semester maksimal</th>
+											<th style="text-align: center;">Uang pangkal minimal</th>
+											<th style="text-align: center;">Uang pangkal maksimal</th>
+											<th style="text-align: center;">Pilih</th>
 										</tr>
 									</thead>
 									<tbody>
 										<tr th:each="schema,iterationStatus: ${schemas}">
-											<td th:text="${schema.golongan_id}"></td>
-											<td th:text="${schema.jumlah_biaya_ik_min}"></td>
-											<td th:text="${schema.jumlah_biaya_ik_max}"></td>
+											<td th:text="${schema.golongan_id}" style="text-align: center;"></td>
+											<td th:text="${schema.jumlah_biaya_ik_min}" style="text-align: center;"></td>
+											<td th:text="${schema.jumlah_biaya_ik_max}" style="text-align: center;"></td>
 											<td th:text="${schema.uang_pangkal_ik_min}"></td>
 											<td th:text="${schema.uang_pangkal_ik_max}"></td>
 											<td><input type="radio" name="golongan_id" id="golongan_id" th:value="${schema.golongan_id}"></input></td>
@@ -146,18 +112,20 @@
 					
 					<hr/>
 					
-					<div class="btn-group" role="group" aria-label="...">
-						<button type="submit" class="btn btn-default" value="Upload">Ajukan</button>
-					</div>
-					
-					<div class="btn-group" role="group" aria-label="...">
-					  <a th:href="'/calon-mahasiswa/skema-pembayaran'"><button type="button" class="btn btn-default">Kembali</button></a>
+					<div style="text-align:right;">
+						<div class="btn-group" role="group" aria-label="...">
+						  <a th:href="'/calon-mahasiswa/skema-pembayaran'"><button type="button" class="btn btn-default btn-cancel">Kembali</button></a>
+						</div>
+						
+						<div class="btn-group" role="group" aria-label="...">
+							<button type="submit" class="btn btn-default" value="Upload">Ajukan</button>
+						</div>
 					</div>
 				</form>
 			</div>
        	</div>
 		
-		<div class="footer">Modul Registrasi Mahasiswa Baru</div>
+		<div th:include="footer"></div>
 		
 		<script type="text/javascript">
 			/*<![CDATA[*/
