@@ -6,7 +6,9 @@ Link-link yang ke menu lain diganti aja kalo perlu
 -->
 
 <nav class="navbar-inverse navbar-fixed-top">
+
 	<div class="container">
+		
 		<div class="navbar-header">
 			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false">
 				<span class="sr-only">Toggle navigation</span>
@@ -14,13 +16,13 @@ Link-link yang ke menu lain diganti aja kalo perlu
 				<span class="icon-bar"></span>
 				<span class="icon-bar"></span>
 			</button>
-			<a th:href="'/'"><img class="navbar-brand" src="/img/logo.png" alt="Logo"/></a>
+			<a th:href="'/c6/'"><img class="navbar-brand" src="/c6/img/logo.png" alt="Logo"/></a>
 		</div>
 		
 		<div class="collapse navbar-collapse" id="navbar-collapse">
 			<ul class="nav navbar-nav navbar-left">
 				<div class="dropdown">
-					<a th:href="'/calon-mahasiswa/'">
+					<a th:href="'/c6/calon-mahasiswa/'">
 						<button class="dropbtn">Home</button>
 					</a>
 				</div>
@@ -28,7 +30,7 @@ Link-link yang ke menu lain diganti aja kalo perlu
 			
 			<ul class="nav navbar-nav navbar-left">
 				<div class="dropdown">
-					<a th:href="'/calon-mahasiswa/skema-pembayaran'">
+					<a th:href="'/c6/calon-mahasiswa/skema-pembayaran'">
 						<button class="dropbtn">Skema Pembayaran</button>
 					</a>
 				</div>
@@ -37,23 +39,26 @@ Link-link yang ke menu lain diganti aja kalo perlu
 			<ul class="nav navbar-nav navbar-left">
 				<div class="dropdown">
 					<a class="dropdown-toggle" data-toggle="dropdown" href="#">
-						<button class="dropbtn">Isian Data Mahasiswa</button>
-						<span class="caret"></span>
+						<button class="dropbtn">Isian Data Mahasiswa
+							<span class="caret"></span>
+						</button>
 					</a>
 					<div class="dropdown-menu dropdown-content">
-						<li><a th:href="'/calon-mahasiswa/biodata/fill'">Isi Isian Data Mahasiswa</a></li>
-						<li><a th:href="'/calon-mahasiswa/biodata/view/'+${mahasiswa.npm}">Lihat Isian Data Mahasiswa</a></li>
+						<li><a th:href="'/c6/calon-mahasiswa/biodata/fill'">Isi/Ubah Isian Data Mahasiswa</a></li>
+						<li><a th:href="'/c6/calon-mahasiswa/biodata/view/'+${mahasiswa.npm}">Lihat Isian Data Mahasiswa</a></li>
 					</div>
 				</div>
 			</ul>
 			
 			<ul class="nav navbar-nav navbar-right">
 				<div class="dropdown">
-					<a th:href="'/logout'">
+					<a th:href="'/c6/logout'">
 						<button class="dropbtn">Keluar</button>
 					</a>
 				</div>
 			</ul>
 		</div>
 	</div>
+	
+	<div class="navbar-strip"/>
 </nav>

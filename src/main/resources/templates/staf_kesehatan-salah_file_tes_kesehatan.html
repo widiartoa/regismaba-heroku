@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+		<div th:replace="resources"></div>
+        <title>Staf Kesehatan - Mengunggah Hasil Tes Kesehatan</title>
+    </head>
+	
+    <body>
+    	<div th:include="staf_kesehatan-navbar"></div>
+		
+    	<div class="container">
+			<div class="content">
+				<div class="row">
+					<div class="col-sm-12"><h3>Error</h3></div>
+				</div>
+				
+				<hr/>
+				
+		    	<div>Terdapat kesalahan jenis file yang diunggah. Mohon mengunggah file dengan format .pdf, .png atau .jpg</div>
+    	
+    			<hr/>
+    			
+		    	<div class="btn-group" role="group" aria-label="...">
+				  <a th:href="'/staf-kesehatan/daftar-mhs'"><button type="button" class="btn btn-warning">Kembali</button></a>
+				</div>
+			</div>
+       	</div>
+		
+		<div class="footer">Modul Registrasi Mahasiswa Baru</div>
+		
+		<script type="text/javascript">
+			$(document).ready(function(){
+				$('#myTable').dataTable();
+			});
+		</script>
+    </body>
+</html>

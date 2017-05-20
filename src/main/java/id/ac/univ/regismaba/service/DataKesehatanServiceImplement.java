@@ -43,5 +43,10 @@ public class DataKesehatanServiceImplement implements DataKesehatanService {
 //	public List<DataKesehatanModel> selectAllDataKesehatan() {
 //	    return dataKesehatanMapper.selectAllDataKesehatan ();
 //	}
+	
+	@Override
+	public void updateHasilTes(DataKesehatanModel dataKes) {
+	    dataKesehatanMapper.updateHasilTes (dataKes);
+	}
 
 }
