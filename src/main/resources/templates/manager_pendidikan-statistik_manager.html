@@ -36,7 +36,7 @@
 		    	  }
 			 	
 			      // Set chart options
-			      var options = {'title':'Total Pendaftar (Total : ' + total + ')',
+			      var options = {'title':'Total Pendaftar Setiap Fakultas (Total : ' + total + ')',
 			                     'width':500,
 			                     'height':300};
 			
@@ -60,7 +60,7 @@
 		    	  }
 			 	
 			      // Set chart options
-			      var options = {'title':'Pendaftar Ulang (Total : ' + total + ')',
+			      var options = {'title':'Pendaftar Ulang Setiap Fakultas (Total : ' + total + ')',
 			                     'width':500,
 			                     'height':300};
 			
@@ -86,7 +86,7 @@
 		    	  }
 			 	
 			      // Set chart options
-			      var options = {'title':'Rincian Data Fakultas',
+			      var options = {'title':'Rincian Data Setiap Fakultas',
 			                     'width':500,
 			                     'height':300};
 			
@@ -99,29 +99,44 @@
 	</head>
 	<body>
 		<div th:include="manager_pendidikan-navbar"></div>
-	
-			<div class="content">
+			<div class="content content-top">
 				<div class="row">
 					<div class="col-sm-12">
-						<h3>Statistik Registrasi Mahasiswa Baru</h3>
-						<h4>Fakultas</h4>
+						<h3><span class="glyphicon glyphicon-stats"></span>Statistik Registrasi Mahasiswa Baru - Fakultas</h3>
 					</div>
 				</div>
+			
+				<hr/>
 			
 				<table align="center">
 					<tbody>
 						<tr>
-							<td th:id="'sumFaculty_bar'"></td>
-							<td th:id="'faculty'"></td>
+							<td>
+								<div th:id="'sumFaculty_bar'"></div>
+								<h4>Grafik ini berguna untuk memperlihatkan data registrasi mahasiswa baru secara umum pada setiap fakultas</h4>
+								<hr/>
+							</td>
+							<td>
+								<div th:id="'faculty'"></div>
+								<h4>Grafik ini berguna untuk memperlihatkan persentase pendaftar mahasiswa baru pada setiap fakultas</h4>
+								<hr/>
+							</td>
 						</tr>
 						<tr>
-							<td th:id="'regFaculty_pie'"></td>
-							<td th:id="'regFaculty_bar'"></td>
+							<td>
+								<div th:id="'regFaculty_pie'"></div>
+								<h4>Grafik ini berguna untuk memperlihatkan persentase mahasiswa baru yang melakukan registrasi ulang pada setiap fakultas</h4>
+								<hr/>
+							</td>
+							<td>
+								<div th:id="'regFaculty_bar'"></div>
+								<h4>Grafik ini berguna untuk memperlihatkan perbandingan jumlah mahasiswa baru yang melakukan registrasi ulang pada setiap fakultas</h4>
+								<hr/>
+							</td>
 						</tr>
 					</tbody>
 				</table>
-			</div>
-	
-		<div class="footer">Modul Registrasi Mahasiswa Baru</div>
+		</div>
+		<div th:include="footer"></div>
 	</body>
 </html>

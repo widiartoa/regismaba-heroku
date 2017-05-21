@@ -11,7 +11,7 @@
     	<div class="container">
 			<div class="content">
 				<div class="row">
-					<div class="col-sm-12"><h3>Error</h3></div>
+					<div class="col-sm-12"><h3><span class="glyphicon glyphicon-warning-sign"></span>Error</h3></div>
 				</div>
 				
 				<hr/>
@@ -21,12 +21,12 @@
     			<hr/>
     			
 		    	<div class="btn-group" role="group" aria-label="...">
-				  <a th:href="'/staf-kesehatan/daftar-mhs'"><button type="button" class="btn btn-warning">Kembali</button></a>
+				  <a th:href="'/c6/staf-kesehatan/daftar-mhs'"><button type="button" class="btn btn-default btn-cancel">Kembali</button></a>
 				</div>
 			</div>
        	</div>
 		
-		<div class="footer">Modul Registrasi Mahasiswa Baru</div>
+		<div th:include="footer"></div>
 		
 		<script type="text/javascript">
 			$(document).ready(function(){

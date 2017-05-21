@@ -36,7 +36,7 @@
 		    	  }
 			 	
 			      // Set chart options
-			      var options = {'title':'Pendaftar Program (Total : ' + total + ')',
+			      var options = {'title':'Total Pendaftar Setiap Program (Total : ' + total + ')',
 			                     'width':500,
 			                     'height':300};
 			
@@ -60,7 +60,7 @@
 		    	  }
 			 	
 			      // Set chart options
-			      var options = {'title':'Registran Program (Total : ' + total + ')',
+			      var options = {'title':'Pendaftar Ulang Setiap Program (Total : ' + total + ')',
 			                     'width':500,
 			                     'height':300};
 			
@@ -86,7 +86,7 @@
 		    	  }
 			 	
 			      // Set chart options
-			      var options = {'title':'Registran Data Program',
+			      var options = {'title':'Rincian Data Setiap Program',
 			                     'width':500,
 			                     'height':300};
 			
@@ -99,12 +99,10 @@
 	</head>
 	<body>
 		<div th:include="manager_pendidikan-navbar"></div>
-	
-			<div class="content">
+			<div class="content content-top">
 				<div class="row">
 					<div class="col-sm-12">
-						<h3>Statistik Registrasi Mahasiswa Baru</h3>
-						<h4>Program</h4>
+						<h3><span class="glyphicon glyphicon-stats"></span>Statistik Registrasi Mahasiswa Baru - Program</h3>
 					</div>
 				</div>
 				
@@ -113,17 +111,32 @@
 				<table align="center">
 					<tbody>
 						<tr>
-							<td th:id="'sumProgram_bar'"></td>
-							<td th:id="'program'"></td>
+							<td>
+								<div th:id="'sumProgram_bar'"></div>
+								<h4>Grafik ini berguna untuk memperlihatkan data registrasi mahasiswa baru secara umum pada setiap program</h4>
+								<hr/>
+							</td>
+							<td>
+								<div th:id="'program'"></div>
+								<h4>Grafik ini berguna untuk memperlihatkan persentase pendaftar mahasiswa baru pada setiap program</h4>
+								<hr/>
+							</td>
 						</tr>
 						<tr>
-							<td th:id="'regProgram_pie'"></td>
-							<td th:id="'regProgram_bar'"></td>
+							<td>
+								<div th:id="'regProgram_pie'"></div>
+								<h4>Grafik ini berguna untuk memperlihatkan persentase mahasiswa baru yang melakukan registrasi ulang pada setiap program</h4>
+								<hr/>
+							</td>
+							<td>
+								<div th:id="'regProgram_bar'"></div>
+								<h4>Grafik ini berguna untuk memperlihatkan perbandingan jumlah mahasiswa baru yang melakukan registrasi ulang pada setiap program</h4>
+								<hr/>
+							</td>
 						</tr>
 					</tbody>
 				</table>
-			</div>
-	
-		<div class="footer">Modul Registrasi Mahasiswa Baru</div>
+				</div>
+		<div th:include="footer"></div>
 	</body>
 </html>

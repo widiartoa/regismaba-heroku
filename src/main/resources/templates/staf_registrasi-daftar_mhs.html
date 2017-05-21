@@ -9,63 +9,65 @@
 	<div th:include="staf_registrasi-navbar"></div>
 
 	<div class="container">
-		<div class="content">
+		<div class="content content-top">
 			<div class="row">
 				<div class="col-sm-12">
-					<h3>Daftar Mahasiswa</h3>
+					<h3><span class="glyphicon glyphicon-list"></span>Daftar Mahasiswa</h3>
 				</div>
 			</div>
 			
 			<hr/>
 			
-			<table class="table">
-				<thead>
-					<tr>
-						<td>
-							<h4 th:text="'Username'">Username</h4>
-						</td>
-						<td>
-							<h4 th:text="'Nama Lengkap'">Nama Lengkap</h4>
-						</td>
-						<td>
-							<h4 th:text="'NPM'">NPM</h4>
-						</td>
-						<td>
-							<h4 th:text="'Jurusan'">Jurusan</h4>
-						</td>
-						<td>
-							<h4 th:text="'Fakultas'">Fakultas</h4>
-						</td>
-						<td>
-							<h4 th:text="'Status Verifikasi'">Status Verifikasi</h4>
-						</td>
-						<td>
-							<h4 th:text="'Status Cetak KTM'">Status Cetak KTM</h4>
-						</td>
-						<td>
-							<h4 th:text="'Lihat IDM'">Lihat IDM</h4>
-						</td>
-					</tr>
-				</thead>
-				<tbody>
-					<tr th:each="mahasiswa,iterationStatus: ${mahasiswas}" th:if="${mahasiswa.biodata!=null}">
-						<td th:text="${mahasiswa.username}" class="center">username</td>
-						<td th:text="${mahasiswa.nama_lengkap}" class="center">nama lengkap</td>
-						<td th:text="${mahasiswa.npm}">npm</td>
-						<td th:text="${mahasiswa.program_studi.nama_program_studi}" class="center">jurusan</td>
-						<td th:text="${mahasiswa.fakultas}" class="center">fakultas</td>
-						<td th:text="${mahasiswa.biodata.status_verifikasi}">status_verifikasi </td>
-						<td th:text="'menunggu antrian cetakan'">menunggu antrian cetakan</td>
-						<td><a th:href="'/calon-mahasiswa/biodata/view/' + ${mahasiswa.npm}"
-							class="btn btn-warning"> <i class="glyphicon glyphicon-eye-open"></i>
-						</a></td>
-					</tr>
-				</tbody>
-			</table>
+			<div class="table-responsive">
+				<table class="table">
+					<thead>
+						<tr>
+							<th>
+								<h4 th:text="'Username'">Username</h4>
+							</th>
+							<th>
+								<h4 th:text="'Nama Lengkap'">Nama Lengkap</h4>
+							</th>
+							<th>
+								<h4 th:text="'NPM'">NPM</h4>
+							</th>
+							<th>
+								<h4 th:text="'Jurusan'">Jurusan</h4>
+							</th>
+							<th>
+								<h4 th:text="'Fakultas'">Fakultas</h4>
+							</th>
+							<th>
+								<h4 th:text="'Status Verifikasi'">Status Verifikasi</h4>
+							</th>
+							<th>
+								<h4 th:text="'Status Cetak KTM'">Status Cetak KTM</h4>
+							</th>
+							<th>
+								<h4 th:text="'Lihat IDM'">Lihat IDM</h4>
+							</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="mahasiswa,iterationStatus: ${mahasiswas}" th:if="${mahasiswa.biodata!=null}">
+							<td th:text="${mahasiswa.username}" class="center">username</td>
+							<td th:text="${mahasiswa.nama_lengkap}" class="center">nama lengkap</td>
+							<td th:text="${mahasiswa.npm}">npm</td>
+							<td th:text="${mahasiswa.program_studi.nama_program_studi}" class="center">jurusan</td>
+							<td th:text="${mahasiswa.fakultas}" class="center">fakultas</td>
+							<td th:text="${mahasiswa.biodata.status_verifikasi}">status_verifikasi </td>
+							<td th:text="'menunggu antrian cetakan'">menunggu antrian cetakan</td>
+							<td><a th:href="'/c6/staf-registrasi/biodata/view/' + ${mahasiswa.npm}"
+								class="btn btn-default"> <i class="glyphicon glyphicon-eye-open"></i>
+							</a></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
 		</div>
 	</div>
 
-	<div class="footer">Modul Registrasi Mahasiswa Baru</div>
+	<div th:include="footer"></div>
 
 	<script type="text/javascript">
 		$(document).ready(function() {

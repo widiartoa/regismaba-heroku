@@ -11,9 +11,11 @@
 			    google.charts.load('current', {'packages':['corechart']});
 		    
 			    var s = [[${schemas}]];
+			    var t = [[${types}]];
 			    
 			    // Set a callback to run when the Google Visualization API is loaded.
 			    google.charts.setOnLoadCallback(drawSchemaChart);
+			    google.charts.setOnLoadCallback(drawTypeChart);
 			    
 			    // Callback that creates and populates a data table,
 			    // instantiates the pie chart, passes in the data and
@@ -23,9 +25,9 @@
 			      var data = new google.visualization.DataTable();
 			      
 			      data.addColumn('string', 'Golongan');
-			      data.addColumn('number', 'Total Pendaftar');
-			      data.addColumn('number', 'Pendaftar Ulang');
-			      data.addColumn('number', 'Tidak Mendaftar');
+			      data.addColumn('number', 'Total Pengaju');
+			      data.addColumn('number', 'Terverifikasi');
+			      data.addColumn('number', 'Belum terverifikasi');
 			      
 			      for(var i = 0; i < s.length; i++)
 		    	  {
@@ -33,7 +35,7 @@
 		    	  }
 			 	
 			      // Set chart options
-			      var options = {'title':'Pengaju Golongan',
+			      var options = {'title':'Pengaju Golongan Secara Umum',
 			                     'width':500,
 			                     'height':300};
 			
@@ -41,16 +43,45 @@
 				  var chart = new google.visualization.BarChart(document.getElementById('schema'));
 				  chart.draw(data, options);
 			    }
+			    
+			    function drawTypeChart() {
+			      // Create the data table.
+			      for(var i = 0; i < t.length; i++)
+		    	  {
+		    	  	  var ts = t[i].objects;
+		    	  	  var data = new google.visualization.DataTable();
+				      
+				      data.addColumn('string', 'Fakultas');
+				      data.addColumn('number', 'Total Pengaju');
+				      data.addColumn('number', 'Terverifikasi');
+				      data.addColumn('number', 'Belum terverifikasi');
+		    	  	  
+			    	  for(var j = 0; j < ts.length; j++)
+			    	  {
+				    	  data.addRow([ts[j].nama, ts[j].total, ts[j].regis, ts[j].non_regis]);
+			    	  }
+				 	
+				      // Set chart options
+				      var options = {'title':'Pengaju Golongan ' + t[i].nama,
+				                     'width':500,
+				                     'height':300};
+				
+				      // Instantiate and draw our chart, passing in some options.
+					  var chart = new google.visualization.BarChart(document.getElementById('chart_' + t[i].nama));
+					  chart.draw(data, options);
+		    	  }
+			    }
 		    /*]]>*/
 	    </script>
 	</head>
 	<body>
 		<div th:include="staf_kesejahteraan-navbar"></div>
-	
-			<div class="content">
+		
+		<div class="container">
+			<div class="content content-top">
 				<div class="row">
 					<div class="col-sm-12">
-						<h3>Statistik Skema Pembayaran</h3>
+						<h3><span class="glyphicon glyphicon-stats"></span>Statistik Skema Pembayaran</h3>
 					</div>
 				</div>
 				
@@ -60,11 +91,17 @@
 					<tbody>
 						<tr>
 							<td th:id="'schema'"></td>
+							<td>Grafik ini dapat digunakan untuk melihat statistik skema secara keseluruhan</td>
+						</tr>
+						<tr th:each="type, iterationStatus: ${types}">
+							<td th:id="'chart_' + ${type.nama}"></td>
+							<td>Grafik ini dapat digunakan untuk melihat statistik golongan terkait di setiap fakultas</td>
 						</tr>
 					</tbody>
 				</table>
 			</div>
+		</div>
 	
-		<div class="footer">Modul Registrasi Mahasiswa Baru</div>
+		<div th:include="footer"></div>>
 	</body>
 </html>

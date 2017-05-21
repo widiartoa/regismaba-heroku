@@ -13,13 +13,13 @@ Di head setiap page musti ditambahin div replace
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css" rel='stylesheet' type='text/css' />
 <link href="https://fonts.googleapis.com/css?family=Dosis" rel="stylesheet" type='text/css' />
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous" />
-<link rel="stylesheet" href="/css/bootstrap.min.css" th:href="@{/css/dataTables.bootstrap.min.css}"
+<link rel="stylesheet" href="/c6/css/bootstrap.min.css" th:href="@{/css/dataTables.bootstrap.min.css}"
 		  media="screen" />
 <script src="https://code.jquery.com/jquery-3.2.0.min.js" integrity="sha256-JAW99MJVpJBGcbzEuXk4Az05s/XyDdBomFqNlM3ic+I=" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" type="text/javascript" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous" ></script>
-<script src="/js/jquery.dataTables.min.js" th:href="@{/js/jquery.dataTables.min.js}"></script>
-<script src="/js/dataTables.bootstrap.min.js" th:href="@{/js/dataTables.bootstrap.min.js}"></script>
-<script src="/js/jquery-validation.min.js" th:href="@{/js/jquery-validation.min.js}"></script>
+<script src="/c6/js/jquery.dataTables.min.js" th:href="@{/c6/js/jquery.dataTables.min.js}"></script>
+<script src="/c6/js/dataTables.bootstrap.min.js" th:href="@{/c6/js/dataTables.bootstrap.min.js}"></script>
+<script src="/c6/js/jquery-validation.min.js" th:href="@{/c6/js/jquery-validation.min.js}"></script>
 
 <style>
 /* 
@@ -34,14 +34,18 @@ body {
 	font-family: 'Dosis', sans-serif;
 	min-height: 100%;
     margin-bottom: 100px;
+	background-color: #f3f3f3;
 }
 
-.containers{
+hr {
+	border-color: #ccc;
+}
+
+.container{
 	min-height: 100%;
 }
 
 .content{
-	margin-top: 7%;
 	margin-left: 7%;
 	margin-right:7%;
 	margin-bottom: 3%;
@@ -51,8 +55,26 @@ body {
 	padding-bottom: 3%;
 	border-style: solid;
 	border-width: thin;
-	border-color: #ecf0f1;
+	border-color: #ccc;
 	border-radius: 5px;
+	background-color: #fff;
+}
+
+.content-top{
+	margin-top: 7%;
+}
+
+.content-profpic {
+	float: right;
+}
+
+.content h3{
+	color: #fca300;
+	font-weight: bold;
+}
+
+.content .glyphicon {
+	margin: 5px;
 }
 
 .content-table{
@@ -71,7 +93,7 @@ body {
 }
 
 .navbar-fixed-top {
-	background-color:#1c1c1c;
+	background-color:#fff;
 	color:#1c1c1c;
 }
 
@@ -82,6 +104,16 @@ body {
 .navbar-inverse .navbar-toggle .icon-bar {
 	background-color: #fca300;
 }
+
+.navbar-strip {
+	height: 5px;
+	background-color: #fca300;
+}
+
+.navbar-inverse .navbar-collapse, .navbar-inverse .navbar-form {
+	border-color: #fca300;
+}
+
 
 .btn-primary,
 .btn-default:hover,
@@ -105,9 +137,28 @@ body {
 	border-color: transparent;
 }
 
+.btn-cancel{
+	color: #fca300;
+	background-color: #fff;
+	border-color: #fca300;
+}
+
+.navbar-inverse .navbar-nav>.open>a, .navbar-inverse .navbar-nav>.open>a:focus, .navbar-inverse .navbar-nav>.open>a:hover{
+	color : #fca300;
+	background-color: transparent;
+}
+
+.navbar-inverse .navbar-toggle:focus, .navbar-inverse .navbar-toggle:hover, .navbar-inverse .navbar-toggle {
+	border-color: #fca300;
+}
+
+.navbar-inverse .navbar-toggle:focus, .navbar-inverse .navbar-toggle:hover {
+	background-color: #6b6b6b;
+}
+
 .dropbtn {
-	background-color: #1c1c1c;
-	color: #6b6b6b;
+	background-color: transparent;
+	color: #1c1c1c;
 	padding: 16px;
 	font-size: 16px;
 	border: none;
@@ -120,23 +171,26 @@ body {
 }
 
 .dropdown-toggle{
-	color: #6b6b6b;
+	color: #1c1c1c;
 }
 
 .dropdown:hover .dropbtn, 
 .dropdown-toggle:focus, 
 .dropdown-toggle:hover {
-	color: #ffffff;
+	color: #fca300;
 }
 
 .footer {
 	width: 100%;
 	position: absolute;
 	bottom: 0;
-	background-color: #1c1c1c;
+	background-color: transparent;
 	color: #6b6b6b;
-	font-size: 16px;
+	font-size: 12px;
 	padding: 15px;
+}
+	
+.footer-left, .footer-right {
 	text-align: center;
 }
 
@@ -149,34 +203,31 @@ body {
 	padding:10px 5px;
 }
 
-@media screen and (min-width: 768px) {
-	.modal-dialog {
-		width:75%;
-	}
-	
-	.navbar-inverse .navbar-nav .open .dropdown-menu>li>a {
-		color: #6b6b6b;
-	}
-}
-
 /*
 CSS khusus buat page index
 */
 
 .index{
-	background-image: url("/img/background.png");
+	/*background-image: url("/img/background.png");*/
 	background-size: cover;
 	background-repeat: no-repeat;
     margin-bottom: 0px;
 }
 
+.index-navbar{
+	background-color:#fca300; 
+	height: 1%;
+	margin-bottom: 3%;
+}
+
 .index-header{
 	text-align: center;
 	margin: 3%;
+	margin-bottom: 6%;
 }
 
 .index-header img{
-	width:75%;
+	width:60%;
 }
 
 .index-content{
@@ -184,20 +235,35 @@ CSS khusus buat page index
 	background-color: #ffffff;
 	margin-left: 20%;
 	margin-right: 20%;
-	margin-bottom: 5%;
+	margin-bottom: 50px;
 	padding-left: 2%;
 	padding-right: 2%;
 	padding top: 1%;
-	border: #6b6b6b;
 	border-style: solid;
 	border-width: thin;
-	border-color: #ecf0f1;
+	border-color: #ccc;
 	border-radius: 5px;
 }
 
 .index-content li{
 	padding-top: 3%;
-	width: 49.7%;
+	width: 100%;
+}
+
+.index-content a{
+	color: black;
+}
+
+.index-submit-error, .index-submit-btn {
+	text-align:center;
+} 
+
+.index-submit-btn button {
+	width:100%;
+}
+
+.index-submit-error {
+	color: #fca300;
 }
 
 /* Style the tab */
@@ -235,5 +301,63 @@ div.tab button.active {
     padding: 6px 12px;
     border: 1px solid #ccc;
     border-top: none;
+}
+
+/*
+Responsive Shit : Yang atas Case kalo HP yang bawah Case Kalo lagi PC
+*/
+
+@media screen and (max-width: 767px) {
+	.navbar-inverse .navbar-nav .open .dropdown-menu>li>a {
+		color: #1c1c1c;
+	}
+	
+	.navbar-inverse .navbar-nav .open .dropdown-menu>li>a:focus, .navbar-inverse .navbar-nav .open .dropdown-menu>li>a:hover {
+		color: #fca300;
+	}
+}
+
+@media screen and (min-width: 768px) {
+	.modal-dialog {
+		width:75%;
+	}
+	
+	.index-navbar {
+		margin-bottom: 0%;
+	}
+	
+	.index-header{
+		margin-bottom: 3%;
+	}
+	
+	.index-header img {
+		width: 50%;
+	}
+	
+	.index-content{
+		margin-left: 25%;
+		margin-right: 25%;
+	}
+
+	.index-content li{
+		padding-top: 3%;
+		width: 49.7%;
+	}
+	
+	.index-submit-error {
+		text-align: left;
+	}
+	
+	.index-submit-btn {
+		text-align: right;
+	}
+	
+	.footer-left {
+		text-align: left;
+	}
+
+	.footer-right {
+		text-align: right;
+	}
 }
 </style>

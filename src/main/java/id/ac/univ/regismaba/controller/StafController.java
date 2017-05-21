@@ -1,14 +1,25 @@
 package id.ac.univ.regismaba.controller;
 
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
+import java.util.Scanner;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.json.GsonJsonParser;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -20,6 +31,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import id.ac.univ.regismaba.model.AlamatModel;
 import id.ac.univ.regismaba.model.BiodataModel;
@@ -95,6 +107,94 @@ public class StafController
     // untuk Staf Kesehatan redirect:/staf_kesehatan/daftar_mhs
     // untuk Staf Kesejahteraan redirect:/staf_kesejahteraan/daftar_mhs
 
+
+	@RequestMapping("/staf/login")
+	public String loginStaf(Model model, RedirectAttributes redirectAttrs,
+		@RequestParam(value = "username", required = true) String username,
+		@RequestParam(value = "password", required = true) String password)
+	{
+		String errorStaf = "";
+		
+		try {		
+			HttpURLConnection con = (HttpURLConnection) new URL("https://sso.ui.ac.id/oauth/lockdin/token").openConnection();
+			con.setDoOutput(true);
+			con.setRequestMethod("POST");
+			String param = "grant_type=password&client_id=dev-propensi-cs&client_secret=od5ifie3ueSeeshai9ohyoo9cha2ZuhueMoo0equ&username="+username+"&password="+password;
+			con.getOutputStream().write(param.getBytes("UTF-8"));
+			
+			GsonJsonParser jsonParser = new GsonJsonParser();
+			Scanner s = new Scanner(con.getInputStream()).useDelimiter("\\A");
+			String resultTokenJSON = s.hasNext() ? s.next() : "";
+			System.out.println(resultTokenJSON);
+			Map<String, Object> resultTokenMap = jsonParser.parseMap(resultTokenJSON);
+			String resultSessionId = resultTokenMap.get("access_token").toString();
+			System.out.println(resultSessionId);
+
+			HttpURLConnection conResource = (HttpURLConnection) new URL("https://sso.ui.ac.id/oauth/lockdin/resource?access_token="+resultSessionId).openConnection();
+			conResource.setDoOutput(true);
+			
+			Scanner s2 = new Scanner(conResource.getInputStream()).useDelimiter("\\A");
+			String resultResourceJSON = s2.hasNext() ? s2.next() : "";
+			System.out.println(resultResourceJSON);
+			Map<String, Object> resultResourceMap = jsonParser.parseMap(resultResourceJSON);
+			String resultUserId = resultResourceMap.get("user_id").toString();
+			System.out.println(resultUserId);
+			
+			//String authoritiesStr = cari di database;
+			UserModel staf = userDAO.selectUser(resultUserId);
+			if(staf != null) {
+				Collection<SimpleGrantedAuthority> authorities = new ArrayList<SimpleGrantedAuthority>();
+				authorities.add(new SimpleGrantedAuthority("" + staf.getId_role())); //ntar ganti jadi authoritiesStr
+				Authentication auth = new UsernamePasswordAuthenticationToken(resultUserId, null, authorities);
+				SecurityContextHolder.getContext().setAuthentication(auth);	
+				return "redirect:/";
+			} else {
+				errorStaf = "Anda tidak memiliki akses untuk memasuki sistem. Silahkan mengontak admin.";
+				model.addAttribute("errorStaf", errorStaf);
+				System.out.println(errorStaf);
+				return "errorSSO";
+			}
+		}
+		catch(Exception e){
+			errorStaf = "Salah memasukkan Username atau Password SSO.";
+			model.addAttribute("errorStaf", errorStaf);
+			System.out.println("error "+e);
+			System.out.println(errorStaf);
+			return "errorSSO";
+		}
+		
+	}
+	
+	@RequestMapping("/staf-verifikasi/")
+    public String verifikatorHome (Model model)
+    {
+		return "redirect:/staf-verifikasi/daftar-mhs";
+	}
+	
+	@RequestMapping("/staf-registrasi/")
+    public String registrasiHome (Model model)
+    {
+		return "redirect:/staf-registrasi/daftar-mhs";
+	}
+	
+	@RequestMapping("/staf-kesejahteraan/")
+    public String kesejahteraanHome (Model model)
+    {
+		return "redirect:/staf-kesejahteraan/daftar-mhs";
+	}
+	
+	@RequestMapping("/staf-kesehatan/")
+    public String kesehatanHome (Model model)
+    {
+		return "redirect:/staf-kesehatan/daftar-mhs";
+	}
+
+	@RequestMapping("/manager-pendidikan/")
+    public String managerPendidikanHome (Model model)
+    {
+		return "redirect:/manager-pendidikan/statistik-manager/fakultas";
+	}
+	
     @RequestMapping("/staf-verifikasi/daftar-mhs")
     public String daftarMhsVerifikator (Model model)
     {

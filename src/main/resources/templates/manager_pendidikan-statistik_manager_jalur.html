@@ -14,10 +14,17 @@
 			    var rp = [[${regPaths}]];
 			    var sp = [[${sumPaths}]];
 			    
+			    var snmptn = [[${snmptn}]];
+			    var sbmptn = [[${sbmptn}]];
+			    var simak = [[${simak}]];
+			    
 			    // Set a callback to run when the Google Visualization API is loaded.
 			    google.charts.setOnLoadCallback(drawPathChart);
 			    google.charts.setOnLoadCallback(drawRegPathChart);
 			    google.charts.setOnLoadCallback(drawSumPathChart);
+			    google.charts.setOnLoadCallback(drawSumFacultyChart);
+			    google.charts.setOnLoadCallback(drawSumFacultyChart2);
+			    google.charts.setOnLoadCallback(drawSumFacultyChart3);
 			    
 			    // Callback that creates and populates a data table,
 			    // instantiates the pie chart, passes in the data and
@@ -36,14 +43,13 @@
 		    	  }
 			 	
 			      // Set chart options
-			      var options = {'title':'Pendaftar Jalur (Total : ' + total + ')',
+			      var options = {'title':'Total Pendaftar Setiap Jalur (Total : ' + total + ')',
 			                     'width':500,
 			                     'height':300};
 			
 			      // Instantiate and draw our chart, passing in some options.
 				  var chart = new google.visualization.PieChart(document.getElementById('path'));
 			      chart.draw(data, options);
-			      console.log("chart");
 			    }
 			    
 			    function drawRegPathChart() {
@@ -60,7 +66,7 @@
 		    	  }
 			 	
 			      // Set chart options
-			      var options = {'title':'Registran Jalur (Total : ' + total + ')',
+			      var options = {'title':'Pendaftar Ulang Setiap Jalur (Total : ' + total + ')',
 			                     'width':500,
 			                     'height':300};
 			
@@ -86,7 +92,7 @@
 		    	  }
 			 	
 			      // Set chart options
-			      var options = {'title':'Registran Data Program',
+			      var options = {'title':'Rincian Data Setiap Jalur',
 			                     'width':500,
 			                     'height':300};
 			
@@ -94,17 +100,88 @@
 				  var chart2 = new google.visualization.BarChart(document.getElementById('sumPath_bar'));
 				  chart2.draw(data, options);
 			    }
+			    
+			    function drawSumFacultyChart() {
+			      // Create the data table.
+			      var data = new google.visualization.DataTable();
+			      
+			      data.addColumn('string', 'Fakultas');
+			      data.addColumn('number', 'Total Pendaftar');
+			      data.addColumn('number', 'Pendaftar Ulang');
+			      data.addColumn('number', 'Tidak Mendaftar');
+			      
+			      for(var i = 0; i < snmptn.length; i++)
+		    	  {
+			    	  data.addRow([snmptn[i].nama, snmptn[i].total, snmptn[i].regis, snmptn[i].non_regis]);
+		    	  }
+			 	
+			      // Set chart options
+			      var options = {'title':'Rincian Data Jalur SNMPTN Setiap Fakultas',
+			                     'width':500,
+			                     'height':300};
+			
+			      // Instantiate and draw our chart, passing in some options.
+				  var chart = new google.visualization.BarChart(document.getElementById('snmptn'));
+				  chart.draw(data, options);
+				  
+			    }
+			    
+			    function drawSumFacultyChart2() {
+				      // Create the data table.
+				      var data = new google.visualization.DataTable();
+				      
+				      data.addColumn('string', 'Fakultas');
+				      data.addColumn('number', 'Total Pendaftar');
+				      data.addColumn('number', 'Pendaftar Ulang');
+				      data.addColumn('number', 'Tidak Mendaftar');
+				      
+				      for(var i = 0; i < sbmptn.length; i++)
+			    	  {
+				    	  data.addRow([sbmptn[i].nama, sbmptn[i].total, sbmptn[i].regis, sbmptn[i].non_regis]);
+			    	  }
+				 	
+				      // Set chart options
+				      var options = {'title':'Rincian Data Jalur SBMPTN Setiap Fakultas',
+				                     'width':500,
+				                     'height':300};
+				
+				      // Instantiate and draw our chart, passing in some options.
+					  var chart = new google.visualization.BarChart(document.getElementById('sbmptn'));
+					  chart.draw(data, options);
+				    }
+			    
+			    function drawSumFacultyChart3() {
+				      // Create the data table.
+				      var data = new google.visualization.DataTable();
+				      
+				      data.addColumn('string', 'Fakultas');
+				      data.addColumn('number', 'Total Pendaftar');
+				      data.addColumn('number', 'Pendaftar Ulang');
+				      data.addColumn('number', 'Tidak Mendaftar');
+				      
+				      for(var i = 0; i < simak.length; i++)
+			    	  {
+				    	  data.addRow([simak[i].nama, simak[i].total, simak[i].regis, simak[i].non_regis]);
+			    	  }
+				 	
+				      // Set chart options
+				      var options = {'title':'Rincian Data Jalur MANDIRI Setiap Fakultas',
+				                     'width':500,
+				                     'height':300};
+				
+				      // Instantiate and draw our chart, passing in some options.
+					  var chart = new google.visualization.BarChart(document.getElementById('simak'));
+					  chart.draw(data, options);
+				    }
 		    /*]]>*/
 	    </script>
 	</head>
 	<body>
 		<div th:include="manager_pendidikan-navbar"></div>
-	
-			<div class="content">
+			<div class="content content-top">
 				<div class="row">
 					<div class="col-sm-12">
-						<h3>Statistik Registrasi Mahasiswa Baru</h3>
-						<h4>Jalur</h4>
+						<h3><span class="glyphicon glyphicon-stats"></span>Statistik Registrasi Mahasiswa Baru - Jalur</h3>
 					</div>
 				</div>
 				
@@ -113,17 +190,51 @@
 				<table align="center">
 					<tbody>
 						<tr>
-							<td th:id="'sumPath_bar'"></td>
-							<td th:id="'path'"></td>
+							<td>
+								<div th:id="'sumPath_bar'"></div>
+								<h4>Grafik ini berguna untuk memperlihatkan data registrasi mahasiswa baru secara umum pada jalur masuk</h4>
+								<hr/>
+							</td>
+							<td>
+								<div th:id="'path'"></div>
+								<h4>Grafik ini berguna untuk memperlihatkan persentase pendaftar mahasiswa baru pada setiap jalur masuk</h4>
+								<hr/>
+							</td>
 						</tr>
 						<tr>
-							<td th:id="'regPath_pie'"></td>
-							<td th:id="'regPath_bar'"></td>
+							<td>
+								<div th:id="'regPath_pie'"></div>
+								<h4>Grafik ini berguna untuk memperlihatkan persentase mahasiswa baru yang melakukan registrasi ulang pada setiap jalur masuk</h4>
+								<hr/>
+							</td>
+							<td>
+								<div th:id="'regPath_bar'"></div>
+								<h4>Grafik ini berguna untuk memperlihatkan perbandingan jumlah mahasiswa baru yang melakukan registrasi ulang pada setiap program jalur</h4>
+								<hr/>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<div th:id="'snmptn'"></div>
+								<h4>Grafik ini berguna untuk memperlihatkan jumlah mahasiswa baru yang melakukan registrasi ulang pada jalur SNMPTN. Data yang ditampilkan berdasarkan setiap program studi</h4>
+								<hr/>
+							</td>
+							<td>
+								<div th:id="'sbmptn'"></div>
+								<h4>Grafik ini berguna untuk memperlihatkan jumlah mahasiswa baru yang melakukan registrasi ulang pada jalur SBMPTN. Data yang ditampilkan berdasarkan setiap program studi</h4>
+								<hr/>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<div th:id="'simak'"></div>
+								<h4>Grafik ini berguna untuk memperlihatkan jumlah mahasiswa baru yang melakukan registrasi ulang pada jalur MANDIRI. Data yang ditampilkan berdasarkan setiap program studi</h4>
+								<hr/>
+							</td>
 						</tr>
 					</tbody>
 				</table>
-			</div>
-	
-		<div class="footer">Modul Registrasi Mahasiswa Baru</div>
+		</div>
+		<div th:include="footer"></div>
 	</body>
 </html>

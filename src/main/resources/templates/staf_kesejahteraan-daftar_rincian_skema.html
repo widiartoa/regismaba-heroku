@@ -9,7 +9,16 @@
 		<div th:include="staf_kesejahteraan-navbar"></div>
 
 		<div class="container">
-				<div class="tab">
+			<div class="content content-top">
+				<div class="row">
+					<div class="col-sm-12">
+						<h3><span class="glyphicon glyphicon-list"></span>Daftar Jadwal</h3>
+					</div>
+				</div>
+				
+				<hr/>
+				
+				<div class="tab" style="background-color: transparent">
 					<button class="tablinks" onclick="openJadwal(event, 'saintek')" id="defaultOpen">
 						SAINTEK
 					</button>
@@ -50,7 +59,7 @@
 											<td th:text="${schema.uang_pangkal_ipa_max}">Uang Pangkal IPA</td>
 											<td th:text="${schema.tingkat_role.nama_tingkat}">Tingkat Staf</td>
 											<td>
-												<a th:href="'/staf-kesejahteraan/skema-pembayaran/update/' + ${schema.golongan_id}">
+												<a th:href="'/c6/staf-kesejahteraan/skema-pembayaran/update/' + ${schema.golongan_id}">
 													<button type="button" class="btn btn-warning">Ubah</button>
 												</a>
 											</td>
@@ -91,7 +100,7 @@
 											<td th:text="${schema.uang_pangkal_ips_max}">Uang Pangkal IPS</td>
 											<td th:text="${schema.tingkat_role.nama_tingkat}">Tingkat Staf</td>
 											<td>
-												<a th:href="'/staf-kesejahteraan/skema-pembayaran/update/' + ${schema.golongan_id}">
+												<a th:href="'/c6/staf-kesejahteraan/skema-pembayaran/update/' + ${schema.golongan_id}">
 													<button type="button" class="btn btn-warning">Ubah</button>
 												</a>
 											</td>
@@ -132,7 +141,7 @@
 											<td th:text="${schema.uang_pangkal_ik_max}">Uang Pangkal IK</td>
 											<td th:text="${schema.tingkat_role.nama_tingkat}">Tingkat Staf</td>
 											<td>
-												<a th:href="'/staf-kesejahteraan/skema-pembayaran/update/' + ${schema.golongan_id}">
+												<a th:href="'/c6/staf-kesejahteraan/skema-pembayaran/update/' + ${schema.golongan_id}">
 													<button type="button" class="btn btn-warning">Ubah</button>
 												</a>
 											</td>
@@ -147,54 +156,55 @@
 				<br/>
 				
 				<div class="btn-group" role="group" aria-label="...">
-				  <a th:href="'/staf-kesejahteraan/skema-pembayaran/insert'"><button type="button" class="btn btn-warning">Buat Rincian Skema Pembayaran</button></a>
+					<a th:href="'/c6/staf-kesejahteraan/skema-pembayaran/insert'"><button type="button" class="btn btn-default">Buat Rincian Skema Pembayaran</button></a>
 				</div>
+			</div>
+
+			<div th:include="footer"></div>
+
+			<script type="text/javascript">
+				$(document)
+				.ready(
+						function() {
+							$('.table').dataTable();
+							var i, tabcontent, tablinks;
+							tabcontent = document
+									.getElementsByClassName("tabcontent");
+							i = 0;
+							while (i != tabcontent.length) {
+								tabcontent[i].style.display = "none";
+								i++;
+							}
+							tablinks = document
+									.getElementsByClassName("tablinks");
+							i = 0;
+							while (i != tablinks.length) {
+								tablinks[i].className = tablinks[i].className
+										.replace(" active", "");
+								i++;
+							}
+							document.getElementById('saintek').style.display = "block";
+							evt.currentTarget.className += " active";
+						});
+				function openJadwal(evt, jadwalName) {
+					var i, tabcontent, tablinks;
+					tabcontent = document.getElementsByClassName("tabcontent");
+					i = 0;
+					while (i != tabcontent.length) {
+						tabcontent[i].style.display = "none";
+						i++;
+					}
+					tablinks = document.getElementsByClassName("tablinks");
+					i = 0;
+					while (i != tablinks.length) {
+						tablinks[i].className = tablinks[i].className.replace(
+								" active", "");
+						i++;
+					}
+					document.getElementById(jadwalName).style.display = "block";
+					evt.currentTarget.className += " active";
+				}
+			</script>
 		</div>
-
-		<div class="footer">Modul Registrasi Mahasiswa Baru</div>
-
-		<script type="text/javascript">
-			$(document)
-			.ready(
-					function() {
-						$('.table').dataTable();
-						var i, tabcontent, tablinks;
-						tabcontent = document
-								.getElementsByClassName("tabcontent");
-						i = 0;
-						while (i != tabcontent.length) {
-							tabcontent[i].style.display = "none";
-							i++;
-						}
-						tablinks = document
-								.getElementsByClassName("tablinks");
-						i = 0;
-						while (i != tablinks.length) {
-							tablinks[i].className = tablinks[i].className
-									.replace(" active", "");
-							i++;
-						}
-						document.getElementById('saintek').style.display = "block";
-						evt.currentTarget.className += " active";
-					});
-			function openJadwal(evt, jadwalName) {
-				var i, tabcontent, tablinks;
-				tabcontent = document.getElementsByClassName("tabcontent");
-				i = 0;
-				while (i != tabcontent.length) {
-					tabcontent[i].style.display = "none";
-					i++;
-				}
-				tablinks = document.getElementsByClassName("tablinks");
-				i = 0;
-				while (i != tablinks.length) {
-					tablinks[i].className = tablinks[i].className.replace(
-							" active", "");
-					i++;
-				}
-				document.getElementById(jadwalName).style.display = "block";
-				evt.currentTarget.className += " active";
-			}
-		</script>
 	</body>
 </html>

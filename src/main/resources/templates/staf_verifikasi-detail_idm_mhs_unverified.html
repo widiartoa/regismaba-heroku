@@ -18,7 +18,7 @@
 				<hr/>
 				<div class="col-xs-6 col-md-3">
 				    <a href="#" class="thumbnail">
-				      <img src="/img/logo.png" alt="profpic"/>
+				      <img src="/c6/img/logo.png" alt="profpic"/>
 					</a>
 				</div>
 				
@@ -189,13 +189,13 @@
   				<hr/>
 				
 				<div class="btn-pull-right" role="group" aria-label="..." align="right">
-				  <a th:href="'/staf-verifikasi/detailIDM/verified/' + ${mahasiswa.npm}"><button id="verify" type="button" class="btn btn-success">Verifikasi</button></a>
-				  <a th:href="'/staf-verifikasi/daftar_mhs'"><button id="verify" type="button" class="btn btn-warning">Kembali</button></a>
+				  <a th:href="'/c6/staf-verifikasi/detailIDM/verified/' + ${mahasiswa.npm}"><button id="verify" type="button" class="btn btn-success">Verifikasi</button></a>
+				  <a th:href="'/c6/staf-verifikasi/daftar_mhs'"><button id="verify" type="button" class="btn btn-warning">Kembali</button></a>
 				</div>
 			</div>
        	</div>
 		
-		<div class="footer">Modul Registrasi Mahasiswa Baru</div>
+		<div th:include="footer"></div>
 		
 		<script type="text/javascript">
 			$(document).ready(function(){
