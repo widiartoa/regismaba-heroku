@@ -153,19 +153,6 @@ public class PengajuanSkemaBiayaController {
 			model.addAttribute("rumpun", rumpun);
 			model.addAttribute("mahasiswa", mahasiswa);
 			return "calon_mahasiswa-pengajuan_skema_pembayaran";
-			
-//			if(psbs.selectPSBMFromUsername(mahasiswa.getUsername()) != null)
-//			{
-//				System.out.println("Send update pengajuan page");
-//				PengajuanSkemaBiayaModel psbm = psbs.selectPSBMFromUsername(mahasiswa.getUsername());
-//				model.addAttribute("psbm", psbm);
-//				return "calon_mahasiswa-pengajuan_skema_pembayaran";
-//			}
-//			else
-//			{
-//				System.out.println("Send new pengajuan page");
-//				return "calon_mahasiswa-pengajuan_skema_pembayaran_add";
-//			}
 		}
 	}
 	
@@ -286,75 +273,6 @@ public class PengajuanSkemaBiayaController {
     public ResponseEntity handleStorageFileNotFound(StorageFileNotFoundException exc) {
         return ResponseEntity.notFound().build();
     }
-    
-//    public void storeFile(MultipartFile file, int type) throws IOException
-//    {
-//    	Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-//		String user = auth.getName();
-//		MahasiswaModel mahasiswa = mahasiswaService.selectMahasiswaByUsername(user);
-//    	Random rand = new Random();
-//		int num = rand.nextInt(1000000) + 1;
-//    	if(file.isEmpty() == false){	
-//    		String fileContentType = file.getContentType();
-//    		
-//    		if(contentTypes.contains(fileContentType)) {
-//    			String dbURL = "\\" + mahasiswa.getNpm() + "-" + num + "-"
-//						+ file.getOriginalFilename();
-//		
-//				byte[] bytes = file.getBytes();
-//				Path path = Paths.get(dbURL);
-//				Files.write(path, bytes);
-//		
-//				dbURL = mahasiswa.getNpm() + "-" + num + "-" + file.getOriginalFilename();
-//    			
-//    			if(type == 1) {skema.setSurat_keterangan_rtrw(dbURL);}
-//    			if(type == 2) {skema.setFoto_rumah(dbURL);}
-//    			if(type == 3) {skema.setSlip_gaji_pribadi(dbURL);}
-//    			if(type == 4) {skema.setSlip_gaji_wali1(dbURL);}
-//    			if(type == 5) {skema.setSlip_gaji_wali2(dbURL);}
-//    			if(type == 6) {skema.setTagihan_air(dbURL);}
-//    			if(type == 7) {skema.setTagihan_listrik(dbURL);}
-//    			if(type == 8) {skema.setTagihan_telepon(dbURL);}
-//    			
-//    		} else {
-//    			//triggering return "calon_mahasiswa-salah_file_pengajuan";
-//    			fileError = true;
-//    		}
-//    	}
-//    	else{
-//    		//for update
-//    		if(psbs.selectPSBMFromUsername(mahasiswa.getUsername()) != null){
-//    			PengajuanSkemaBiayaModel tmp = psbs.selectPSBMFromUsername(mahasiswa.getUsername());
-//    			
-//    			if(type == 1) {skema.setSurat_keterangan_rtrw(null);}
-//    			if(type == 2) {skema.setFoto_rumah("-");} //cannot be null
-//    			if(type == 3) {skema.setSlip_gaji_pribadi(null);}
-//    			if(type == 4) {skema.setSlip_gaji_wali1(null);}
-//    			if(type == 5) {skema.setSlip_gaji_wali2(null);}
-//    			if(type == 6) {skema.setTagihan_air(null);}
-//    			if(type == 7) {skema.setTagihan_listrik(null);}
-//    			if(type == 8) {skema.setTagihan_telepon(null);}
-//    		}
-//    		//for insert
-//    		else{
-//    			//triggering return "calon_mahasiswa-salah_file_pengajuan";
-//    			if( type == 1 ||
-//    				type == 2 ||
-//    				type == 6 ||
-//    				type == 7 ||
-//    				type == 8)
-//    			{
-//        			fileError = true;
-//    			}
-//    			else
-//    			{
-//    				if(type == 3) {skema.setSlip_gaji_pribadi("no_data");}
-//        			if(type == 4) {skema.setSlip_gaji_wali1("no_data");}
-//        			if(type == 5) {skema.setSlip_gaji_wali2("no_data");}
-//    			}
-//    		}
-//    	}
-//    }		
     
     public void storeFile(MultipartFile file, int type)
     {

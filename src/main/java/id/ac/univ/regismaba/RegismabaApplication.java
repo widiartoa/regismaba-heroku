@@ -1,5 +1,9 @@
 package id.ac.univ.regismaba;
 
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
+import org.apache.tomcat.util.http.fileupload.FileUtils;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -24,12 +28,11 @@ public class RegismabaApplication extends SpringBootServletInitializer {
 		SpringApplication.run(RegismabaApplication.class, args);
 	}
 	
-//	@Bean
-//	CommandLineRunner init(StorageService storageService) {
-//		return (args) -> {
-//            //storageService.deleteAll();
-//            storageService.init();
-//		};
-//	}
+	@Bean
+	CommandLineRunner init(StorageService storageService) {
+		return (args) -> {
+            storageService.init();
+		};
+	}
 	
 }
