@@ -47,6 +47,10 @@ public class StatistikManagerController {
 		model.addAttribute("regFaculties", regFaculties);
 		model.addAttribute("sumFaculties", sumFaculties);
 		
+//		System.out.println("Coba satu " + StatistikManagerController.class.getResource("").getPath().toString());
+//		System.out.println("Coba duaa " + System.getProperty("user.dir").toString());
+//		System.out.println("Coba tiga " + System.getenv("UPLOAD_LOCATION").toString());
+		
 		return "manager_pendidikan-statistik_manager";
 	}
 	

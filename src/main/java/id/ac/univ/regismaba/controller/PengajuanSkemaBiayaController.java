@@ -242,6 +242,8 @@ public class PengajuanSkemaBiayaController {
 		storeFile(tagihan_listrik, 7);
 		storeFile(tagihan_telepon, 8);
 		
+		model.addAttribute("mahasiswa", mahasiswa);	
+		
 		if(fileError == true)
 		{
 			fileError = false;
@@ -254,7 +256,6 @@ public class PengajuanSkemaBiayaController {
 		RumpunModel rumpun = rm.getRumpun(mahasiswa.getUsername());
 		SkemaBiayaModel sbm = sbs.selectSBM(psbm.getGolongan_id());
 		
-		model.addAttribute("mahasiswa", mahasiswa);	
 		model.addAttribute("psbm", psbm);
 		model.addAttribute("sbm", sbm);
 		model.addAttribute("rumpun", rumpun);
@@ -297,7 +298,7 @@ public class PengajuanSkemaBiayaController {
 //    		String fileContentType = file.getContentType();
 //    		
 //    		if(contentTypes.contains(fileContentType)) {
-//    			String dbURL = "src\\main\\webapp\\img\\skema\\" + mahasiswa.getNpm() + "-" + num + "-"
+//    			String dbURL = "\\" + mahasiswa.getNpm() + "-" + num + "-"
 //						+ file.getOriginalFilename();
 //		
 //				byte[] bytes = file.getBytes();
