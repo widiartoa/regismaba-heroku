@@ -308,8 +308,28 @@
 					
 					<div th:if="${biodata.status_verifikasi.equals('Unverified')}">
 						<div class="modal-footer">
-							<a th:href="'/c6/staf-verifikasi/daftar-mhs/verified/' + ${mahasiswa.npm}"><button id="verify" type="button" class="btn btn-success">Verifikasi</button></a>
-							<button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
+							<a>
+						  		<button type="button" class="btn btn-success" data-toggle="modal" data-target="#confirm2">Verifikasi</button>
+						  	</a>
+						  	<button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
+						</div>
+						
+						<div id="confirm2" class="modal fade" role="dialog" style="top: auto; bottom: 275px; outline: none;">
+							<div class="modal-dialog">
+								<div class="modal-content">
+									<div class="modal-body">
+										<div class="panel-body" style="background-color:#f1f8e9; text-align: center;">
+											<h4>Apakah Anda yakin untuk verifikasi Isian Data Mahasiswa ini?</h4>
+										</div>
+										<div align="center" style="background-color:#f1f8e9;">
+										<a th:href="'/c6/staf-verifikasi/daftar-mhs/verified/' + ${mahasiswa.npm}">
+											<button style="display:inline-block;" th:id="'verify'+${mahasiswa.npm}" type="button" class="btn btn-success">Yakin</button>
+										</a>
+										<button type="button" class="btn btn-default" data-dismiss="modal">Tidak</button>
+										</div>
+									</div>
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>
