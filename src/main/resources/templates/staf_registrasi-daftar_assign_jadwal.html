@@ -9,39 +9,41 @@
 	<div th:include="staf_registrasi-navbar"></div>
 
 	<div class="container">
-		<div class="content">
+		<div class="content content-top">
 			<div class="row">
 				<div class="col-sm-12">
-					<h3>Daftar Assign Jadwal Mahasiswa</h3>
+					<h3><span class="glyphicon glyphicon-list"></span>Daftar Assign Jadwal Mahasiswa</h3>
 				</div>
 			</div>
 
 			<hr />
 
-			<table class="table">
-				<thead>
-					<tr>
-						<td>fakultas</td>
-						<td>npm</td>
-						<td>Hari</td>
-						<td>Tanggal</td>
-						<td>Waktu Awal-Waktu Akhir</td>
-					</tr>
-				</thead>
-				<tbody>
-					<tr th:each="assign,iterationStatus: ${assignedJadwals}">
-						<td th:text="${assign.fakultas.nama_fakultas}" class="center">fakultas</td>
-						<td th:text="${assign.npm}">npm</td>
-						<td th:text="${assign.jadwalRegis.hari}"
-							style="text-align: center;">Hari</td>
-						<td th:text="${assign.jadwalRegis.tanggal}"
-							style="text-align: center;">Tanggal</td>
-						<td
-							th:text="${assign.jadwalRegis.waktu_awal}+'-'+${assign.jadwalRegis.waktu_akhir}"
-							style="text-align: center;">Waktu Awal-Waktu Akhir</td>
-					</tr>
-				</tbody>
-			</table>
+			<div class="table-responsive">
+				<table class="table">
+					<thead>
+						<tr>
+							<td>fakultas</td>
+							<td>npm</td>
+							<td>Hari</td>
+							<td>Tanggal</td>
+							<td>Waktu Awal-Waktu Akhir</td>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="assign,iterationStatus: ${assignedJadwals}">
+							<td th:text="${assign.fakultas.nama_fakultas}" class="center">fakultas</td>
+							<td th:text="${assign.npm}">npm</td>
+							<td th:text="${assign.jadwalRegis.hari}"
+								style="text-align: center;">Hari</td>
+							<td th:text="${assign.jadwalRegis.tanggal}"
+								style="text-align: center;">Tanggal</td>
+							<td
+								th:text="${assign.jadwalRegis.waktu_awal}+'-'+${assign.jadwalRegis.waktu_akhir}"
+								style="text-align: center;">Waktu Awal-Waktu Akhir</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
 		</div>
 	</div>
 
