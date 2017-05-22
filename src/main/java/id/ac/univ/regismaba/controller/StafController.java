@@ -275,10 +275,6 @@ public class StafController
             @PathVariable(value = "npm") String npm,
             @RequestParam("hasil_tes_kesehatan") MultipartFile hasil_tes_kesehatan)
     {
-        // Authentication auth =
-        // SecurityContextHolder.getContext().getAuthentication();
-        // String user = auth.getName();
-        // UserModel staf = userDAO.selectUser (user);
 
         String usernameStaf = "wilson.mokoginta";
         String nipStaf = "0132456789";
