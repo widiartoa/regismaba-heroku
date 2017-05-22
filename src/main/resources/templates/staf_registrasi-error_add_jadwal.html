@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+		<div th:replace="resources"></div>
+        <title>Alert!</title>
+    </head>
+	
+    <body>
+    	<div class="container">
+			<div class="content">
+				<div class="row">
+					<div class="col-sm-12"><h1>Perhatian</h1></div>
+					<div class="col-sm-12"><h3>Waktu awal registrasi melebihi waktu akhir registrasi</h3></div>
+				</div>
+				
+				<div class="btn-group" role="group" aria-label="...">
+					<a th:href="'/c6/staf-registrasi/daftar-jadwal'"><button type="button" class="btn btn-default">Kembali</button></a>
+				</div>
+			</div>
+       	</div>
+    </body>
+</html>
