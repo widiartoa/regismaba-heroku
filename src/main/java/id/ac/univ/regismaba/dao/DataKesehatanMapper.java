@@ -37,7 +37,7 @@ public interface DataKesehatanMapper {
 	DataKesehatanModel selectDataKesehatanByUsername(String username);
 	
 	
-	@Update("UPDATE data_kesehatan SET data_kesehatan_id=#{data_kesehatan_id}, username=#{username},"
+	@Update("UPDATE data_kesehatan SET "
 			+ "form_survey_kesehatan=#{form_survey_kesehatan}, hasil_tes_kesehatan=#{hasil_tes_kesehatan},"
 			+ "updated_by=#{updated_by}, updated_at=#{updated_at} WHERE username=#{username}")
 	void updateDataKesehatan(DataKesehatanModel dataKesehatan);
