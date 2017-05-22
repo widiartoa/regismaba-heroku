@@ -37,36 +37,38 @@
 							
 							<hr/>
 							
-							<table class="table">
-								<thead>
-									<tr>
-										<td>Golongan</td>
-										<td>Jumlah Biaya Semester Minimal</td>
-										<td>Jumlah Biaya Semester Maksimal</td>
-										<td>Uang Pangkal Minimal</td>
-										<td>Uang Pangkal Maksimal</td>
-										<td>Tingkat Staf</td>
-										<td>Ubah</td>
-									</tr>
-								</thead>
-								<tbody>
-									<div th:each="schema,iterationStatus: ${schemas}">
+							<div class="table-responsive">
+								<table class="table">
+									<thead>
 										<tr>
-											<td th:text="${schema.golongan_id}">Golongan</td>
-											<td th:text="${schema.jumlah_biaya_ipa_min}">Jumlah Biaya IPA</td>
-											<td th:text="${schema.jumlah_biaya_ipa_max}">Jumlah Biaya IPA</td>
-											<td th:text="${schema.uang_pangkal_ipa_min}">Uang Pangkal IPA</td>
-											<td th:text="${schema.uang_pangkal_ipa_max}">Uang Pangkal IPA</td>
-											<td th:text="${schema.tingkat_role.nama_tingkat}">Tingkat Staf</td>
-											<td>
-												<a th:href="'/c6/staf-kesejahteraan/skema-pembayaran/update/' + ${schema.golongan_id}">
-													<button type="button" class="btn btn-warning">Ubah</button>
-												</a>
-											</td>
+											<td>Golongan</td>
+											<td>Jumlah Biaya Semester Minimal</td>
+											<td>Jumlah Biaya Semester Maksimal</td>
+											<td>Uang Pangkal Minimal</td>
+											<td>Uang Pangkal Maksimal</td>
+											<td>Tingkat Staf</td>
+											<td>Ubah</td>
 										</tr>
-									</div>
-								</tbody>
-							</table>
+									</thead>
+									<tbody>
+										<div th:each="schema,iterationStatus: ${schemas}">
+											<tr>
+												<td th:text="${schema.golongan_id}">Golongan</td>
+												<td th:text="${schema.jumlah_biaya_ipa_min}">Jumlah Biaya IPA</td>
+												<td th:text="${schema.jumlah_biaya_ipa_max}">Jumlah Biaya IPA</td>
+												<td th:text="${schema.uang_pangkal_ipa_min}">Uang Pangkal IPA</td>
+												<td th:text="${schema.uang_pangkal_ipa_max}">Uang Pangkal IPA</td>
+												<td th:text="${schema.tingkat_role.nama_tingkat}">Tingkat Staf</td>
+												<td>
+													<a th:href="'/c6/staf-kesejahteraan/skema-pembayaran/update/' + ${schema.golongan_id}">
+														<button type="button" class="btn btn-default">Ubah</button>
+													</a>
+												</td>
+											</tr>
+										</div>
+									</tbody>
+								</table>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -78,36 +80,38 @@
 							
 							<hr/>
 							
-							<table class="table">
-								<thead>
-									<tr>
-										<td>Golongan</td>
-										<td>Jumlah Biaya Semester Minimal</td>
-										<td>Jumlah Biaya Semester Maksimal</td>
-										<td>Uang Pangkal Minimal</td>
-										<td>Uang Pangkal Maksimal</td>
-										<td>Tingkat Staf</td>
-										<td>Ubah</td>
-									</tr>
-								</thead>
-								<tbody>
-									<div th:each="schema,iterationStatus: ${schemas}">
+							<div class="table-responsive">
+								<table class="table">
+									<thead>
 										<tr>
-											<td th:text="${schema.golongan_id}">Golongan</td>
-											<td th:text="${schema.jumlah_biaya_ips_min}">Jumlah Biaya IPS</td>
-											<td th:text="${schema.jumlah_biaya_ips_max}">Jumlah Biaya IPS</td>
-											<td th:text="${schema.uang_pangkal_ips_min}">Uang Pangkal IPS</td>
-											<td th:text="${schema.uang_pangkal_ips_max}">Uang Pangkal IPS</td>
-											<td th:text="${schema.tingkat_role.nama_tingkat}">Tingkat Staf</td>
-											<td>
-												<a th:href="'/c6/staf-kesejahteraan/skema-pembayaran/update/' + ${schema.golongan_id}">
-													<button type="button" class="btn btn-warning">Ubah</button>
-												</a>
-											</td>
+											<td>Golongan</td>
+											<td>Jumlah Biaya Semester Minimal</td>
+											<td>Jumlah Biaya Semester Maksimal</td>
+											<td>Uang Pangkal Minimal</td>
+											<td>Uang Pangkal Maksimal</td>
+											<td>Tingkat Staf</td>
+											<td>Ubah</td>
 										</tr>
-									</div>
-								</tbody>
-							</table>
+									</thead>
+									<tbody>
+										<div th:each="schema,iterationStatus: ${schemas}">
+											<tr>
+												<td th:text="${schema.golongan_id}">Golongan</td>
+												<td th:text="${schema.jumlah_biaya_ips_min}">Jumlah Biaya IPS</td>
+												<td th:text="${schema.jumlah_biaya_ips_max}">Jumlah Biaya IPS</td>
+												<td th:text="${schema.uang_pangkal_ips_min}">Uang Pangkal IPS</td>
+												<td th:text="${schema.uang_pangkal_ips_max}">Uang Pangkal IPS</td>
+												<td th:text="${schema.tingkat_role.nama_tingkat}">Tingkat Staf</td>
+												<td>
+													<a th:href="'/c6/staf-kesejahteraan/skema-pembayaran/update/' + ${schema.golongan_id}">
+														<button type="button" class="btn btn-warning">Ubah</button>
+													</a>
+												</td>
+											</tr>
+										</div>
+									</tbody>
+								</table>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -119,44 +123,48 @@
 							
 							<hr/>
 							
-							<table class="table">
-								<thead>
-									<tr>
-										<td>Golongan</td>
-										<td>Jumlah Biaya Semester Minimal</td>
-										<td>Jumlah Biaya Semester Maksimal</td>
-										<td>Uang Pangkal Minimal</td>
-										<td>Uang Pangkal Maksimal</td>
-										<td>Tingkat Staf</td>
-										<td>Ubah</td>
-									</tr>
-								</thead>
-								<tbody>
-									<div th:each="schema,iterationStatus: ${schemas}">
+							<div class="table-responsive">
+								<table class="table">
+									<thead>
 										<tr>
-											<td th:text="${schema.golongan_id}">Golongan</td>
-											<td th:text="${schema.jumlah_biaya_ik_min}">Jumlah Biaya IK</td>
-											<td th:text="${schema.jumlah_biaya_ik_max}">Jumlah Biaya IK</td>
-											<td th:text="${schema.uang_pangkal_ik_min}">Uang Pangkal IK</td>
-											<td th:text="${schema.uang_pangkal_ik_max}">Uang Pangkal IK</td>
-											<td th:text="${schema.tingkat_role.nama_tingkat}">Tingkat Staf</td>
-											<td>
-												<a th:href="'/c6/staf-kesejahteraan/skema-pembayaran/update/' + ${schema.golongan_id}">
-													<button type="button" class="btn btn-warning">Ubah</button>
-												</a>
-											</td>
+											<td>Golongan</td>
+											<td>Jumlah Biaya Semester Minimal</td>
+											<td>Jumlah Biaya Semester Maksimal</td>
+											<td>Uang Pangkal Minimal</td>
+											<td>Uang Pangkal Maksimal</td>
+											<td>Tingkat Staf</td>
+											<td>Ubah</td>
 										</tr>
-									</div>
-								</tbody>
-							</table>
+									</thead>
+									<tbody>
+										<div th:each="schema,iterationStatus: ${schemas}">
+											<tr>
+												<td th:text="${schema.golongan_id}">Golongan</td>
+												<td th:text="${schema.jumlah_biaya_ik_min}">Jumlah Biaya IK</td>
+												<td th:text="${schema.jumlah_biaya_ik_max}">Jumlah Biaya IK</td>
+												<td th:text="${schema.uang_pangkal_ik_min}">Uang Pangkal IK</td>
+												<td th:text="${schema.uang_pangkal_ik_max}">Uang Pangkal IK</td>
+												<td th:text="${schema.tingkat_role.nama_tingkat}">Tingkat Staf</td>
+												<td>
+													<a th:href="'/c6/staf-kesejahteraan/skema-pembayaran/update/' + ${schema.golongan_id}">
+														<button type="button" class="btn btn-warning">Ubah</button>
+													</a>
+												</td>
+											</tr>
+										</div>
+									</tbody>
+								</table>
+							</div>
 						</div>
 					</div>
 				</div>
 				
 				<br/>
 				
-				<div class="btn-group" role="group" aria-label="...">
-					<a th:href="'/c6/staf-kesejahteraan/skema-pembayaran/insert'"><button type="button" class="btn btn-default">Buat Rincian Skema Pembayaran</button></a>
+				<div style="text-align:right;">
+					<div class="btn-group" role="group" aria-label="...">
+						<a th:href="'/c6/staf-kesejahteraan/skema-pembayaran/insert'"><button type="button" class="btn btn-default">Buat Rincian Skema Pembayaran</button></a>
+					</div>
 				</div>
 			</div>
 
