@@ -182,7 +182,7 @@ public class JadwalController {
 					mahasiswa.getFakultas());
 		}
 		//TODO: assign jadwal
-		jadwalService.assignJadwalReg(jadwalRegisList, 0, jadwalRegisList.get(0).getKapasitas(), mahasiswaList, 0, "redita.arifin");
+		jadwalService.assignJadwalReg(jadwalRegisList, 0, jadwalRegisList.get(0).getKapasitas(), mahasiswaList, 0, user);
 		
 		return "redirect:/staf-registrasi/daftar-assign-jadwal/";
 	}
