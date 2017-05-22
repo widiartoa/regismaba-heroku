@@ -22,7 +22,7 @@ public interface AlamatMapper {
 	})
 	Integer selectJalanId(AlamatModel alamat);	
 	
-	@Select("SELECT * FROM ALAMAT WHERE jalan_id=#{jalan_id}")
+	@Select("SELECT * FROM alamat WHERE jalan_id=#{jalan_id}")
 	@Results(value = {
 		@Result(property="kota_kabupaten_id", column="kota_kabupaten_id"),    
 		@Result(property="jalan", column="jalan"),

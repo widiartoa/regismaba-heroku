@@ -19,10 +19,10 @@ public interface BiodataMapper {
 				+ "#{scan_kk}, #{scan_surat_pernyataan_mahasiswa}, #{ukuran_jaket}, #{created_by}, #{updated_by}, #{updated_at}, #{agama_id})")
 		void insertBiodata(BiodataModel biodata);
 
-		@Select("SELECT * FROM BIODATA WHERE biodata_id=#{biodata_id}")
+		@Select("select * from biodata where biodata_id=#{biodata_id}")
 		BiodataModel selectBiodata(int biodata_id);
 		
-		@Select("SELECT * FROM BIODATA WHERE username=#{username}")
+		@Select("select * from biodata where username=#{username}")
 		@Results(value = {
 			@Result(property="jalan_id", column="jalan_id"),    
 			@Result(property="tanggal_lahir", column="tanggal_lahir"),
@@ -45,11 +45,11 @@ public interface BiodataMapper {
 		})
 		BiodataModel selectBiodataByUsername(String username);
 		
-		@Update("UPDATE biodata SET flag_aktif=#{flag_aktif}, status_verifikasi=#{status_verifikasi}, "
+		@Update("update biodata set flag_aktif=#{flag_aktif}, status_verifikasi=#{status_verifikasi}, "
 				+ "tanggal_lahir=#{tanggal_lahir}, jenis_kelamin=#{jenis_kelamin}, nomor_telepon=#{nomor_telepon}, kewarganegaraan=#{kewarganegaraan}, "
 				+ "nomor_ktp=#{nomor_ktp}, sidik_jari=#{sidik_jari}, scan_ktp=#{scan_ktp}, scan_kk=#{scan_kk}, scan_surat_pernyataan_mahasiswa=#{scan_surat_pernyataan_mahasiswa},"
 				+ "ukuran_jaket=#{ukuran_jaket}, updated_by=#{updated_by}, updated_at=#{updated_at}, agama_id=#{agama_id} "
-				+ "WHERE username=#{username}")
+				+ "where username=#{username}")
 		void updateBiodataByUsername(BiodataModel biodata);
 		
 		
