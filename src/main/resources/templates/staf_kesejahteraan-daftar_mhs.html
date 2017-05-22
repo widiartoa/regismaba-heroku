@@ -18,56 +18,58 @@
 			
 			<hr/>
 
-			<table class="table">
-				<thead>
-					<tr>
-						<td>
-							<h4 th:text="'Username'">Username</h4>
-						</td>
-						<td>
-							<h4 th:text="'Nama Lengkap'">Nama Lengkap</h4>
-						</td>
-						<td>
-							<h4 th:text="'NPM'">NPM</h4>
-						</td>
-						<td>
-							<h4 th:text="'Jurusan'">Jurusan</h4>
-						</td>
-						<td>
-							<h4 th:text="'Fakultas'">Fakultas</h4>
-						</td>
-						<td>
-							<h4 th:text="'Golongan'">Golongan</h4>
-						</td>
-						<td>
-							<h4 th:text="'Status Pengajuan'">Status Verifikasi</h4>
-						</td>
-						<td>
-							<h4 th:text="'Lihat Pengajuan Skema Pembayaran'">Lihat
-								Pengajuan Skema Pembayaran</h4>
-						</td>
-					</tr>
-				</thead>
-				<tbody>
-					<span th:each="pengajuan,iterationStatus: ${pengajuans}">
-						<tr th:each="mahasiswa,iterationStatus: ${mahasiswas}"
-							th:if="${pengajuan.username.equals(mahasiswa.username)}">
-							<td th:text="${mahasiswa.username}">username</td>
-							<td th:text="${mahasiswa.nama_lengkap}">nama lengkap</td>
-							<td th:text="${mahasiswa.npm}">npm</td>
-							<td th:text="${mahasiswa.program_studi.nama_program_studi}">jurusan</td>
-							<td th:text="${mahasiswa.fakultas}">fakultas</td>
-							<td th:text="${pengajuan.golongan_id}">golongan</td>
-							<td th:text="${pengajuan.status_pengajuan}">status pengajuan</td>
+			<div class="table-responsive">
+				<table class="table">
+					<thead>
+						<tr>
 							<td>
-								<a type="button" data-toggle="modal" th:attr="data-target='#mahasiswaModel'+${mahasiswa.npm}" class="btn btn-warning"> 
-									<i class="glyphicon glyphicon-eye-open"></i>
-								</a>
+								<h4 th:text="'Username'">Username</h4>
+							</td>
+							<td>
+								<h4 th:text="'Nama Lengkap'">Nama Lengkap</h4>
+							</td>
+							<td>
+								<h4 th:text="'NPM'">NPM</h4>
+							</td>
+							<td>
+								<h4 th:text="'Jurusan'">Jurusan</h4>
+							</td>
+							<td>
+								<h4 th:text="'Fakultas'">Fakultas</h4>
+							</td>
+							<td>
+								<h4 th:text="'Golongan'">Golongan</h4>
+							</td>
+							<td>
+								<h4 th:text="'Status Pengajuan'">Status Verifikasi</h4>
+							</td>
+							<td>
+								<h4 th:text="'Lihat Pengajuan Skema Pembayaran'">Lihat
+									Pengajuan Skema Pembayaran</h4>
 							</td>
 						</tr>
-					</span>
-				</tbody>
-			</table>
+					</thead>
+					<tbody>
+						<span th:each="pengajuan,iterationStatus: ${pengajuans}">
+							<tr th:each="mahasiswa,iterationStatus: ${mahasiswas}"
+								th:if="${pengajuan.username.equals(mahasiswa.username)}">
+								<td th:text="${mahasiswa.username}">username</td>
+								<td th:text="${mahasiswa.nama_lengkap}">nama lengkap</td>
+								<td th:text="${mahasiswa.npm}">npm</td>
+								<td th:text="${mahasiswa.program_studi.nama_program_studi}">jurusan</td>
+								<td th:text="${mahasiswa.fakultas}">fakultas</td>
+								<td th:text="${pengajuan.golongan_id}">golongan</td>
+								<td th:text="${pengajuan.status_pengajuan}">status pengajuan</td>
+								<td>
+									<a type="button" data-toggle="modal" th:attr="data-target='#mahasiswaModel'+${mahasiswa.npm}" class="btn btn-default"> 
+										<i class="glyphicon glyphicon-eye-open"></i>
+									</a>
+								</td>
+							</tr>
+						</span>
+					</tbody>
+				</table>
+			</div>
 		</div>
 	</div>
 
@@ -177,12 +179,12 @@
 										<td style="width:25%">Status Pengajuan</td>
 										<td>
 											<select class="form-control" name="status-pengajuan" id="status-pengajuan">
-												<div th:if="${pengajuan.status_pengajuan == 'Unverified'}">
-													<option value="Unverified" selected="selected">Unverified</option>
+												<div th:if="${pengajuan.status_pengajuan == 'Not verified yet'}">
+													<option value="Not verified yet" selected="selected">Not verified yet</option>
 													<option value="Verified">Verified</option>
 												</div>
-												<div th:if="${pengajuan.status_pengajuan != 'Unverified'}">
-													<option value="Unverified">Unverified</option>
+												<div th:if="${pengajuan.status_pengajuan != 'Not verified yet'}">
+													<option value="Not verified yet">Not verified yet</option>
 													<option value="Verified" selected="selected">Verified</option>
 												</div>
 											</select>
@@ -208,6 +210,17 @@
 												th:min="${skemas[pengajuanItr.index].uang_pangkal_ips_min}" th:max="${skemas[pengajuanItr.index].uang_pangkal_ips_max}" />
 											<input th:case="'3'" type="number" class="form-control" name="ubah-uang" id="ubah-uang" th:value="${pengajuan.uang_pangkal}"
 												th:min="${skemas[pengajuanItr.index].uang_pangkal_ik_min}" th:max="${skemas[pengajuanItr.index].uang_pangkal_ik_max}" />
+										</td>
+									</tr>
+									<tr>
+										<td style="width:25%">Jumlah biaya Semester</td>
+										<td th:switch="${rumpuns[pengajuanItr.index].rumpun_id}">
+											<input th:case="'1'" type="number" class="form-control" name="ubah-biaya" id="ubah-biaya" th:value="${pengajuan.jumlah_biaya_semester}"
+												th:min="${skemas[pengajuanItr.index].jumlah_biaya_ipa_min}" th:max="${skemas[pengajuanItr.index].jumlah_biaya_ipa_max}" />
+											<input th:case="'2'" type="number" class="form-control" name="ubah-biaya" id="ubah-biaya" th:value="${pengajuan.jumlah_biaya_semester}"
+												th:min="${skemas[pengajuanItr.index].jumlah_biaya_ips_min}" th:max="${skemas[pengajuanItr.index].jumlah_biaya_ips_max}" />
+											<input th:case="'3'" type="number" class="form-control" name="ubah-biaya" id="ubah-biaya" th:value="${pengajuan.jumlah_biaya_semester}"
+												th:min="${skemas[pengajuanItr.index].jumlah_biaya_ik_min}" th:max="${skemas[pengajuanItr.index].jumlah_biaya_ik_max}" />
 										</td>
 									</tr>
 									<tr>

@@ -171,13 +171,16 @@ public class JadwalController {
 		//TODO: get jadwal order by timestamp_awal ASC
 		List<JadwalRegisModel> jadwalRegisList = jadwalService.selectAllJadwalRegisAsc();
 		
-		//TODO: Select * from mahasiswa as m inner join program_studi as p on m.fakultas_id = p.fakultas_id 
-		//		inner join urutan_assign_jadwal as u on m.fakultas_id = u.fakultas_id 
-		//		order by fakultasorder_id insert mhs + jadwal to assign_jadwal
-		List<MahasiswaModel> mahasiswaList = mahasiswaService.selectAllMahasiswaSortedUrutanAssignonTahunAjaran(tahunAjaranSaatIni.getTahun_ajaran_id());
-		
-		log.info("get one of mahasiswa with npm {} and fakultas {} on the list", mahasiswaList.get(0).getNpm(), mahasiswaList.get(0).getFakultas());
-		
+		// TODO: Select * from mahasiswa as m inner join program_studi as p on
+		// m.fakultas_id = p.fakultas_id
+		// inner join urutan_assign_jadwal as u on m.fakultas_id = u.fakultas_id
+		// order by fakultasorder_id insert mhs + jadwal to assign_jadwal
+		List<MahasiswaModel> mahasiswaList = mahasiswaService
+				.selectAllMahasiswaSortedUrutanAssignonTahunAjaran(tahunAjaranSaatIni.getTahun_ajaran_id());
+		for (MahasiswaModel mahasiswa : mahasiswaList) {
+			log.info("get one of mahasiswa with npm {} and fakultas {} on the list", mahasiswa.getNpm(),
+					mahasiswa.getFakultas());
+		}
 		//TODO: assign jadwal
 		jadwalService.assignJadwalReg(jadwalRegisList, 0, jadwalRegisList.get(0).getKapasitas(), mahasiswaList, 0, "redita.arifin");
 		
@@ -190,7 +193,7 @@ public class JadwalController {
 
 		model.addAttribute("assignedJadwals", assignedJadwals);
 
-		for (AssignJadwalModel assign : assignedJadwals){
+		for (AssignJadwalModel assign : assignedJadwals) {
 		JadwalRegisModel jadwalRegis = null;
 		if (assign.getJadwal_registrasi_id() != 0) {
 			int jadwalRegisId = assign.getJadwal_registrasi_id();

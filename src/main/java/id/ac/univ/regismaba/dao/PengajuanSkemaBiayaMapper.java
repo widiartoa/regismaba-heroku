@@ -72,9 +72,9 @@ public interface PengajuanSkemaBiayaMapper {
 //	void insertGolongan(PengajuanSkemaBiayaModel psbm);
 	
 	@Insert("insert into pengajuan_skema_pembayaran (golongan_id, foto_rumah, status_pengajuan, "
-			+ "created_at, created_by, updated_at, updated_by, username, status_pembayaran) values (#{golongan_id}, '-', "
+			+ "created_at, created_by, updated_at, updated_by, username, status_pembayaran, uang_pangkal, jumlah_biaya_semester) values (#{golongan_id}, '-', "
 			+ "'Not verified yet', current_timestamp, #{username}, current_timestamp, #{username}, "
-			+ "#{username}, 'Not verified yet')")
+			+ "#{username}, 'Not verified yet', 0, 0)")
 	void insertGolongan(PengajuanSkemaBiayaModel psbm);
 	
 	@Update("update pengajuan_skema_pembayaran set golongan_id=#{golongan_id}, updated_at=current_timestamp, "
@@ -86,7 +86,7 @@ public interface PengajuanSkemaBiayaMapper {
 	void updateGolongan(PengajuanSkemaBiayaModel psbm);
 	
 	@Update("update pengajuan_skema_pembayaran set golongan_id=#{golongan_id}, updated_at=current_timestamp, "
-			+ "status_pengajuan=#{status_pengajuan}, komentar=#{komentar}, "
-			+ "updated_by=#{updated_by} where username=#{username}")
+			+ "status_pengajuan=#{status_pengajuan}, komentar=#{komentar}, jumlah_biaya_semester=#{jumlah_biaya_semester}, "
+			+ "uang_pangkal=#{uang_pangkal}, updated_by=#{updated_by} where username=#{username}")
 	void updatePengajuan(PengajuanSkemaBiayaModel psbm);
 }

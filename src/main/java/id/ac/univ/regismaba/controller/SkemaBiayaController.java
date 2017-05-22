@@ -75,14 +75,23 @@ public class SkemaBiayaController {
 	public String submitNewRincianSkemaPembayaran(Model model, @ModelAttribute SkemaBiayaModel sbm)
 	{
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		String user = auth.getName();
-		sbm.setCreated_by(user);
+		String username = auth.getName();
+		UserModel user =  us.selectUser(username);
+		RoleModel role = rs.selectRole(user.getId_role());
+		sbm.setCreated_by(user.getUsername());
 		
 		sbs.insertSBM(sbm);
 		
-		List<SkemaBiayaModel> schemas = sbs.selectAllSBM();
-		
-		model.addAttribute("schemas", schemas);
+		if(role.getTingkat_role_id() == 1){
+			List<SkemaBiayaModel> schemas = sbs.selectAllSBM();
+			
+			model.addAttribute("schemas", schemas);
+		}
+		else{
+			List<SkemaBiayaModel> schemas = sbs.selectAllSBMByFacultyLevel();
+			
+			model.addAttribute("schemas", schemas);
+		}
 		
 		return "staf_kesejahteraan-daftar_rincian_skema";
 	}
