@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<div th:replace="resources"></div>
-<title>Staf Kesejahteraan - Daftar Mahasiswa</title>
+	<div th:replace="resources"></div>
+	<title>Staf Kesejahteraan - Daftar Mahasiswa</title>
 </head>
 
 <body>
@@ -61,7 +61,7 @@
 								<td th:text="${pengajuan.golongan_id}">golongan</td>
 								<td th:text="${pengajuan.status_pengajuan}">status pengajuan</td>
 								<td>
-									<a type="button" data-toggle="modal" th:attr="data-target='#mahasiswaModel'+${mahasiswa.npm}" class="btn btn-default"> 
+									<a type="button" data-toggle="modal" th:attr="data-target='#mahasiswaModel'+${mahasiswa.npm}, onclick='getItr('+${rumpuns[iterationStatus.index].rumpun_id}+')'" class="btn btn-default"> 
 										<i class="glyphicon glyphicon-eye-open"></i>
 									</a>
 								</td>
@@ -193,7 +193,7 @@
 									<tr>
 										<td style="width:25%">Ubah Golongan Mahasiswa</td>
 										<td>
-											<select class="form-control" name="ubah-golongan" id="ubah-golongan">
+											<select class="form-control ubah-golongan" name="ubah-golongan" th:id="'ubah-golongan-' + ${mahasiswa.npm}" th:attr="onchange='updateMinMax('+${mahasiswa.npm}+')'">
 												<div th:each="skema,skemaListItr: ${skemaList}">
 													<option th:if="${pengajuan.golongan_id != skema.golongan_id}" th:value="${skema.golongan_id}" th:text="${skema.golongan_id}">1</option>
 													<option th:if="${pengajuan.golongan_id == skema.golongan_id}" th:value="${skema.golongan_id}" th:text="${skema.golongan_id}" selected="selected">1</option>
@@ -201,28 +201,31 @@
 											</select>
 										</td>
 									</tr>
-									<tr>
-										<td style="width:25%">Uang Pangkal yang diberikan</td>
-										<td th:switch="${rumpuns[pengajuanItr.index].rumpun_id}">
-											<input th:case="'1'" type="number" class="form-control" name="ubah-uang" id="ubah-uang" th:value="${pengajuan.uang_pangkal}"
-												th:min="${skemas[pengajuanItr.index].uang_pangkal_ipa_min}" th:max="${skemas[pengajuanItr.index].uang_pangkal_ipa_max}" />
-											<input th:case="'2'" type="number" class="form-control" name="ubah-uang" id="ubah-uang" th:value="${pengajuan.uang_pangkal}"
-												th:min="${skemas[pengajuanItr.index].uang_pangkal_ips_min}" th:max="${skemas[pengajuanItr.index].uang_pangkal_ips_max}" />
-											<input th:case="'3'" type="number" class="form-control" name="ubah-uang" id="ubah-uang" th:value="${pengajuan.uang_pangkal}"
-												th:min="${skemas[pengajuanItr.index].uang_pangkal_ik_min}" th:max="${skemas[pengajuanItr.index].uang_pangkal_ik_max}" />
-										</td>
-									</tr>
+									
 									<tr>
 										<td style="width:25%">Jumlah biaya Semester</td>
 										<td th:switch="${rumpuns[pengajuanItr.index].rumpun_id}">
-											<input th:case="'1'" type="number" class="form-control" name="ubah-biaya" id="ubah-biaya" th:value="${pengajuan.jumlah_biaya_semester}"
-												th:min="${skemas[pengajuanItr.index].jumlah_biaya_ipa_min}" th:max="${skemas[pengajuanItr.index].jumlah_biaya_ipa_max}" />
-											<input th:case="'2'" type="number" class="form-control" name="ubah-biaya" id="ubah-biaya" th:value="${pengajuan.jumlah_biaya_semester}"
-												th:min="${skemas[pengajuanItr.index].jumlah_biaya_ips_min}" th:max="${skemas[pengajuanItr.index].jumlah_biaya_ips_max}" />
-											<input th:case="'3'" type="number" class="form-control" name="ubah-biaya" id="ubah-biaya" th:value="${pengajuan.jumlah_biaya_semester}"
-												th:min="${skemas[pengajuanItr.index].jumlah_biaya_ik_min}" th:max="${skemas[pengajuanItr.index].jumlah_biaya_ik_max}" />
+											<input th:case="'1'" type="number" class="form-control" name="ubah-biaya" id="ubah-biaya-ipa" th:value="${pengajuan.jumlah_biaya_semester}"
+												th:min="${skemas[pengajuanItr.index].jumlah_biaya_ipa_min}" th:max="${skemas[pengajuanItr.index].jumlah_biaya_ipa_max}"/>
+											<input th:case="'2'" type="number" class="form-control" name="ubah-biaya" id="ubah-biaya-ips" th:value="${pengajuan.jumlah_biaya_semester}"
+												th:min="${skemas[pengajuanItr.index].jumlah_biaya_ips_min}" th:max="${skemas[pengajuanItr.index].jumlah_biaya_ips_max}"/>
+											<input th:case="'3'" type="number" class="form-control" name="ubah-biaya" id="ubah-biaya-ik" th:value="${pengajuan.jumlah_biaya_semester}"
+												th:min="${skemas[pengajuanItr.index].jumlah_biaya_ik_min}" th:max="${skemas[pengajuanItr.index].jumlah_biaya_ik_max}"/>
 										</td>
 									</tr>
+									
+									<tr>
+										<td style="width:25%">Uang Pangkal yang diberikan</td>
+										<td th:switch="${rumpuns[pengajuanItr.index].rumpun_id}">
+											<input th:case="'1'" type="number" class="form-control" name="ubah-uang" id="ubah-uang-ipa" th:value="${pengajuan.uang_pangkal}"
+												th:min="${skemas[pengajuanItr.index].uang_pangkal_ipa_min}" th:max="${skemas[pengajuanItr.index].uang_pangkal_ipa_max}"/>
+											<input th:case="'2'" type="number" class="form-control" name="ubah-uang" id="ubah-uang-ips" th:value="${pengajuan.uang_pangkal}"
+												th:min="${skemas[pengajuanItr.index].uang_pangkal_ips_min}" th:max="${skemas[pengajuanItr.index].uang_pangkal_ips_max}"/>
+											<input th:case="'3'" type="number" class="form-control" name="ubah-uang" id="ubah-uang-ik" th:value="${pengajuan.uang_pangkal}"
+												th:min="${skemas[pengajuanItr.index].uang_pangkal_ik_min}" th:max="${skemas[pengajuanItr.index].uang_pangkal_ik_max}"/>
+										</td>
+									</tr>
+									
 									<tr>
 										<td style="width:25%">Komentar</td>
 										<td>
@@ -242,11 +245,91 @@
 			</div>
 		</div>
 	</div>
-
-	<script type="text/javascript">
+	
+	<script type="text/javascript" th:inline="javascript">
+	/*<![CDATA[*/
 		$(document).ready(function() {
 			$('.table').dataTable();
+			//getItr(1);
 		});
+
+		console.log("lala");
+		
+		var itr = 0;
+		
+		function getItr(lala) {
+			itr = lala;
+			console.log("lala itr = " + itr);
+		}
+		
+		function updateMinMax(npm) {
+			var z = document.getElementById("ubah-golongan-" + npm);
+			var y = z.options[z.selectedIndex].value;
+			var schema = [[${skemaList}]];
+			
+			console.log("nilai dari " + itr);
+			
+			if(itr == 1){
+				console.log("ipa " + y);
+				
+				var a = document.getElementById("ubah-uang-ipa");
+				var d = document.getElementById("ubah-biaya-ipa");
+				
+				var pangkalIpaMin = schema[y-1].uang_pangkal_ipa_min;
+				var pangkalIpaMax = schema[y-1].uang_pangkal_ipa_max;
+				
+				var smtIpaMin = schema[y-1].jumlah_biaya_ipa_min;
+				var smtIpaMax = schema[y-1].jumlah_biaya_ipa_max;
+				
+				console.log("pangkal ipa min " + smtIpaMin);
+				
+				a.setAttribute("min", pangkalIpaMin);
+				a.setAttribute("max", pangkalIpaMax);
+				
+				d.setAttribute("min", smtIpaMin);
+				d.setAttribute("max", smtIpaMax);
+			}
+			
+			if(itr == 2){
+				console.log("ips");
+				
+				var b = document.getElementById("ubah-uang-ips");
+				var e = document.getElementById("ubah-biaya-ips");
+				
+				var pangkalIpsMin = schema[y-1].uang_pangkal_ips_min;
+				var pangkalIpsMax = schema[y-1].uang_pangkal_ips_max;
+				
+				var smtIpsMin = schema[y-1].jumlah_biaya_ips_min;
+				var smtIpsMax = schema[y-1].jumlah_biaya_ips_max;
+				
+				b.setAttribute("min", pangkalIpsMin);
+				b.setAttribute("max", pangkalIpsMax);
+				
+				e.setAttribute("min", smtIpsMin);
+				e.setAttribute("max", smtIpsMax);
+			}
+			
+			if(itr == 3){
+				console.log("ik");
+				
+				var c = document.getElementById("ubah-uang-ik");
+				var f = document.getElementById("ubah-biaya-ik");
+				
+				var pangkalIkMin = schema[y-1].uang_pangkal_ik_min;
+				var pangkalIkMax = schema[y-1].uang_pangkal_ik_max;
+				
+				var smtIkMin = schema[y-1].jumlah_biaya_ik_min;
+				var smtIkMax = schema[y-1].jumlah_biaya_ik_max;
+				
+				c.setAttribute("min", pangkalIkMin);
+				c.setAttribute("max", pangkalIkMax);
+				
+				f.setAttribute("min", smtIkMin);
+				f.setAttribute("max", smtIkMax);
+				
+			}
+		}
+ 		/*]]>*/
 	</script>
 </body>
 </html>
