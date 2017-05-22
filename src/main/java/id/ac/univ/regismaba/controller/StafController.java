@@ -407,6 +407,7 @@ public class StafController
             @RequestParam(value = "status-pengajuan", required = true) String status_pengajuan,
             @RequestParam(value = "ubah-golongan", required = true) int golongan_id,
             @RequestParam(value = "ubah-uang", required = true) int uang,
+            @RequestParam(value = "ubah-biaya", required = true) int biaya,
             @RequestParam(value = "komentar", required = true) String komentar)
     {
         MahasiswaModel mahasiswa = mahasiswaDAO.selectMahasiswa (npm);
@@ -416,6 +417,7 @@ public class StafController
             psbm.setGolongan_id (golongan_id);
             psbm.setStatus_pengajuan (status_pengajuan);
             psbm.setUang_pangkal (uang);
+			psbm.setJumlah_biaya_semester (biaya);
             psbm.setKomentar (komentar);
             psbm.setUpdated_by (mahasiswa.getUsername ()); // ntar update ke
                                                            // staff
