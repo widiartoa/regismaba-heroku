@@ -18,52 +18,54 @@
 			
 			<hr/>
 
-			<table class="table">
-				<thead>
-					<tr>
-						<td>
-							<h4 th:text="'Username'">Username</h4>
-						</td>
-						<td>
-							<h4 th:text="'Nama Lengkap'">Nama Lengkap</h4>
-						</td>
-						<td>
-							<h4 th:text="'NPM'">NPM</h4>
-						</td>
-						<td>
-							<h4 th:text="'Jurusan'">Jurusan</h4>
-						</td>
-						<td>
-							<h4 th:text="'Fakultas'">Fakultas</h4>
-						</td>
-						<td>
-							<h4 th:text="'Riwayat'">Riwayat Kesehatan</h4>
-						</td>
-						<td>
-							<h4 th:text="'Tes Kesehatan'">Hasil Tes Kesehatan</h4>
-						</td>
-						<td>
-							<h4 th:text="'Survei Kesehatan'">Survei Kesehatan</h4>
-						</td>
-					</tr>
-				</thead>
-				<tbody>
-					<span th:each="mahasiswa,iterationStatus: ${mahasiswas}">
-						<tr th:each="dataKes,iterationStatus:${dataKess}" th:if="${dataKes.username.equals(mahasiswa.username)}">
-							<td th:text="${mahasiswa.username}" class="center">username</td>
-							<td th:text="${mahasiswa.nama_lengkap}" class="center">nama lengkap</td>
-							<td th:text="${mahasiswa.npm}">npm</td>
-							<td th:text="${mahasiswa.program_studi.nama_program_studi}">jurusan</td>
-							<td th:text="${mahasiswa.fakultas}">fakultas</td>
-							<td><a th:href="${dataKes.form_survey_kesehatan}">(unduh form survey kesehatan)</a></td>
-							<td><a th:href="${dataKes.hasil_tes_kesehatan}">(unduh hasil tes kesehatan)</a></td>
-							<td><a type="button" data-toggle="modal" th:attr="data-target='#mahasiswaModel' + ${mahasiswa.npm}" class="btn btn-warning">
-								<i class="glyphicon glyphicon-pencil"></i></a>
+			<div class="table-responsive">
+				<table class="table">
+					<thead>
+						<tr>
+							<td>
+								<h4 th:text="'Username'">Username</h4>
+							</td>
+							<td>
+								<h4 th:text="'Nama Lengkap'">Nama Lengkap</h4>
+							</td>
+							<td>
+								<h4 th:text="'NPM'">NPM</h4>
+							</td>
+							<td>
+								<h4 th:text="'Jurusan'">Jurusan</h4>
+							</td>
+							<td>
+								<h4 th:text="'Fakultas'">Fakultas</h4>
+							</td>
+							<td>
+								<h4 th:text="'Riwayat'">Riwayat Kesehatan</h4>
+							</td>
+							<td>
+								<h4 th:text="'Tes Kesehatan'">Hasil Tes Kesehatan</h4>
+							</td>
+							<td>
+								<h4 th:text="'Survei Kesehatan'">Survei Kesehatan</h4>
 							</td>
 						</tr>
-					</span>
-				</tbody>
-			</table>
+					</thead>
+					<tbody>
+						<span th:each="mahasiswa,iterationStatus: ${mahasiswas}">
+							<tr th:each="dataKes,iterationStatus:${dataKess}" th:if="${dataKes.username.equals(mahasiswa.username)}">
+								<td th:text="${mahasiswa.username}" class="center">username</td>
+								<td th:text="${mahasiswa.nama_lengkap}" class="center">nama lengkap</td>
+								<td th:text="${mahasiswa.npm}">npm</td>
+								<td th:text="${mahasiswa.program_studi.nama_program_studi}">jurusan</td>
+								<td th:text="${mahasiswa.fakultas}">fakultas</td>
+								<td><a th:href="${dataKes.form_survey_kesehatan}">(unduh form survey kesehatan)</a></td>
+								<td><a th:href="${dataKes.hasil_tes_kesehatan}">(unduh hasil tes kesehatan)</a></td>
+								<td><a type="button" data-toggle="modal" th:attr="data-target='#mahasiswaModel' + ${mahasiswa.npm}" class="btn btn-default">
+									<i class="glyphicon glyphicon-pencil"></i></a>
+								</td>
+							</tr>
+						</span>
+					</tbody>
+				</table>
+			</div>
 		</div>
 	</div>
 
