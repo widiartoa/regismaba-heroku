@@ -86,7 +86,7 @@ public interface PengajuanSkemaBiayaMapper {
 	void updateGolongan(PengajuanSkemaBiayaModel psbm);
 	
 	@Update("update pengajuan_skema_pembayaran set golongan_id=#{golongan_id}, updated_at=current_timestamp, "
-			+ "status_pengajuan=#{status_pengajuan}, komentar=#{komentar}, "
-			+ "updated_by=#{updated_by} where username=#{username}")
+			+ "status_pengajuan=#{status_pengajuan}, komentar=#{komentar}, jumlah_biaya_semester=#{jumlah_biaya_semester}, "
+			+ "uang_pangkal=#{uang_pangkal}, updated_by=#{updated_by} where username=#{username}")
 	void updatePengajuan(PengajuanSkemaBiayaModel psbm);
 }
