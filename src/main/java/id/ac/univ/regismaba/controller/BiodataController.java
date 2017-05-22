@@ -118,15 +118,6 @@ public class BiodataController {
 	UserService userDAO;
 	
 
-	/*@RequestMapping("calon-mahasiswa/idm")
-	public String idmMahasiswa()
-	{		
-		// todo : kalo belom isi idm ke fill idm, udah ke view idm
-		
-		
-		return "calon_mahasiswa-mengisi_idm";
-	}*/
-
 	@RequestMapping("calon-mahasiswa/biodata/fill")
 	public String insert(Model model) {
 		User user = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -159,13 +150,6 @@ public class BiodataController {
 			return "error";
 		}
 		
-		
-/*		if (mahasiswa != null){
-						
-		} else {
-			return "error";
-		}*/
-		
 		return "calon_mahasiswa-mengisi_idm";
 	}
 
@@ -193,7 +177,7 @@ public class BiodataController {
 			@RequestParam(value = "nomor_ijazah", required = false) String nomor_ijazah,
 			@RequestParam(value = "institusi_id", required = false) String institusi_id,
 			@RequestParam(value = "tingkat_pendidikan_id", required = false) String tingkat_pendidikan_id,
-//			@RequestParam(value = "nama_institusi", required = false) String nama_institusi,
+			//@RequestParam(value = "nama_institusi", required = false) String nama_institusi,
 	        @RequestParam(value = "jenjang", required = false) String jenjang,
 	        @RequestParam("scan_ijazah") MultipartFile scan_ijazah,
 	        @RequestParam("scan_pernyataan_ijazah") MultipartFile scan_pernyataan_ijazah,
@@ -230,23 +214,9 @@ public class BiodataController {
 
 		
 		//========================
-//        IjazahModel ijazah = new IjazahModel();
+
         ijazah.setNomor_ijazah (nomor_ijazah);
-        
-//        Random rand = new Random();
-//        
-//        int num = rand.nextInt(1000000) + 1;
-        
-//        storageService.store (scan_ijazah, num+"");
-//        storageService.store (scan_pernyataan_ijazah, num+"");
-//        storageService.store (scan_ktp, num+"");
-//        storageService.store (scan_kk, num+"");
-//        storageService.store (scan_surat_pernyataan_mahasiswa, num+"");
-//        storageService.store (form_survey_kesehatan, num+"");
-//        storageService.store (scan_kartu, num+"");
-       
-        
-        
+                
         storeFile(scan_kartu, 1);
     	storeFile(scan_ktp, 2);
     	storeFile(scan_kk, 3);
@@ -259,73 +229,7 @@ public class BiodataController {
 		{
 			fileError = false;
 			return "calon_mahasiswa-salah_file_upload";
-		}
-    	
-//        //================================IJAZAH=====================================
-//        Path data1 = storageService.load(scan_ijazah.getOriginalFilename());
-//        String pdb1 = MvcUriComponentsBuilder
-//                .fromMethodName(BiodataController.class, "serveFile", data1.getFileName().toString())
-//                .build().toString();
-//        
-//        ijazah.setScan_ijazah (pdb1);
-//        
-//        //SCAN PERNYATAAN IJAZAH UPLOAD//
-//        Path data2 = storageService.load(scan_ijazah.getOriginalFilename());
-//        String pdb2 = MvcUriComponentsBuilder
-//                .fromMethodName(BiodataController.class, "serveFile", data2.getFileName().toString())
-//                .build().toString();
-//        
-//        ijazah.setScan_pernyataan_ijazah (pdb2);
-//        
-//        //=================================BIODATA======================================
-//        BiodataModel bio = new BiodataModel();
-//        
-//        //SCAN SIDIK JARI UPLOAD//        
-//        /*Path data3 = storageService.load(sidik_jari.getOriginalFilename());
-//        String pdb3 = MvcUriComponentsBuilder
-//                .fromMethodName(BiodataController.class, "serveFile", data3.getFileName().toString())
-//                .build().toString();
-//        
-//        bio.setSidik_jari(pdb3);*/
-//
-//        
-//        //SCAN SCAN KTP UPLOAD//
-//        Path data4 = storageService.load(scan_ktp.getOriginalFilename());
-//        String pdb4 = MvcUriComponentsBuilder
-//                .fromMethodName(BiodataController.class, "serveFile", data4.getFileName().toString())
-//                .build().toString();
-//        
-//        bio.setScan_ktp(pdb4);
-//        
-//        
-//        //SCAN SCAN KK UPLOAD//
-//        Path data5 = storageService.load(scan_kk.getOriginalFilename());
-//        String pdb5 = MvcUriComponentsBuilder
-//                .fromMethodName(BiodataController.class, "serveFile", data5.getFileName().toString())
-//                .build().toString();
-//        
-//        bio.setScan_kk(pdb5);
-//        
-//        
-//        //SCAN SCAN SURAT PERNYATAAN MAHASISWA UPLOAD//
-//        Path data6 = storageService.load(scan_surat_pernyataan_mahasiswa.getOriginalFilename());
-//        String pdb6 = MvcUriComponentsBuilder
-//                .fromMethodName(BiodataController.class, "serveFile", data6.getFileName().toString())
-//                .build().toString();
-//        
-//        bio.setScan_surat_pernyataan_mahasiswa(pdb6);
-        
-        
-        //SCAN FORM SURVEY KESEHATAN UPLOAD//
-//        DataKesehatanModel dkm = new DataKesehatanModel();
-        
-//        Path data7 = storageService.load(form_survey_kesehatan.getOriginalFilename());
-//        String pdb7 = MvcUriComponentsBuilder
-//                .fromMethodName(BiodataController.class, "serveFile", data7.getFileName().toString())
-//                .build().toString();
-//        
-//        dkm.setForm_survey_kesehatan(pdb7);
-              
+		}            
         
         User user = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         String name = user.getUsername(); //get logged in username
@@ -357,9 +261,6 @@ public class BiodataController {
 		institusi = institusiDAO.selectInstitusi(Integer.parseInt(institusi_id));
 		model.addAttribute("institusi", institusi);
 		
-		
-		//lalalala
-		
 		dkm.setData_kesehatan_id(0);
         dkm.setHasil_tes_kesehatan("Belum cek kesehatan");
         dkm.setUsername(name);
@@ -379,17 +280,6 @@ public class BiodataController {
 		}
 		alamat.setJalan_id(alamatDAO.selectJalanId(alamat));
 		biodata.setJalan_id(alamatDAO.selectJalanId(alamat));
-
-		
-//		AsuransiKesehatanModel akm = new AsuransiKesehatanModel();
-		
-//		//SCAN KARTU ASURANSI
-//        Path data8 = storageService.load(scan_kartu.getOriginalFilename());
-//        String pdb8 = MvcUriComponentsBuilder
-//                .fromMethodName(BiodataController.class, "serveFile", data8.getFileName().toString())
-//                .build().toString();
-//        
-//        akm.setScan_kartu(pdb8);
 		
 		akm.setNomor_asuransi(nomor_asuransi);
 		akm.setUsername(name);
@@ -411,7 +301,6 @@ public class BiodataController {
 			return "error";
 		}
 		
-//		return "success-biodata-insert";
 		return "redirect:/calon-mahasiswa/biodata/view/" + mahasiswa.getNpm();
            
         
@@ -810,23 +699,8 @@ public class BiodataController {
 
 		
 		//========================
-//        IjazahModel ijazah = new IjazahModel();
         ijazah.setNomor_ijazah (nomor_ijazah);
-        
-//        Random rand = new Random();
-//        
-//        int num = rand.nextInt(1000000) + 1;
-        
-//        storageService.store (scan_ijazah, num+"");
-//        storageService.store (scan_pernyataan_ijazah, num+"");
-//        storageService.store (scan_ktp, num+"");
-//        storageService.store (scan_kk, num+"");
-//        storageService.store (scan_surat_pernyataan_mahasiswa, num+"");
-//        storageService.store (form_survey_kesehatan, num+"");
-//        storageService.store (scan_kartu, num+"");
-       
-        
-        
+               
         storeFile(scan_kartu, 1);
     	storeFile(scan_ktp, 2);
     	storeFile(scan_kk, 3);
@@ -841,72 +715,7 @@ public class BiodataController {
 			return "calon_mahasiswa-salah_file_upload";
 		}
     	
-//        //================================IJAZAH=====================================
-//        Path data1 = storageService.load(scan_ijazah.getOriginalFilename());
-//        String pdb1 = MvcUriComponentsBuilder
-//                .fromMethodName(BiodataController.class, "serveFile", data1.getFileName().toString())
-//                .build().toString();
-//        
-//        ijazah.setScan_ijazah (pdb1);
-//        
-//        //SCAN PERNYATAAN IJAZAH UPLOAD//
-//        Path data2 = storageService.load(scan_ijazah.getOriginalFilename());
-//        String pdb2 = MvcUriComponentsBuilder
-//                .fromMethodName(BiodataController.class, "serveFile", data2.getFileName().toString())
-//                .build().toString();
-//        
-//        ijazah.setScan_pernyataan_ijazah (pdb2);
-//        
-////        =================================BIODATA======================================
-//        BiodataModel bio = new BiodataModel();
-//        
-//        //SCAN SIDIK JARI UPLOAD//        
-//        /*Path data3 = storageService.load(sidik_jari.getOriginalFilename());
-//        String pdb3 = MvcUriComponentsBuilder
-//                .fromMethodName(BiodataController.class, "serveFile", data3.getFileName().toString())
-//                .build().toString();
-//        
-//        bio.setSidik_jari(pdb3);*/
-//
-//        
-//        //SCAN SCAN KTP UPLOAD//
-//        Path data4 = storageService.load(scan_ktp.getOriginalFilename());
-//        String pdb4 = MvcUriComponentsBuilder
-//                .fromMethodName(BiodataController.class, "serveFile", data4.getFileName().toString())
-//                .build().toString();
-//        
-//        bio.setScan_ktp(pdb4);
-//        
-//        
-//        //SCAN SCAN KK UPLOAD//
-//        Path data5 = storageService.load(scan_kk.getOriginalFilename());
-//        String pdb5 = MvcUriComponentsBuilder
-//                .fromMethodName(BiodataController.class, "serveFile", data5.getFileName().toString())
-//                .build().toString();
-//        
-//        bio.setScan_kk(pdb5);
-//        
-//        
-//        //SCAN SCAN SURAT PERNYATAAN MAHASISWA UPLOAD//
-//        Path data6 = storageService.load(scan_surat_pernyataan_mahasiswa.getOriginalFilename());
-//        String pdb6 = MvcUriComponentsBuilder
-//                .fromMethodName(BiodataController.class, "serveFile", data6.getFileName().toString())
-//                .build().toString();
-//        
-//        bio.setScan_surat_pernyataan_mahasiswa(pdb6);
-        
-        
-        //SCAN FORM SURVEY KESEHATAN UPLOAD//
-//        DataKesehatanModel dkm = new DataKesehatanModel();
-//        
-//        Path data7 = storageService.load(form_survey_kesehatan.getOriginalFilename());
-//        String pdb7 = MvcUriComponentsBuilder
-//                .fromMethodName(BiodataController.class, "serveFile", data7.getFileName().toString())
-//                .build().toString();
-//        
-//        dkm.setForm_survey_kesehatan(pdb7);
-//              
-        
+       
         User user = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         String name = user.getUsername(); //get logged in username
         
@@ -940,8 +749,6 @@ public class BiodataController {
         //===================================
 
         AlamatModel alamat = new AlamatModel();
-        
-        //lalala
 
         int jalanID = alamatDAO.selectJalanIdByUsername(name);
         alamat.setJalan_id(jalanID);
@@ -958,18 +765,7 @@ public class BiodataController {
 		alamat.setUpdated_at(null);
 
 		alamatDAO.updateAlamat(alamat);
-		
-		
-//		AsuransiKesehatanModel akm = new AsuransiKesehatanModel();
-//		
-//		//SCAN KARTU ASURANSI
-//        Path data8 = storageService.load(scan_kartu.getOriginalFilename());
-//        String pdb8 = MvcUriComponentsBuilder
-//                .fromMethodName(BiodataController.class, "serveFile", data8.getFileName().toString())
-//                .build().toString();
-//        
-//        akm.setScan_kartu(pdb8);
-		
+				
 		akm.setNomor_asuransi(nomor_asuransi);
 		akm.setUsername(name);
 		akm.setNomor_penerbit_asuransi(nomor_penerbit_asuransi);
@@ -991,7 +787,6 @@ public class BiodataController {
 			return "error";
 		}
 		
-//		return "success-biodata-insert";
 		return "redirect:/calon-mahasiswa/biodata/view/" + mahasiswa.getNpm();
            
         
@@ -1001,39 +796,6 @@ public class BiodataController {
 	}
 	
 	
-	
-//	@RequestMapping("/kelas/update/{idKelas}")
-//	public String update(Model model, @PathVariable(value = "idKelas") String idKelas) {
-//		KelasModel kelas = kelasDAO.selectKelas(idKelas);
-//		if (kelas != null) {
-//			model.addAttribute("kelas", kelas);
-//			model.addAttribute("univs", univDAO.selectAllUniv());
-//			model.addAttribute("fakultass", fakultasDAO.selectAllFakultas());
-//			model.addAttribute("kurikulums", kurikulumDAO.selectAllKurikulum());
-//			model.addAttribute("prodis", prodiDAO.selectAllProdi());
-//			model.addAttribute("matkuls", matkulDAO.selectAllMatkul());
-//			return "enrollment/form-kelas-update";
-//		} else {
-//			model.addAttribute("idKelas", idKelas);
-//			return "enrollment/kelas-not-found";
-//		}
-//	}
-	
-	
-	
-//	@RequestMapping("/kelas/view/")
-//	public String view(Model model, @RequestParam(value = "idKelas", required = false) String idKelas) {
-//		KelasModel kelas = kelasDAO.selectKelas(idKelas);
-//
-//		if (kelas != null) {
-//			model.addAttribute("kelas", kelas);
-//			return "/enrollment/view-kelas";
-//		} else {
-//			model.addAttribute("idKelas", idKelas);
-//			return "enrollment/kelas-not-found";
-//		}
-//	}
-    
 	
 	@RequestMapping("/staf-registrasi/biodata/view/{npm}")
 	public String viewByStafRegis(Model model, @PathVariable(value = "npm") String npm) {
@@ -1136,10 +898,4 @@ public class BiodataController {
 		System.out.println("keluuarrrr");
 		return "error";
 	}
-	
-	
-	
-	
-	
-	
 }
