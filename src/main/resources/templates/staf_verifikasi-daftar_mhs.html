@@ -153,7 +153,10 @@
 									<td>
 										<div class="col-sm-12"><h4 th:text="'Sidik Jari'">sidik jari </h4></div>
 									</td>
-									<td>
+									<td th:if="${biodata.sidik_jari}=='Belum scan sidik jari'">
+										<div class="col-sm-12"><h4>Belum ada scan sidik jari</h4></div>
+									</td>
+									<td th:if="${biodata.sidik_jari}!='Belum scan sidik jari'">
 										<div class="col-sm-12"><a th:href="${biodata.sidik_jari}"><h4>(unduh scan sidik jari)</h4></a></div>
 									</td>
 								</tr>
