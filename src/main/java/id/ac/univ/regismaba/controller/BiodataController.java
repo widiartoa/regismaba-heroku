@@ -930,7 +930,6 @@ public class BiodataController {
 		ijazah.setUpdated_by(name);
 		ijazah.setUpdated_at(null);
         
-		dkm.setData_kesehatan_id(0);
         dkm.setHasil_tes_kesehatan("Belum cek kesehatan");
         dkm.setUsername(name);
 		dkm.setUpdated_by(name);
