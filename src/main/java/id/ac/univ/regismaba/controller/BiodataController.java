@@ -129,6 +129,17 @@ public class BiodataController {
 
 	@RequestMapping("calon-mahasiswa/biodata/fill")
 	public String insert(Model model) {
+		User user = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+	    String name = user.getUsername(); //get logged in username
+		
+		UserModel userNowLoggedIn = userDAO.selectUser(name);
+		
+		MahasiswaModel mahasiswa = mahasiswaDAO.selectMahasiswaByUsername(name);
+		
+		if (biodataDAO.selectBiodataByUsername(name) != null) {
+			return "redirect:/calon-mahasiswa/biodata/update/";
+		}
+		
 		List<ProvinsiModel> provinsis = provinsiDAO.selectAllProvinsi();
 		model.addAttribute("provinsis", provinsis);
 		List<AgamaModel> agamas = agamaDAO.selectAllAgama();
@@ -138,10 +149,7 @@ public class BiodataController {
 		List<TingkatPendidikanModel> tingkatPendidikans = tingkatPendidikanDAO.selectAllTingkatPendidikan();
 		model.addAttribute("tingkatPendidikans", tingkatPendidikans);
 		
-		User user = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-	    String name = user.getUsername(); //get logged in username
 		
-		UserModel userNowLoggedIn = userDAO.selectUser(name);
 		System.out.println(user);
 		if (userNowLoggedIn != null) {
 			model.addAttribute("user", userNowLoggedIn);
@@ -150,12 +158,12 @@ public class BiodataController {
 			return "error";
 		}
 		
-		MahasiswaModel mahasiswa = mahasiswaDAO.selectMahasiswaByUsername(name);
-		if (mahasiswa != null){
+		
+/*		if (mahasiswa != null){
 			model.addAttribute("mahasiswa", mahasiswa);			
 		} else {
 			return "error";
-		}
+		}*/
 		
 		return "calon_mahasiswa-mengisi_idm";
 	}
