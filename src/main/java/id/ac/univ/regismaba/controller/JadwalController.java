@@ -1,7 +1,11 @@
 package id.ac.univ.regismaba.controller;
 
+import java.text.DateFormat;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -115,9 +119,16 @@ public class JadwalController {
 			@RequestParam(value = "waktu_awal", required = false) String waktu_awal,
 			@RequestParam(value = "waktu_akhir", required = false) String waktu_akhir,
 			@RequestParam(value = "kapasitas", required = false) int kapasitas) throws ParseException {
-		jadwalService.insertJadwalRegis(hari, waktu_awal, waktu_akhir, kapasitas);
 
-		return "redirect:/staf-registrasi/daftar-jadwal";
+	    DateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+            Date timestamp_awal = format.parse(hari + " " + waktu_awal);
+            Date timestamp_akhir = format.parse(hari + " " + waktu_akhir);
+            if (timestamp_awal.compareTo(timestamp_akhir) < 0) {
+                jadwalService.insertJadwalRegis(hari, waktu_awal, waktu_akhir, kapasitas);
+                return "redirect:/staf-registrasi/daftar-jadwal";
+            } else {
+                return "staf_registrasi-error_add_jadwal";
+            }
 	}
 
 	@RequestMapping("/staf-registrasi/daftar-jadwal/{jadwal_registrasi_id}/hapus")
