@@ -135,6 +135,7 @@ public class BiodataController {
 		UserModel userNowLoggedIn = userDAO.selectUser(name);
 		
 		MahasiswaModel mahasiswa = mahasiswaDAO.selectMahasiswaByUsername(name);
+		model.addAttribute("mahasiswa", mahasiswa);
 		
 		if (biodataDAO.selectBiodataByUsername(name) != null) {
 			return "redirect:/calon-mahasiswa/biodata/update/";
@@ -150,7 +151,7 @@ public class BiodataController {
 		model.addAttribute("tingkatPendidikans", tingkatPendidikans);
 		
 		
-		System.out.println(user);
+		System.out.println("MASUK BIODATA FILL DENGAN USER " + user);
 		if (userNowLoggedIn != null) {
 			model.addAttribute("user", userNowLoggedIn);
 				System.out.println("user ke add ke model");
@@ -160,7 +161,7 @@ public class BiodataController {
 		
 		
 /*		if (mahasiswa != null){
-			model.addAttribute("mahasiswa", mahasiswa);			
+						
 		} else {
 			return "error";
 		}*/
