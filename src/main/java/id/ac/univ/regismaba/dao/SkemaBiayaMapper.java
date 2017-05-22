@@ -49,17 +49,17 @@ public interface SkemaBiayaMapper {
 	
 	@Select("select golongan_id as nama, "
 			+ "(select count(*) from mahasiswa m, pengajuan_skema_pembayaran p where m.username=p.username and p.golongan_id=#{golongan_id}) as total, "
-			+ "(select count(*) from mahasiswa m, pengajuan_skema_pembayaran s where m.username=s.username and s.golongan_id=#{golongan_id} and s.golongan_id='Verified') as regis, "
+			+ "(select count(*) from mahasiswa m, pengajuan_skema_pembayaran s where m.username=s.username and s.golongan_id=#{golongan_id} and s.status_pengajuan='Verified') as regis, "
 			+ "((select count(*) from mahasiswa m, pengajuan_skema_pembayaran p where m.username=p.username and p.golongan_id=#{golongan_id}) - "
-			+ "(select count(*) from mahasiswa m, pengajuan_skema_pembayaran s where m.username=s.username and s.golongan_id=#{golongan_id} and s.golongan_id='Verified')) as non_regis "
+			+ "(select count(*) from mahasiswa m, pengajuan_skema_pembayaran s where m.username=s.username and s.golongan_id=#{golongan_id} and s.status_pengajuan='Verified')) as non_regis "
 			+ "from skema_pembayaran where golongan_id=#{golongan_id}")
 	StatistikManagerSummaryModel summarySchema(@Param("golongan_id") int golongan_id);
 	
 	@Select("select nama_fakultas as nama, "
 			+ "(select count(*) from mahasiswa m, pengajuan_skema_pembayaran p, program_studi s, fakultas f where m.username=p.username and p.golongan_id=#{golongan_id} and m.program_studi_id=s.program_studi_id and s.fakultas_id=f.fakultas_id and f.fakultas_id=#{fakultas_id}) as total, "
-			+ "(select count(*) from mahasiswa m, pengajuan_skema_pembayaran p, program_studi s, fakultas f where m.username=p.username and p.golongan_id=#{golongan_id} and p.golongan_id='Verified' and m.program_studi_id=s.program_studi_id and s.fakultas_id=f.fakultas_id and f.fakultas_id=#{fakultas_id}) as regis, "
+			+ "(select count(*) from mahasiswa m, pengajuan_skema_pembayaran p, program_studi s, fakultas f where m.username=p.username and p.golongan_id=#{golongan_id} and p.status_pengajuan='Verified' and m.program_studi_id=s.program_studi_id and s.fakultas_id=f.fakultas_id and f.fakultas_id=#{fakultas_id}) as regis, "
 			+ "((select count(*) from mahasiswa m, pengajuan_skema_pembayaran p, program_studi s, fakultas f where m.username=p.username and p.golongan_id=#{golongan_id} and m.program_studi_id=s.program_studi_id and s.fakultas_id=f.fakultas_id and f.fakultas_id=#{fakultas_id}) - "
-			+ "(select count(*) from mahasiswa m, pengajuan_skema_pembayaran p, program_studi s, fakultas f where m.username=p.username and p.golongan_id=#{golongan_id} and p.golongan_id='Verified' and m.program_studi_id=s.program_studi_id and s.fakultas_id=f.fakultas_id and f.fakultas_id=#{fakultas_id})) as non_regis "
+			+ "(select count(*) from mahasiswa m, pengajuan_skema_pembayaran p, program_studi s, fakultas f where m.username=p.username and p.golongan_id=#{golongan_id} and p.status_pengajuan='Verified' and m.program_studi_id=s.program_studi_id and s.fakultas_id=f.fakultas_id and f.fakultas_id=#{fakultas_id})) as non_regis "
 			+ "from fakultas where fakultas_id=#{fakultas_id}")
 //	@Select("select golongan_id, "
 //			+ "(select count(*) from mahasiswa m, pengajuan_skema_pembayaran p, program_studi s, fakultas f where m.username=p.username and p.golongan_id=#{golongan_id} and m.program_studi_id=s.program_studi_id and s.fakultas_id=f.fakultas_id and f.fakultas_id=#{fakultas_id}) as total, "
