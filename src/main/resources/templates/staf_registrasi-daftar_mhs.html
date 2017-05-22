@@ -49,13 +49,14 @@
 						</tr>
 					</thead>
 					<tbody>
-						<tr th:each="mahasiswa,iterationStatus: ${mahasiswas}" th:if="${mahasiswa.biodata!=null}">
+						<tr th:each="mahasiswa,iterationStatus: ${mahasiswas}" >
 							<td th:text="${mahasiswa.username}" class="center">username</td>
 							<td th:text="${mahasiswa.nama_lengkap}" class="center">nama lengkap</td>
 							<td th:text="${mahasiswa.npm}">npm</td>
 							<td th:text="${mahasiswa.program_studi.nama_program_studi}" class="center">jurusan</td>
 							<td th:text="${mahasiswa.fakultas}" class="center">fakultas</td>
-							<td th:text="${mahasiswa.biodata.status_verifikasi}">status_verifikasi </td>
+							<td th:if="${mahasiswa.biodata!=null}" th:text="${mahasiswa.biodata.status_verifikasi}">status_verifikasi </td>
+							<td th:if="${mahasiswa.biodata==null}" th:text="${'Not Verified Yet'}">status_verifikasi </td>
 							<td th:text="'menunggu antrian cetakan'">menunggu antrian cetakan</td>
 							<td><a th:href="'/c6/staf-registrasi/biodata/view/' + ${mahasiswa.npm}"
 								class="btn btn-default"> <i class="glyphicon glyphicon-eye-open"></i>

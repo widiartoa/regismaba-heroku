@@ -180,10 +180,10 @@ public class JadwalServiceImplement implements JadwalService {
 	public void insertJadwalRegis(String hari, String waktu_awal, String waktu_akhir, int kapasitas)
 			throws ParseException {
 		// TODO Auto-generated method stub
-		
+
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		String user = auth.getName();
-		
+
 		TahunAjaranModel tahunAjaranSaatIni = tahunAjaranService.selectTahunAjaranSaatIni();
 
 		DateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
@@ -236,20 +236,32 @@ public class JadwalServiceImplement implements JadwalService {
 	@Override
 	public void assignJadwalReg(List<JadwalRegisModel> jadwalList, int indexJadwalList, int kapasitasSisa,
 			List<MahasiswaModel> mahasiswaList, int totalJadwalAssigned, String created_by) {
-		if (indexJadwalList < jadwalList.size()) {
-			TahunAjaranModel tahunAjaranSaatIni = tahunAjaranService.selectTahunAjaranSaatIni();
+		if (totalJadwalAssigned < mahasiswaList.size()) {
+			if (kapasitasSisa > 0) {
+				if (indexJadwalList < jadwalList.size()) {
 
-			MahasiswaModel mahasiswa = mahasiswaList.get(totalJadwalAssigned);
-			JadwalRegisModel jadwal = jadwalList.get(indexJadwalList);
-			log.info("mahasiswa dengan npm {} fakultas id {}", mahasiswa.getNpm(),
-					mahasiswa.getFakultas_id());
-			jadwalMapper.assignJadwalReg(mahasiswa.getFakultas_id(), mahasiswa.getNpm(),
-					jadwal.getJadwal_registrasi_id(), tahunAjaranSaatIni.getTahun_ajaran_id(), created_by);
-			log.info("mahasiswa dengan npm {} diberikan jadwal dengan id {}", mahasiswa.getNpm(),
-					jadwal.getJadwal_registrasi_id());
+					TahunAjaranModel tahunAjaranSaatIni = tahunAjaranService.selectTahunAjaranSaatIni();
 
-			assignJadwalReg(jadwalList, indexJadwalList + 1, kapasitasSisa - 1, mahasiswaList, totalJadwalAssigned + 1,
-					created_by);
+					MahasiswaModel mahasiswa = mahasiswaList.get(totalJadwalAssigned);
+					JadwalRegisModel jadwal = jadwalList.get(indexJadwalList);
+					log.info("mahasiswa dengan npm {} fakultas id {}", mahasiswa.getNpm(), mahasiswa.getFakultas_id());
+					jadwalMapper.assignJadwalReg(mahasiswa.getFakultas_id(), mahasiswa.getNpm(),
+							jadwal.getJadwal_registrasi_id(), tahunAjaranSaatIni.getTahun_ajaran_id(), created_by);
+					log.info("mahasiswa dengan npm {} diberikan jadwal dengan id {}", mahasiswa.getNpm(),
+							jadwal.getJadwal_registrasi_id());
+
+					assignJadwalReg(jadwalList, indexJadwalList, kapasitasSisa - 1, mahasiswaList,
+							totalJadwalAssigned + 1, created_by);
+				}
+			} else {
+				if (indexJadwalList + 1 < jadwalList.size()) {
+					log.info("kapasitas jadwal sisa {} pindah ke jadwal id {} dengan kapasitas {}", kapasitasSisa,
+							jadwalList.get(indexJadwalList + 1).getJadwal_registrasi_id(),
+							jadwalList.get(indexJadwalList + 1).getKapasitas());
+					assignJadwalReg(jadwalList, indexJadwalList + 1, jadwalList.get(indexJadwalList + 1).getKapasitas(),
+							mahasiswaList, totalJadwalAssigned, created_by);
+				}
+			}
 		}
 	}
 
