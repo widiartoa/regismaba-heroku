@@ -522,7 +522,9 @@ public class BiodataController {
 		BiodataModel biodata = biodataDAO.selectBiodataByUsername(username);
 		System.out.println("biodata ke select");
 		System.out.println(biodata);
-		if (biodata != null) {
+		if (biodata == null) {
+			return "redirect:/calon-mahasiswa/biodata/fill/";
+		} else {
 			System.out.println("biodata gak null");
 //			String tanggalLahir = verifIDMDAO.parseTanggalLahirBiodata(biodata);
 			
